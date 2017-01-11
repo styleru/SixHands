@@ -16,7 +16,7 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        VKSDKInstance = VKSdk.initialize(withAppId: "5769875")
+        VKSDKInstance = VKSdk.initialize(withAppId: "5446345")
         VKSDKInstance!.register(self)
         VKSDKInstance!.uiDelegate = self
         sn_type = "vk"
@@ -84,6 +84,7 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
                     self.last_name = user.last_name
                     self.avatar = user.photo_50
                     self.sn_id = result.token.userId
+                    print(self.sn_id)
                     
                     let listUrlString = "http://dev.6hands.styleru.net/user"
                     let myUrl = URL(string: listUrlString)
@@ -91,14 +92,14 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
                     request.httpMethod = "POST"
                     var postString = "first_name=" + self.first_name!
                     postString += "&last_name=" + self.last_name!
-                    postString += "email=" + self.email!
+                    postString += "&email=" + self.email!
                     postString += "&avatar=" + self.avatar!
                     postString += "&phone=" + self.phone!
                     postString += "&device=" + self.device!
-                    postString += "sn_type=" + self.sn_type!
+                    postString += "&sn_type=" + self.sn_type!
                     postString += "&sn_id=" + self.sn_id!
                     postString += "&token=" + self.resultToken!
-                    
+                    print(postString)
                     request.httpBody = postString.data(using: .utf8)
                     
                     let task = URLSession.shared.dataTask(with: request){ data, response, error in

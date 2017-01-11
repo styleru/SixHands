@@ -1,0 +1,6 @@
+framework module Pods_sixHandsUITests {
+  umbrella header "Pods-sixHandsUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

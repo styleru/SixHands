@@ -85,7 +85,7 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
                     self.avatar = user.photo_50
                     self.sn_id = result.token.userId
                     
-                    let listUrlString = "https://dev.6hands.styleru.net/user"
+                    let listUrlString = "http://dev.6hands.styleru.net/user"
                     let myUrl = URL(string: listUrlString)
                     var request = URLRequest(url:myUrl!);
                     request.httpMethod = "POST"

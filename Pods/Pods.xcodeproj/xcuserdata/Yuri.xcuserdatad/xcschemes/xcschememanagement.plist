@@ -7,7 +7,7 @@
 		<key>Pods-sixHands.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 		<key>Pods-sixHandsTests.xcscheme</key>
 		<dict>
@@ -15,6 +15,11 @@
 			<integer>1</integer>
 		</dict>
 		<key>Pods-sixHandsUITests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>2</integer>
@@ -37,6 +42,16 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>728C9907C04061A5A4D9F11A7B803CA1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9079AC655B203F42F6D08F472229FFC9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>AA237CB5AFF86C2868D052ACA9B2E771</key>
 		<dict>
 			<key>primary</key>
@@ -47,7 +62,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>BCC200650B2F3D19314BB131E09F81E3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>C82C0783FE373AF790A62AE397D00AF9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F0133D07C0B22D8E92577ADE4F902D8E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

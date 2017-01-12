@@ -11,6 +11,7 @@
 		7E2A8EE45F0BB582F5921732 /* Pods_sixHands.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6780D743E810AEE48781C19C /* Pods_sixHands.framework */; };
 		A35074894FDA36A12622C1DD /* Pods_sixHandsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CEC0A982CA57FD3764CF30C /* Pods_sixHandsTests.framework */; };
 		DAB274111E2676CC00A06E11 /* VK_ios_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB274101E2676CC00A06E11 /* VK_ios_sdk.framework */; };
+		DAB274131E27B85D00A06E11 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB274121E27B85D00A06E11 /* SwiftyJSON.framework */; };
 		F7529B5B1E266BA700F47FE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7529B5A1E266BA700F47FE9 /* AppDelegate.swift */; };
 		F7529B5D1E266BA700F47FE9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7529B5C1E266BA700F47FE9 /* ViewController.swift */; };
 		F7529B601E266BA700F47FE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7529B5E1E266BA700F47FE9 /* Main.storyboard */; };
@@ -49,6 +50,7 @@
 		B7AF76E87CD3942874EF5E1F /* Pods-sixHands.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sixHands.release.xcconfig"; path = "Pods/Target Support Files/Pods-sixHands/Pods-sixHands.release.xcconfig"; sourceTree = "<group>"; };
 		DAB2740D1E2676B100A06E11 /* sixHands-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sixHands-Bridging-Header.h"; sourceTree = "<group>"; };
 		DAB274101E2676CC00A06E11 /* VK_ios_sdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VK_ios_sdk.framework; path = "../../Library/Developer/Xcode/DerivedData/sixHands-aamiahgmlndqjveaummiesehqmaa/Build/Products/Debug-iphonesimulator/VK-ios-sdk/VK_ios_sdk.framework"; sourceTree = "<group>"; };
+		DAB274121E27B85D00A06E11 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "Pods/../build/Debug-iphoneos/SwiftyJSON/SwiftyJSON.framework"; sourceTree = "<group>"; };
 		F7529B571E266BA700F47FE9 /* sixHands.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sixHands.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7529B5A1E266BA700F47FE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F7529B5C1E266BA700F47FE9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAB274131E27B85D00A06E11 /* SwiftyJSON.framework in Frameworks */,
 				DAB274111E2676CC00A06E11 /* VK_ios_sdk.framework in Frameworks */,
 				7E2A8EE45F0BB582F5921732 /* Pods_sixHands.framework in Frameworks */,
 			);
@@ -96,6 +99,7 @@
 		D8CA62CE80DF5009C0CB60E2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DAB274121E27B85D00A06E11 /* SwiftyJSON.framework */,
 				DAB274101E2676CC00A06E11 /* VK_ios_sdk.framework */,
 				6780D743E810AEE48781C19C /* Pods_sixHands.framework */,
 				8CEC0A982CA57FD3764CF30C /* Pods_sixHandsTests.framework */,
@@ -608,6 +612,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 4RWLL37A47;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/SwiftyJSON",
+				);
 				INFOPLIST_FILE = sixHands/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.styleru.SixHands;
@@ -625,6 +633,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 4RWLL37A47;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/SwiftyJSON",
+				);
 				INFOPLIST_FILE = sixHands/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.styleru.SixHands;

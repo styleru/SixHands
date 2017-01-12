@@ -12,6 +12,7 @@
 		A35074894FDA36A12622C1DD /* Pods_sixHandsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CEC0A982CA57FD3764CF30C /* Pods_sixHandsTests.framework */; };
 		DAB274111E2676CC00A06E11 /* VK_ios_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB274101E2676CC00A06E11 /* VK_ios_sdk.framework */; };
 		DAB274131E27B85D00A06E11 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB274121E27B85D00A06E11 /* SwiftyJSON.framework */; };
+		DAB274151E27BB9900A06E11 /* six_hand.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = DAB274141E27BB9900A06E11 /* six_hand.xcdatamodel */; };
 		F7529B5B1E266BA700F47FE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7529B5A1E266BA700F47FE9 /* AppDelegate.swift */; };
 		F7529B5D1E266BA700F47FE9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7529B5C1E266BA700F47FE9 /* ViewController.swift */; };
 		F7529B601E266BA700F47FE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7529B5E1E266BA700F47FE9 /* Main.storyboard */; };
@@ -51,6 +52,7 @@
 		DAB2740D1E2676B100A06E11 /* sixHands-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sixHands-Bridging-Header.h"; sourceTree = "<group>"; };
 		DAB274101E2676CC00A06E11 /* VK_ios_sdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VK_ios_sdk.framework; path = "../../Library/Developer/Xcode/DerivedData/sixHands-aamiahgmlndqjveaummiesehqmaa/Build/Products/Debug-iphonesimulator/VK-ios-sdk/VK_ios_sdk.framework"; sourceTree = "<group>"; };
 		DAB274121E27B85D00A06E11 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "Pods/../build/Debug-iphoneos/SwiftyJSON/SwiftyJSON.framework"; sourceTree = "<group>"; };
+		DAB274141E27BB9900A06E11 /* six_hand.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = six_hand.xcdatamodel; sourceTree = "<group>"; };
 		F7529B571E266BA700F47FE9 /* sixHands.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sixHands.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7529B5A1E266BA700F47FE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F7529B5C1E266BA700F47FE9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 		F7529B591E266BA700F47FE9 /* sixHands */ = {
 			isa = PBXGroup;
 			children = (
+				DAB274141E27BB9900A06E11 /* six_hand.xcdatamodel */,
 				F7529B5A1E266BA700F47FE9 /* AppDelegate.swift */,
 				F7529B5C1E266BA700F47FE9 /* ViewController.swift */,
 				F7529B5E1E266BA700F47FE9 /* Main.storyboard */,
@@ -459,6 +462,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7529B5D1E266BA700F47FE9 /* ViewController.swift in Sources */,
+				DAB274151E27BB9900A06E11 /* six_hand.xcdatamodel in Sources */,
 				F7529B5B1E266BA700F47FE9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

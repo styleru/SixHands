@@ -8,11 +8,13 @@
 
 import UIKit
 import SwiftyJSON
+import CoreData
 
 class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
 
-     var first_name, last_name, email, phone, avatar, sn_type, device, sn_id, resultToken : String?
-     var VKSDKInstance: VKSdk?
+    var first_name, last_name, email, phone, avatar, sn_type, device, sn_id, resultToken : String?
+    var VKSDKInstance: VKSdk?
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,31 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
         sn_type = "vk"
         device = "iphone"
         phone = "+70000000"
+        
+        //тест coredata
+        
+        //добавление
+//        let People = Person(context:context)
+//        People.name = "1"
+//        People.surname = "2"
+//        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+//        
+//        //показывание
+//        do
+//        {
+//            let task :[Person] = try context.fetch(Person.fetchRequest())
+//            for tas in task {
+//                print(tas.name!)
+//            }
+//        }
+//        catch{
+//            
+//        }
+//        
+        
+        
+        //конец тестов
+        
     }
 
     @IBAction func vkLogin(_ sender: UIButton) {
@@ -114,21 +141,30 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
                         }
                         let responseString = String(data: data, encoding: .utf8)
                         print("responseString = \(responseString)")
+                        
+                        
+                        if let dataFromString = responseString?.data(using: .utf8, allowLossyConversion: false) {
+                            
+                            var jsondata = JSON(data: dataFromString)
+                            jsondata = jsondata["body"]
+                            
+                            print(jsondata)
+                        }
+                        
+                        
+                        
+                        DispatchQueue.main.async { [unowned self] in
+                        self.performSegue(withIdentifier: "login", sender: self)
+                        }
                     }
                     task.resume()
+                    
                     
             }, errorBlock: {
                 (error) -> Void in
                 print("error")
                 
             })
-            
-            
-            // User successfully authorized, you may start working with VK API
-            
-            //            DispatchQueue.main.async {
-            //            self.performSegue(withIdentifier: "login", sender: self)
-            //            }
         }
             
             

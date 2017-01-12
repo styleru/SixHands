@@ -26,15 +26,36 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="vk"/>
                                 <connections>
-                                    <action selector="vkLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Td5-jv-iyN"/>
+                                    <action selector="vkLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y8G-Vc-MBm"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.50575548540000004" green="0.50575548540000004" blue="0.50575548540000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <connections>
+                        <segue destination="kfz-7V-ri2" kind="presentation" identifier="login" id="8cG-jU-zYj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="AjW-0Q-ZoI">
+            <objects>
+                <viewController id="kfz-7V-ri2" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uIk-PE-fgP"/>
+                        <viewControllerLayoutGuide type="bottom" id="deP-en-NzB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QrD-6y-QHd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yu9-el-rCi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="894" y="125"/>
         </scene>
     </scenes>
 </document>

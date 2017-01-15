@@ -19,5 +19,10 @@ extension Person {
 
     @NSManaged public var last_name: String?
     @NSManaged public var first_name: String?
+    @NSManaged public var vk_id: Int32
+    @NSManaged public var fb_id: Int32
+    @NSManaged public var email: String?
+    @NSManaged public var phone: String?
+    @NSManaged public var avatar_url: String?
 
 }

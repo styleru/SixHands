@@ -144,11 +144,49 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
                         
                         
                         if let dataFromString = responseString?.data(using: .utf8, allowLossyConversion: false) {
-                            
                             var jsondata = JSON(data: dataFromString)
                             jsondata = jsondata["body"]
-                            
-                            print(jsondata)
+                            UserDefaults.standard.setValue(jsondata["token"].string, forKey: "token")
+                            var bool = true
+                            do{
+                                let task :[Person] = try self.context.fetch(Person.fetchRequest())
+                                for tas in task {
+                                        tas.first_name = jsondata["user"]["first_name"].string
+                                        tas.last_name = jsondata["user"]["last_name"].string
+                                        tas.email = jsondata["user"]["email"].string
+                                        tas.phone = jsondata["user"]["phone"].string
+                                    for(_,subJson):(String,JSON) in jsondata["user"]["social_networks"]{
+                                        if(subJson["sn"] == "vk"){
+                                            tas.vk_id = subJson["id_user"].int32Value
+                                        }
+                                        if(subJson["sn"] == "fb"){
+                                            tas.fb_id = subJson["id_user"].int32Value
+                                        }
+                                    }
+                                        //tas.vk_id = jsondata["user"]["social_networks"]
+                                        //tas.fb_id = jsondata["user"]["social_networks"][1]["id_user"].string
+                                        bool = false
+                                        var warning = "The user has already registered: "
+                                        warning += tas.first_name!+" "
+                                        warning += tas.email!+" "
+                                        warning += tas.vk_id.description
+                                        print(warning)
+                                        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+                                }
+                            }
+                            catch{
+                                
+                            }
+                            if bool {
+                                let user = Person(context: self.context)
+                                user.first_name = jsondata["user"]["first_name"].string
+                                user.last_name = jsondata["user"]["last_name"].string
+                                user.email = jsondata["user"]["email"].string
+                                user.phone = jsondata["user"]["phone"].string
+                                print("User has been added!")
+                                (UIApplication.shared.delegate as! AppDelegate).saveContext()
+                            }
+
                         }
                         
                         

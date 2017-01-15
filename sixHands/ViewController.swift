@@ -98,7 +98,6 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
         if result.token != nil {
             email = result.token.email
             resultToken = result.token.accessToken
-            
             let getData: VKRequest =  VKApi.users().get(["fields": "photo_50,contacts"])
             
             
@@ -146,8 +145,10 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
                         if let dataFromString = responseString?.data(using: .utf8, allowLossyConversion: false) {
                             
                             var jsondata = JSON(data: dataFromString)
-                            jsondata = jsondata["body"]
-                            
+                            let applicationUser = ApplicationUser(context:self.context)
+                            if applicationUser.first_name = jsondata[0]["user"]["first_name"].string {
+                            print("OK")
+                            }
                             print(jsondata)
                         }
                         

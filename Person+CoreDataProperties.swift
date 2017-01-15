@@ -2,7 +2,7 @@
 //  Person+CoreDataProperties.swift
 //  
 //
-//  Created by Юрий on 12.01.17.
+//  Created by Владимир Марков on 15.01.17.
 //
 //  This file was automatically generated and should not be edited.
 //
@@ -17,7 +17,7 @@ extension Person {
         return NSFetchRequest<Person>(entityName: "Person");
     }
 
-    @NSManaged public var name: String?
-    @NSManaged public var surname: String?
+    @NSManaged public var last_name: String?
+    @NSManaged public var first_name: String?
 
 }

@@ -163,8 +163,7 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
                                             tas.fb_id = subJson["id_user"].int32Value
                                         }
                                     }
-                                        //tas.vk_id = jsondata["user"]["social_networks"]
-                                        //tas.fb_id = jsondata["user"]["social_networks"][1]["id_user"].string
+
                                         bool = false
                                         var warning = "The user has already registered: "
                                         warning += tas.first_name!+" "

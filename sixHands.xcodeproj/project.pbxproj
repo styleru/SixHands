@@ -20,6 +20,7 @@
 		F7529B651E266BA700F47FE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7529B631E266BA700F47FE9 /* LaunchScreen.storyboard */; };
 		F7529B701E266BA700F47FE9 /* sixHandsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7529B6F1E266BA700F47FE9 /* sixHandsTests.swift */; };
 		F7529B7B1E266BA700F47FE9 /* sixHandsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7529B7A1E266BA700F47FE9 /* sixHandsUITests.swift */; };
+		F7BAACAF1E2C8FE7009BE9AD /* ListOfFlatsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BAACAE1E2C8FE7009BE9AD /* ListOfFlatsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		F7529B761E266BA700F47FE9 /* sixHandsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sixHandsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7529B7A1E266BA700F47FE9 /* sixHandsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sixHandsUITests.swift; sourceTree = "<group>"; };
 		F7529B7C1E266BA700F47FE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F7BAACAE1E2C8FE7009BE9AD /* ListOfFlatsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListOfFlatsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,9 +137,9 @@
 		F7529B591E266BA700F47FE9 /* sixHands */ = {
 			isa = PBXGroup;
 			children = (
+				F7BAACAD1E2C8FB9009BE9AD /* Controllers */,
 				DAB274141E27BB9900A06E11 /* six_hand.xcdatamodel */,
 				F7529B5A1E266BA700F47FE9 /* AppDelegate.swift */,
-				F7529B5C1E266BA700F47FE9 /* ViewController.swift */,
 				F7529B5E1E266BA700F47FE9 /* Main.storyboard */,
 				F7529B611E266BA700F47FE9 /* Assets.xcassets */,
 				F7529B631E266BA700F47FE9 /* LaunchScreen.storyboard */,
@@ -163,6 +165,15 @@
 				F7529B7C1E266BA700F47FE9 /* Info.plist */,
 			);
 			path = sixHandsUITests;
+			sourceTree = "<group>";
+		};
+		F7BAACAD1E2C8FB9009BE9AD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F7BAACAE1E2C8FE7009BE9AD /* ListOfFlatsController.swift */,
+				F7529B5C1E266BA700F47FE9 /* ViewController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		F9EFD6413BDC82BDAE149B08 /* Pods */ = {
@@ -462,6 +473,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7529B5D1E266BA700F47FE9 /* ViewController.swift in Sources */,
+				F7BAACAF1E2C8FE7009BE9AD /* ListOfFlatsController.swift in Sources */,
 				DAB274151E27BB9900A06E11 /* six_hand.xcdatamodel in Sources */,
 				F7529B5B1E266BA700F47FE9 /* AppDelegate.swift in Sources */,
 			);

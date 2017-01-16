@@ -14,6 +14,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     
      @IBOutlet weak var listOfFlatsTableView: UITableView!
     
+    
     override func viewDidLoad() {
         listOfFlatsTableView.delegate = self
         listOfFlatsTableView.dataSource = self
@@ -41,7 +42,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return 0
+        return 1
     }
 }
 

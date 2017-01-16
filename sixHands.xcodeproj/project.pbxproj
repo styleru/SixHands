@@ -21,6 +21,7 @@
 		F7529B701E266BA700F47FE9 /* sixHandsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7529B6F1E266BA700F47FE9 /* sixHandsTests.swift */; };
 		F7529B7B1E266BA700F47FE9 /* sixHandsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7529B7A1E266BA700F47FE9 /* sixHandsUITests.swift */; };
 		F7BAACAF1E2C8FE7009BE9AD /* ListOfFlatsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BAACAE1E2C8FE7009BE9AD /* ListOfFlatsController.swift */; };
+		F7BAACBA1E2CD2F2009BE9AD /* FlatViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BAACB91E2CD2F2009BE9AD /* FlatViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		F7529B7A1E266BA700F47FE9 /* sixHandsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sixHandsUITests.swift; sourceTree = "<group>"; };
 		F7529B7C1E266BA700F47FE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F7BAACAE1E2C8FE7009BE9AD /* ListOfFlatsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListOfFlatsController.swift; sourceTree = "<group>"; };
+		F7BAACB91E2CD2F2009BE9AD /* FlatViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 		F7529B591E266BA700F47FE9 /* sixHands */ = {
 			isa = PBXGroup;
 			children = (
+				F7BAACB61E2CD27C009BE9AD /* Views */,
 				F7BAACB01E2C98B0009BE9AD /* Models */,
 				F7BAACAD1E2C8FB9009BE9AD /* Controllers */,
 				DAB274141E27BB9900A06E11 /* six_hand.xcdatamodel */,
@@ -182,6 +185,14 @@
 			children = (
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		F7BAACB61E2CD27C009BE9AD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F7BAACB91E2CD2F2009BE9AD /* FlatViewCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		F9EFD6413BDC82BDAE149B08 /* Pods */ = {
@@ -480,6 +491,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7BAACBA1E2CD2F2009BE9AD /* FlatViewCell.swift in Sources */,
 				F7529B5D1E266BA700F47FE9 /* ViewController.swift in Sources */,
 				F7BAACAF1E2C8FE7009BE9AD /* ListOfFlatsController.swift in Sources */,
 				DAB274151E27BB9900A06E11 /* six_hand.xcdatamodel in Sources */,

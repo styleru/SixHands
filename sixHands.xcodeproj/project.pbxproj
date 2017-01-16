@@ -137,6 +137,7 @@
 		F7529B591E266BA700F47FE9 /* sixHands */ = {
 			isa = PBXGroup;
 			children = (
+				F7BAACB01E2C98B0009BE9AD /* Models */,
 				F7BAACAD1E2C8FB9009BE9AD /* Controllers */,
 				DAB274141E27BB9900A06E11 /* six_hand.xcdatamodel */,
 				F7529B5A1E266BA700F47FE9 /* AppDelegate.swift */,
@@ -174,6 +175,13 @@
 				F7529B5C1E266BA700F47FE9 /* ViewController.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		F7BAACB01E2C98B0009BE9AD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		F9EFD6413BDC82BDAE149B08 /* Pods */ = {

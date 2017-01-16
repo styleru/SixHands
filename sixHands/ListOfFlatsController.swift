@@ -17,6 +17,9 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         listOfFlatsTableView.delegate = self
         listOfFlatsTableView.dataSource = self
+//        listOfFlatsTableView.beginUpdates()
+//        listOfFlatsTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+//        listOfFlatsTableView.endUpdates()
         super.viewDidLoad()
     }
     
@@ -28,7 +31,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         super.didReceiveMemoryWarning()
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // cell selected code here
     }
     

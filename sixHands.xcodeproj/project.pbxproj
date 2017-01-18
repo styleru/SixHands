@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		404E70E11E2EBF2800F94277 /* FacebookAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404E70E01E2EBF2800F94277 /* FacebookAuth.swift */; };
+		406F92011E2F53F800E2A9FF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 406F91FF1E2F53F800E2A9FF /* FBSDKCoreKit.framework */; };
+		406F92021E2F53F800E2A9FF /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 406F92001E2F53F800E2A9FF /* FBSDKLoginKit.framework */; };
+		40D6EFEF1E2F684D00363465 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40D6EFEE1E2F684D00363465 /* Bolts.framework */; };
 		5E9C8A722D7580992749666F /* Pods_sixHandsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36FDA856FD8EE1986F732C03 /* Pods_sixHandsUITests.framework */; };
 		7E2A8EE45F0BB582F5921732 /* Pods_sixHands.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6780D743E810AEE48781C19C /* Pods_sixHands.framework */; };
 		A35074894FDA36A12622C1DD /* Pods_sixHandsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CEC0A982CA57FD3764CF30C /* Pods_sixHandsTests.framework */; };
@@ -45,6 +49,10 @@
 		18FBA49ED325AFFF16756EF4 /* Pods-sixHandsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sixHandsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sixHandsUITests/Pods-sixHandsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		36A6F9B5BD6D2615B0FFA05B /* Pods-sixHandsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sixHandsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-sixHandsTests/Pods-sixHandsTests.release.xcconfig"; sourceTree = "<group>"; };
 		36FDA856FD8EE1986F732C03 /* Pods_sixHandsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sixHandsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		404E70E01E2EBF2800F94277 /* FacebookAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookAuth.swift; sourceTree = "<group>"; };
+		406F91FF1E2F53F800E2A9FF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		406F92001E2F53F800E2A9FF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		40D6EFEE1E2F684D00363465 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		63FDC736767934B0635C653E /* Pods-sixHands.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sixHands.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sixHands/Pods-sixHands.debug.xcconfig"; sourceTree = "<group>"; };
 		6780D743E810AEE48781C19C /* Pods_sixHands.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sixHands.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CEC0A982CA57FD3764CF30C /* Pods_sixHandsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sixHandsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +86,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAB274131E27B85D00A06E11 /* SwiftyJSON.framework in Frameworks */,
+				406F92011E2F53F800E2A9FF /* FBSDKCoreKit.framework in Frameworks */,
+				406F92021E2F53F800E2A9FF /* FBSDKLoginKit.framework in Frameworks */,
+				40D6EFEF1E2F684D00363465 /* Bolts.framework in Frameworks */,
 				DAB274111E2676CC00A06E11 /* VK_ios_sdk.framework in Frameworks */,
 				7E2A8EE45F0BB582F5921732 /* Pods_sixHands.framework in Frameworks */,
 			);
@@ -105,6 +116,9 @@
 		D8CA62CE80DF5009C0CB60E2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				40D6EFEE1E2F684D00363465 /* Bolts.framework */,
+				406F91FF1E2F53F800E2A9FF /* FBSDKCoreKit.framework */,
+				406F92001E2F53F800E2A9FF /* FBSDKLoginKit.framework */,
 				DAB274121E27B85D00A06E11 /* SwiftyJSON.framework */,
 				DAB274101E2676CC00A06E11 /* VK_ios_sdk.framework */,
 				6780D743E810AEE48781C19C /* Pods_sixHands.framework */,
@@ -183,6 +197,7 @@
 		F7BAACB01E2C98B0009BE9AD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				404E70E01E2EBF2800F94277 /* FacebookAuth.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -492,6 +507,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7BAACBA1E2CD2F2009BE9AD /* FlatViewCell.swift in Sources */,
+				404E70E11E2EBF2800F94277 /* FacebookAuth.swift in Sources */,
 				F7529B5D1E266BA700F47FE9 /* ViewController.swift in Sources */,
 				F7BAACAF1E2C8FE7009BE9AD /* ListOfFlatsController.swift in Sources */,
 				DAB274151E27BB9900A06E11 /* six_hand.xcdatamodel in Sources */,
@@ -651,6 +667,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/SwiftyJSON",
+					"$(PROJECT_DIR)/Pods",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = sixHands/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -672,6 +690,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/SwiftyJSON",
+					"$(PROJECT_DIR)/Pods",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = sixHands/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

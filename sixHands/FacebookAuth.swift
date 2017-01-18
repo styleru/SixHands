@@ -1,0 +1,55 @@
+//
+//  FacebookAuth.swift
+//  sixHands
+//
+//  Created by Илья on 18.01.17.
+//  Copyright © 2017 Владимир Марков. All rights reserved.
+//
+
+import Foundation
+import FBSDKCoreKit
+import FBSDKLoginKit
+
+    
+    
+   public func FBLogin(){
+        var fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+        fbLoginManager .logIn(withReadPermissions: ["public_profile","email"], handler: { (result, error) -> Void in
+            if (error == nil){
+                var fbloginresult : FBSDKLoginManagerLoginResult = result!
+                if(fbloginresult.grantedPermissions != nil && fbloginresult.grantedPermissions.contains("email"))
+                {
+                    
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                     let  afterLogin = storyboard.instantiateViewController(withIdentifier: "afterLogin") as! UIViewController
+                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                     appDelegate.window?.rootViewController = afterLogin
+                    print("ВСЕ ОК")
+                    print( FBSDKAccessToken.current())
+                   
+                    fbLoginManager.logOut()
+                }
+            }
+        })
+    }
+
+  public func getFBUserData(){
+        if((FBSDKAccessToken.current()) != nil){
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email, country, city"]).start(completionHandler: { (connection, result, error) -> Void in
+                if (error == nil){
+                    print(result)
+                }
+            })}
+    
+
+   
+
+}
+
+
+
+
+
+
+
+

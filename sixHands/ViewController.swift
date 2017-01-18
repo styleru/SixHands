@@ -10,6 +10,8 @@ import UIKit
 import SwiftyJSON
 import CoreData
 
+
+
 class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
 
     var first_name, last_name, email, phone, avatar, sn_type, device, sn_id, resultToken : String?
@@ -72,6 +74,20 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
     }
     
     
+    
+    @IBAction func fbLogin(_ sender: UIButton) {
+        FBLogin()
+        getFBUserData()
+        
+       
+    }
+    
+   
+    
+    
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -90,6 +106,7 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
         }
         return nil
     }
+    
     
     
     func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
@@ -210,6 +227,10 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
             //уведомление о том, что не вошли
         }
     }
+    
+    
+    
+    
     
     
     

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -29,6 +29,14 @@
                                     <action selector="vkLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y8G-Vc-MBm"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lMm-ys-Ppz">
+                                <rect key="frame" x="249" y="526" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="FB"/>
+                                <connections>
+                                    <action selector="fbLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CQS-F3-Rz3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.50575548540000004" green="0.50575548540000004" blue="0.50575548540000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -42,7 +50,7 @@
         <!--List Of Flats Controller-->
         <scene sceneID="AjW-0Q-ZoI">
             <objects>
-                <viewController id="kfz-7V-ri2" customClass="ListOfFlatsController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="afterLogin" id="kfz-7V-ri2" customClass="ListOfFlatsController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uIk-PE-fgP"/>
                         <viewControllerLayoutGuide type="bottom" id="deP-en-NzB"/>
@@ -90,7 +98,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yu9-el-rCi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="893.60000000000002" y="124.58770614692655"/>
+            <point key="canvasLocation" x="33" y="851"/>
         </scene>
     </scenes>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

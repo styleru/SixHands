@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>FacebookDisplayName</key>
+	<string>sixHands</string>
+	<key>FacebookAppID</key>
+	<string>269516973394643</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -26,6 +30,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>vk5446345</string>
+				<string>fb269516973394643</string>
 			</array>
 		</dict>
 	</array>
@@ -36,6 +41,11 @@
 		<string>vk</string>
 		<string>vk-share</string>
 		<string>vkauthorize</string>
+		<string>fbauth2</string>
+		<string>fb</string>
+		<string>fbapi</string>
+		<string>fbshareextension</string>
+		<string>fb-messenger-api</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

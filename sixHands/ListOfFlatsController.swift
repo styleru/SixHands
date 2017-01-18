@@ -9,6 +9,8 @@
 import UIKit
 import SwiftyJSON
 import CoreData
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
@@ -23,6 +25,12 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
 //        listOfFlatsTableView.endUpdates()
         super.viewDidLoad()
     }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+
+    }
+    
     
     func loadFlats(){
         
@@ -44,6 +52,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return 1
     }
+    
 }
 
 

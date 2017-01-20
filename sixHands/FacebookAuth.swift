@@ -21,9 +21,9 @@ import FBSDKLoginKit
                 {
                     
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                     let  afterLogin = storyboard.instantiateViewController(withIdentifier: "afterLogin") as! UIViewController
+                     let  afterLoginTB = storyboard.instantiateViewController(withIdentifier: "afterLogin") as! UITabBarController
                      let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                     appDelegate.window?.rootViewController = afterLogin
+                     appDelegate.window?.rootViewController = afterLoginTB
                     print("ВСЕ ОК")
                     print( FBSDKAccessToken.current())
                    

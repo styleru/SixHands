@@ -13,10 +13,10 @@ import FBSDKLoginKit
     
     
    public func FBLogin(){
-        var fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
         fbLoginManager .logIn(withReadPermissions: ["public_profile","email"], handler: { (result, error) -> Void in
             if (error == nil){
-                var fbloginresult : FBSDKLoginManagerLoginResult = result!
+                let fbloginresult : FBSDKLoginManagerLoginResult = result!
                 if(fbloginresult.grantedPermissions != nil && fbloginresult.grantedPermissions.contains("email"))
                 {
                     

@@ -110,9 +110,10 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
         cell.avatar.bounds = CGRect(x: 0, y: 0, width:screenSize.width * 0.11733 , height: screenSize.width * 0.11733)
         cell.avatar.center = CGPoint(x:cell.bounds.width - cell.avatar.bounds.width/2 - 6,y:cell.bounds.height-(cell.bounds.height-cell.flatImage.frame.maxY)/2)
-        cell.avatar.layer.cornerRadius = cell.avatar.frame.width / 2.0
+        cell.avatar.layer.masksToBounds = false
+        cell.avatar.layer.cornerRadius = cell.avatar.frame.size.width / 2
         cell.avatar.clipsToBounds = true
-        cell.avatar.contentMode = .scaleToFill
+        cell.avatar.contentMode = .scaleAspectFill
         
         
         return cell

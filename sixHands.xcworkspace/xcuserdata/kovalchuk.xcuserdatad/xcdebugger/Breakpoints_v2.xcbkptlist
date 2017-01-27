@@ -25,14 +25,28 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "sixHands/FacebookAuth.swift"
-            timestampString = "506425935.65806"
+            filePath = "sixHands/ProfileController.swift"
+            timestampString = "506940122.448151"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "FBLogin()"
-            landmarkType = "9">
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "rentButtonAction()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "sixHands/FacebookAuth.swift"
+            timestampString = "507241830.159978"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

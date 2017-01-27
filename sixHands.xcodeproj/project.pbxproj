@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		400274BC1E321D46000B94DF /* FlatViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400274BB1E321D46000B94DF /* FlatViewCell.swift */; };
+		404674071E37BCE100587A62 /* VKAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404674061E37BCE100587A62 /* VKAuth.swift */; };
 		404E70E11E2EBF2800F94277 /* FacebookAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404E70E01E2EBF2800F94277 /* FacebookAuth.swift */; };
 		406F92011E2F53F800E2A9FF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 406F91FF1E2F53F800E2A9FF /* FBSDKCoreKit.framework */; };
 		406F92021E2F53F800E2A9FF /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 406F92001E2F53F800E2A9FF /* FBSDKLoginKit.framework */; };
@@ -51,6 +52,7 @@
 		36A6F9B5BD6D2615B0FFA05B /* Pods-sixHandsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sixHandsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-sixHandsTests/Pods-sixHandsTests.release.xcconfig"; sourceTree = "<group>"; };
 		36FDA856FD8EE1986F732C03 /* Pods_sixHandsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sixHandsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		400274BB1E321D46000B94DF /* FlatViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatViewCell.swift; sourceTree = "<group>"; };
+		404674061E37BCE100587A62 /* VKAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKAuth.swift; sourceTree = "<group>"; };
 		404E70E01E2EBF2800F94277 /* FacebookAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookAuth.swift; sourceTree = "<group>"; };
 		406F91FF1E2F53F800E2A9FF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		406F92001E2F53F800E2A9FF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				404E70E01E2EBF2800F94277 /* FacebookAuth.swift */,
+				404674061E37BCE100587A62 /* VKAuth.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 			files = (
 				9DA19FFD1E35E972000C2E05 /* ProfileController.swift in Sources */,
 				404E70E11E2EBF2800F94277 /* FacebookAuth.swift in Sources */,
+				404674071E37BCE100587A62 /* VKAuth.swift in Sources */,
 				F7529B5D1E266BA700F47FE9 /* ViewController.swift in Sources */,
 				F7BAACAF1E2C8FE7009BE9AD /* ListOfFlatsController.swift in Sources */,
 				400274BC1E321D46000B94DF /* FlatViewCell.swift in Sources */,

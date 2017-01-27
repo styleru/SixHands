@@ -77,7 +77,7 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
     
     @IBAction func fbLogin(_ sender: UIButton) {
         FBLogin()
-        getFBUserData()
+        //getFBUserData()
         
        
     }
@@ -92,6 +92,8 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     func vkSdkShouldPresent(_ controller: UIViewController!) {
         self.present(controller, animated: true, completion: nil)
     }
@@ -154,8 +156,7 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
                         if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
                             print("statusCode \(httpStatus.statusCode)")
                             print("response =\(response)")
-                            
-                        }
+                            }
                         let responseString = String(data: data, encoding: .utf8)
                         print("responseString = \(responseString)")
                         

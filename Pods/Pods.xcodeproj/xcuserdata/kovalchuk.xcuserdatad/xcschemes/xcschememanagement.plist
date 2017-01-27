@@ -4,45 +4,55 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Alamofire.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-sixHands.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-sixHandsTests.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-sixHandsUITests.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>VK-ios-sdk-VKSdkResources.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>VK-ios-sdk.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>5</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>728C9907C04061A5A4D9F11A7B803CA1</key>
+		<key>2B56CF884F3386CE4C9C4BE3EBA864AF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9079AC655B203F42F6D08F472229FFC9</key>
+		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A79970BE277BF5B6C0EBD8E9A085ED39</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,12 +62,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BCC200650B2F3D19314BB131E09F81E3</key>
+		<key>AE0B7746FD417499B5EF1F1BD5730663</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F0133D07C0B22D8E92577ADE4F902D8E</key>
+		<key>B612BF23FBB2D2814F413ABDE28CCC10</key>
 		<dict>
 			<key>primary</key>
 			<true/>

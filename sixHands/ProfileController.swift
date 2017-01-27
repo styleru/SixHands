@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -131,8 +133,8 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
     //action for vk button
     func fbButtonAction() {
         print("fb button tapped!")
+                
     }
-    
     //action for vk button
     func rentButtonAction() {
         print("rent button tapped!")

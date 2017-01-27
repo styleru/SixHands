@@ -33,8 +33,14 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
     
     override func viewDidLoad() {
-        print(screenSize.height)
-        print(screenSize.width)
+        
+        //gray bar
+        let grayBar = UIView()
+        grayBar.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: 25.0)
+        grayBar.backgroundColor = UIColor.black
+        grayBar.alpha = 0.37
+        self.view.addSubview(grayBar)
+        
         listOfFlatsTableView.delegate = self
         listOfFlatsTableView.dataSource = self
         listOfFlatsTableView.beginUpdates()

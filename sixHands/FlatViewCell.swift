@@ -17,18 +17,41 @@ class FlatViewCell: UITableViewCell {
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var price: UILabel!
     
-    
+    let flat = UIImageView()
+    let priceLabel = UILabel()
+    let subwayLabel = UILabel()
+    let rooms = UILabel()
+    let views = UILabel()
+    let new = UILabel()
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?){
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        self.backgroundColor = UIColor.clear
+        contentView.addSubview(flat)
+        contentView.addSubview(priceLabel)
+        contentView.addSubview(subwayLabel)
+        contentView.addSubview(rooms)
+        contentView.addSubview(views)
+        contentView.addSubview(new)
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 
 }

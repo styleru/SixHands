@@ -18,6 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        UIApplication.shared.statusBarStyle = .lightContent
+        UITabBar.appearance().tintColor = UIColor(red: 89/255, green: 215/255, blue: 199/255, alpha: 1)
+        UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 14.0, weight: UIFontWeightLight)], for: .normal)
+        
     return    FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     
     }

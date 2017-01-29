@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "121"
             endingLineNumber = "121"
-            landmarkName = "rentButtonAction()"
+            landmarkName = "settingsButtonAction()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

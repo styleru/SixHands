@@ -10,11 +10,9 @@ import Foundation
 import FBSDKCoreKit
 import FBSDKLoginKit
 import Alamofire
-import SwiftyJSON
-import CoreData
 
 
-let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
 var fbDetails  = NSDictionary()
 public func FBLogin(){
         let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
@@ -46,65 +44,9 @@ public func FBLogin(){
                         let url = "http://dev.6hands.styleru.net/user"
                         //ПОЛУЧАЮ JSON С СЕРВАКА
                         Alamofire.request(url, method: .post, parameters: params)
-                            .response { response in
-                                
-                                //ЗАНОС В CORE DATA
-                               
-                                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                              
-                                var jsondata = JSON(data: data)
-                                    jsondata = jsondata["body"]
-                                    UserDefaults.standard.setValue(jsondata["token"].string, forKey: "token")
-                                    var bool = true
-                                    do{
-                                        let task :[Person] = try context.fetch(Person.fetchRequest())
-                                        for tas in task {
-                                            tas.first_name = jsondata["user"]["first_name"].string
-                                            tas.last_name = jsondata["user"]["last_name"].string
-                                            tas.email = jsondata["user"]["email"].string
-                                            tas.phone = jsondata["user"]["phone"].string
-                                            for(_,subJson):(String,JSON) in jsondata["user"]["social_networks"]{
-                                                if(subJson["sn"] == "vk"){
-                                                    tas.vk_id = subJson["id_user"].int32Value
-                                                }
-                                                if(subJson["sn"] == "fb"){
-                                                    tas.fb_id = subJson["id_user"].int32Value
-                                                }
-                                            }
-                                            
-                                            bool = false
-                                            var warning = "The user has already registered: "
-                                            warning += tas.first_name!+" "
-                                            warning += tas.email!+" "
-                                            warning += tas.vk_id.description
-                                            print(warning)
-                                            (UIApplication.shared.delegate as! AppDelegate).saveContext()
-                                        }
-                                    }
-                                    catch{
-                                        
-                                    }
-                                    if bool {
-                                        let user = Person(context: context)
-                                        user.first_name = jsondata["user"]["first_name"].string
-                                        user.last_name = jsondata["user"]["last_name"].string
-                                        user.email = jsondata["user"]["email"].string
-                                        user.phone = jsondata["user"]["phone"].string
-                                        print("User has been added!")
-                                        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-                                    }
-                        
-                        
-                                
-                        
-                        
-                                }
-                        
-                        
+                            .responseJSON { response in
+                                print(response.result.value)
                         }
-                        
-                        
-                        
                         
                     
                     })

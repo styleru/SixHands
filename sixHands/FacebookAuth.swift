@@ -63,6 +63,7 @@ public func FBLogin(){
                                             tas.last_name = jsondata["user"]["last_name"].string
                                             tas.email = jsondata["user"]["email"].string
                                             tas.phone = jsondata["user"]["phone"].string
+                                            tas.avatar_url = jsondata["user"]["avatar"].string
                                             for(_,subJson):(String,JSON) in jsondata["user"]["social_networks"]{
                                                 if(subJson["sn"] == "vk"){
                                                     tas.vk_id = subJson["id_user"].int32Value

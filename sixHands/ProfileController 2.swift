@@ -9,8 +9,12 @@
 import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
+import CoreData
 
 class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var info = [NSManagedObject]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,6 +115,19 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         table.separatorInset.left = 15.0
         table.separatorInset.right = 15.0
         self.view.addSubview(table)
+        
+        
+        //get info from coredata
+        do {
+            info = try context.fetch(Person.fetchRequest())
+        } catch {
+            print("Fetching Failed")
+        }
+        
+        print("kek: \(info[0].value(forKey: "first_name") as! String)")
+        name.text = info[0].value(forKey: "first_name") as? String
+        print("lol: \(info[0].value(forKey: "avatar_url") as! String)")
+        avatar.sd_setImage(with: URL(string: (info[0].value(forKey: "avatar_url") as? String)!))
         
         
     }

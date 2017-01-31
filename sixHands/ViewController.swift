@@ -118,7 +118,7 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
             email = result.token.email
             resultToken = result.token.accessToken
             
-            let getData: VKRequest =  VKApi.users().get(["fields": "photo_50,contacts"])
+            let getData: VKRequest =  VKApi.users().get(["fields": "photo_max,contacts"])
             
             
             getData.execute(
@@ -129,7 +129,7 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
                     
                     self.first_name = user.first_name
                     self.last_name = user.last_name
-                    self.avatar = user.photo_50
+                    self.avatar = user.photo_max
                     self.sn_id = result.token.userId
                     
                     let listUrlString = "http://dev.6hands.styleru.net/user"
@@ -173,6 +173,7 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
                                         tas.last_name = jsondata["user"]["last_name"].string
                                         tas.email = jsondata["user"]["email"].string
                                         tas.phone = jsondata["user"]["phone"].string
+                                        tas.avatar_url = jsondata["user"]["avatar"].string
                                     for(_,subJson):(String,JSON) in jsondata["user"]["social_networks"]{
                                         if(subJson["sn"] == "vk"){
                                             tas.vk_id = subJson["id_user"].int32Value

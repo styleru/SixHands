@@ -8,6 +8,7 @@ target 'sixHands' do
   use_frameworks!
   pod "VK-ios-sdk"
   pod "SwiftyJSON"
+  pod 'SDWebImage/WebP'
   pod 'Alamofire', '~> 4.3'
   # Pods for sixHands
 

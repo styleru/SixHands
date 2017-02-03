@@ -11,12 +11,12 @@ import SwiftyJSON
 import CoreData
 import FBSDKCoreKit
 import FBSDKLoginKit
-
+import Alamofire
 class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewDataSource{
   let screenSize: CGRect = UIScreen.main.bounds
    
-    
-    
+    var flats = [Flat]()
+    typealias JSONStandard = [String : AnyObject]
     
     @IBOutlet weak var listOfFlats: UILabel!
     
@@ -33,6 +33,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
     
     override func viewDidLoad() {
+        update(user_id: "128", sorting: "last", parameters: nil, amount: 20)
         
         //gray bar
         let grayBar = UIView()
@@ -44,7 +45,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         listOfFlatsTableView.delegate = self
         listOfFlatsTableView.dataSource = self
         listOfFlatsTableView.beginUpdates()
-       listOfFlatsTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+        listOfFlatsTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
         listOfFlatsTableView.endUpdates()
         
         
@@ -71,8 +72,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
         
         
-        
-        super.viewDidLoad()
+    super.viewDidLoad()
     }
     
     
@@ -81,19 +81,19 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
-    func loadFlats(){
-        
-    }
+   
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // cell selected code here
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "FlatViewCell", for: indexPath) as! FlatViewCell
         
         
@@ -120,15 +120,62 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         cell.avatar.layer.cornerRadius = cell.avatar.frame.size.width / 2
         cell.avatar.clipsToBounds = true
         cell.avatar.contentMode = .scaleAspectFill
+        //END OF CONSTRAINTS
+        
+        cell.subway.text = "пока нема"
+        cell.mutualFriends.text = "социопат"
+        cell.numberOfRooms.text = flats[indexPath.row].numberOfRoomsInFlat
+        cell.price.text = flats[indexPath.row].flatPrice
+        cell.avatar.sd_setImage(with: URL(string : flats[indexPath.row].avatarImage))
+        cell.flatImage.sd_setImage(with: URL(string : flats[indexPath.row].imageOfFlat))
         
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return 1
+   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        return flats.count
     }
+    
+    func update(user_id:String,sorting:String,parameters:String?,amount:Int8) {
+        
+        let headers:HTTPHeaders = ["Token": UserDefaults.standard.object(forKey:"token") as! String]
+        Alamofire.request("http://dev.6hands.styleru.net/flats/filter?id_user=\(user_id)&sorting=\(sorting)&offset=0&amount=\(amount)&parameters=\(parameters)",headers:headers).responseJSON { response in
+            var jsondata = JSON(data:response.data!)["body"]
+            let array = jsondata.array
+            
+            for i in 0..<array!.count{
+            let flat = Flat()
+                flat.avatarImage = jsondata[i]["avatar"].string!
+                flat.flatPrice = jsondata[i]["parameters"]["30"].string!
+                flat.flatSubway = "Пока нема"
+                flat.flatMutualFriends = "социопат"
+                flat.imageOfFlat = jsondata[i]["photos"][0]["url"].string!
+                print(flat.imageOfFlat)
+                flat.numberOfRoomsInFlat = jsondata[i]["parameters"]["31"].string!
+                self.flats.append(flat)
+                
+            }
+            OperationQueue.main.addOperation({()-> Void in
+                
+                self.listOfFlatsTableView.reloadData()
+                
+            })
+            
+        //self.flats = self.parseData(JSONdata: response.data!)
+        }
     }
+
+   
+    
+    
+    
+    
+    
+    
+    
+
+}
 
 
 

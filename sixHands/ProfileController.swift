@@ -150,7 +150,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
     //action for vk button
     func fbButtonAction() {
         print("fb button tapped!")
-                
+         
     }
     //action for vk button
     func rentButtonAction() {

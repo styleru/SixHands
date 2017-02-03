@@ -8,41 +8,90 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 		<key>Pods-sixHands.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 		<key>Pods-sixHandsTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
 		<key>Pods-sixHandsUITests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>SDWebImage.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
 		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 		<key>VK-ios-sdk-VKSdkResources.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>7</integer>
 		</dict>
 		<key>VK-ios-sdk.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+		<key>libwebp.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>29A59862B11DDBD1D1215703AC84EF67</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2B56CF884F3386CE4C9C4BE3EBA864AF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5B97032809CAEABB5FFCAAA674CD607B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5B9A31F08E12B6311C0F48DE7E671FFA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>615D41F76665BE6C1747E47CD7BD03A3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,7 +101,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>8E50A13C4670DC60F607FBFB058A9AF3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>A79970BE277BF5B6C0EBD8E9A085ED39</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A79DC8F5606F6D28D8D17C45867D0779</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,7 +126,37 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>B37E86CE91EEB7FCEFEDBEC9D422CC2D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>B612BF23FBB2D2814F413ABDE28CCC10</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B7CD376D72D4BFE4F416B622B055F4B6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DABB6ADD632315925B8C05AD56715736</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E281ABE0DA6CB5B4095C4EAA1FD503FF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E47BE7EE9529C6A2DD165F4A77A65DDC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EC69F0D454FB6DF4F4D35F1CDF5B92DF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

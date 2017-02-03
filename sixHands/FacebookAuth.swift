@@ -23,11 +23,12 @@ public func FBLogin(){
                 let fbloginresult : FBSDKLoginManagerLoginResult = result!
                 if(fbloginresult.grantedPermissions != nil && fbloginresult.grantedPermissions.contains("email"))
                 {
-                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                      let  afterLoginTB = storyboard.instantiateViewController(withIdentifier: "afterLogin") as! UITabBarController
                      let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                     appDelegate.window?.rootViewController = afterLoginTB
+                        appDelegate.window?.rootViewController = afterLoginTB
+                    })
                     getFBUserData()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                         //КИДАЮ ДАННЫЕ НА СЕРВАК
@@ -117,12 +118,6 @@ func getFBUserData(){
             print(error)}
         else {
        fbDetails = result as! NSDictionary
-            print(fbDetails["id"])
-            print(fbDetails["email"])
-            print(fbDetails["first_name"] as! String)
-            print(fbDetails["last_name"])
-            print("http://graph.facebook.com/\(fbDetails["id"]!)/picture?type=large")
-            
        
         }
     }

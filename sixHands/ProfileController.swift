@@ -254,13 +254,14 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
                     self.flats.append(flat)
                     
                 }
+                
+                OperationQueue.main.addOperation({()-> Void in
+                    
+                    self.table.reloadData()
+                    
+                })
             }
             
-            OperationQueue.main.addOperation({()-> Void in
-                
-                self.table.reloadData()
-                
-            })
             
             //self.flats = self.parseData(JSONdata: response.data!)
         }

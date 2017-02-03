@@ -18,6 +18,10 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
    
     var flats = [Flat]()
     typealias JSONStandard = [String : AnyObject]
+    let refreshControl = UIRefreshControl()
+    //let params = "%5B%7B%22key%22%3A%22id%22%2C%22value%22%3A%22307%22%2C%20%22criterion%22%3A%22single%22%7D%5D"
+    var offsetInc = 2
+    let amount = 2
     
     @IBOutlet weak var listOfFlats: UILabel!
     
@@ -34,8 +38,8 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
     
     override func viewDidLoad() {
-        //let params = "%5B%7B%22key%22%3A%22id%22%2C%22value%22%3A%22307%22%2C%20%22criterion%22%3A%22single%22%7D%5D"
-        update(user_id: "129", sorting: "last", parameters: "", amount: 20)
+
+        update(user_id: "129", sorting: "last", parameters: "", amount: Int8(amount), offset: 0)
         
         //gray bar
         let grayBar = UIView()
@@ -68,27 +72,38 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         listOfFlatsTableView.center = CGPoint(x: screenSize.width/2, y: screenSize.height * 0.564467)
         listOfFlatsTableView.bounds = CGRect(x: 0, y: 0, width: screenSize.width * 0.91466, height: screenSize.height * 0.70614)
         
-       
+        //pull
+        refreshControl.backgroundColor = UIColor.clear
+        refreshControl.tintColor = UIColor.gray
+        refreshControl.addTarget(self, action: #selector(ListOfFlatsController.refresh), for: UIControlEvents.valueChanged)
+        self.listOfFlatsTableView?.addSubview(refreshControl)
         
-        
-        
-        
-        
-    super.viewDidLoad()
+        super.viewDidLoad()
     }
-    
     
     override func viewDidAppear(_ animated: Bool) {
         
     }
     
-    
-   
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    func refresh() {
+        print("refresh...")
+        flats = []
+        update(user_id: "129", sorting: "last", parameters: "", amount: Int8(amount), offset: 0)
+        offsetInc = amount
+        self.refreshControl.endRefreshing()
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == flats.count - 1 {
+            print("reached the bottom cell")
+            update(user_id: "129", sorting: "last", parameters: "", amount: Int8(amount), offset: offsetInc)
+            offsetInc += amount
+        }
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // cell selected code here
@@ -124,8 +139,8 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         cell.avatar.contentMode = .scaleAspectFill
         //END OF CONSTRAINTS
         
-        cell.subway.text = "Нет пока"
-        cell.mutualFriends.text = "Отсутствуют"
+        cell.subway.text = "м. Арбатская"
+        cell.mutualFriends.text = "5 общих друзей"
         cell.numberOfRooms.text = "\(flats[indexPath.row].numberOfRoomsInFlat)-комн."
         cell.price.text = "\(flats[indexPath.row].flatPrice) Р"
         cell.avatar.sd_setImage(with: URL(string : flats[indexPath.row].avatarImage))
@@ -142,10 +157,10 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         return flats.count
     }
     
-    func update(user_id:String,sorting:String,parameters:String,amount:Int8) {
+    func update(user_id:String,sorting:String,parameters:String,amount:Int8,offset:Int) {
         
         let headers:HTTPHeaders = ["Token": UserDefaults.standard.object(forKey:"token") as! String]
-        Alamofire.request("http://dev.6hands.styleru.net/flats/filter?id_user=\(user_id)&sorting=\(sorting)&offset=0&amount=\(amount)&parameters=\(parameters)",headers:headers).responseJSON { response in
+        Alamofire.request("http://dev.6hands.styleru.net/flats/filter?id_user=\(user_id)&sorting=\(sorting)&offset=\(offset)&amount=\(amount)&parameters=\(parameters)",headers:headers).responseJSON { response in
             var jsondata = JSON(data:response.data!)["body"]
             let array = jsondata.array
             print(jsondata)

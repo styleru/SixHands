@@ -10,14 +10,24 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 import CoreData
+import Alamofire
+import SwiftyJSON
 
 class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var info = [NSManagedObject]()
+    var flats = [Flat]()
+    typealias JSONStandard = [String : AnyObject]
+    let table = UITableView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //parameters for request & request
+        let params = "%5B%7B%22key%22%3A%22id_user%22%2C%22value%22%3A%22\(UserDefaults.standard.value(forKey: "id_user")!)%22%2C%20%22criterion%22%3A%22single%22%7D%5D"
+        
+        get(user_id: "129", sorting: "last", parameters: params, amount: 20)
         
         //view bounds
         let screen = self.view.frame
@@ -106,7 +116,6 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         self.view.addSubview(rentButton)
         
         //tableView
-        let table = UITableView()
         table.frame = CGRect(x: 0.0, y: vkButton.frame.maxY + 15.0, width: screen.width, height: screen.height - 167.0 - 124.0)
         table.rowHeight = screen.height * 0.375
         table.delegate = self
@@ -124,9 +133,9 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
             print("Fetching Failed")
         }
         
-        print("kek: \(info[0].value(forKey: "first_name") as! String)")
+        print("name: \(info[0].value(forKey: "first_name") as! String)")
         name.text = info[0].value(forKey: "first_name") as? String
-        print("lol: \(info[0].value(forKey: "avatar_url") as! String)")
+        print("image: \(info[0].value(forKey: "avatar_url") as! String)")
         avatar.sd_setImage(with: URL(string: (info[0].value(forKey: "avatar_url") as? String)!))
         
         
@@ -162,7 +171,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return flats.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -173,12 +182,14 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         let screen = self.view.frame
         
         //image
-        cell.flat.image = UIImage(named: "1")
+        var flatImageURL : String = flats[indexPath.row].imageOfFlat
+        flatImageURL = String(flatImageURL.characters.dropFirst(29))
+        cell.flat.sd_setImage(with: URL(string: flatImageURL))
         cell.flat.frame = CGRect(x: 15.0, y: 10.0, width: screen.width - 30.0, height: tableView.rowHeight * 0.7)
         cell.flat.contentMode = .scaleToFill
         
         //price
-        cell.priceLabel.text = "10 000 Р"
+        cell.priceLabel.text = "\(flats[indexPath.row].flatPrice) Р"
         cell.priceLabel.textColor = UIColor.white
         cell.priceLabel.textAlignment = .center
         cell.priceLabel.font = UIFont(name: "Lato-Medium", size: 16.0)
@@ -186,28 +197,28 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.priceLabel.frame = CGRect(x: screen.maxX - screen.height * 0.15 - 15.0, y: cell.flat.frame.minY + screen.height * 0.2, width: screen.height * 0.15, height: screen.height * 0.056)
         
         //subway
-        cell.subwayLabel.text = "м. Славянский Бульвар"
+        cell.subwayLabel.text = "\(flats[indexPath.row].flatSubway)"
         cell.subwayLabel.textColor = UIColor.black
         cell.subwayLabel.font = UIFont.systemFont(ofSize: 14.0)
         cell.subwayLabel.frame = CGRect(x: 15.0, y: cell.flat.frame.maxY + screen.height * 0.009, width: screen.height * 0.276, height: screen.height * 0.032)
         cell.subwayLabel.adjustsFontSizeToFitWidth = true
         
         //rooms
-        cell.rooms.text = "2-комн.кв"
+        cell.rooms.text = "\(flats[indexPath.row].numberOfRoomsInFlat)-комн."
         cell.rooms.textColor = UIColor.black
         cell.rooms.font = UIFont.systemFont(ofSize: 14.0)
         cell.rooms.frame = CGRect(x: cell.subwayLabel.frame.maxX + 17.0, y: cell.flat.frame.maxY + screen.height * 0.009, width: screen.height * 0.143, height: screen.height * 0.032)
         cell.rooms.adjustsFontSizeToFitWidth = true
         
         //views
-        cell.views.text = "Просмотров: 98"
+        cell.views.text = "Просмотров: \(flats[indexPath.row].views)"
         cell.views.textColor = UIColor.black
         cell.views.font = UIFont.systemFont(ofSize: 12.0, weight: UIFontWeightLight)
         cell.views.frame = CGRect(x: 15.0, y: cell.subwayLabel.frame.maxY + screen.height * 0.009, width: screen.height * 0.176, height: screen.height * 0.026)
         cell.views.adjustsFontSizeToFitWidth = true
         
         //new views
-        cell.new.text = "Новых: 65"
+        cell.new.text = "Новых: \(flats[indexPath.row].newView)"
         cell.new.textColor = UIColor(red: 72/255, green: 218/255, blue: 200/255, alpha: 1)
         cell.new.font = UIFont.systemFont(ofSize: 12.0, weight: UIFontWeightLight)
         cell.new.frame = CGRect(x: cell.views.frame.maxX + 11.0, y: cell.subwayLabel.frame.maxY + screen.height * 0.009, width: screen.height * 0.123, height: screen.height * 0.026)
@@ -220,6 +231,39 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func get(user_id:String,sorting:String,parameters:String,amount:Int8) {
+        
+        let headers:HTTPHeaders = ["Token": UserDefaults.standard.object(forKey:"token") as! String]
+        Alamofire.request("http://dev.6hands.styleru.net/flats/filter?id_user=\(user_id)&sorting=\(sorting)&offset=0&amount=\(amount)&parameters=\(parameters)",headers:headers).responseJSON { response in
+            
+            var jsondata = JSON(data:response.data!)["body"]
+            let array = jsondata.array
+            print(jsondata)
+            
+            if (array?.count) != nil {
+                for i in 0..<array!.count{
+                    let flat = Flat()
+                    flat.flatPrice = jsondata[i]["parameters"]["30"].string!
+                    flat.flatSubway = "м. Текстильщики"
+                    flat.imageOfFlat = jsondata[i]["photos"][0]["url"].string!
+                    flat.numberOfRoomsInFlat = jsondata[i]["parameters"]["31"].string!
+                    flat.views = "65"
+                    flat.newView = "12"
+                    self.flats.append(flat)
+                    
+                }
+            }
+            
+            OperationQueue.main.addOperation({()-> Void in
+                
+                self.table.reloadData()
+                
+            })
+            
+            //self.flats = self.parseData(JSONdata: response.data!)
+        }
     }
     
 

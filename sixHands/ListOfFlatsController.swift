@@ -12,6 +12,7 @@ import CoreData
 import FBSDKCoreKit
 import FBSDKLoginKit
 import Alamofire
+
 class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewDataSource{
   let screenSize: CGRect = UIScreen.main.bounds
    
@@ -33,7 +34,8 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
     
     override func viewDidLoad() {
-        update(user_id: "128", sorting: "last", parameters: nil, amount: 20)
+        //let params = "%5B%7B%22key%22%3A%22id%22%2C%22value%22%3A%22307%22%2C%20%22criterion%22%3A%22single%22%7D%5D"
+        update(user_id: "129", sorting: "last", parameters: "", amount: 20)
         
         //gray bar
         let grayBar = UIView()
@@ -50,7 +52,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
         
         //CONSTRAINTS:
-        listOfFlatsTableView.rowHeight = screenSize.height * 0.376311
+        listOfFlatsTableView.rowHeight = screenSize.height * 0.4
         
         listOfFlats.bounds = CGRect(x:0, y:0 , width: screenSize.width * 0.8, height: screenSize.height * 0.096)
         listOfFlats.center = CGPoint(x: listOfFlats.bounds.width/2 + screenSize.width/2 - screenSize.width * 0.91466 / 2, y: screenSize.height * 0.089955)
@@ -98,8 +100,8 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
         
         //CONSTRAINTS
-        cell.flatImage.bounds = CGRect(x: 0, y: 0, width: screenSize.width * 0.91466 , height: screenSize.height * 0.27436282 )
-        cell.flatImage.center = CGPoint(x: cell.bounds.width / 2, y: cell.flatImage.frame.height/2)
+        cell.flatImage.bounds = CGRect(x: 0, y: 0.0, width: screenSize.width * 0.91466 , height: screenSize.height * 0.27436282 )
+        cell.flatImage.center = CGPoint(x: cell.bounds.width / 2, y: cell.flatImage.frame.height/2 + 5.0)
         
         cell.mutualFriends.bounds = CGRect(x: 0, y: 0, width: screenSize.width * 0.3 , height: screenSize.height * 0.03)
         cell.mutualFriends.center = CGPoint(x:cell.mutualFriends.frame.width / 2, y: cell.bounds.height-cell.mutualFriends.frame.height)
@@ -122,12 +124,15 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         cell.avatar.contentMode = .scaleAspectFill
         //END OF CONSTRAINTS
         
-        cell.subway.text = "пока нема"
-        cell.mutualFriends.text = "социопат"
-        cell.numberOfRooms.text = flats[indexPath.row].numberOfRoomsInFlat
-        cell.price.text = flats[indexPath.row].flatPrice
+        cell.subway.text = "Нет пока"
+        cell.mutualFriends.text = "Отсутствуют"
+        cell.numberOfRooms.text = "\(flats[indexPath.row].numberOfRoomsInFlat)-комн."
+        cell.price.text = "\(flats[indexPath.row].flatPrice) Р"
         cell.avatar.sd_setImage(with: URL(string : flats[indexPath.row].avatarImage))
-        cell.flatImage.sd_setImage(with: URL(string : flats[indexPath.row].imageOfFlat))
+        
+        var flatImageURL : String = flats[indexPath.row].imageOfFlat
+        flatImageURL = String(flatImageURL.characters.dropFirst(29))
+        cell.flatImage.sd_setImage(with: URL(string : flatImageURL))
         
         
         return cell
@@ -137,24 +142,27 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         return flats.count
     }
     
-    func update(user_id:String,sorting:String,parameters:String?,amount:Int8) {
+    func update(user_id:String,sorting:String,parameters:String,amount:Int8) {
         
         let headers:HTTPHeaders = ["Token": UserDefaults.standard.object(forKey:"token") as! String]
         Alamofire.request("http://dev.6hands.styleru.net/flats/filter?id_user=\(user_id)&sorting=\(sorting)&offset=0&amount=\(amount)&parameters=\(parameters)",headers:headers).responseJSON { response in
             var jsondata = JSON(data:response.data!)["body"]
             let array = jsondata.array
+            print(jsondata)
             
-            for i in 0..<array!.count{
-            let flat = Flat()
-                flat.avatarImage = jsondata[i]["avatar"].string!
-                flat.flatPrice = jsondata[i]["parameters"]["30"].string!
-                flat.flatSubway = "Пока нема"
-                flat.flatMutualFriends = "социопат"
-                flat.imageOfFlat = jsondata[i]["photos"][0]["url"].string!
-                print(flat.imageOfFlat)
-                flat.numberOfRoomsInFlat = jsondata[i]["parameters"]["31"].string!
-                self.flats.append(flat)
+            if (array?.count) != nil {
+                for i in 0..<array!.count{
+                    let flat = Flat()
+                    flat.avatarImage = jsondata[i]["avatar"].string!
+                    flat.flatPrice = jsondata[i]["parameters"]["30"].string!
+                    flat.flatSubway = "Пока нема"
+                    flat.flatMutualFriends = "социопат"
+                    flat.imageOfFlat = jsondata[i]["photos"][0]["url"].string!
+                    print(flat.imageOfFlat)
+                    flat.numberOfRoomsInFlat = jsondata[i]["parameters"]["31"].string!
+                    self.flats.append(flat)
                 
+                }
             }
             OperationQueue.main.addOperation({()-> Void in
                 

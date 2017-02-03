@@ -158,6 +158,7 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
                             print("response =\(response)")
                             }
                         let responseString = String(data: data, encoding: .utf8)
+                        
                         print("responseString = \(responseString)")
                         
                         
@@ -165,6 +166,7 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
                             var jsondata = JSON(data: dataFromString)
                             jsondata = jsondata["body"]
                             UserDefaults.standard.setValue(jsondata["token"].string, forKey: "token")
+                            UserDefaults.standard.set(jsondata["user"]["id"].string, forKey: "id_user")
                             var bool = true
                             do{
                                 let task :[Person] = try self.context.fetch(Person.fetchRequest())

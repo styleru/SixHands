@@ -14,5 +14,7 @@ class Flat{
     var numberOfRoomsInFlat:String = ""
     var flatMutualFriends:String = ""
     var flatPrice:String = ""
+    var views: String = ""
+    var newView: String = ""
     
     }

@@ -56,6 +56,7 @@ public func FBLogin(){
                                     var jsondata = JSON(data: data)
                                     jsondata = jsondata["body"]
                                     UserDefaults.standard.setValue(jsondata["token"].string, forKey: "token")
+                                    UserDefaults.standard.set(jsondata["user"]["id"].string, forKey: "id_user")
                                     var bool = true
                                     do{
                                         let task :[Person] = try context.fetch(Person.fetchRequest())

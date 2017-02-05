@@ -144,10 +144,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         cell.numberOfRooms.text = "\(flats[indexPath.row].numberOfRoomsInFlat)-комн."
         cell.price.text = "\(flats[indexPath.row].flatPrice) Р"
         cell.avatar.sd_setImage(with: URL(string : flats[indexPath.row].avatarImage))
-        
-        var flatImageURL : String = flats[indexPath.row].imageOfFlat
-        flatImageURL = String(flatImageURL.characters.dropFirst(29))
-        cell.flatImage.sd_setImage(with: URL(string : flatImageURL))
+        cell.flatImage.sd_setImage(with: URL(string : flats[indexPath.row].imageOfFlat))
         
         
         return cell

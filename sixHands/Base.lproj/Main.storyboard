@@ -69,7 +69,7 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="249"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TNT-ro-0Kj" id="9nY-VX-sTG">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="248.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="248"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="6gh-A1-C63">
@@ -165,7 +165,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Список" id="Hl6-qV-VCj"/>
+                    <tabBarItem key="tabBarItem" title="Список" image="Home" id="Hl6-qV-VCj"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="favouritesOutlet" destination="4LO-xe-YIz" id="2Av-9h-WPl"/>
@@ -192,7 +192,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Профиль" id="SW5-iT-ZWd"/>
+                    <tabBarItem key="tabBarItem" title="Профиль" image="Profile" id="SW5-iT-ZWd"/>
                     <navigationItem key="navigationItem" id="iRg-7u-HQE"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
@@ -200,7 +200,7 @@
             </objects>
             <point key="canvasLocation" x="1430" y="2006"/>
         </scene>
-        <!--Item 2-->
+        <!--Связь-->
         <scene sceneID="2HN-2l-uWG">
             <objects>
                 <viewController id="w5c-CK-dor" sceneMemberID="viewController">
@@ -213,13 +213,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="KpG-95-jkd"/>
+                    <tabBarItem key="tabBarItem" title="Связь" image="Chat" id="KpG-95-jkd"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jkm-0p-LbR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="580" y="2006"/>
         </scene>
-        <!--Item 1-->
+        <!--Карта-->
         <scene sceneID="CuA-Ib-Q0R">
             <objects>
                 <viewController id="zpI-hk-eiu" sceneMemberID="viewController">
@@ -232,7 +232,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="Exm-Ln-df3"/>
+                    <tabBarItem key="tabBarItem" title="Карта" image="Map" id="Exm-Ln-df3"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sdx-KD-XB3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -264,6 +264,10 @@
     <resources>
         <image name="1" width="600" height="400"/>
         <image name="2" width="2560" height="1920"/>
+        <image name="Chat" width="25" height="25"/>
+        <image name="Home" width="24" height="24"/>
+        <image name="Map" width="24" height="24"/>
+        <image name="Profile" width="24" height="24"/>
     </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

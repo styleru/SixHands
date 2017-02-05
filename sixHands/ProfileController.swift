@@ -29,6 +29,13 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         get(user_id: "129", sorting: "last", parameters: params, amount: 20)
         
+        //get info from coredata
+        do {
+            info = try context.fetch(Person.fetchRequest())
+        } catch {
+            print("Fetching Failed")
+        }
+        
         //view bounds
         let screen = self.view.frame
 
@@ -53,7 +60,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         //profile photo
         let avatar = UIImageView()
         avatar.frame = CGRect(x: screen.maxX - 15.0 - screen.height * 0.09, y: screen.minY + 40.0, width: screen.height * 0.09, height: screen.height * 0.09)
-        avatar.image = UIImage(named: "2")
+        avatar.sd_setImage(with: URL(string: (info[0].value(forKey: "avatar_url") as? String)!))
         avatar.layer.masksToBounds = false
         avatar.layer.cornerRadius = avatar.frame.size.width/2
         avatar.clipsToBounds = true
@@ -63,7 +70,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         //name label
         let name = UILabel()
         name.frame = CGRect(x: screen.minX + 15.0, y: screen.minY + 40.0, width: 172.0, height: 36.0)
-        name.text = "Ryan"
+        name.text = info[0].value(forKey: "first_name") as? String
         name.font = UIFont.systemFont(ofSize: 24.0, weight: UIFontWeightHeavy)
         name.textColor = UIColor(red: 57/255, green: 57/255, blue: 57/255, alpha: 1)
         self.view.addSubview(name)
@@ -80,34 +87,48 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         //VK button
         let vkButton = UIButton()
-        vkButton.frame = CGRect(x: 15.0, y: changeButton.frame.maxY + 25.0, width: 34.0, height: 34.0)
+        
+        if info[0].value(forKey: "vk_id") as! Int32 != 0 {
+            vkButton.frame = CGRect(x: 15.0, y: changeButton.frame.maxY + 25.0, width: 34.0, height: 34.0)
+            vkButton.setTitle("VK", for: .normal)
+        } else {
+            vkButton.frame = CGRect(x: 15.0, y: changeButton.frame.maxY + 25.0, width: 60.0, height: 34.0)
+            vkButton.setTitle("+ VK", for: .normal)
+        }
+        
         vkButton.addTarget(self, action: #selector(ProfileController.vkButtonAction), for: .touchUpInside)
-        /*
         vkButton.backgroundColor = UIColor(red: 80/255, green: 114/255, blue: 153/255, alpha: 1)
-        vkButton.setTitle("VK", for: .normal)
+        vkButton.titleLabel?.font = UIFont.systemFont(ofSize: 14.0)
         vkButton.setTitleColor(UIColor.white, for: .normal)
         vkButton.layer.masksToBounds = false
-        vkButton.layer.cornerRadius = vkButton.frame.size.width/2
-        vkButton.clipsToBounds = true*/
-        vkButton.setImage(#imageLiteral(resourceName: "vk"), for: .normal)
+        vkButton.layer.cornerRadius = vkButton.frame.size.height/2
+        vkButton.clipsToBounds = true
+        //vkButton.setImage(#imageLiteral(resourceName: "vk"), for: .normal)
         self.view.addSubview(vkButton)
         
         //FB button
         let fbButton = UIButton()
-        fbButton.frame = CGRect(x: vkButton.frame.maxX + 6, y: changeButton.frame.maxY + 25.0, width: 116.0, height: 34.0)
+        
+        if info[0].value(forKey: "fb_id") as! Int32 != 0 {
+            fbButton.frame = CGRect(x: vkButton.frame.maxX + 6, y: changeButton.frame.maxY + 25.0, width: 34.0, height: 34.0)
+            fbButton.setTitle("FB", for: .normal)
+        } else {
+            fbButton.frame = CGRect(x: vkButton.frame.maxX + 6, y: changeButton.frame.maxY + 25.0, width: 116.0, height: 34.0)
+            fbButton.setTitle("+ Facebook", for: .normal)
+        }
+    
         fbButton.addTarget(self, action: #selector(ProfileController.fbButtonAction), for: .touchUpInside)
         fbButton.backgroundColor = UIColor(red: 59/255, green: 89/255, blue: 152/255, alpha: 1)
         fbButton.layer.masksToBounds = false
         fbButton.layer.cornerRadius = fbButton.frame.size.height/2
         fbButton.clipsToBounds = true
-        fbButton.setTitle("+ Facebook", for: .normal)
         fbButton.setTitleColor(UIColor.white, for: .normal)
         fbButton.titleLabel?.font = UIFont.systemFont(ofSize: 14.0)
         self.view.addSubview(fbButton)
         
         //rent button
         let rentButton = UIButton()
-        rentButton.frame = CGRect(x: 15.0, y: screen.maxY - 15.0 - 49.0 - 44.0, width: screen.width - 30.0, height: 44.0)
+        rentButton.frame = CGRect(x: 15.0, y: screen.maxY - 30.0 - 49.0 - 44.0, width: screen.width - 30.0, height: 55.0)
         rentButton.addTarget(self, action: #selector(ProfileController.rentButtonAction), for: .touchUpInside)
         rentButton.backgroundColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
         rentButton.setTitle("СДАТЬ КВАРТИРУ", for: .normal)
@@ -124,20 +145,6 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         table.separatorInset.left = 15.0
         table.separatorInset.right = 15.0
         self.view.addSubview(table)
-        
-        
-        //get info from coredata
-        do {
-            info = try context.fetch(Person.fetchRequest())
-        } catch {
-            print("Fetching Failed")
-        }
-        
-        print("name: \(info[0].value(forKey: "first_name") as! String)")
-        name.text = info[0].value(forKey: "first_name") as? String
-        print("image: \(info[0].value(forKey: "avatar_url") as! String)")
-        avatar.sd_setImage(with: URL(string: (info[0].value(forKey: "avatar_url") as? String)!))
-        
         
     }
     
@@ -182,9 +189,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         let screen = self.view.frame
         
         //image
-        var flatImageURL : String = flats[indexPath.row].imageOfFlat
-        flatImageURL = String(flatImageURL.characters.dropFirst(29))
-        cell.flat.sd_setImage(with: URL(string: flatImageURL))
+        cell.flat.sd_setImage(with: URL(string : flats[indexPath.row].imageOfFlat))
         cell.flat.frame = CGRect(x: 15.0, y: 10.0, width: screen.width - 30.0, height: tableView.rowHeight * 0.7)
         cell.flat.contentMode = .scaleToFill
         

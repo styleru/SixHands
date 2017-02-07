@@ -38,7 +38,10 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         //view bounds
         let screen = self.view.frame
+        
+        tabBarController?.tabBar.isHidden = false
 
+        /*
         //right Button
         let settingsButton = UIButton()
         settingsButton.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
@@ -48,11 +51,11 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         let rightBarButton = UIBarButtonItem()
         rightBarButton.customView = settingsButton
-        self.navigationItem.rightBarButtonItem = rightBarButton
+        self.navigationItem.rightBarButtonItem = rightBarButton*/
         
         //gray bar
         let grayBar = UIView()
-        grayBar.frame = CGRect(x: 0.0, y: 0.0, width: screen.width, height: 25.0)
+        grayBar.frame = CGRect(x: 0.0, y: 0.0, width: screen.width, height: 20.0)
         grayBar.backgroundColor = UIColor.black
         grayBar.alpha = 0.37
         self.view.addSubview(grayBar)
@@ -171,7 +174,10 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
     //action for vk button
     func rentButtonAction() {
         print("rent button tapped!")
+        performSegue(withIdentifier: "rent", sender: self)
     }
+    
+    @IBAction func cancelRent(segue: UIStoryboardSegue) {}
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

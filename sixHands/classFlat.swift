@@ -7,7 +7,9 @@
 //
 
 import Foundation
+
 class Flat{
+    
     var imageOfFlat: String = ""
     var avatarImage: String = ""
     var flatSubway:String = ""
@@ -16,5 +18,14 @@ class Flat{
     var flatPrice:String = ""
     var views: String = ""
     var newView: String = ""
+    var address: String = ""
+    var addressDetailedInfo : String = ""
+    var flat_id = String()
+    var square = String()
+    var conditioning = String()
+    var tv = String()
+    var fridge = String()
+    var internet = String()
+    var parking = String()
     
     }

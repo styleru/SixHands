@@ -9,6 +9,9 @@ target 'sixHands' do
   pod "VK-ios-sdk"
   pod "SwiftyJSON"
   pod 'SDWebImage/WebP'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
+  pod 'YandexMapKit'
   pod 'Alamofire', '~> 4.3'
   # Pods for sixHands
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bxM-4z-c0h">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -46,6 +46,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="137" y="314"/>
         </scene>
         <!--Список-->
         <scene sceneID="AjW-0Q-ZoI">
@@ -237,10 +238,35 @@
                     <tabBarItem key="tabBarItem" title="Профиль" image="Profile" id="SW5-iT-ZWd"/>
                     <navigationItem key="navigationItem" id="iRg-7u-HQE"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="QEQ-eJ-3Xo" kind="show" identifier="rent" id="w72-Bw-mhI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AjP-Ss-CM5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1430" y="2006"/>
+        </scene>
+        <!--Rent Address Controller-->
+        <scene sceneID="HQO-AD-DjE">
+            <objects>
+                <viewController id="QEQ-eJ-3Xo" customClass="RentAddressController" customModule="sixHands" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="d4W-bl-BMK"/>
+                        <viewControllerLayoutGuide type="bottom" id="jGN-4j-mI8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pc1-kk-T63">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="JjA-I2-mHM" kind="unwind" identifier="cancelRent" unwindAction="cancelRentWithSegue:" id="FdC-V9-g88"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VKQ-tv-4n9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="JjA-I2-mHM" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1430" y="2740"/>
         </scene>
         <!--Связь-->
         <scene sceneID="2HN-2l-uWG">

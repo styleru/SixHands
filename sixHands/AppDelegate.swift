@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import FBSDKCoreKit
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.statusBarStyle = .lightContent
         UITabBar.appearance().tintColor = UIColor(red: 89/255, green: 215/255, blue: 199/255, alpha: 1)
         UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 14.0, weight: UIFontWeightLight)], for: .normal)
+        
+        GMSPlacesClient.provideAPIKey("AIzaSyBcxFvkN_640omakMQmT-PnDZ1EZ4zr298")
         
     return    FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     

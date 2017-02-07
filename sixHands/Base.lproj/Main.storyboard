@@ -70,7 +70,7 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="249"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TNT-ro-0Kj" id="9nY-VX-sTG">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="248"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="248.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="6gh-A1-C63">
@@ -261,12 +261,35 @@
                     </view>
                     <connections>
                         <segue destination="JjA-I2-mHM" kind="unwind" identifier="cancelRent" unwindAction="cancelRentWithSegue:" id="FdC-V9-g88"/>
+                        <segue destination="kLX-A5-TRU" kind="show" identifier="continue" id="Sc9-2V-Zqf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VKQ-tv-4n9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="JjA-I2-mHM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1430" y="2740"/>
+        </scene>
+        <!--Rent Params Controller-->
+        <scene sceneID="C3N-7D-C3d">
+            <objects>
+                <viewController id="kLX-A5-TRU" customClass="RentParamsController" customModule="sixHands" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ab6-xr-Eof"/>
+                        <viewControllerLayoutGuide type="bottom" id="kh1-eq-nLi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wYz-7N-43b">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="Dcf-KM-VFZ" kind="unwind" identifier="cancelRent" unwindAction="cancelRentWithSegue:" id="0iR-X2-jbv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cFd-bB-xzY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Dcf-KM-VFZ" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1430" y="3438"/>
         </scene>
         <!--Связь-->
         <scene sceneID="2HN-2l-uWG">

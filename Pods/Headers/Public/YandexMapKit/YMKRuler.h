@@ -1,1 +1,0 @@
-../../../YandexMapKit/Headers/YMKRuler.h

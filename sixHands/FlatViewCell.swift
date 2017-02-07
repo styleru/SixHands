@@ -24,6 +24,8 @@ class FlatViewCell: UITableViewCell {
     let views = UILabel()
     let new = UILabel()
     
+    let switchButton = UISwitch()
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,6 +49,7 @@ class FlatViewCell: UITableViewCell {
         contentView.addSubview(rooms)
         contentView.addSubview(views)
         contentView.addSubview(new)
+        contentView.addSubview(switchButton)
         
     }
     

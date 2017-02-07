@@ -1,12 +1,5 @@
 PODS:
   - Alamofire (4.3.0)
-  - GoogleMaps (2.1.1):
-    - GoogleMaps/Maps (= 2.1.1)
-  - GoogleMaps/Base (2.1.1)
-  - GoogleMaps/Maps (2.1.1):
-    - GoogleMaps/Base
-  - GooglePlaces (2.1.1):
-    - GoogleMaps/Base (= 2.1.1)
   - libwebp (0.5.1):
     - libwebp/core (= 0.5.1)
     - libwebp/dec (= 0.5.1)
@@ -37,27 +30,20 @@ PODS:
     - SDWebImage/Core
   - SwiftyJSON (3.1.4)
   - VK-ios-sdk (1.4.6)
-  - YandexMapKit (1.0.11)
 
 DEPENDENCIES:
   - Alamofire (~> 4.3)
-  - GoogleMaps
-  - GooglePlaces
   - SDWebImage/WebP
   - SwiftyJSON
   - VK-ios-sdk
-  - YandexMapKit
 
 SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
-  GoogleMaps: a5b5bbe47734e2443bde781a6aa64e69fdb6d785
-  GooglePlaces: 35636d86e5020cba3856eb988c09a5491de0a65a
   libwebp: b9126f8982a95370cf4eaad9bb3fefd57f052c15
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   VK-ios-sdk: 7fd48bc5aaa6b96c3197c1987eb6593f2ea67331
-  YandexMapKit: 70c6e0819e88f742e3800711f7aedecaf3029300
 
-PODFILE CHECKSUM: 51f161a76c467f0056cae254fd421186c03a9faa
+PODFILE CHECKSUM: b654da04e1d1ffca4660a67ec54fe6f02ff181d6
 
 COCOAPODS: 1.2.0

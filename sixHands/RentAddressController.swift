@@ -14,7 +14,7 @@ import SwiftyJSON
 class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     
     let addressField = UITextField()
-    var addresses = [CLLocationCoordinate2D]()
+    //var addresses = [CLLocationCoordinate2D]()
     var addressString = String()
     var addressStrings = [String]()
     var detailedStrings = [String]()
@@ -136,6 +136,7 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
     
     func continueButtonAction() {
         print("continue...")
+        performSegue(withIdentifier: "continue", sender: self)
     }
     
     func cancelButtonAction() {

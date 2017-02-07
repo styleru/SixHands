@@ -132,7 +132,7 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="popular:" destination="kfz-7V-ri2" eventType="touchUpInside" id="Phc-bd-5SW"/>
+                                    <action selector="popular:" destination="kfz-7V-ri2" eventType="touchUpInside" id="E0p-Nq-Iaq"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Список квартир" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xvw-tq-dDA">
@@ -149,7 +149,7 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="favourites:" destination="kfz-7V-ri2" eventType="touchUpInside" id="fEp-ZR-eHc"/>
+                                    <action selector="favourites:" destination="kfz-7V-ri2" eventType="touchUpInside" id="0OX-P4-b4O"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pno-6K-2Q9">
@@ -159,7 +159,15 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="new:" destination="kfz-7V-ri2" eventType="touchUpInside" id="5xM-11-ff5"/>
+                                    <action selector="new:" destination="kfz-7V-ri2" eventType="touchUpInside" id="Ori-L6-M0f"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JgC-Wc-rqJ">
+                                <rect key="frame" x="334" y="31" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Horizontal Settings Mixer_000000_100"/>
+                                <connections>
+                                    <action selector="filter:" destination="kfz-7V-ri2" eventType="touchUpInside" id="eGb-gM-J7x"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -169,15 +177,49 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="favouritesOutlet" destination="4LO-xe-YIz" id="2Av-9h-WPl"/>
+                        <outlet property="filterOutlet" destination="JgC-Wc-rqJ" id="rb1-PF-HZq"/>
                         <outlet property="listOfFlats" destination="Xvw-tq-dDA" id="Xpv-Sq-YdP"/>
                         <outlet property="listOfFlatsTableView" destination="eKc-B7-2HR" id="Cme-Im-qxU"/>
                         <outlet property="newOutlet" destination="pno-6K-2Q9" id="Gje-E9-DfL"/>
                         <outlet property="popularOutlet" destination="XdJ-tV-D8c" id="4MD-bh-TRe"/>
+                        <segue destination="dCz-TW-Oyr" kind="show" identifier="singleFlat" id="4Na-gf-PUB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yu9-el-rCi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1394.4000000000001" y="2005.5472263868066"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="rH5-DP-9RM">
+            <objects>
+                <viewController id="8ww-Dq-9hn" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XGB-lh-noo"/>
+                        <viewControllerLayoutGuide type="bottom" id="34D-0L-fzR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="K3j-oK-2rQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y5d-Ra-v1E">
+                                <rect key="frame" x="67" y="200" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8OH-on-KJb">
+                                <rect key="frame" x="166" y="439" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="bai-K5-Iar"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LXU-fE-rQT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1394" y="3594"/>
         </scene>
         <!--Профиль-->
         <scene sceneID="k6H-hO-6X1">
@@ -260,12 +302,31 @@
             </objects>
             <point key="canvasLocation" x="137" y="1130"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ztA-Wa-de3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dCz-TW-Oyr" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lWk-yn-qbd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8ww-Dq-9hn" kind="relationship" relationship="rootViewController" id="Yju-if-4Bv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UbK-Ub-Csr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1394" y="2826"/>
+        </scene>
     </scenes>
     <resources>
         <image name="1" width="600" height="400"/>
         <image name="2" width="2560" height="1920"/>
         <image name="Chat" width="25" height="25"/>
         <image name="Home" width="24" height="24"/>
+        <image name="Horizontal Settings Mixer_000000_100" width="50" height="50"/>
         <image name="Map" width="24" height="24"/>
         <image name="Profile" width="24" height="24"/>
     </resources>

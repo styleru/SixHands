@@ -23,22 +23,18 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     var offsetInc = 2
     let amount = 2
     
+    @IBOutlet weak var filterOutlet: UIButton!
     @IBOutlet weak var listOfFlats: UILabel!
     
     @IBOutlet weak var favouritesOutlet: UIButton!
     @IBOutlet weak var popularOutlet: UIButton!
     @IBOutlet weak var newOutlet: UIButton!
-    @IBAction func new(_ sender: Any) {
-    }
-    @IBAction func popular(_ sender: Any) {
-    }
-    @IBAction func favourites(_ sender: Any) {
-    }
     @IBOutlet weak var listOfFlatsTableView: UITableView!
         
     
     override func viewDidLoad() {
-
+        print(screenSize.width)
+        print(screenSize.height)
         update(user_id: "129", sorting: "last", parameters: "", amount: Int8(amount), offset: 0)
         
         //gray bar
@@ -56,16 +52,18 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
         
         //CONSTRAINTS:
+        favouritesOutlet.bounds = CGRect(x: 0, y: 0, width: screenSize.width * 0.3  , height: screenSize.height * 0.0299 )
+        favouritesOutlet.center = CGPoint(x: screenSize.width * 0.836 , y: screenSize.height * 0.16041)
+        filterOutlet.bounds = CGRect(x:0, y:0 , width: screenSize.width * 0.0676, height: screenSize.width * 0.0676)
+        filterOutlet.center = CGPoint(x: screenSize.width * 0.9, y: screenSize.height * 0.093)
         listOfFlatsTableView.rowHeight = screenSize.height * 0.4
         
         listOfFlats.bounds = CGRect(x:0, y:0 , width: screenSize.width * 0.8, height: screenSize.height * 0.096)
         listOfFlats.center = CGPoint(x: listOfFlats.bounds.width/2 + screenSize.width/2 - screenSize.width * 0.91466 / 2, y: screenSize.height * 0.089955)
         
-        favouritesOutlet.center = CGPoint(x: screenSize.width * 0.836 , y: screenSize.height * 0.16041)
         popularOutlet.center = CGPoint(x: screenSize.width * 0.448 , y: screenSize.height * 0.16041)
         newOutlet.center = CGPoint(x: screenSize.width * 0.11333 , y: screenSize.height * 0.16041)
         
-        favouritesOutlet.bounds = CGRect(x: 0, y: 0, width: screenSize.width * 0.3  , height: screenSize.height * 0.0299 )
         popularOutlet.bounds = CGRect(x: 0, y: 0, width: screenSize.width * 0.3, height: screenSize.height * 0.0299 )
         newOutlet.bounds = CGRect(x: 0, y: 0, width: screenSize.width * 0.141333, height: screenSize.height * 0.0299)
         
@@ -94,6 +92,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         flats = []
         update(user_id: "129", sorting: "last", parameters: "", amount: Int8(amount), offset: 0)
         offsetInc = amount
+        self.listOfFlatsTableView.reloadData()
         self.refreshControl.endRefreshing()
     }
     
@@ -107,6 +106,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // cell selected code here
+        performSegue(withIdentifier: "singleFlat", sender: self)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -186,7 +186,28 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
 
-   
+    @IBAction func new(_ sender: UIButton) {
+        newOutlet.alpha = 1
+        favouritesOutlet.alpha = 0.2
+        popularOutlet.alpha = 0.2
+        update(user_id: "129", sorting: "last", parameters: "", amount: Int8(amount), offset: 0)
+    }
+    @IBAction func popular(_ sender: UIButton) {
+        update(user_id: "129", sorting: "popular", parameters: "", amount: Int8(amount), offset: 0)
+        newOutlet.alpha = 0.2
+        favouritesOutlet.alpha = 0.2
+        popularOutlet.alpha = 1
+    }
+    @IBAction func favourites(_ sender: UIButton) {
+        newOutlet.alpha = 0.2
+        favouritesOutlet.alpha = 1
+        popularOutlet.alpha = 0.2
+        update(user_id: "129", sorting: "last", parameters: "", amount: Int8(amount), offset: 0)
+    }
+
+    @IBAction func filter(_ sender: UIButton) {
+        //performSegue(withIdentifier: "", sender: self)
+    }
     
     
     

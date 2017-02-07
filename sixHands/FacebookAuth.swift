@@ -32,7 +32,7 @@ public func FBLogin(){
                     getFBUserData()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                         //КИДАЮ ДАННЫЕ НА СЕРВАК
-                        let params: Parameters = [
+                        if let params: Parameters = [
                             "first_name": fbDetails["first_name"]! as! String,
                             "last_name":fbDetails["last_name"]! as! String ,
                             "email":fbDetails["email"]! as! String ,
@@ -42,7 +42,7 @@ public func FBLogin(){
                             "sn_type":"fb",
                             "sn_id":fbDetails["id"]! as! String,
                             "token":(result?.token.tokenString)!
-                        ]
+                            ]{
                         
                         let url = "http://dev.6hands.styleru.net/user"
                         //ПОЛУЧАЮ JSON С СЕРВАКА
@@ -97,11 +97,11 @@ public func FBLogin(){
                                         (UIApplication.shared.delegate as! AppDelegate).saveContext()
                                     }
 
-                                
+                                }
                                 }}
                         
                     
-                    })
+                        })
                      fbLoginManager.logOut()
                 }
             }

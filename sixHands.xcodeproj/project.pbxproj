@@ -12,6 +12,7 @@
 		406F92011E2F53F800E2A9FF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 406F91FF1E2F53F800E2A9FF /* FBSDKCoreKit.framework */; };
 		406F92021E2F53F800E2A9FF /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 406F92001E2F53F800E2A9FF /* FBSDKLoginKit.framework */; };
 		407618661E3E245400650C72 /* classFlat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407618651E3E245400650C72 /* classFlat.swift */; };
+		408376931E4B4C3C001B8F16 /* FlatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408376921E4B4C3C001B8F16 /* FlatViewController.swift */; };
 		408A687C1E424A8900FEA8EF /* APIfunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408A687B1E424A8900FEA8EF /* APIfunctions.swift */; };
 		40D6EFEF1E2F684D00363465 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40D6EFEE1E2F684D00363465 /* Bolts.framework */; };
 		5E9C8A722D7580992749666F /* Pods_sixHandsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36FDA856FD8EE1986F732C03 /* Pods_sixHandsUITests.framework */; };
@@ -59,6 +60,7 @@
 		406F91FF1E2F53F800E2A9FF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		406F92001E2F53F800E2A9FF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		407618651E3E245400650C72 /* classFlat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = classFlat.swift; sourceTree = "<group>"; };
+		408376921E4B4C3C001B8F16 /* FlatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatViewController.swift; sourceTree = "<group>"; };
 		408A687B1E424A8900FEA8EF /* APIfunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIfunctions.swift; sourceTree = "<group>"; };
 		40D6EFEE1E2F684D00363465 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		63FDC736767934B0635C653E /* Pods-sixHands.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sixHands.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sixHands/Pods-sixHands.debug.xcconfig"; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				9D6FE0E61E42437C00133C3F /* ProfileController.swift */,
 				9D8D64471E47C03100019F22 /* RentAddressController.swift */,
 				9D33CA5D1E4A6F1B000FFAA9 /* RentParamsController.swift */,
+				408376921E4B4C3C001B8F16 /* FlatViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -522,6 +525,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				408A687C1E424A8900FEA8EF /* APIfunctions.swift in Sources */,
+				408376931E4B4C3C001B8F16 /* FlatViewController.swift in Sources */,
 				9D8D64481E47C03100019F22 /* RentAddressController.swift in Sources */,
 				9D6FE0E71E42437C00133C3F /* ProfileController.swift in Sources */,
 				404E70E11E2EBF2800F94277 /* FacebookAuth.swift in Sources */,

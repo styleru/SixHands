@@ -10,7 +10,7 @@ import Foundation
 
 class Flat{
     
-    var imageOfFlat: String = ""
+    var imageOfFlat = [String]()
     var avatarImage: String = ""
     var flatSubway:String = ""
     var numberOfRoomsInFlat:String = ""
@@ -27,5 +27,6 @@ class Flat{
     var fridge = String()
     var internet = String()
     var parking = String()
+    var comments = String()
     
     }

@@ -19,6 +19,7 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
     var addressStrings = [String]()
     var detailedStrings = [String]()
     let table = UITableView()
+    static var flatToRent = Flat()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +60,7 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
         addressField.delegate = self
         addressField.placeholder = "Где вы сдаёте квартиру?"
         addressField.textColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.7)
-        addressField.font = UIFont.systemFont(ofSize: 24.0, weight: UIFontWeightHeavy)
+        addressField.font = UIFont.systemFont(ofSize: 22.0, weight: UIFontWeightHeavy)
         addressField.adjustsFontSizeToFitWidth = true
         addressField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
         self.view.addSubview(addressField)
@@ -172,6 +173,8 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
         cell.rooms.frame = CGRect(x: 15.0, y: cell.subwayLabel.frame.maxY + 5.0, width: screen.width - 30, height: 16.0)
         cell.rooms.adjustsFontSizeToFitWidth = true
         
+        cell.switchButton.isHidden = true
+        
         return cell
     }
     
@@ -180,6 +183,8 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FlatViewCell
         
         self.addressField.text = "\(addressStrings[indexPath.row])"
+        RentAddressController.flatToRent.address = "\(addressStrings[indexPath.row])"
+        RentAddressController.flatToRent.addressDetailedInfo = "\(detailedStrings[indexPath.row])"
         self.addressField.resignFirstResponder()
         addressStrings = []
         detailedStrings = []

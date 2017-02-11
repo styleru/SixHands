@@ -144,7 +144,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         cell.numberOfRooms.text = "\(flats[indexPath.row].numberOfRoomsInFlat)-комн."
         cell.price.text = "\(flats[indexPath.row].flatPrice) Р"
         cell.avatar.sd_setImage(with: URL(string : flats[indexPath.row].avatarImage))
-        cell.flatImage.sd_setImage(with: URL(string : flats[indexPath.row].imageOfFlat))
+        cell.flatImage.sd_setImage(with: URL(string : flats[indexPath.row].imageOfFlat[0]))
         
         
         return cell
@@ -169,8 +169,14 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
                     flat.flatPrice = jsondata[i]["parameters"]["30"].string!
                     flat.flatSubway = "Пока нема"
                     flat.flatMutualFriends = "социопат"
-                    flat.imageOfFlat = jsondata[i]["photos"][0]["url"].string!
-                    print(flat.imageOfFlat)
+                    
+                    let arrayOfPhotos = jsondata[i]["photos"].array
+                    if arrayOfPhotos?.count != nil {
+                        for j in 0..<arrayOfPhotos!.count {
+                            flat.imageOfFlat.append(jsondata[i]["photos"][j]["url"].string!)
+                        }
+                    }
+
                     flat.numberOfRoomsInFlat = jsondata[i]["parameters"]["31"].string!
                     self.flats.append(flat)
                 

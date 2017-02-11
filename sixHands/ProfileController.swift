@@ -195,7 +195,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         let screen = self.view.frame
         
         //image
-        cell.flat.sd_setImage(with: URL(string : flats[indexPath.row].imageOfFlat))
+        cell.flat.sd_setImage(with: URL(string : flats[indexPath.row].imageOfFlat[0]))
         cell.flat.frame = CGRect(x: 15.0, y: 10.0, width: screen.width - 30.0, height: tableView.rowHeight * 0.7)
         cell.flat.contentMode = .scaleToFill
         
@@ -258,7 +258,13 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
                     let flat = Flat()
                     flat.flatPrice = jsondata[i]["parameters"]["30"].string!
                     flat.flatSubway = "м. Текстильщики"
-                    flat.imageOfFlat = jsondata[i]["photos"][0]["url"].string!
+                    
+                    let arrayOfPhotos = jsondata[i]["photos"].array
+                    if arrayOfPhotos?.count != nil {
+                        for j in 0..<arrayOfPhotos!.count {
+                            flat.imageOfFlat.append(jsondata[i]["photos"][j]["url"].string!)
+                        }
+                    }
                     flat.numberOfRoomsInFlat = jsondata[i]["parameters"]["31"].string!
                     flat.views = "65"
                     flat.newView = "12"

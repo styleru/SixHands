@@ -20,6 +20,7 @@
 		9D33CA5E1E4A6F1B000FFAA9 /* RentParamsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D33CA5D1E4A6F1B000FFAA9 /* RentParamsController.swift */; };
 		9D6FE0E71E42437C00133C3F /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6FE0E61E42437C00133C3F /* ProfileController.swift */; };
 		9D8D64481E47C03100019F22 /* RentAddressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8D64471E47C03100019F22 /* RentAddressController.swift */; };
+		9DC414C01E4B4D0B001A9385 /* RentLastPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC414BF1E4B4D0B001A9385 /* RentLastPageController.swift */; };
 		A35074894FDA36A12622C1DD /* Pods_sixHandsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CEC0A982CA57FD3764CF30C /* Pods_sixHandsTests.framework */; };
 		DAB274111E2676CC00A06E11 /* VK_ios_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB274101E2676CC00A06E11 /* VK_ios_sdk.framework */; };
 		DAB274131E27B85D00A06E11 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB274121E27B85D00A06E11 /* SwiftyJSON.framework */; };
@@ -70,6 +71,7 @@
 		9D33CA5D1E4A6F1B000FFAA9 /* RentParamsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RentParamsController.swift; sourceTree = "<group>"; };
 		9D6FE0E61E42437C00133C3F /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		9D8D64471E47C03100019F22 /* RentAddressController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RentAddressController.swift; sourceTree = "<group>"; };
+		9DC414BF1E4B4D0B001A9385 /* RentLastPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RentLastPageController.swift; sourceTree = "<group>"; };
 		AAA86B416A6473A83F995839 /* Pods-sixHandsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sixHandsUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-sixHandsUITests/Pods-sixHandsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B7AF76E87CD3942874EF5E1F /* Pods-sixHands.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sixHands.release.xcconfig"; path = "Pods/Target Support Files/Pods-sixHands/Pods-sixHands.release.xcconfig"; sourceTree = "<group>"; };
 		DAB2740D1E2676B100A06E11 /* sixHands-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sixHands-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -200,12 +202,13 @@
 		F7BAACAD1E2C8FB9009BE9AD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F7BAACAE1E2C8FE7009BE9AD /* ListOfFlatsController.swift */,
 				F7529B5C1E266BA700F47FE9 /* ViewController.swift */,
+				F7BAACAE1E2C8FE7009BE9AD /* ListOfFlatsController.swift */,
+				408376921E4B4C3C001B8F16 /* FlatViewController.swift */,
 				9D6FE0E61E42437C00133C3F /* ProfileController.swift */,
 				9D8D64471E47C03100019F22 /* RentAddressController.swift */,
 				9D33CA5D1E4A6F1B000FFAA9 /* RentParamsController.swift */,
-				408376921E4B4C3C001B8F16 /* FlatViewController.swift */,
+				9DC414BF1E4B4D0B001A9385 /* RentLastPageController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				9D6FE0E71E42437C00133C3F /* ProfileController.swift in Sources */,
 				404E70E11E2EBF2800F94277 /* FacebookAuth.swift in Sources */,
 				F7529B5D1E266BA700F47FE9 /* ViewController.swift in Sources */,
+				9DC414C01E4B4D0B001A9385 /* RentLastPageController.swift in Sources */,
 				9D33CA5E1E4A6F1B000FFAA9 /* RentParamsController.swift in Sources */,
 				407618661E3E245400650C72 /* classFlat.swift in Sources */,
 				F7BAACAF1E2C8FE7009BE9AD /* ListOfFlatsController.swift in Sources */,

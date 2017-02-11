@@ -14,6 +14,7 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UITableViewDe
     let squareField = UITextField()
     let table = UITableView()
     var params = [String]()
+    var paramsValues = [Int]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,8 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UITableViewDe
         //view bounds
         let screen = self.view.frame
         
-        params = ["Холодильник", "Интернет", "Телевизор", "Парковка"]
+        params = ["Холодильник", "Интернет", "Телевизор", "Парковка", "Кондиционер"]
+        paramsValues = [0, 0, 0, 0, 0]
         
         //gray bar
         let grayBar = UIView()
@@ -54,15 +56,21 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UITableViewDe
         roomsField.frame = CGRect(x: screen.minX + 15.0, y: screen.height * 0.12, width: screen.width - 30.0, height: 36.0)
         roomsField.delegate = self
         roomsField.placeholder = "Количество комнат"
-        roomsField.textColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.85)
+        roomsField.textColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.8)
         roomsField.font = UIFont.systemFont(ofSize: 24.0, weight: UIFontWeightHeavy)
         roomsField.adjustsFontSizeToFitWidth = true
         self.view.addSubview(roomsField)
         
-        squareField.frame = CGRect(x: screen.minX + 15.0, y: roomsField.frame.maxY + 25.0, width: screen.width - 30.0, height: 36.0)
+        //separator
+        let separator2 = UIView()
+        separator2.frame = CGRect(x: 15.0, y: roomsField.frame.maxY + 15.0, width: screen.width - 30.0, height: 1.0)
+        separator2.backgroundColor = UIColor(red: 215/255, green: 215/255, blue: 215/255, alpha: 1.0)
+        self.view.addSubview(separator2)
+        
+        squareField.frame = CGRect(x: screen.minX + 15.0, y: separator2.frame.maxY + 30.0, width: screen.width - 30.0, height: 36.0)
         squareField.delegate = self
         squareField.placeholder = "Площадь квартиры"
-        squareField.textColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.7)
+        squareField.textColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.8)
         squareField.font = UIFont.systemFont(ofSize: 24.0, weight: UIFontWeightHeavy)
         squareField.adjustsFontSizeToFitWidth = true
         self.view.addSubview(squareField)
@@ -105,6 +113,14 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UITableViewDe
     
     func continueButtonAction() {
         print("continue...")
+        RentAddressController.flatToRent.conditioning = "\(paramsValues[4])"
+        RentAddressController.flatToRent.fridge = "\(paramsValues[0])"
+        RentAddressController.flatToRent.internet = "\(paramsValues[1])"
+        RentAddressController.flatToRent.tv = "\(paramsValues[2])"
+        RentAddressController.flatToRent.parking = "\(paramsValues[3])"
+        RentAddressController.flatToRent.numberOfRoomsInFlat = roomsField.text!
+        RentAddressController.flatToRent.square = squareField.text!
+        performSegue(withIdentifier: "lastStep", sender: self)
     }
     
     func cancelButtonAction() {
@@ -135,8 +151,18 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UITableViewDe
         
         //switch
         cell.switchButton.frame = CGRect(x: screen.width - 20.0 - 40.0, y: (self.table.rowHeight - 25) / 2, width: 40.0, height: 25.0)
+        cell.switchButton.addTarget(self, action: #selector(RentParamsController.switchDidChange(_:)), for: UIControlEvents.valueChanged)
+        cell.switchButton.tag = indexPath.row
         
         return cell
+    }
+    
+    func switchDidChange(_ uiSwitch: UISwitch) {
+        if uiSwitch.isOn {
+            self.paramsValues[uiSwitch.tag] = 1
+        } else {
+            self.paramsValues[uiSwitch.tag] = 0
+        }
     }
 
     override func didReceiveMemoryWarning() {

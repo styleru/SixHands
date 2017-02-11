@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="NKU-Jd-hfY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -57,7 +57,7 @@
                         <viewControllerLayoutGuide type="bottom" id="deP-en-NzB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QrD-6y-QHd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="249" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eKc-B7-2HR">
@@ -429,7 +429,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VKQ-tv-4n9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="JjA-I2-mHM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1430" y="2740"/>
+            <point key="canvasLocation" x="1430" y="2826"/>
         </scene>
         <!--Rent Params Controller-->
         <scene sceneID="C3N-7D-C3d">
@@ -446,12 +446,35 @@
                     </view>
                     <connections>
                         <segue destination="Dcf-KM-VFZ" kind="unwind" identifier="cancelRent" unwindAction="cancelRentWithSegue:" id="0iR-X2-jbv"/>
+                        <segue destination="qrc-vR-2Iu" kind="show" identifier="lastStep" id="h3g-qP-AQk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cFd-bB-xzY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Dcf-KM-VFZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1430" y="3438"/>
+            <point key="canvasLocation" x="1430" y="3593"/>
+        </scene>
+        <!--Rent Last Page Controller-->
+        <scene sceneID="095-De-Djj">
+            <objects>
+                <viewController id="qrc-vR-2Iu" customClass="RentLastPageController" customModule="sixHands" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="H84-SH-nXw"/>
+                        <viewControllerLayoutGuide type="bottom" id="mqv-Pr-R9y"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oCM-K3-f2s">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="62a-57-d8s" kind="unwind" identifier="cancelRent" unwindAction="cancelRentWithSegue:" id="eEW-AB-n3A"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CeA-oK-pkx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="62a-57-d8s" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1430" y="4305"/>
         </scene>
         <!--Связь-->
         <scene sceneID="2HN-2l-uWG">
@@ -529,7 +552,7 @@
         <image name="Stairs Up_000000_100" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qyM-Mq-26y"/>
+        <segue reference="UNO-kG-68M"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

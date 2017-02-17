@@ -268,7 +268,7 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
             var i = 0
             
             for data in photoData {
-                multipart.append(data, withName: "photo[\(i)]", fileName: "photo[\(i)].jpg", mimeType: "image/jpeg")
+                multipart.append(data, withName: "photo\(i)", fileName: "photo[\(i)].jpg", mimeType: "image/jpeg")
                 i += 1
             }
             

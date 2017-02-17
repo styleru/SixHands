@@ -20,6 +20,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
     var flats = [Flat]()
     typealias JSONStandard = [String : AnyObject]
     let table = UITableView()
+    let refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +28,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         //parameters for request & request
         let params = "%5B%7B%22key%22%3A%22id_user%22%2C%22value%22%3A%22\(UserDefaults.standard.value(forKey: "id_user")!)%22%2C%20%22criterion%22%3A%22single%22%7D%5D"
         
-        get(user_id: "129", sorting: "last", parameters: params, amount: 20)
+        get(sorting: "last", parameters: params, amount: 20)
         
         //get info from coredata
         do {
@@ -149,6 +150,21 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         table.separatorInset.right = 15.0
         self.view.addSubview(table)
         
+        //pull
+        refreshControl.backgroundColor = UIColor.clear
+        refreshControl.tintColor = UIColor.gray
+        refreshControl.addTarget(self, action: #selector(ProfileController.refresh), for: UIControlEvents.valueChanged)
+        self.table.addSubview(refreshControl)
+        
+    }
+    
+    func refresh() {
+        print("refresh...")
+        flats = []
+        let params = "%5B%7B%22key%22%3A%22id_user%22%2C%22value%22%3A%22\(UserDefaults.standard.value(forKey: "id_user")!)%22%2C%20%22criterion%22%3A%22single%22%7D%5D"
+        get(sorting: "last", parameters: params, amount: 20)
+        self.table.reloadData()
+        self.refreshControl.endRefreshing()
     }
     
     //action for bar button
@@ -246,12 +262,11 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         // Dispose of any resources that can be recreated.
     }
     
-    func get(user_id:String,sorting:String,parameters:String,amount:Int8) {
+    func get(sorting:String,parameters:String,amount:Int8) {
         
-        //let headers:HTTPHeaders = ["Token": UserDefaults.standard.object(forKey:"token") as! String]
         Alamofire.request("http://6hands.styleru.net/flats/filter?select=\(sorting)&offset=0&amount=\(amount)&parameters=\(parameters)").responseJSON { response in
             
-            var jsondata = JSON(data:response.data!)//["body"]
+            var jsondata = JSON(data:response.data!)
             let array = jsondata.array
             print(jsondata)
             

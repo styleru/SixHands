@@ -249,7 +249,6 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
         
     }
     
-    
     func upload(photoData: [Data], parameters: [String : String], with callback: @escaping ((JSON?, Error?) -> Void)) {
         
         let headers:HTTPHeaders = ["Token": UserDefaults.standard.object(forKey:"token") as! String]
@@ -268,7 +267,7 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
             var i = 0
             
             for data in photoData {
-                multipart.append(data, withName: "photo[\(i)]", fileName: "photo[\(i)].jpg", mimeType: "image/jpeg")
+                multipart.append(data, withName: "photo\(i)", fileName: "photo\(i).jpg", mimeType: "image/jpeg")
                 i += 1
             }
             

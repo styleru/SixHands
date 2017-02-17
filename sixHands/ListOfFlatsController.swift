@@ -35,7 +35,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         print(screenSize.width)
         print(screenSize.height)
-        update(user_id: "129", sorting: "last", parameters: "", amount: Int8(amount), offset: 0)
+        update(sorting: "last", parameters: "", amount: Int8(amount), offset: 0)
         
         //gray bar
         let grayBar = UIView()
@@ -90,7 +90,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     func refresh() {
         print("refresh...")
         flats = []
-        update(user_id: "129", sorting: "last", parameters: "", amount: Int8(amount), offset: 0)
+        update(sorting: "last", parameters: "", amount: Int8(amount), offset: 0)
         offsetInc = amount
         self.listOfFlatsTableView.reloadData()
         self.refreshControl.endRefreshing()
@@ -99,7 +99,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == flats.count - 1 {
             print("reached the bottom cell")
-            update(user_id: "129", sorting: "last", parameters: "", amount: Int8(amount), offset: offsetInc)
+            update(sorting: "last", parameters: "", amount: Int8(amount), offset: offsetInc)
             offsetInc += amount
         }
     }
@@ -154,11 +154,10 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         return flats.count
     }
     
-    func update(user_id:String,sorting:String,parameters:String,amount:Int8,offset:Int) {
+    func update(sorting:String,parameters:String,amount:Int8,offset:Int) {
         
-        //let headers:HTTPHeaders = ["Token": UserDefaults.standard.object(forKey:"token") as! String]
         Alamofire.request("http://6hands.styleru.net/flats/filter?select=\(sorting)&offset=\(offset)&amount=\(amount)&parameters=\(parameters)").responseJSON { response in
-            var jsondata = JSON(data:response.data!)//["body"]
+            var jsondata = JSON(data:response.data!)
             let array = jsondata.array
             print(jsondata)
             
@@ -196,10 +195,10 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         newOutlet.alpha = 1
         favouritesOutlet.alpha = 0.2
         popularOutlet.alpha = 0.2
-        update(user_id: "129", sorting: "last", parameters: "", amount: Int8(amount), offset: 0)
+        update(sorting: "last", parameters: "", amount: Int8(amount), offset: 0)
     }
     @IBAction func popular(_ sender: UIButton) {
-        update(user_id: "129", sorting: "popular", parameters: "", amount: Int8(amount), offset: 0)
+        update(sorting: "popular", parameters: "", amount: Int8(amount), offset: 0)
         newOutlet.alpha = 0.2
         favouritesOutlet.alpha = 0.2
         popularOutlet.alpha = 1
@@ -208,7 +207,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         newOutlet.alpha = 0.2
         favouritesOutlet.alpha = 1
         popularOutlet.alpha = 0.2
-        update(user_id: "129", sorting: "last", parameters: "", amount: Int8(amount), offset: 0)
+        update(sorting: "last", parameters: "", amount: Int8(amount), offset: 0)
     }
 
     @IBAction func filter(_ sender: UIButton) {

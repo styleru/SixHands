@@ -235,6 +235,8 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.new.frame = CGRect(x: cell.views.frame.maxX + 11.0, y: cell.subwayLabel.frame.maxY + screen.height * 0.009, width: screen.height * 0.123, height: screen.height * 0.026)
         cell.new.adjustsFontSizeToFitWidth = true
         
+        cell.switchButton.isHidden = true
+        
         
         return cell
     }
@@ -246,10 +248,10 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func get(user_id:String,sorting:String,parameters:String,amount:Int8) {
         
-        let headers:HTTPHeaders = ["Token": UserDefaults.standard.object(forKey:"token") as! String]
-        Alamofire.request("http://dev.6hands.styleru.net/flats/filter?id_user=\(user_id)&sorting=\(sorting)&offset=0&amount=\(amount)&parameters=\(parameters)",headers:headers).responseJSON { response in
+        //let headers:HTTPHeaders = ["Token": UserDefaults.standard.object(forKey:"token") as! String]
+        Alamofire.request("http://6hands.styleru.net/flats/filter?select=\(sorting)&offset=0&amount=\(amount)&parameters=\(parameters)").responseJSON { response in
             
-            var jsondata = JSON(data:response.data!)["body"]
+            var jsondata = JSON(data:response.data!)//["body"]
             let array = jsondata.array
             print(jsondata)
             

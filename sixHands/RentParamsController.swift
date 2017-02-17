@@ -23,8 +23,8 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UITableViewDe
         //view bounds
         let screen = self.view.frame
         
-        params = ["Холодильник", "Интернет", "Телевизор", "Парковка", "Кондиционер"]
-        paramsValues = [0, 0, 0, 0, 0]
+        params = ["Холодильник", "Интернет", "Телевизор", "Парковка", "Кондиционер", "Стиральная машина", "Посудомоечная машина", "Мебель", "Животные", "Совместная аренда", "Кухонная мебель"]
+        paramsValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         
         //gray bar
         let grayBar = UIView()
@@ -120,6 +120,12 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UITableViewDe
         RentAddressController.flatToRent.parking = "\(paramsValues[3])"
         RentAddressController.flatToRent.numberOfRoomsInFlat = roomsField.text!
         RentAddressController.flatToRent.square = squareField.text!
+        RentAddressController.flatToRent.stiralka = "\(paramsValues[5])"
+        RentAddressController.flatToRent.posudomoyka = "\(paramsValues[6])"
+        RentAddressController.flatToRent.furniture = "\(paramsValues[7])"
+        RentAddressController.flatToRent.animals = "\(paramsValues[8])"
+        RentAddressController.flatToRent.mutualFriends = "\(paramsValues[9])"
+        RentAddressController.flatToRent.kitchenFurniture = "\(paramsValues[10])"
         performSegue(withIdentifier: "lastStep", sender: self)
     }
     

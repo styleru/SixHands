@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import SwiftyJSON
+import Alamofire
+import CoreLocation
 
 class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -175,54 +178,132 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
     }
     
     func continueButtonAction() {
-        print("continue...")
-        print(RentAddressController.flatToRent.address)
-        print(RentAddressController.flatToRent.addressDetailedInfo)
-        print(RentAddressController.flatToRent.square)
-        print(RentAddressController.flatToRent.numberOfRoomsInFlat)
-        print(RentAddressController.flatToRent.conditioning)
+        print("goPublic...")
+        
+        var comments = commentsField.text!
+        comments = comments.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
+        
+        let param = [
+            "24" : "\(RentAddressController.flatToRent.parking)",
+            "23" : "\(RentAddressController.flatToRent.conditioning)",
+            "21" : "\(RentAddressController.flatToRent.stiralka)",
+            "20" : "\(RentAddressController.flatToRent.posudomoyka)",
+            "19" : "\(RentAddressController.flatToRent.fridge)",
+            "18" : "\(RentAddressController.flatToRent.tv)",
+            "29" : "\(RentAddressController.flatToRent.square)",
+            "8" : "\(RentAddressController.flatToRent.furniture)",
+            "9" : "\(RentAddressController.flatToRent.animals)",
+            "12" : "\(RentAddressController.flatToRent.mutualFriends)",
+            "14" : "\(RentAddressController.flatToRent.kitchenFurniture)",
+            "15" : "\(RentAddressController.flatToRent.internet)",
+            "30" : "\(priceField.text!)",
+            "31" : "\(RentAddressController.flatToRent.numberOfRoomsInFlat)",
+            "27" : comments
+        ]
+        
+        //convert parameters to array with percent encoding
+        //let symbols = ["%5B", "%7B", "%22", "%3A", "%7D", "%5D"]
+        let symbols = ["[", "{", "\"", ":", "}", "]"]
+        var params = symbols[0]
+        for (id, value) in param {
+            params += symbols[1] + symbols[2] + "id" + symbols[2] + symbols[3] + symbols[2] + id + symbols[2] + "," + symbols[2] + "value" + symbols[2] + symbols[3] + symbols[2] + value + symbols[2] + symbols[4] + ","
+        }
+        params = String(params.characters.dropLast(1))
+        params += symbols[5]
+        
+        //separate building and street
+        let full = RentAddressController.flatToRent.address
+        var building = ""
+        var street = ""
+        if let rangeOfComma = full.range(of: ",", options: .backwards) {
+            building = String(full.characters.suffix(from: rangeOfComma.upperBound))
+            building = String(building.characters.dropFirst())
+        }
+        if let rangeOfComma = full.range(of: ",") {
+            street = String(full.characters.prefix(upTo: rangeOfComma.upperBound))
+            street = String(street.characters.dropLast())
+        }
+        
+        let parameters = [
+            "id_city" : "1",
+            "id_underground" : "1",
+            "street" : street.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!,
+            "building" : building,
+            "longitude" : "\(RentAddressController.flatToRent.longitude)",
+            "latitude" : "\(RentAddressController.flatToRent.latitude)",
+            "parameters" : params,
+            "photo_descriptions" : "[{}]"
+        ]
+        
+        var photoDatas = [Data]()
+        for photo in photos {
+            photoDatas.append(UIImageJPEGRepresentation(photo,1)!)
+        }
+        
+        upload(photoData: photoDatas, parameters: parameters) { (json, error) in
+            //print(json!)
+            //print(error!)
+        }
+        
+        
+        
     }
     
-    /*
-    func goPublic(user_id:String,sorting:String,parameters:String,amount:Int8) {
+    
+    func upload(photoData: [Data], parameters: [String : String], with callback: @escaping ((JSON?, Error?) -> Void)) {
         
         let headers:HTTPHeaders = ["Token": UserDefaults.standard.object(forKey:"token") as! String]
-        Alamofire.request("http://dev.6hands.styleru.net/flats/filter?id_user=\(user_id)&sorting=\(sorting)&offset=0&amount=\(amount)&parameters=\(parameters)",headers:headers).responseJSON { response in
+        let urlString = "http://6hands.styleru.net/flats/single"
+        let encoded = urlString.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
+        let myUrl = URL(string: encoded!)
+        
+        
+        Alamofire.upload(multipartFormData: { (multipart) in
             
-            var jsondata = JSON(data:response.data!)["body"]
-            let array = jsondata.array
-            print(jsondata)
-            
-            if (array?.count) != nil {
-                for i in 0..<array!.count{
-                    let flat = Flat()
-                    flat.flatPrice = jsondata[i]["parameters"]["30"].string!
-                    flat.flatSubway = "м. Текстильщики"
-                    
-                    let arrayOfPhotos = jsondata[i]["photos"].array
-                    if arrayOfPhotos?.count != nil {
-                        for j in 0..<arrayOfPhotos!.count {
-                            flat.imageOfFlat[j] = jsondata[i]["photos"][j]["url"].string!
-                        }
-                    }
-                    flat.numberOfRoomsInFlat = jsondata[i]["parameters"]["31"].string!
-                    flat.views = "65"
-                    flat.newView = "12"
-                    self.flats.append(flat)
-                    
-                }
-                
-                OperationQueue.main.addOperation({()-> Void in
-                    
-                    self.table.reloadData()
-                    
-                })
+            for (key, value) in parameters {
+                multipart.append(value.data(using: String.Encoding.utf8)!, withName: key)
+                print("\(key) : \(value)")
             }
             
+            var i = 0
             
-            //self.flats = self.parseData(JSONdata: response.data!)
-        }
-    }*/
+            for data in photoData {
+                multipart.append(data, withName: "photo[\(i)]", fileName: "photo[\(i)].jpg", mimeType: "image/jpeg")
+                i += 1
+            }
+            
+        }, to: myUrl!, method: .post, headers: headers, encodingCompletion: { result in
+            
+            switch result {
+            case .failure(let error):
+                callback(nil, error)
+                print(error)
+            case .success(let request, _, _):
+                request.response(completionHandler: { (response) in
+                    let json = JSON(data: response.data!)
+                    callback(json, nil)
+                    print("response: \(response.response!)")
+                    print("data: \(json)")
+                    if (json != JSON.null) {
+                        print("finally!")
+                        self.performSegue(withIdentifier: "cancelRent", sender: self)
+                    } else {
+                        print("Something's wrong")
+                        
+                        //temporary alert
+                        let alertController = UIAlertController(title: "Something's wrong", message: "hmmm... 500 Internal Server Error", preferredStyle: UIAlertControllerStyle.alert)
+                        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel)
+                        {
+                            (result : UIAlertAction) -> Void in
+                        }
+                        alertController.addAction(cancelAction)
+                        self.present(alertController, animated: true, completion: nil)
+                        
+                    }
+                })
+            }
+        })
+    }
     
     func addButtonAction() {
         

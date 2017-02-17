@@ -44,7 +44,7 @@ public func FBLogin(){
                             "token":(result?.token.tokenString)!
                             ]{
                         
-                        let url = "http://dev.6hands.styleru.net/user"
+                        let url = "http://6hands.styleru.net/user"
                         //ПОЛУЧАЮ JSON С СЕРВАКА
                         Alamofire.request(url, method: .post, parameters: params)
                             .responseJSON { response in
@@ -54,7 +54,6 @@ public func FBLogin(){
                                 if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                                     
                                     var jsondata = JSON(data: data)
-                                    jsondata = jsondata["body"]
                                     UserDefaults.standard.setValue(jsondata["token"].string, forKey: "token")
                                     UserDefaults.standard.set(jsondata["user"]["id"].string, forKey: "id_user")
                                     var bool = true

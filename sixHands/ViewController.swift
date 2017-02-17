@@ -132,7 +132,7 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
                     self.avatar = user.photo_max
                     self.sn_id = result.token.userId
                     
-                    let listUrlString = "http://dev.6hands.styleru.net/user"
+                    let listUrlString = "http://6hands.styleru.net/user"
                     let myUrl = URL(string: listUrlString)
                     var request = URLRequest(url:myUrl!);
                     request.httpMethod = "POST"
@@ -164,7 +164,6 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
                         
                         if let dataFromString = responseString?.data(using: .utf8, allowLossyConversion: false) {
                             var jsondata = JSON(data: dataFromString)
-                            jsondata = jsondata["body"]
                             UserDefaults.standard.setValue(jsondata["token"].string, forKey: "token")
                             UserDefaults.standard.set(jsondata["user"]["id"].string, forKey: "id_user")
                             var bool = true

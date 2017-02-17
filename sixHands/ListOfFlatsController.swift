@@ -156,16 +156,16 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     
     func update(user_id:String,sorting:String,parameters:String,amount:Int8,offset:Int) {
         
-        let headers:HTTPHeaders = ["Token": UserDefaults.standard.object(forKey:"token") as! String]
-        Alamofire.request("http://dev.6hands.styleru.net/flats/filter?id_user=\(user_id)&sorting=\(sorting)&offset=\(offset)&amount=\(amount)&parameters=\(parameters)",headers:headers).responseJSON { response in
-            var jsondata = JSON(data:response.data!)["body"]
+        //let headers:HTTPHeaders = ["Token": UserDefaults.standard.object(forKey:"token") as! String]
+        Alamofire.request("http://6hands.styleru.net/flats/filter?select=\(sorting)&offset=\(offset)&amount=\(amount)&parameters=\(parameters)").responseJSON { response in
+            var jsondata = JSON(data:response.data!)//["body"]
             let array = jsondata.array
             print(jsondata)
             
             if (array?.count) != nil {
                 for i in 0..<array!.count{
                     let flat = Flat()
-                    flat.avatarImage = jsondata[i]["avatar"].string!
+                    flat.avatarImage = jsondata[i]["owner"]["avatar"].string!
                     flat.flatPrice = jsondata[i]["parameters"]["30"].string!
                     flat.flatSubway = "Пока нема"
                     flat.flatMutualFriends = "социопат"

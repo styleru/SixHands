@@ -18,6 +18,8 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
     var addressString = String()
     var addressStrings = [String]()
     var detailedStrings = [String]()
+    var longitudes = [Float]()
+    var latitudes = [Float]()
     let table = UITableView()
     static var flatToRent = Flat()
     
@@ -101,8 +103,11 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
             
             var jsondata = JSON(data:response.data!)["features"]
             let array = jsondata.array
+            
             self.addressStrings = []
             self.detailedStrings = []
+            self.latitudes = []
+            self.longitudes = []
             
             if (array?.count) != nil {
                 for i in 0..<array!.count{
@@ -110,6 +115,10 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
                     self.addressStrings.append(jsondata[i]["properties"]["name"].string!)
                     //other details(city, country etc.)
                     self.detailedStrings.append(jsondata[i]["properties"]["description"].string!)
+                    
+                    var coordianates = jsondata[i]["geometry"]["coordinates"].array
+                    self.longitudes.append((coordianates?[1].floatValue)!)
+                    self.latitudes.append((coordianates?[0].floatValue)!)
                 }
             }
             self.table.reloadData()
@@ -131,12 +140,15 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
             addressField.placeholder = "Где вы сдаёте квартиру?"
             addressStrings = []
             detailedStrings = []
+            longitudes = []
+            latitudes = []
             self.table.reloadData()
         }
     }
     
     func continueButtonAction() {
         print("continue...")
+        print("long: \(RentAddressController.flatToRent.longitude), lat: \(RentAddressController.flatToRent.latitude)")
         performSegue(withIdentifier: "continue", sender: self)
     }
     
@@ -185,9 +197,13 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
         self.addressField.text = "\(addressStrings[indexPath.row])"
         RentAddressController.flatToRent.address = "\(addressStrings[indexPath.row])"
         RentAddressController.flatToRent.addressDetailedInfo = "\(detailedStrings[indexPath.row])"
+        RentAddressController.flatToRent.longitude = "\(longitudes[indexPath.row])"
+        RentAddressController.flatToRent.latitude = "\(latitudes[indexPath.row])"
         self.addressField.resignFirstResponder()
         addressStrings = []
         detailedStrings = []
+        longitudes = []
+        latitudes = []
         self.table.reloadData()
         cell.setSelected(false, animated: false)
     }

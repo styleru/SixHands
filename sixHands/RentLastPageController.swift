@@ -180,9 +180,6 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
     func continueButtonAction() {
         print("goPublic...")
         
-        var comments = commentsField.text!
-        comments = comments.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
-        
         let param = [
             "24" : "\(RentAddressController.flatToRent.parking)",
             "23" : "\(RentAddressController.flatToRent.conditioning)",
@@ -198,7 +195,7 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
             "15" : "\(RentAddressController.flatToRent.internet)",
             "30" : "\(priceField.text!)",
             "31" : "\(RentAddressController.flatToRent.numberOfRoomsInFlat)",
-            "27" : comments
+            "27" : commentsField.text!
         ]
         
         //convert parameters to array with percent encoding
@@ -227,7 +224,7 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
         let parameters = [
             "id_city" : "1",
             "id_underground" : "1",
-            "street" : street.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!,
+            "street" : street,
             "building" : building,
             "longitude" : "\(RentAddressController.flatToRent.longitude)",
             "latitude" : "\(RentAddressController.flatToRent.latitude)",

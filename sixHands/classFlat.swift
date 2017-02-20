@@ -28,6 +28,8 @@ class Flat{
     var internet = String()
     var parking = String()
     var comments = String()
+
+
     var stiralka = String()
     var posudomoyka = String()
     var furniture = String()
@@ -36,5 +38,6 @@ class Flat{
     var kitchenFurniture = String()
     var longitude = String()
     var latitude = String()
+
     
     }

@@ -7,9 +7,15 @@
 //
 
 import UIKit
+
 import SwiftyJSON
 import Alamofire
 import CoreLocation
+
+import SwiftyJSON
+import Alamofire
+import CoreLocation
+
 
 class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -178,6 +184,7 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
     }
     
     func continueButtonAction() {
+
         print("goPublic...")
         
         let param = [
@@ -300,6 +307,7 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
             }
         })
     }
+
     
     func addButtonAction() {
         

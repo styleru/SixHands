@@ -7,9 +7,15 @@
 //
 
 import UIKit
+
 import SwiftyJSON
 import Alamofire
 import CoreLocation
+
+import SwiftyJSON
+import Alamofire
+import CoreLocation
+
 
 class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -178,10 +184,8 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
     }
     
     func continueButtonAction() {
+
         print("goPublic...")
-        
-        var comments = commentsField.text!
-        comments = comments.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
         
         let param = [
             "24" : "\(RentAddressController.flatToRent.parking)",
@@ -198,7 +202,7 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
             "15" : "\(RentAddressController.flatToRent.internet)",
             "30" : "\(priceField.text!)",
             "31" : "\(RentAddressController.flatToRent.numberOfRoomsInFlat)",
-            "27" : comments
+            "27" : commentsField.text!
         ]
         
         //convert parameters to array with percent encoding
@@ -227,7 +231,7 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
         let parameters = [
             "id_city" : "1",
             "id_underground" : "1",
-            "street" : street.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!,
+            "street" : street,
             "building" : building,
             "longitude" : "\(RentAddressController.flatToRent.longitude)",
             "latitude" : "\(RentAddressController.flatToRent.latitude)",
@@ -248,7 +252,6 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
         
         
     }
-    
     
     func upload(photoData: [Data], parameters: [String : String], with callback: @escaping ((JSON?, Error?) -> Void)) {
         
@@ -304,6 +307,7 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
             }
         })
     }
+
     
     func addButtonAction() {
         

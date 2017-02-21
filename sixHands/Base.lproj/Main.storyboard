@@ -69,7 +69,11 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="249"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TNT-ro-0Kj" id="9nY-VX-sTG">
+
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="249"/>
+
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="248.5"/>
+
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kp1-G8-Xtb">
@@ -212,7 +216,7 @@
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hu2-pe-rF2">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="918"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Krasnogorskiy b-r, 50" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8OH-on-KJb">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Krasnogorskiy b-r, 50" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8OH-on-KJb">
                                                 <rect key="frame" x="8" y="261" width="225" height="84"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
@@ -299,13 +303,13 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="bEZ-TM-VHl">
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="bEZ-TM-VHl">
                                                 <rect key="frame" x="8" y="541" width="117" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
                                                 <state key="normal">
                                                     <string key="title">Хозяин Райан
-                                                            5 общих друзей</string>
+5 общих друзей</string>
                                                     <color key="titleColor" red="0.33333333333333331" green="0.77254901960784317" blue="0.71764705882352942" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                             </button>
@@ -318,14 +322,6 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="245"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </scrollView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VO3-pz-MHx">
-                                                <rect key="frame" x="166" y="448" width="42" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.36366468558282211" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -352,7 +348,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Back_ffffff_100"/>
                                 <connections>
-                                    <segue destination="x0Q-xK-xkC" kind="unwind" unwindAction="fromSingleFlatWithSegue:" id="KBd-3h-hbp"/>
+                                    <segue destination="kfz-7V-ri2" kind="show" id="qyM-Mq-26y"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -379,7 +375,6 @@
                         <outlet property="photoNumberOfRooms" destination="DgV-1T-rMB" id="rHJ-8I-ZeK"/>
                         <outlet property="photoSquare" destination="AT8-0k-VuB" id="MUg-IT-SX8"/>
                         <outlet property="photoStairs" destination="gti-bX-ACS" id="PIP-e4-KZJ"/>
-                        <outlet property="price" destination="VO3-pz-MHx" id="xH2-Xn-0SH"/>
                         <outlet property="razdelitel1" destination="lna-pq-Kkp" id="7hf-ck-JfV"/>
                         <outlet property="razdelitel2" destination="xl0-fy-WWp" id="SSQ-ek-w1L"/>
                         <outlet property="rentOutlet" destination="UV4-NG-S43" id="OmW-J7-PBe"/>
@@ -394,7 +389,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iVJ-pb-US6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="x0Q-xK-xkC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-1394.4000000000001" y="3021.5892053973016"/>
         </scene>
@@ -565,5 +559,8 @@
         <image name="Profile" width="24" height="24"/>
         <image name="Stairs Up_000000_100" width="100" height="100"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="UNO-kG-68M"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

@@ -88,25 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sixHands/RentLastPageController.swift"
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-            timestampString = "508422974.877648"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-=======
->>>>>>> Stashed changes
             timestampString = "509028088.572548"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "151"
             endingLineNumber = "151"
-<<<<<<< Updated upstream
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
             landmarkName = "textViewDidChange(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -118,31 +104,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sixHands/RentLastPageController.swift"
-<<<<<<< Updated upstream
             timestampString = "509056273.510453"
-=======
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-            timestampString = "508499507.169521"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "272"
-            endingLineNumber = "272"
-            landmarkName = "choose()"
-=======
->>>>>>> Stashed changes
-            timestampString = "509052826.575163"
->>>>>>> Stashed changes
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "339"
             endingLineNumber = "339"
             landmarkName = "snap()"
-<<<<<<< Updated upstream
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -153,22 +120,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sixHands/RentLastPageController.swift"
-<<<<<<< Updated upstream
             timestampString = "509056273.510453"
-=======
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-            timestampString = "508499507.169521"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "271"
-            endingLineNumber = "271"
-            landmarkName = "choose()"
-=======
->>>>>>> Stashed changes
-            timestampString = "509052826.575163"
->>>>>>> Stashed changes
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "338"
@@ -206,10 +158,6 @@
             startingLineNumber = "121"
             endingLineNumber = "121"
             landmarkName = "textFieldDidChange(_:)"
-<<<<<<< Updated upstream
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

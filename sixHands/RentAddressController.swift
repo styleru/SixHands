@@ -197,13 +197,8 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
         self.addressField.text = "\(addressStrings[indexPath.row])"
         RentAddressController.flatToRent.address = "\(addressStrings[indexPath.row])"
         RentAddressController.flatToRent.addressDetailedInfo = "\(detailedStrings[indexPath.row])"
-
         RentAddressController.flatToRent.longitude = "\(longitudes[indexPath.row])"
         RentAddressController.flatToRent.latitude = "\(latitudes[indexPath.row])"
-
-        RentAddressController.flatToRent.longitude = "\(longitudes[indexPath.row])"
-        RentAddressController.flatToRent.latitude = "\(latitudes[indexPath.row])"
-
         self.addressField.resignFirstResponder()
         addressStrings = []
         detailedStrings = []

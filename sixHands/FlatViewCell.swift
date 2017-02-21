@@ -10,8 +10,10 @@ import UIKit
 
 class FlatViewCell: UITableViewCell {
 
+
     
     @IBOutlet weak var separator: UIImageView!
+
     @IBOutlet weak var flatImage: UIImageView!
     @IBOutlet weak var subway: UILabel!
     @IBOutlet weak var numberOfRooms: UILabel!

@@ -67,8 +67,8 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         popularOutlet.bounds = CGRect(x: 0, y: 0, width: screenSize.width * 0.3, height: screenSize.height * 0.0299 )
         newOutlet.bounds = CGRect(x: 0, y: 0, width: screenSize.width * 0.141333, height: screenSize.height * 0.0299)
         
-        listOfFlatsTableView.center = CGPoint(x: screenSize.width/2, y: screenSize.height * 0.564467)
-        listOfFlatsTableView.bounds = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height * 0.70614)
+        listOfFlatsTableView.center = CGPoint(x: screenSize.width/2, y: screenSize.height * 0.56)
+        listOfFlatsTableView.bounds = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height * 0.725)
         listOfFlatsTableView.separatorInset.left = 15.0
         listOfFlatsTableView.separatorInset.right = 15.0
         
@@ -81,8 +81,11 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        
+    override func viewWillAppear(_ animated: Bool) {
+        if let indexPath = self.listOfFlatsTableView.indexPathForSelectedRow
+        {
+            self.listOfFlatsTableView.deselectRow(at: indexPath, animated: true)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -118,13 +121,10 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
         //CONSTRAINTS
         cell.flatImage.bounds = CGRect(x: 0, y: 0.0, width: screenSize.width * 0.91466 , height: screenSize.height * 0.27436282 )
-        cell.flatImage.center = CGPoint(x: cell.bounds.width / 2, y: cell.flatImage.frame.height/2 + 7.0)
-        
-        cell.mutualFriends.bounds = CGRect(x: 0, y: 0, width: screenSize.width * 0.3 , height: screenSize.height * 0.03)
-        cell.mutualFriends.center = CGPoint(x:cell.flatImage.frame.minX+cell.mutualFriends.frame.width/2 + 4, y: cell.bounds.height-cell.mutualFriends.frame.height)
+        cell.flatImage.center = CGPoint(x: cell.bounds.width / 2, y: cell.flatImage.frame.height/2 + 20.0)
         
         cell.price.bounds = CGRect(x: 0, y: 0, width:screenSize.width * 0.25066 , height: screenSize.height * 0.05997)
-        cell.price.center = CGPoint(x:cell.flatImage.frame.maxX-cell.price.frame.width/2, y:cell.flatImage.frame.height * 0.7)
+        cell.price.center = CGPoint(x:cell.flatImage.frame.maxX-cell.price.frame.width/2, y:cell.flatImage.frame.height * 0.8)
         
         cell.subway.bounds = CGRect(x: 0, y: 0, width:screenSize.width * 0.3 , height: screenSize.height * 0.02698)
         cell.subway.center = CGPoint(x:cell.flatImage.frame.minX+cell.subway.frame.width/2 + 4, y: cell.flatImage.frame.maxY + cell.subway.frame.height )
@@ -134,7 +134,8 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
         cell.numberOfRooms.bounds = CGRect(x: 0, y: 0, width:screenSize.width * 0.3, height: screenSize.height * 0.02698)
         cell.numberOfRooms.center = CGPoint(x:cell.subway.frame.maxX+10+cell.numberOfRooms.frame.width/2, y:cell.flatImage.frame.maxY + cell.subway.frame.height )
-        
+        cell.mutualFriends.bounds = CGRect(x: 0, y: 0, width: screenSize.width * 0.3 , height: screenSize.height * 0.03)
+        cell.mutualFriends.center = CGPoint(x:cell.flatImage.frame.minX+cell.mutualFriends.frame.width/2 + 4, y: cell.subway.frame.maxY+15)
         
         //cell.dot.layer.cornerRadius = cell.dot.frame.size.width / 2
         cell.avatar.bounds = CGRect(x: 0, y: 0, width:screenSize.width * 0.11733 , height: screenSize.width * 0.11733)
@@ -145,9 +146,13 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         cell.avatar.contentMode = .scaleAspectFill
         cell.flatImage.contentMode = .scaleAspectFill
         cell.flatImage.clipsToBounds = true
+        cell.separator.bounds = CGRect(x: 0, y: 0, width: screenSize.width-30, height: 1)
+        cell.separator.center = CGPoint(x:cell.bounds.width / 2, y: 2)
+        if indexPath.row != 0{
+            cell.separator.backgroundColor = UIColor(displayP3Red: 215/255, green: 215/255, blue: 215/255, alpha: 1.0)}else {cell.separator.backgroundColor = UIColor.clear}
         //END OF CONSTRAINTS
         
-        cell.subway.text = "м. Арбатская"
+        cell.subway.text = "Арбатская"
         cell.mutualFriends.text = "5 общих друзей"
         cell.numberOfRooms.text = "\(flats[indexPath.row].numberOfRoomsInFlat)-комн."
         cell.price.text = "\(flats[indexPath.row].flatPrice) ₽"

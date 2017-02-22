@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bxM-4z-c0h">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -69,11 +69,7 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="249"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TNT-ro-0Kj" id="9nY-VX-sTG">
-
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="249"/>
-
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="248.5"/>
-
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kp1-G8-Xtb">
@@ -260,6 +256,14 @@
                                                 <rect key="frame" x="269" y="357" width="12" height="12"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTN-vi-4K0">
+                                                <rect key="frame" x="166" y="448" width="42" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.36039350076687116" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lna-pq-Kkp">
                                                 <rect key="frame" x="25" y="396" width="325" height="2"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -348,7 +352,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Back_ffffff_100"/>
                                 <connections>
-                                    <segue destination="kfz-7V-ri2" kind="show" id="qyM-Mq-26y"/>
+                                    <segue destination="zDr-8L-m3u" kind="unwind" unwindAction="fromSingleFlatWithSegue:" id="yFN-3J-ZDt"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -375,6 +379,7 @@
                         <outlet property="photoNumberOfRooms" destination="DgV-1T-rMB" id="rHJ-8I-ZeK"/>
                         <outlet property="photoSquare" destination="AT8-0k-VuB" id="MUg-IT-SX8"/>
                         <outlet property="photoStairs" destination="gti-bX-ACS" id="PIP-e4-KZJ"/>
+                        <outlet property="price" destination="jTN-vi-4K0" id="wD7-We-5pj"/>
                         <outlet property="razdelitel1" destination="lna-pq-Kkp" id="7hf-ck-JfV"/>
                         <outlet property="razdelitel2" destination="xl0-fy-WWp" id="SSQ-ek-w1L"/>
                         <outlet property="rentOutlet" destination="UV4-NG-S43" id="OmW-J7-PBe"/>
@@ -389,6 +394,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iVJ-pb-US6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="zDr-8L-m3u" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-1394.4000000000001" y="3021.5892053973016"/>
         </scene>
@@ -559,8 +565,5 @@
         <image name="Profile" width="24" height="24"/>
         <image name="Stairs Up_000000_100" width="100" height="100"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="UNO-kG-68M"/>
-    </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

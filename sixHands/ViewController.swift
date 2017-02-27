@@ -28,29 +28,6 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
         device = "iphone"
         phone = "+70000000"
         
-        //тест coredata
-        
-        //добавление
-//        let People = Person(context:context)
-//        People.name = "1"
-//        People.surname = "2"
-//        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-//        
-//        //показывание
-//        do
-//        {
-//            let task :[Person] = try context.fetch(Person.fetchRequest())
-//            for tas in task {
-//                print(tas.name!)
-//            }
-//        }
-//        catch{
-//            
-//        }
-//        
-        
-        
-        //конец тестов
         
     }
 

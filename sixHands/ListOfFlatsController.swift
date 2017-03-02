@@ -15,7 +15,7 @@ import Alamofire
 
 class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     let screenSize: CGRect = UIScreen.main.bounds
-    
+    let api = API()
     var flats = [Flat]()
     typealias JSONStandard = [String : AnyObject]
     let refreshControl = UIRefreshControl()
@@ -77,7 +77,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         refreshControl.tintColor = UIColor.gray
         refreshControl.addTarget(self, action: #selector(ListOfFlatsController.refresh), for: UIControlEvents.valueChanged)
         self.listOfFlatsTableView?.addSubview(refreshControl)
-        
+     
         super.viewDidLoad()
     }
     

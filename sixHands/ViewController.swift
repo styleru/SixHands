@@ -13,7 +13,15 @@ import CoreData
 
 
 class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
+    let screenSize: CGRect = UIScreen.main.bounds
 
+    @IBOutlet weak var terms: UIButton!
+    @IBOutlet weak var label3: UILabel!
+    @IBOutlet weak var label2: UILabel!
+    @IBOutlet weak var label1: UILabel!
+    @IBOutlet weak var fbOutlet: UIButton!
+    @IBOutlet weak var vkOutlet: UIButton!
+    @IBOutlet weak var image: UIImageView!
     var first_name, last_name, email, phone, avatar, sn_type, device, sn_id, resultToken : String?
     var VKSDKInstance: VKSdk?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -28,8 +36,30 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
         device = "iphone"
         phone = "+70000000"
         
-        
+        image.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height)
+        vkOutlet.frame = CGRect(x: 0, y:0, width: screenSize.width*0.8125, height: screenSize.height*0.0845)
+        vkOutlet.center = CGPoint(x: screenSize.width/2, y: screenSize.height*0.797)
+        fbOutlet.frame = CGRect(x: 0, y:0, width: screenSize.width*0.8125, height: screenSize.height*0.0845)
+        fbOutlet.center = CGPoint(x: screenSize.width/2, y: screenSize.height*0.6813)
+        fbOutlet.layer.cornerRadius = fbOutlet.frame.height/2
+        vkOutlet.layer.cornerRadius = vkOutlet.frame.height/2
+        switch (screenSize.width){
+        case 320 : vkOutlet.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+                fbOutlet.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        case 375 : vkOutlet.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+            fbOutlet.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        case 414: vkOutlet.titleLabel?.font = UIFont.systemFont(ofSize: 21)
+            fbOutlet.titleLabel?.font = UIFont.systemFont(ofSize: 21)
+        default : vkOutlet.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+            fbOutlet.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        }
+        label1.frame = CGRect(x: fbOutlet.frame.minX+5, y: screenSize.height*0.1654, width: screenSize.width*0.63125, height: screenSize.height*0.0704)
+        label2.frame = CGRect(x: fbOutlet.frame.minX+5, y: screenSize.height*0.2658, width: screenSize.width*0.70625, height: screenSize.height*0.1109)
+        label2.text = "Сервис безопасной\nсдачи и аренды жилой\nнедвижимости"
+        label3.frame = CGRect(x: fbOutlet.frame.minX+5, y: screenSize.height*0.91, width: screenSize.width*0.78125, height: 15)
+        terms.frame = CGRect(x: fbOutlet.frame.minX+5, y: label3.frame.maxY, width: screenSize.width*0.70625, height: 15)
     }
+    
 
     @IBAction func vkLogin(_ sender: UIButton) {
         VKSdk.wakeUpSession([VK_API_LONG]) { (state, error) -> Void in

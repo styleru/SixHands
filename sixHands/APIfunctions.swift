@@ -10,28 +10,25 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-/*func Filter(user_id:String,sorting:String,parameters:String?,amount:Int8) {
+class API{
+    let domain = "http://dev.6hands.styleru.net"
     
-    let headers:HTTPHeaders = ["Token": UserDefaults.standard.object(forKey:"token") as! String]
-    Alamofire.request("http://dev.6hands.styleru.net/flats/filter?id_user=\(user_id)&sorting=\(sorting)&offset=0&amount=\(amount)&parameters=\(parameters)",headers:headers).responseData { response in
-        if let data = (response.data){
-        
-        parseJSON(data: data)
+    
+    func flatsSingle(id:String,withcompletionHandler: @escaping () ->()){
+    let fullRequest = domain + "/flats/single?id_flat="+id
+        Alamofire.request(fullRequest).responseJSON { response in
+            var jsondata = JSON(data:response.data!)
+            print("getFlat: ")
         }
-        }
-}
 
-
-
- func parseJSON(data: Data) {
-    do{
-        let jsonResult = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary
-
-        let jsonFlat = jsonResult?["body"] as! [AnyObject]
-        for j in jsonFlat{
-        }
     
     
     }
-    catch{}
-}*/
+    
+    func underGround(){
+    }
+    
+    func user(){
+    }
+    
+}

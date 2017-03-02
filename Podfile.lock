@@ -30,12 +30,14 @@ PODS:
     - SDWebImage/Core
   - SwiftyJSON (3.1.4)
   - VK-ios-sdk (1.4.6)
+  - YandexMobileMetrica/Dynamic (2.7.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.3)
   - SDWebImage/WebP
   - SwiftyJSON
   - VK-ios-sdk
+  - YandexMobileMetrica/Dynamic (= 2.7.0)
 
 SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
@@ -43,7 +45,8 @@ SPEC CHECKSUMS:
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   VK-ios-sdk: 7fd48bc5aaa6b96c3197c1987eb6593f2ea67331
+  YandexMobileMetrica: c8e9050cd23b10dee4358bdf0a5142583a63995c
 
-PODFILE CHECKSUM: b654da04e1d1ffca4660a67ec54fe6f02ff181d6
+PODFILE CHECKSUM: ed117dd2a1ca0b8fed7c75a16c9b11159fbe8d53
 
 COCOAPODS: 1.2.0

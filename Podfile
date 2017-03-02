@@ -10,6 +10,7 @@ target 'sixHands' do
   pod "SwiftyJSON"
   pod 'SDWebImage/WebP'
   pod 'Alamofire', '~> 4.3'
+  pod 'YandexMobileMetrica/Dynamic', '2.7.0'
   # Pods for sixHands
 
   target 'sixHandsTests' do

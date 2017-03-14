@@ -12,7 +12,7 @@ import Alamofire
 import CoreLocation
 
 class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
+    let per = realm.object(ofType: person.self, forPrimaryKey: 0)
     let priceField = UITextField()
     let commentsField = UITextView()
     let separator = UIView()

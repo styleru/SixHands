@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		400274BC1E321D46000B94DF /* FlatViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400274BB1E321D46000B94DF /* FlatViewCell.swift */; };
 		404E70E11E2EBF2800F94277 /* FacebookAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404E70E01E2EBF2800F94277 /* FacebookAuth.swift */; };
+		405F99411E75E09C002EB303 /* person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F99401E75E09C002EB303 /* person.swift */; };
 		406F92011E2F53F800E2A9FF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 406F91FF1E2F53F800E2A9FF /* FBSDKCoreKit.framework */; };
 		406F92021E2F53F800E2A9FF /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 406F92001E2F53F800E2A9FF /* FBSDKLoginKit.framework */; };
 		407618661E3E245400650C72 /* classFlat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407618651E3E245400650C72 /* classFlat.swift */; };
 		408376931E4B4C3C001B8F16 /* FlatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408376921E4B4C3C001B8F16 /* FlatViewController.swift */; };
 		408A687C1E424A8900FEA8EF /* APIfunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408A687B1E424A8900FEA8EF /* APIfunctions.swift */; };
+		40B0D23D1E6F39DE00BC1142 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40B0D23C1E6F39DE00BC1142 /* Assets.xcassets */; };
 		40D6EFEF1E2F684D00363465 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40D6EFEE1E2F684D00363465 /* Bolts.framework */; };
 		5E9C8A722D7580992749666F /* Pods_sixHandsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36FDA856FD8EE1986F732C03 /* Pods_sixHandsUITests.framework */; };
 		7E2A8EE45F0BB582F5921732 /* Pods_sixHands.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6780D743E810AEE48781C19C /* Pods_sixHands.framework */; };
@@ -28,7 +30,6 @@
 		F7529B5B1E266BA700F47FE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7529B5A1E266BA700F47FE9 /* AppDelegate.swift */; };
 		F7529B5D1E266BA700F47FE9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7529B5C1E266BA700F47FE9 /* ViewController.swift */; };
 		F7529B601E266BA700F47FE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7529B5E1E266BA700F47FE9 /* Main.storyboard */; };
-		F7529B621E266BA700F47FE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7529B611E266BA700F47FE9 /* Assets.xcassets */; };
 		F7529B651E266BA700F47FE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7529B631E266BA700F47FE9 /* LaunchScreen.storyboard */; };
 		F7529B701E266BA700F47FE9 /* sixHandsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7529B6F1E266BA700F47FE9 /* sixHandsTests.swift */; };
 		F7529B7B1E266BA700F47FE9 /* sixHandsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7529B7A1E266BA700F47FE9 /* sixHandsUITests.swift */; };
@@ -58,11 +59,13 @@
 		36FDA856FD8EE1986F732C03 /* Pods_sixHandsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sixHandsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		400274BB1E321D46000B94DF /* FlatViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatViewCell.swift; sourceTree = "<group>"; };
 		404E70E01E2EBF2800F94277 /* FacebookAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookAuth.swift; sourceTree = "<group>"; };
+		405F99401E75E09C002EB303 /* person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = person.swift; sourceTree = "<group>"; };
 		406F91FF1E2F53F800E2A9FF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		406F92001E2F53F800E2A9FF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		407618651E3E245400650C72 /* classFlat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = classFlat.swift; sourceTree = "<group>"; };
 		408376921E4B4C3C001B8F16 /* FlatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatViewController.swift; sourceTree = "<group>"; };
 		408A687B1E424A8900FEA8EF /* APIfunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIfunctions.swift; sourceTree = "<group>"; };
+		40B0D23C1E6F39DE00BC1142 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40D6EFEE1E2F684D00363465 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		63FDC736767934B0635C653E /* Pods-sixHands.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sixHands.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sixHands/Pods-sixHands.debug.xcconfig"; sourceTree = "<group>"; };
 		6780D743E810AEE48781C19C /* Pods_sixHands.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sixHands.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,7 +85,6 @@
 		F7529B5A1E266BA700F47FE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F7529B5C1E266BA700F47FE9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F7529B5F1E266BA700F47FE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F7529B611E266BA700F47FE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F7529B641E266BA700F47FE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F7529B661E266BA700F47FE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F7529B6B1E266BA700F47FE9 /* sixHandsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sixHandsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,8 +174,8 @@
 				F7BAACAD1E2C8FB9009BE9AD /* Controllers */,
 				DAB274141E27BB9900A06E11 /* six_hand.xcdatamodel */,
 				F7529B5A1E266BA700F47FE9 /* AppDelegate.swift */,
+				40B0D23C1E6F39DE00BC1142 /* Assets.xcassets */,
 				F7529B5E1E266BA700F47FE9 /* Main.storyboard */,
-				F7529B611E266BA700F47FE9 /* Assets.xcassets */,
 				F7529B631E266BA700F47FE9 /* LaunchScreen.storyboard */,
 				F7529B661E266BA700F47FE9 /* Info.plist */,
 				DAB2740D1E2676B100A06E11 /* sixHands-Bridging-Header.h */,
@@ -217,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				404E70E01E2EBF2800F94277 /* FacebookAuth.swift */,
+				405F99401E75E09C002EB303 /* person.swift */,
 				407618651E3E245400650C72 /* classFlat.swift */,
 				408A687B1E424A8900FEA8EF /* APIfunctions.swift */,
 			);
@@ -363,7 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7529B651E266BA700F47FE9 /* LaunchScreen.storyboard in Resources */,
-				F7529B621E266BA700F47FE9 /* Assets.xcassets in Resources */,
+				40B0D23D1E6F39DE00BC1142 /* Assets.xcassets in Resources */,
 				F7529B601E266BA700F47FE9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -528,6 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				408A687C1E424A8900FEA8EF /* APIfunctions.swift in Sources */,
+				405F99411E75E09C002EB303 /* person.swift in Sources */,
 				408376931E4B4C3C001B8F16 /* FlatViewController.swift in Sources */,
 				9D8D64481E47C03100019F22 /* RentAddressController.swift in Sources */,
 				9D6FE0E71E42437C00133C3F /* ProfileController.swift in Sources */,
@@ -692,7 +696,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 4RWLL37A47;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/SwiftyJSON",
@@ -700,7 +704,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = sixHands/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.styleru.SixHands;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -717,7 +721,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 4RWLL37A47;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/SwiftyJSON",
@@ -725,7 +729,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = sixHands/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.styleru.SixHands;
 				PRODUCT_NAME = "$(TARGET_NAME)";

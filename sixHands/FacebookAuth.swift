@@ -12,8 +12,6 @@ import FBSDKLoginKit
 import Alamofire
 import SwiftyJSON
 
-let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
 public func FBLogin(){
     let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
     fbLoginManager .logIn(withReadPermissions: ["public_profile","email"], handler: { (result, error) -> Void in
@@ -34,9 +32,10 @@ public func FBLogin(){
     })
 }
 
-func getFBUserData(token:String,withcompletionHandler: @escaping (_ success:Bool) ->())
+func getFBUserData(token:String,withcompletionHandler:(_ success:Bool) ->())
 {
     let request = FBSDKGraphRequest(graphPath: "me", parameters:["fields": "id,first_name, last_name, email"])
+    
     request?.start(completionHandler: { (connection, result, error) -> Void in
         if(error == nil)
         {
@@ -60,52 +59,26 @@ func getFBUserData(token:String,withcompletionHandler: @escaping (_ success:Bool
                 //ЗАНОС В CORE DATA
                 
                 if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                    
                     var jsondata = JSON(data: data)
-                    UserDefaults.standard.setValue(jsondata["token"].string, forKey: "token")
-                    UserDefaults.standard.set(jsondata["user"]["id"].string, forKey: "id_user")
-                    var bool = true
-                    do{
-                        let task :[Person] = try context.fetch(Person.fetchRequest())
-                        for tas in task {
-                            tas.first_name = jsondata["user"]["first_name"].string
-                            tas.last_name = jsondata["user"]["last_name"].string
-                            tas.email = jsondata["user"]["email"].string
-                            tas.phone = jsondata["user"]["phone"].string
-                            tas.avatar_url = jsondata["user"]["avatar"].string
-                            for(_,subJson):(String,JSON) in jsondata["user"]["social_networks"]{
-                                if(subJson["sn"] == "vk"){
-                                    tas.vk_id = subJson["id_user"].int32Value
-                                }
-                                if(subJson["sn"] == "fb"){
-                                    tas.fb_id = subJson["id_user"].int32Value
-                                }
-                            }
-                            
-                            bool = false
-                            var warning = "The user has already registered: "
-                            warning += tas.first_name!+" "
-                            warning += tas.email!+" "
-                            warning += tas.vk_id.description
-                            print(warning)
-                            (UIApplication.shared.delegate as! AppDelegate).saveContext()
-                        }
-                    }
-                    catch{
-                        
-                    }
-                    if bool {
-                        let user = Person(context: context)
-                        user.first_name = jsondata["user"]["first_name"].string
-                        user.last_name = jsondata["user"]["last_name"].string
-                        user.email = jsondata["user"]["email"].string
-                        user.phone = jsondata["user"]["phone"].string
-                        print("User has been added!")
-                        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-                    }
+                    let per = person()
+                    let specificPerson = realm.object(ofType: person.self, forPrimaryKey: 0)
+                    per.id = 0
+                    per.token = jsondata["token"].string!
+                  
                     
-                    
-                }
+                        if jsondata != nil{
+                        print(jsondata)
+                        per.first_name = jsondata["user"]["first_name"].string!
+                        per.last_name = jsondata["user"]["last_name"].string!
+                        per.email = jsondata["user"]["email"].string!
+                        per.phone = jsondata["user"]["phone"].string!
+                        per.avatar_url = jsondata["user"]["avatar"].string!
+                        per.fb_id = jsondata["user"]["social_networks"][0]["id_user"].string!
+                            print("USER_ID:\(jsondata["user"]["social_networks"][0]["id_user"].string)")}
+                        try! realm.write {
+                            realm.add(per, update: true)
+                    }
+                    }
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let afterLoginTB = storyboard.instantiateViewController(withIdentifier: "afterLogin") as! UITabBarController
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate

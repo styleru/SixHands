@@ -10,22 +10,36 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
+let per = realm.object(ofType: person.self, forPrimaryKey: 0)
 class API{
+    
     let domain = "http://dev.6hands.styleru.net"
-    
-    
-    func flatsSingle(id:String,withcompletionHandler: @escaping () ->()){
+   // let headers:HTTPHeaders = ["Token": UserDefaults.standard.object(forKey:"token") as! String]
+    let headers:HTTPHeaders = ["Token": per!.token]
+    func flatsSingle(id:String,completionHandler:@escaping (_ js:Any) ->()){
     let fullRequest = domain + "/flats/single?id_flat="+id
         Alamofire.request(fullRequest).responseJSON { response in
-            var jsondata = JSON(data:response.data!)
-            print("getFlat: ")
-        }
-
-    
-    
+        var jsondata = JSON(data:response.data!)
+        completionHandler(jsondata)
+    }
     }
     
-    func underGround(){
+    
+    
+    func flatsFilter(offset:Int,amount:Int,completionHandler:@escaping (_ js:Any) ->()){
+        let fullRequest = domain + "/flats/filter?select=all&offset=\(offset)&amount=\(amount)"
+        Alamofire.request(fullRequest).responseJSON { response in
+            var jsondata = JSON(data:response.data!)
+            completionHandler(jsondata)
+        }
+    }
+    
+    func underground(id:String,completionHandler:@escaping (_ js:Any) ->()){
+        let fullRequest = domain + "/underground?id_city=\(id)"
+        Alamofire.request(fullRequest).responseJSON { response in
+            var jsondata = JSON(data:response.data!)
+            completionHandler(jsondata)
+        }
     }
     
     func user(){

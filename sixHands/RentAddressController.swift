@@ -12,7 +12,7 @@ import Alamofire
 import SwiftyJSON
 
 class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
-    
+    let per = realm.object(ofType: person.self, forPrimaryKey: 0)
     let addressField = UITextField()
     //var addresses = [CLLocationCoordinate2D]()
     var addressString = String()

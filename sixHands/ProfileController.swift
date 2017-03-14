@@ -13,9 +13,10 @@ import CoreData
 import Alamofire
 import SwiftyJSON
 
+
 class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let per = realm.object(ofType: person.self, forPrimaryKey: 0)
+   // let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var info = [NSManagedObject]()
     var flats = [Flat]()
     typealias JSONStandard = [String : AnyObject]
@@ -32,7 +33,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         //get info from coredata
         do {
-            info = try context.fetch(Person.fetchRequest())
+      //      info = try context.fetch(Person.fetchRequest())
         } catch {
             print("Fetching Failed")
         }

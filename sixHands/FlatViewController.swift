@@ -13,11 +13,12 @@ import SwiftyJSON
 
 class FlatViewController: UIViewController {
 let screenSize: CGRect = UIScreen.main.bounds
-   var mas = [String]()
+   let per = realm.object(ofType: person.self, forPrimaryKey: 0)
+    var mas = [String]()
     var id_underground = Int()
     var id_underground_line = Int()
     var flat_id = String()
-    
+    let api = API()
     @IBOutlet weak var imagesScrollView: UIScrollView!
     @IBOutlet weak var backOutlet: UIButton!
     @IBOutlet weak var mutualFriendsOutlet: UIButton!
@@ -46,7 +47,64 @@ let screenSize: CGRect = UIScreen.main.bounds
     override func viewDidLoad() {
         print(screenSize.width)
         print(screenSize.height)
-        getFlat(id: flat_id)
+        
+        api.flatsSingle(id: flat_id){(js:Any) in
+            let jsondata = js as! JSON
+        let time = jsondata["create_date"].string!
+        if time != nil{
+        self.date.text = try? String(time.characters.dropLast(9))
+        self.time.text = try? String(time.characters.dropFirst(11))}
+        if jsondata["price"] != nil { self.price.text = jsondata["price"].string!+" ₽"} else {self.price.text = "-"}
+        if jsondata["address"] != nil{  self.adress.text = jsondata["address"].string!}else {self.adress.text = " "}
+        if jsondata["square"] != nil{self.square.text = jsondata["square"].string! + " м.кв."}else{self.square.text = "-"}
+        if jsondata["rooms"] != nil{self.numberOfRooms.text = jsondata["rooms"].string! + " ком."}else{self.numberOfRooms.text = "-"}
+        if jsondata["floor"] != nil{self.stairs.text = jsondata["floor"].string! + "-этаж"}else {self.stairs.text = "-"}
+        if jsondata["to_underground"] != nil {self.timeToSubway.text = jsondata["to_underground"].string! + " мин."} else {self.timeToSubway.text = "-"}
+        if jsondata["owner"]["first_name"] != nil {self.mutualFriendsOutlet.setTitle( "Хохяин "+jsondata["owner"]["first_name"].string!+"\n5 общих друзей", for: .normal)}else{self.mutualFriendsOutlet.setTitle("Owner", for: .normal)}
+        if jsondata["owner"]["avatar"] != nil {self.avatar.sd_setImage(with:  URL(string : jsondata["owner"]["avatar"].string!))}
+            
+            if  let amount = jsondata["photos"].array?.count{
+            for i in 0..<amount{
+                
+                    let imageView = UIImageView()
+                if jsondata["photos"][i]["url"] != nil{
+                imageView.sd_setImage(with: URL(string : jsondata["photos"][i]["url"].string!))
+                    let x = self.view.frame.width * CGFloat(i)
+                    imageView.frame = CGRect(x: x, y: 0, width: self.screenSize.width, height: self.imagesScrollView.bounds.height)
+                    self.imagesScrollView.contentSize.width = self.screenSize.width * CGFloat(i + 1)
+                    imageView.clipsToBounds = true
+                    self.imagesScrollView.addSubview(imageView)
+                }}
+            }
+            if let id_underground = jsondata["id_underground"].string{
+                self.api.underground(id: id_underground){(js:Any) in
+                let jsondata = js as! JSON
+                    print("Metroha:\(jsondata)")
+                    self.subway.text = jsondata["stations"][Int(id_underground)!-1]["name"].string!
+                    self.id_underground_line = Int(jsondata["stations"][Int(id_underground)!-1]["id_underground_line"].string!)!
+                    let color = (jsondata["lines"].array?.count)!
+                    
+                    for i in 0..<color{
+                        if jsondata["lines"][i]["id"].string! == "\(self.id_underground_line)"{
+                            let col = jsondata["lines"][i]["color"].string!
+                            switch col{
+                            case "Синий": self.subwayColor.backgroundColor = UIColor.blue
+                            case "Красный": self.subwayColor.backgroundColor = UIColor.red
+                            case "Зеленый": self.subwayColor.backgroundColor = UIColor.green
+                            case "Желтая": self.subwayColor.backgroundColor = UIColor.yellow
+                            case "Серый": self.subwayColor.backgroundColor = UIColor.gray
+                            default : self.subwayColor.backgroundColor = UIColor.black
+                            }
+                        }
+                        }}
+            }
+            
+            
+        }
+        
+        
+        
+        
         //Font of adress
         switch (screenSize.width){
         case 320 : adress.font = UIFont.systemFont(ofSize: 20)
@@ -82,7 +140,7 @@ let screenSize: CGRect = UIScreen.main.bounds
         timeToSubway.bounds = CGRect(x: 0, y: 0, width: screenSize.width * 0.17, height: screenSize.width * 0.06)
         timeImage.bounds = CGRect(x: 0, y: 0, width: screenSize.width * 0.032, height: screenSize.width * 0.032 )
         timeToSubway.center = CGPoint(x: time.frame.maxX - timeToSubway.frame.width/2 , y: screenSize.height * 0.5457)
-        timeImage.center = CGPoint(x: timeToSubway.frame.minX - 8, y: screenSize.height * 0.5457)
+        timeImage.center = CGPoint(x: timeToSubway.frame.minX, y: screenSize.height * 0.5457)
 
         
 
@@ -133,53 +191,6 @@ let screenSize: CGRect = UIScreen.main.bounds
         super.didReceiveMemoryWarning()
         
     }
-    func getFlat(id:String) {
-        
-        Alamofire.request("http://6hands.styleru.net/flats/single?id_flat=\(id)").responseJSON { response in
-            var jsondata = JSON(data:response.data!)
-            print("getFlat: ")
-            print(jsondata)
-            
-            self.price.text = jsondata["parameters"]["30"].string! + " ₽"
-            self.adress.text = jsondata["street"].string!
-            let time = jsondata["update_date"].string!
-            self.numberOfRooms.text = jsondata["parameters"]["31"].string! + " ком."
-            self.square.text = jsondata["parameters"]["29"].string! + " м.кв."
-            if jsondata["parameters"]["5"].isEmpty{
-                self.stairs.text = "- " + " этаж"}else{ self.stairs.text = jsondata["parameters"]["5"].string! + " этаж"}
-            if jsondata["parameters"]["37"].isEmpty{
-                self.stairs.text = "- " + " этаж"}else{self.timeToSubway.text = jsondata["parameters"]["37"].string! + " этаж"}
-            //self.timeToSubway.text = jsondata["parameters"]["37"].string! + " мин."
-            self.date.text = String(time.characters.dropLast(9))
-            self.time.text = String(time.characters.dropFirst(11))
-            self.id_underground =  Int(jsondata["id_underground"].string!)!
-            print("uhh")
-            print(self.id_underground)
-            self.getSubway(underground_id: self.id_underground, city_id: "1")
-            
-            let avaURL = jsondata["owner"]["avatar"].string!
-            self.mutualFriendsOutlet.setTitle("Хозяин "+"\(jsondata["owner"]["first_name"].string!)\n" + "5 общих друзей", for: .normal)
-            self.avatar.sd_setImage(with: URL(string : avaURL))
-            if let amount = jsondata["photos"].array?.count{
-                for i in 0..<amount{
-                    self.mas.append(jsondata["photos"][i]["url"].string!)
-                }
-            }
-            for i in 0..<self.mas.count{
-                let imageView = UIImageView()
-                imageView.sd_setImage(with: URL(string : self.mas[i]))
-                let x = self.view.frame.width * CGFloat(i)
-                imageView.frame = CGRect(x: x, y: 0, width: self.screenSize.width, height: self.imagesScrollView.bounds.height)
-                self.imagesScrollView.contentSize.width = self.screenSize.width * CGFloat(i + 1)
-                // imageView.contentMode = .scaleAspectFill
-                imageView.clipsToBounds = true
-                self.imagesScrollView.addSubview(imageView)
-                
-                
-            }
-        }
-    }
-    
     func getSubway(underground_id:Int, city_id:String){
         Alamofire.request("http://6hands.styleru.net/underground?id_city=\(city_id)").responseJSON { response in
             var jsondata = JSON(data:response.data!)

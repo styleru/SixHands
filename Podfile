@@ -11,6 +11,7 @@ target 'sixHands' do
   pod 'SDWebImage/WebP'
   pod 'Alamofire', '~> 4.3'
   pod 'YandexMobileMetrica/Dynamic', '2.7.0'
+  pod ‘RealmSwift’
   # Pods for sixHands
 
   target 'sixHandsTests' do

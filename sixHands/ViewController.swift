@@ -12,9 +12,11 @@ import CoreData
 
 
 
+@available(iOS 10.0, *)
 class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
+    let per = realm.object(ofType: person.self, forPrimaryKey: 0)
     let screenSize: CGRect = UIScreen.main.bounds
-
+    let api = API()
     @IBOutlet weak var terms: UIButton!
     @IBOutlet weak var label3: UILabel!
     @IBOutlet weak var label2: UILabel!
@@ -28,6 +30,7 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //print(realm.configuration.fileURL)
         // Do any additional setup after loading the view, typically from a nib.
         VKSDKInstance = VKSdk.initialize(withAppId: "5446345")
         VKSDKInstance!.register(self)
@@ -84,18 +87,11 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
     
     @IBAction func fbLogin(_ sender: UIButton) {
         FBLogin()
-        //getFBUserData()
-        
-       
+
     }
     
    
-    
-    
-    
-    
-    
-    override func didReceiveMemoryWarning() {
+override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -171,51 +167,25 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
                         
                         if let dataFromString = responseString?.data(using: .utf8, allowLossyConversion: false) {
                             var jsondata = JSON(data: dataFromString)
-                            UserDefaults.standard.setValue(jsondata["token"].string, forKey: "token")
-                            UserDefaults.standard.set(jsondata["user"]["id"].string, forKey: "id_user")
-                            var bool = true
-                            do{
-                                let task :[Person] = try self.context.fetch(Person.fetchRequest())
-                                for tas in task {
-                                        tas.first_name = jsondata["user"]["first_name"].string
-                                        tas.last_name = jsondata["user"]["last_name"].string
-                                        tas.email = jsondata["user"]["email"].string
-                                        tas.phone = jsondata["user"]["phone"].string
-                                        tas.avatar_url = jsondata["user"]["avatar"].string
-                                    for(_,subJson):(String,JSON) in jsondata["user"]["social_networks"]{
-                                        if(subJson["sn"] == "vk"){
-                                            tas.vk_id = subJson["id_user"].int32Value
-                                        }
-                                        if(subJson["sn"] == "fb"){
-                                            tas.fb_id = subJson["id_user"].int32Value
-                                        }
-                                    }
+                            let per = person()
+                            let specificPerson = realm.object(ofType: person.self, forPrimaryKey: 0)
+                            per.id = 0
+                            per.token = jsondata["token"].string!
+                            if jsondata != nil{
+                                print(jsondata)
+                                per.first_name = jsondata["user"]["first_name"].string!
+                                per.last_name = jsondata["user"]["last_name"].string!
+                                per.email = jsondata["user"]["email"].string!
+                                per.phone = jsondata["user"]["phone"].string!
+                                per.avatar_url = jsondata["user"]["avatar"].string!
+                                per.fb_id = jsondata["user"]["social_networks"][0]["id_user"].string!
+                                print("USER_ID:\(jsondata["user"]["social_networks"][0]["id_user"].string)")}
+                            try! realm.write {
+                                realm.add(per, update: true)
+                            }
 
-                                        bool = false
-                                        var warning = "The user has already registered: "
-                                        warning += tas.first_name!+" "
-                                        warning += tas.email!+" "
-                                        warning += tas.vk_id.description
-                                        print(warning)
-                                        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-                                }
-                            }
-                            catch{
-                                
-                            }
-                            if bool {
-                                let user = Person(context: self.context)
-                                user.first_name = jsondata["user"]["first_name"].string
-                                user.last_name = jsondata["user"]["last_name"].string
-                                user.email = jsondata["user"]["email"].string
-                                user.phone = jsondata["user"]["phone"].string
-                                print("User has been added!")
-                                (UIApplication.shared.delegate as! AppDelegate).saveContext()
-                            }
 
                         }
-                        
-                        
                         
                         DispatchQueue.main.async { [unowned self] in
                         self.performSegue(withIdentifier: "login", sender: self)

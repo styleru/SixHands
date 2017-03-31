@@ -163,7 +163,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         print("refresh...")
         flats = []
         let params = "%5B%7B%22key%22%3A%22id_user%22%2C%22value%22%3A%22\(UserDefaults.standard.value(forKey: "id_user")!)%22%2C%20%22criterion%22%3A%22single%22%7D%5D"
-        get(sorting: "last", parameters: params, amount: 20)
+        get(sorting: "all", parameters: params, amount: 20)
         self.table.reloadData()
         self.refreshControl.endRefreshing()
     }

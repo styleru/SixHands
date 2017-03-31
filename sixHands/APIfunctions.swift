@@ -15,21 +15,23 @@ class API{
     
     let domain = "http://dev.6hands.styleru.net"
    // let headers:HTTPHeaders = ["Token": UserDefaults.standard.object(forKey:"token") as! String]
+    //при первом входе токена нет и будет nil!!!!!!!!!
     let headers:HTTPHeaders = ["Token": per!.token]
     func flatsSingle(id:String,completionHandler:@escaping (_ js:Any) ->()){
     let fullRequest = domain + "/flats/single?id_flat="+id
         Alamofire.request(fullRequest).responseJSON { response in
-        var jsondata = JSON(data:response.data!)
+        let jsondata = JSON(data:response.data!)
         completionHandler(jsondata)
     }
     }
     
     
     
-    func flatsFilter(offset:Int,amount:Int,completionHandler:@escaping (_ js:Any) ->()){
-        let fullRequest = domain + "/flats/filter?select=all&offset=\(offset)&amount=\(amount)"
+    func flatsFilter(offset:Int,amount:Int, parameters: String, completionHandler:@escaping (_ js:Any) ->()){
+        let fullRequest = domain + "/flats/filter?select=all&offset=\(offset)&amount=\(amount)\(parameters)"
+        print(fullRequest)
         Alamofire.request(fullRequest).responseJSON { response in
-            var jsondata = JSON(data:response.data!)
+            let jsondata = JSON(data:response.data!)
             completionHandler(jsondata)
         }
     }
@@ -37,7 +39,7 @@ class API{
     func underground(id:String,completionHandler:@escaping (_ js:Any) ->()){
         let fullRequest = domain + "/underground?id_city=\(id)"
         Alamofire.request(fullRequest).responseJSON { response in
-            var jsondata = JSON(data:response.data!)
+            let jsondata = JSON(data:response.data!)
             completionHandler(jsondata)
         }
     }

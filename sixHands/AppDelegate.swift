@@ -9,9 +9,9 @@
 import UIKit
 import CoreData
 import FBSDKCoreKit
-import YandexMobileMetrica
 import RealmSwift
 let realm = try! Realm()
+//import YandexMobileMetrica
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.statusBarStyle = .lightContent
         UITabBar.appearance().tintColor = UIColor(red: 89/255, green: 215/255, blue: 199/255, alpha: 1)
         UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 14.0, weight: UIFontWeightLight)], for: .normal)
-       YMMYandexMetrica.activate(withApiKey: "ed7c92ed-40a2-4c16-90d8-d323bd78017d")
+        //YMMYandexMetrica.activate(withApiKey: "ed7c92ed-40a2-4c16-90d8-d323bd78017d")
         
     return    FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     

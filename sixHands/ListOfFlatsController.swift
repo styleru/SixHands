@@ -227,8 +227,9 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     
     func update(offset:Int,amount:Int){
     
-    api.flatsFilter(offset: offset,amount: amount){(js:Any) in
+        api.flatsFilter(offset: offset, amount: amount, parameters: ""){(js:Any) in
     let jsondata = js as! JSON
+    print("kek: \(jsondata)")
     let array = jsondata.array
     if (array?.count) != nil {
     for i in 0..<array!.count{

@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 import CoreData
-
+import RealmSwift
 
 
 @available(iOS 10.0, *)
@@ -120,6 +120,7 @@ override func didReceiveMemoryWarning() {
         if result.token != nil {
             email = result.token.email
             resultToken = result.token.accessToken
+            print(resultToken!)
             
             let getData: VKRequest =  VKApi.users().get(["fields": "photo_max,contacts"])
             
@@ -135,7 +136,7 @@ override func didReceiveMemoryWarning() {
                     self.avatar = user.photo_max
                     self.sn_id = result.token.userId
                     
-                    let listUrlString = "http://6hands.styleru.net/user"
+                    let listUrlString = "http://dev.6hands.styleru.net/user"
                     let myUrl = URL(string: listUrlString)
                     var request = URLRequest(url:myUrl!);
                     request.httpMethod = "POST"
@@ -149,6 +150,7 @@ override func didReceiveMemoryWarning() {
                     postString += "&sn_id=" + self.sn_id!
                     postString += "&token=" + self.resultToken!
                     request.httpBody = postString.data(using: .utf8)
+                    print(postString)
                     
                     let task = URLSession.shared.dataTask(with: request){ data, response, error in
                         guard let data = data, error == nil else{
@@ -168,20 +170,22 @@ override func didReceiveMemoryWarning() {
                         if let dataFromString = responseString?.data(using: .utf8, allowLossyConversion: false) {
                             var jsondata = JSON(data: dataFromString)
                             let per = person()
-                            let specificPerson = realm.object(ofType: person.self, forPrimaryKey: 0)
+                            //let specificPerson = realm.object(ofType: person.self, forPrimaryKey: 0)
                             per.id = 0
                             per.token = jsondata["token"].string!
-                            if jsondata != nil{
+                            if jsondata != JSON.null {
                                 print(jsondata)
                                 per.first_name = jsondata["user"]["first_name"].string!
                                 per.last_name = jsondata["user"]["last_name"].string!
                                 per.email = jsondata["user"]["email"].string!
                                 per.phone = jsondata["user"]["phone"].string!
                                 per.avatar_url = jsondata["user"]["avatar"].string!
-                                per.fb_id = jsondata["user"]["social_networks"][0]["id_user"].string!
-                                print("USER_ID:\(jsondata["user"]["social_networks"][0]["id_user"].string)")}
-                            try! realm.write {
-                                realm.add(per, update: true)
+                                per.vk_id = jsondata["user"]["social_networks"][0]["id_user"].string!
+                                print("USER_ID:\(jsondata["user"]["social_networks"][0]["id_user"].string)")
+                            }
+                            let realm1 = try! Realm()
+                            try! realm1.write {
+                                realm1.add(per, update: true)
                             }
 
 

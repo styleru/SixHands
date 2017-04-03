@@ -265,7 +265,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
             if (array?.count) != nil {
                 for i in 0..<array!.count{
                     let flat = Flat()
-                    flat.flatPrice = jsondata[i]["parameters"]["30"].string!
+                    flat.flatPrice = jsondata[i]["price"].string!
                     flat.flatSubway = "м. Текстильщики"
                     
                     let arrayOfPhotos = jsondata[i]["photos"].array
@@ -274,7 +274,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
                             flat.imageOfFlat.append(jsondata[i]["photos"][j]["url"].string!)
                         }
                     }
-                    flat.numberOfRoomsInFlat = jsondata[i]["parameters"]["31"].string!
+                    flat.numberOfRoomsInFlat = jsondata[i]["rooms"].string!
                     flat.views = "65"
                     flat.newView = "12"
                     self.flats.append(flat)

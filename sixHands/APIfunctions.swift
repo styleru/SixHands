@@ -49,6 +49,9 @@ class API{
         let encoded = fullRequest.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
         let myUrl = URL(string: encoded!)
         
+        headers = ["Token" : per!.token]
+        print("headers: \(headers)")
+        
         Alamofire.upload(multipartFormData: { (multipart) in
             
             for (key, value) in parameters {
@@ -71,6 +74,7 @@ class API{
             case .success(let request, _, _):
                 request.response(completionHandler: { (response) in
                     let json = JSON(data: response.data!)
+                    print("\(response.response!)")
                     completionHandler(json)
                 })
             }

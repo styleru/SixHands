@@ -16,9 +16,8 @@ import SwiftyJSON
 
 class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let per = realm.object(ofType: person.self, forPrimaryKey: 0)
-   // let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var info = [NSManagedObject]()
     var flats = [Flat]()
+    let api = API()
     typealias JSONStandard = [String : AnyObject]
     let table = UITableView()
     let refreshControl = UIRefreshControl()
@@ -27,16 +26,9 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         super.viewDidLoad()
         
         //parameters for request & request
-        let params = "%5B%7B%22key%22%3A%22id_user%22%2C%22value%22%3A%22\(UserDefaults.standard.value(forKey: "id_user")!)%22%2C%20%22criterion%22%3A%22single%22%7D%5D"
+        let params = "&parameters=%5B%7B%22key%22%3A%22id_user%22%2C%22value%22%3A%22\(UserDefaults.standard.value(forKey: "id_user")!))%22%2C%20%22criterion%22%3A%22single%22%7D%5D"
         
         get(sorting: "last", parameters: params, amount: 20)
-        
-        //get info from coredata
-        do {
-      //      info = try context.fetch(Person.fetchRequest())
-        } catch {
-            print("Fetching Failed")
-        }
         
         //view bounds
         let screen = self.view.frame
@@ -65,7 +57,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         //profile photo
         let avatar = UIImageView()
         avatar.frame = CGRect(x: screen.maxX - 15.0 - screen.height * 0.09, y: screen.minY + 40.0, width: screen.height * 0.09, height: screen.height * 0.09)
-        avatar.sd_setImage(with: URL(string: (info[0].value(forKey: "avatar_url") as? String)!))
+        avatar.sd_setImage(with: URL(string: (per?.avatar_url)!))
         avatar.layer.masksToBounds = false
         avatar.layer.cornerRadius = avatar.frame.size.width/2
         avatar.clipsToBounds = true
@@ -75,7 +67,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         //name label
         let name = UILabel()
         name.frame = CGRect(x: screen.minX + 15.0, y: screen.minY + 40.0, width: 172.0, height: 36.0)
-        name.text = info[0].value(forKey: "first_name") as? String
+        name.text = per?.first_name
         name.font = UIFont.systemFont(ofSize: 24.0, weight: UIFontWeightHeavy)
         name.textColor = UIColor(red: 57/255, green: 57/255, blue: 57/255, alpha: 1)
         self.view.addSubview(name)
@@ -93,7 +85,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         //VK button
         let vkButton = UIButton()
         
-        if info[0].value(forKey: "vk_id") as! Int32 != 0 {
+        if (per?.vk_id)! != "0" {
             vkButton.frame = CGRect(x: 15.0, y: changeButton.frame.maxY + 25.0, width: 34.0, height: 34.0)
             vkButton.setTitle("VK", for: .normal)
         } else {
@@ -114,7 +106,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         //FB button
         let fbButton = UIButton()
         
-        if info[0].value(forKey: "fb_id") as! Int32 != 0 {
+        if (per?.fb_id)! != "0" {
             fbButton.frame = CGRect(x: vkButton.frame.maxX + 6, y: changeButton.frame.maxY + 25.0, width: 34.0, height: 34.0)
             fbButton.setTitle("FB", for: .normal)
         } else {
@@ -162,7 +154,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
     func refresh() {
         print("refresh...")
         flats = []
-        let params = "%5B%7B%22key%22%3A%22id_user%22%2C%22value%22%3A%22\(UserDefaults.standard.value(forKey: "id_user")!)%22%2C%20%22criterion%22%3A%22single%22%7D%5D"
+        let params = "&parameters=%5B%7B%22key%22%3A%22id_user%22%2C%22value%22%3A%22\(UserDefaults.standard.value(forKey: "id_user")!)%22%2C%20%22criterion%22%3A%22single%22%7D%5D"
         get(sorting: "all", parameters: params, amount: 20)
         self.table.reloadData()
         self.refreshControl.endRefreshing()
@@ -265,9 +257,8 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func get(sorting:String,parameters:String,amount:Int8) {
         
-        Alamofire.request("http://6hands.styleru.net/flats/filter?select=\(sorting)&offset=0&amount=\(amount)&parameters=\(parameters)").responseJSON { response in
-            
-            var jsondata = JSON(data:response.data!)
+        api.flatsFilter(offset: 0, amount: Int(amount), parameters: parameters) { (js: Any) in
+            let jsondata = js as! JSON
             let array = jsondata.array
             print(jsondata)
             
@@ -296,10 +287,9 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
                     
                 })
             }
-            
-            
-            //self.flats = self.parseData(JSONdata: response.data!)
+
         }
+        
     }
     
 

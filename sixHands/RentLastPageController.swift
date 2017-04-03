@@ -13,6 +13,7 @@ import CoreLocation
 
 class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     let per = realm.object(ofType: person.self, forPrimaryKey: 0)
+    let api = API()
     let priceField = UITextField()
     let commentsField = UITextView()
     let separator = UIView()
@@ -187,26 +188,21 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
             "20" : "\(RentAddressController.flatToRent.posudomoyka)",
             "19" : "\(RentAddressController.flatToRent.fridge)",
             "18" : "\(RentAddressController.flatToRent.tv)",
-            "29" : "\(RentAddressController.flatToRent.square)",
             "8" : "\(RentAddressController.flatToRent.furniture)",
             "9" : "\(RentAddressController.flatToRent.animals)",
             "12" : "\(RentAddressController.flatToRent.mutualFriends)",
             "14" : "\(RentAddressController.flatToRent.kitchenFurniture)",
-            "15" : "\(RentAddressController.flatToRent.internet)",
-            "30" : "\(priceField.text!)",
-            "31" : "\(RentAddressController.flatToRent.numberOfRoomsInFlat)",
-            "27" : commentsField.text!
+            "15" : "\(RentAddressController.flatToRent.internet)"
         ]
         
-        //convert parameters to array with percent encoding
-        //let symbols = ["%5B", "%7B", "%22", "%3A", "%7D", "%5D"]
-        let symbols = ["[", "{", "\"", ":", "}", "]"]
-        var params = symbols[0]
+        var params = "["
         for (id, value) in param {
-            params += symbols[1] + symbols[2] + "id" + symbols[2] + symbols[3] + symbols[2] + id + symbols[2] + "," + symbols[2] + "value" + symbols[2] + symbols[3] + symbols[2] + value + symbols[2] + symbols[4] + ","
+            if value == "1" {
+                params += id + ","
+            }
         }
         params = String(params.characters.dropLast(1))
-        params += symbols[5]
+        params += "]"
         
         //separate building and street
         let full = RentAddressController.flatToRent.address
@@ -228,8 +224,11 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
             "building" : building,
             "longitude" : "\(RentAddressController.flatToRent.longitude)",
             "latitude" : "\(RentAddressController.flatToRent.latitude)",
-            "parameters" : params,
-            "photo_descriptions" : "[{}]"
+            "price" : "\(priceField.text!)",
+            "square" : "\(RentAddressController.flatToRent.square)",
+            "rooms" : "\(RentAddressController.flatToRent.numberOfRoomsInFlat)",
+            "description" : "\(commentsField.text!)",
+            "options" : params
         ]
         
         var photoDatas = [Data]()
@@ -237,68 +236,33 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
             photoDatas.append(UIImageJPEGRepresentation(photo,1)!)
         }
         
-        upload(photoData: photoDatas, parameters: parameters) { (json, error) in
-            //print(json!)
-            //print(error!)
-        }
-        
-        
+        upload(photoData: photoDatas, parameters: parameters)
         
     }
     
-    func upload(photoData: [Data], parameters: [String : String], with callback: @escaping ((JSON?, Error?) -> Void)) {
+    func upload(photoData: [Data], parameters: [String : String]) {
         
-        let headers:HTTPHeaders = ["Token": UserDefaults.standard.object(forKey:"token") as! String]
-        let urlString = "http://6hands.styleru.net/flats/single"
-        let encoded = urlString.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
-        let myUrl = URL(string: encoded!)
+        api.upload(photoData: photoData, parameters: parameters) { (js: Any) in
+            let jsondata = js as! JSON
+            print("data: \(jsondata)")
+            if (jsondata != JSON.null) {
+                print("finally!")
+                self.performSegue(withIdentifier: "cancelRent", sender: self)
+            } else {
+                print("Something's wrong")
+                
+                //temporary alert
+                let alertController = UIAlertController(title: "Something's wrong", message: "hmmm... 500 Internal Server Error", preferredStyle: UIAlertControllerStyle.alert)
+                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel)
+                {
+                    (result : UIAlertAction) -> Void in
+                }
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
+                
+            }
+        }
         
-        
-        Alamofire.upload(multipartFormData: { (multipart) in
-            
-            for (key, value) in parameters {
-                multipart.append(value.data(using: String.Encoding.utf8)!, withName: key)
-                print("\(key) : \(value)")
-            }
-            
-            var i = 0
-            
-            for data in photoData {
-                multipart.append(data, withName: "photo\(i)", fileName: "photo\(i).jpg", mimeType: "image/jpeg")
-                i += 1
-            }
-            
-        }, to: myUrl!, method: .post, headers: headers, encodingCompletion: { result in
-            
-            switch result {
-            case .failure(let error):
-                callback(nil, error)
-                print(error)
-            case .success(let request, _, _):
-                request.response(completionHandler: { (response) in
-                    let json = JSON(data: response.data!)
-                    callback(json, nil)
-                    print("response: \(response.response!)")
-                    print("data: \(json)")
-                    if (json != JSON.null) {
-                        print("finally!")
-                        self.performSegue(withIdentifier: "cancelRent", sender: self)
-                    } else {
-                        print("Something's wrong")
-                        
-                        //temporary alert
-                        let alertController = UIAlertController(title: "Something's wrong", message: "hmmm... 500 Internal Server Error", preferredStyle: UIAlertControllerStyle.alert)
-                        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel)
-                        {
-                            (result : UIAlertAction) -> Void in
-                        }
-                        alertController.addAction(cancelAction)
-                        self.present(alertController, animated: true, completion: nil)
-                        
-                    }
-                })
-            }
-        })
     }
     
     func addButtonAction() {

@@ -14,15 +14,15 @@ let per = realm.object(ofType: person.self, forPrimaryKey: 0)
 class API{
     
     let domain = "http://dev.6hands.styleru.net"
-   // let headers:HTTPHeaders = ["Token": UserDefaults.standard.object(forKey:"token") as! String]
-    //при первом входе токена нет и будет nil!!!!!!!!!
-    let headers:HTTPHeaders = ["Token": per!.token]
+    var headers:HTTPHeaders = HTTPHeaders()
+    
     func flatsSingle(id:String,completionHandler:@escaping (_ js:Any) ->()){
-    let fullRequest = domain + "/flats/single?id_flat="+id
+    let fullRequest = domain + "/flats/single?id_flat=" + id
+        
         Alamofire.request(fullRequest).responseJSON { response in
         let jsondata = JSON(data:response.data!)
         completionHandler(jsondata)
-    }
+        }
     }
     
     
@@ -42,6 +42,40 @@ class API{
             let jsondata = JSON(data:response.data!)
             completionHandler(jsondata)
         }
+    }
+    
+    func upload(photoData: [Data], parameters: [String : String], completionHandler:@escaping (_ js:Any) ->()){
+        let fullRequest = domain + "/flats/single"
+        let encoded = fullRequest.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
+        let myUrl = URL(string: encoded!)
+        
+        Alamofire.upload(multipartFormData: { (multipart) in
+            
+            for (key, value) in parameters {
+                multipart.append(value.data(using: String.Encoding.utf8)!, withName: key)
+                print("\(key) : \(value)")
+            }
+            
+            var i = 0
+            
+            for data in photoData {
+                multipart.append(data, withName: "photo\(i)", fileName: "photo\(i).jpg", mimeType: "image/jpeg")
+                i += 1
+            }
+            
+        }, to: myUrl!, method: .post, headers: headers, encodingCompletion: { result in
+            
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let request, _, _):
+                request.response(completionHandler: { (response) in
+                    let json = JSON(data: response.data!)
+                    completionHandler(json)
+                })
+            }
+        })
+
     }
     
     func user(){

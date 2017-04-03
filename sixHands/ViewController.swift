@@ -170,9 +170,8 @@ override func didReceiveMemoryWarning() {
                         if let dataFromString = responseString?.data(using: .utf8, allowLossyConversion: false) {
                             var jsondata = JSON(data: dataFromString)
                             let per = person()
-                            //let specificPerson = realm.object(ofType: person.self, forPrimaryKey: 0)
-                            per.id = 0
                             per.token = jsondata["token"].string!
+                            self.api.headers = ["Token": per.token]
                             if jsondata != JSON.null {
                                 print(jsondata)
                                 per.first_name = jsondata["user"]["first_name"].string!
@@ -181,6 +180,9 @@ override func didReceiveMemoryWarning() {
                                 per.phone = jsondata["user"]["phone"].string!
                                 per.avatar_url = jsondata["user"]["avatar"].string!
                                 per.vk_id = jsondata["user"]["social_networks"][0]["id_user"].string!
+                                per.id = Int(jsondata["user"]["id"].string!)!
+                                UserDefaults.standard.set(per.id, forKey: "id_user")
+                                UserDefaults.standard.synchronize()
                                 print("USER_ID:\(jsondata["user"]["social_networks"][0]["id_user"].string)")
                             }
                             let realm1 = try! Realm()

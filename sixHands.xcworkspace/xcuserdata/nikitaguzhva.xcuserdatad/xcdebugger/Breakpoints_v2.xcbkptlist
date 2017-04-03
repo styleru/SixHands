@@ -88,11 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sixHands/RentLastPageController.swift"
-            timestampString = "509028088.572548"
+            timestampString = "512911012.49105"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "textViewDidChange(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -104,11 +104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sixHands/RentLastPageController.swift"
-            timestampString = "509056273.510453"
+            timestampString = "512911924.162774"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "339"
-            endingLineNumber = "339"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
             landmarkName = "snap()"
             landmarkType = "7">
          </BreakpointContent>
@@ -120,28 +120,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sixHands/RentLastPageController.swift"
-            timestampString = "509056273.510453"
+            timestampString = "512911924.162774"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "338"
-            endingLineNumber = "338"
+            startingLineNumber = "304"
+            endingLineNumber = "304"
             landmarkName = "snap()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sixHands/RentLastPageController.swift"
-            timestampString = "509056273.510453"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "259"
-            endingLineNumber = "259"
-            landmarkName = "upload(photoData:parameters:with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -167,13 +151,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "sixHands/ViewController.swift"
-            timestampString = "512038459.611687"
+            filePath = "sixHands/RentLastPageController.swift"
+            timestampString = "512911806.247433"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
-            landmarkName = "vkSdkAccessAuthorizationFinished(with:)"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
+            landmarkName = "continueButtonAction()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

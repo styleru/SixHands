@@ -30,7 +30,7 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //print(realm.configuration.fileURL)
+        print(realm.configuration.fileURL)
         // Do any additional setup after loading the view, typically from a nib.
         VKSDKInstance = VKSdk.initialize(withAppId: "5446345")
         VKSDKInstance!.register(self)
@@ -170,6 +170,16 @@ override func didReceiveMemoryWarning() {
                         if let dataFromString = responseString?.data(using: .utf8, allowLossyConversion: false) {
                             var jsondata = JSON(data: dataFromString)
                             let per = person()
+
+
+                            //let specificPerson = realm.object(ofType: person.self, forPrimaryKey: 0)
+                            //let realm = try! Realm()
+                            
+                            let specificPerson = realm.object(ofType: person.self, forPrimaryKey: 0)
+                            print("JSON:\(jsondata)")
+
+                            per.id = 0
+
                             per.token = jsondata["token"].string!
                             self.api.headers = ["Token": per.token]
                             if jsondata != JSON.null {
@@ -185,9 +195,9 @@ override func didReceiveMemoryWarning() {
                                 UserDefaults.standard.synchronize()
                                 print("USER_ID:\(jsondata["user"]["social_networks"][0]["id_user"].string)")
                             }
-                            let realm1 = try! Realm()
-                            try! realm1.write {
-                                realm1.add(per, update: true)
+                            
+                            try! realm.write {
+                                realm.add(per, update: true)
                             }
 
 

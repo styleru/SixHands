@@ -14,7 +14,17 @@ let per = realm.object(ofType: person.self, forPrimaryKey: 0)
 class API{
     
     let domain = "http://dev.6hands.styleru.net"
+
     var headers:HTTPHeaders = HTTPHeaders()
+
+
+   // let headers:HTTPHeaders = ["Token": UserDefaults.standard.object(forKey:"token") as! String]
+    //при первом входе токена нет и будет nil!!!!!!!!!
+
+   //let headers:HTTPHeaders = ["Token": UserDefaults.standard.object(forKey:"token") as! String]
+
+    // headers:HTTPHeaders = ["Token": per!.token]
+
     
     func flatsSingle(id:String,completionHandler:@escaping (_ js:Any) ->()){
     let fullRequest = domain + "/flats/single?id_flat=" + id
@@ -27,14 +37,18 @@ class API{
     
     
     
+
     func flatsFilter(offset:Int,amount:Int, parameters: String, completionHandler:@escaping (_ js:Any) ->()){
-        let fullRequest = domain + "/flats/filter?select=all&offset=\(offset)&amount=\(amount)\(parameters)"
-        print(fullRequest)
+        let fullRequest = domain + "/flats/filter?select=all&offset=\(offset)&amount=\(amount)"}
+
+    func flatsFilter(offset:Int,amount:Int,completionHandler:@escaping (_ js:Any) ->()){
+        let fullRequest = domain + "/flats/filter?select=all&offset=\(offset)&amount=\(amount)"
+
         Alamofire.request(fullRequest).responseJSON { response in
             let jsondata = JSON(data:response.data!)
             completionHandler(jsondata)
         }
-    }
+        }
     
     func underground(id:String,completionHandler:@escaping (_ js:Any) ->()){
         let fullRequest = domain + "/underground?id_city=\(id)"
@@ -42,7 +56,7 @@ class API{
             let jsondata = JSON(data:response.data!)
             completionHandler(jsondata)
         }
-    }
+        }
     
     func upload(photoData: [Data], parameters: [String : String], completionHandler:@escaping (_ js:Any) ->()){
         let fullRequest = domain + "/flats/single"
@@ -85,4 +99,4 @@ class API{
     func user(){
     }
     
-}
+        }

@@ -34,7 +34,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     override func viewDidLoad() {
-        print(per!.first_name)
+        
         
         update(offset:0,amount: amount)
         print(screenSize.width)
@@ -167,7 +167,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         //END OF CONSTRAINTS
         
         cell.subway.text = "Арбатская"
-        cell.mutualFriends.text = "5 общих друзей"
+        //cell.mutualFriends.text = "5 общих друзей"
         cell.numberOfRooms.text = "\(flats[indexPath.row].numberOfRoomsInFlat)-комн."
         cell.price.text = "\(flats[indexPath.row].flatPrice) ₽"
         cell.avatar.sd_setImage(with: URL(string : flats[indexPath.row].avatarImage))
@@ -227,7 +227,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     
     func update(offset:Int,amount:Int){
     
-        api.flatsFilter(offset: offset, amount: amount, parameters: ""){(js:Any) in
+        api.flatsFilter(offset: offset, amount: amount){(js:Any) in
     let jsondata = js as! JSON
     let array = jsondata.array
     if (array?.count) != nil {
@@ -239,7 +239,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     //flat.flatMutualFriends = "социопат"
     flat.flat_id = jsondata[i]["id"].string!
     flat.imageOfFlat.append(jsondata[i]["photos"][0]["url"].string!)
-    
+    print("PHOTO_URL:\(jsondata[i]["photos"][0]["url"].string!)")
     flat.numberOfRoomsInFlat = jsondata[i]["rooms"].string!
     self.flats.append(flat)
     

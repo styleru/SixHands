@@ -16,7 +16,8 @@ class FlatViewCell: UITableViewCell {
     @IBOutlet weak var flatImage: UIImageView!
     @IBOutlet weak var subway: UILabel!
     @IBOutlet weak var numberOfRooms: UILabel!
-    @IBOutlet weak var mutualFriends: UILabel!
+    
+    @IBOutlet weak var mutualFriends: UIButton!
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var price: UILabel!
     

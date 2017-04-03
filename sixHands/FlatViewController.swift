@@ -19,6 +19,8 @@ let screenSize: CGRect = UIScreen.main.bounds
     var id_underground_line = Int()
     var flat_id = String()
     let api = API()
+    var fullDesc = "AUE"
+    var shortDesc = "HUY"
     @IBOutlet weak var imagesScrollView: UIScrollView!
     @IBOutlet weak var backOutlet: UIButton!
     @IBOutlet weak var mutualFriendsOutlet: UIButton!
@@ -26,9 +28,14 @@ let screenSize: CGRect = UIScreen.main.bounds
     @IBOutlet weak var stairs: UILabel!
     @IBOutlet weak var square: UILabel!
     @IBOutlet weak var numberOfRooms: UILabel!
+    @IBOutlet weak var aboutFlat: UITextView!
     @IBOutlet weak var photoStairs: UIImageView!
     @IBOutlet weak var photoSquare: UIImageView!
     @IBOutlet weak var photoNumberOfRooms: UIImageView!
+    @IBOutlet weak var razdelitel4: UIImageView!
+    @IBOutlet weak var conveniences: UILabel!
+    @IBOutlet weak var about: UILabel!
+    @IBOutlet weak var razdelitel3: UIImageView!
     @IBOutlet weak var razdelitel2: UIImageView!
     @IBOutlet weak var razdelitel1: UIImageView!
     @IBOutlet weak var timeImage: UIImageView!
@@ -42,6 +49,7 @@ let screenSize: CGRect = UIScreen.main.bounds
     @IBOutlet weak var rentOutlet: UIButton!
     @IBOutlet weak var price: UILabel!
     
+    @IBOutlet weak var showAllOutlet: UIButton!
     
     
     override func viewDidLoad() {
@@ -50,6 +58,13 @@ let screenSize: CGRect = UIScreen.main.bounds
         
         api.flatsSingle(id: flat_id){(js:Any) in
             let jsondata = js as! JSON
+            if jsondata["description"] != nil{
+            self.fullDesc = jsondata["description"].string!
+                if self.fullDesc.characters.count<170{
+                self.showAllOutlet.isHidden = true
+                }
+            }
+            
         let time = jsondata["create_date"].string!
         if time != nil{
         self.date.text = try? String(time.characters.dropLast(9))
@@ -60,7 +75,28 @@ let screenSize: CGRect = UIScreen.main.bounds
         if jsondata["rooms"] != nil{self.numberOfRooms.text = jsondata["rooms"].string! + " ком."}else{self.numberOfRooms.text = "-"}
         if jsondata["floor"] != nil{self.stairs.text = jsondata["floor"].string! + "-этаж"}else {self.stairs.text = "-"}
         if jsondata["to_underground"] != nil {self.timeToSubway.text = jsondata["to_underground"].string! + " мин."} else {self.timeToSubway.text = "-"}
-        if jsondata["owner"]["first_name"] != nil {self.mutualFriendsOutlet.setTitle( "Хохяин "+jsondata["owner"]["first_name"].string!+"\n5 общих друзей", for: .normal)}else{self.mutualFriendsOutlet.setTitle("Owner", for: .normal)}
+         print("description:\(self.fullDesc)")
+        self.shortDesc = try! String(self.fullDesc.characters.dropLast(self.fullDesc.characters.count-144))+"..."
+            self.aboutFlat.text = self.shortDesc
+            print("SUKA:\(self.shortDesc)")
+            let seafoamBlue = UIColor(red: 85.0/255.0, green: 197.0/255.0, blue: 183.0/255.0, alpha: 1.0)
+            if jsondata["owner"]["first_name"] != nil {
+                let firstText = "Хозяин "
+                let name = jsondata["owner"]["first_name"].string! + "\n5 "
+                let secondText = "общих друзей ❯"
+                let attrText1 = NSMutableAttributedString(string: firstText)
+                attrText1.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: NSMakeRange(0,attrText1.length))
+                
+                let attrText2 = NSMutableAttributedString(string: name)
+                attrText2.addAttribute(NSForegroundColorAttributeName, value: seafoamBlue, range: NSMakeRange(0,attrText2.length))
+                let attrText3 = NSMutableAttributedString(string: secondText)
+                attrText3.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: NSMakeRange(0,attrText3.length))
+                let attributedText = NSMutableAttributedString()
+                attributedText.append(attrText1)
+                attributedText.append(attrText2)
+                attributedText.append(attrText3)
+
+        self.mutualFriendsOutlet.setAttributedTitle(attributedText, for: .normal)}else{self.mutualFriendsOutlet.setTitle("Owner", for: .normal)}
         if jsondata["owner"]["avatar"] != nil {self.avatar.sd_setImage(with:  URL(string : jsondata["owner"]["avatar"].string!))}
             
             if  let amount = jsondata["photos"].array?.count{
@@ -179,9 +215,23 @@ let screenSize: CGRect = UIScreen.main.bounds
         subwayColor.layer.cornerRadius = subwayColor.frame.size.width / 2
         subwayColor.clipsToBounds = true
         
+        razdelitel3.frame = CGRect(x: mutualFriendsOutlet.frame.minX, y: avatar.frame.midY+screenSize.height * 0.0809, width: screenSize.width*0.88, height: screenSize.height*0.002)
         
+        about.frame = CGRect(x: mutualFriendsOutlet.frame.minX, y: razdelitel3.frame.maxY+screenSize.height*0.02338, width: screenSize.width*0.277, height: screenSize.height*0.017991)
+        if screenSize.width == 375{
+            aboutFlat.frame = CGRect(x: about.frame.minX-5, y: about.frame.maxY+screenSize.height*0.017, width: screenSize.width*0.845333, height: screenSize.height*0.16)}else if screenSize.width == 414{
+        aboutFlat.frame = CGRect(x: about.frame.minX-5, y: about.frame.maxY+screenSize.height*0.017, width: screenSize.width*0.845333, height: screenSize.height*0.165)
+        }
+        razdelitel4.frame = CGRect(x: mutualFriendsOutlet.frame.minX, y: aboutFlat.frame.maxY + screenSize.height*0.02338 , width: screenSize.width*0.88, height: screenSize.height*0.002)
+        conveniences.frame = CGRect(x: mutualFriendsOutlet.frame.minX, y: razdelitel4.frame.maxY+screenSize.height*0.02338, width: screenSize.width*0.277, height: screenSize.height*0.017991)
         
+        if screenSize.width == 375{
+        showAllOutlet.frame = CGRect(x: screenSize.width*0.45, y: aboutFlat.frame.maxY-screenSize.height*0.0325, width: screenSize.width*0.5, height: screenSize.height*0.03)
+        }else if screenSize.width == 414{
+        showAllOutlet.frame = CGRect(x: screenSize.width*0.45, y: aboutFlat.frame.maxY-screenSize.height*0.02398, width: screenSize.width*0.5, height: screenSize.height*0.03)
         
+        }
+       
         super.viewDidLoad()
 
         
@@ -216,6 +266,11 @@ let screenSize: CGRect = UIScreen.main.bounds
         }
     }
 
-
+    @IBAction func showAllButton(_ sender: Any) {
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        aboutFlat.setContentOffset(CGPoint.zero, animated: false)
+    }
    
 }

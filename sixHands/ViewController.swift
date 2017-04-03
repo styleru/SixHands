@@ -171,15 +171,6 @@ override func didReceiveMemoryWarning() {
                             var jsondata = JSON(data: dataFromString)
                             let per = person()
 
-
-                            //let specificPerson = realm.object(ofType: person.self, forPrimaryKey: 0)
-                            //let realm = try! Realm()
-                            
-                            let specificPerson = realm.object(ofType: person.self, forPrimaryKey: 0)
-                            print("JSON:\(jsondata)")
-
-                            per.id = 0
-
                             per.token = jsondata["token"].string!
                             self.api.headers = ["Token": per.token]
                             if jsondata != JSON.null {
@@ -196,8 +187,9 @@ override func didReceiveMemoryWarning() {
                                 print("USER_ID:\(jsondata["user"]["social_networks"][0]["id_user"].string)")
                             }
                             
-                            try! realm.write {
-                                realm.add(per, update: true)
+                            let realm1 = try! Realm()
+                            try! realm1.write {
+                                realm1.add(per, update: true)
                             }
 
 

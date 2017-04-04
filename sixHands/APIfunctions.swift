@@ -28,7 +28,6 @@ class API{
     
     func flatsFilter(offset:Int,amount:Int, parameters: String, completionHandler:@escaping (_ js:Any) ->()){
         let fullRequest = domain + "/flats/filter?select=all&offset=\(offset)&amount=\(amount)\(parameters)"
-        print(fullRequest)
         Alamofire.request(fullRequest).responseJSON { response in
             let jsondata = JSON(data:response.data!)
             completionHandler(jsondata)
@@ -49,7 +48,6 @@ class API{
         let myUrl = URL(string: encoded!)
         
         headers = ["Token" : per!.token]
-        print("headers: \(headers)")
         
         Alamofire.upload(multipartFormData: { (multipart) in
             
@@ -73,7 +71,6 @@ class API{
             case .success(let request, _, _):
                 request.response(completionHandler: { (response) in
                     let json = JSON(data: response.data!)
-                    print("\(response.response!)")
                     completionHandler(json)
                 })
             }

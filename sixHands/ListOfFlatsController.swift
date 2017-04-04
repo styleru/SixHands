@@ -13,16 +13,16 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import Alamofire
 
-class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
     let per = realm.object(ofType: person.self, forPrimaryKey: 0)
     let screenSize: CGRect = UIScreen.main.bounds
     let api = API()
     var flats = [Flat]()
     typealias JSONStandard = [String : AnyObject]
     let refreshControl = UIRefreshControl()
-    //let params = "%5B%7B%22key%22%3A%22id%22%2C%22value%22%3A%22307%22%2C%20%22criterion%22%3A%22single%22%7D%5D"
-    var offsetInc = 2
+    var offsetInc = 10
     let amount = 10
+    var id = String()
     
     @IBOutlet weak var filterOutlet: UIButton!
     @IBOutlet weak var listOfFlats: UILabel!
@@ -35,10 +35,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         
-        
         update(offset:0,amount: amount)
-        print(screenSize.width)
-        print(screenSize.height)
                
         
         //gray bar
@@ -106,11 +103,11 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        /*if indexPath.row == flats.count - 1 {
-            print("reached the bottom cell")
+        
+        if indexPath.row == flats.count - 1 {
             update(offset:offsetInc , amount: amount)
             offsetInc += amount
-        }*/
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -156,12 +153,16 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
         cell.separator.bounds = CGRect(x: 0, y: 0, width: screenSize.width-30, height: 1)
         cell.separator.center = CGPoint(x:cell.bounds.width / 2, y: 2)
+        
         if indexPath.row != 0{
             if #available(iOS 10.0, *) {
                 cell.separator.backgroundColor = UIColor(displayP3Red: 215/255, green: 215/255, blue: 215/255, alpha: 1.0)
             } else {
                 // Fallback on earlier versions
-            }}else {cell.separator.backgroundColor = UIColor.clear}
+            }
+        } else {
+            cell.separator.backgroundColor = UIColor.clear
+        }
         
         
         //END OF CONSTRAINTS
@@ -171,10 +172,12 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         cell.numberOfRooms.text = "\(flats[indexPath.row].numberOfRoomsInFlat)-комн."
         cell.price.text = "\(flats[indexPath.row].flatPrice) ₽"
         cell.avatar.sd_setImage(with: URL(string : flats[indexPath.row].avatarImage))
+        cell.mutualFriends.tag = Int(flats[indexPath.row].flat_id)!
+        cell.mutualFriends.addTarget(self, action: #selector(ListOfFlatsController.mutual(_:)), for: .touchUpInside)
         
-       if flats[indexPath.row].imageOfFlat.isEmpty{
-        }else {
-        cell.flatImage.sd_setImage(with: URL(string :flats[indexPath.row].imageOfFlat[0]))
+        if flats[indexPath.row].imageOfFlat.isEmpty {
+        } else {
+            cell.flatImage.sd_setImage(with: URL(string :flats[indexPath.row].imageOfFlat[0]))
         }
         
         return cell
@@ -183,16 +186,23 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return flats.count
     }
+    
+    func mutual(_ sender: UIButton) {
+        id = "\(sender.tag)"
+        performSegue(withIdentifier: "mutual", sender: self)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "singleFlat"{
             let VC = segue.destination as! FlatViewController
             let indexPath = self.listOfFlatsTableView.indexPathForSelectedRow
             VC.flat_id = flats[(indexPath?.row)!].flat_id
+        } else if segue.identifier == "mutual"{
+            let VC1 = segue.destination as! MutualFriendsViewController
+            VC1.flat_id = id
         }
     }
-    
-    
     
     @IBAction func new(_ sender: UIButton) {
         flats = []
@@ -223,37 +233,36 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         //performSegue(withIdentifier: "", sender: self)
     }
     @IBAction func fromSingleFlat(segue: UIStoryboardSegue) {}
-    
+    @IBAction func fromMutualFriends(segue: UIStoryboardSegue) {}
     
     func update(offset:Int,amount:Int){
     
         api.flatsFilter(offset: offset, amount: amount, parameters: ""){(js:Any) in
-    let jsondata = js as! JSON
-    let array = jsondata.array
-    if (array?.count) != nil {
-    for i in 0..<array!.count{
-    let flat = Flat()
-    flat.avatarImage = jsondata[i]["owner"]["avatar"].string!
-    flat.flatPrice = jsondata[i]["price"].string!
-    //    flat.flatSubway = "Пока нема"
-    //flat.flatMutualFriends = "социопат"
-    flat.flat_id = jsondata[i]["id"].string!
-    flat.imageOfFlat.append(jsondata[i]["photos"][0]["url"].string!)
-    print("PHOTO_URL:\(jsondata[i]["photos"][0]["url"].string!)")
-    flat.numberOfRoomsInFlat = jsondata[i]["rooms"].string!
-    self.flats.append(flat)
+            let jsondata = js as! JSON
+            let array = jsondata.array
+            if (array?.count) != nil {
+                for i in 0..<array!.count{
+                    let flat = Flat()
+                    flat.avatarImage = jsondata[i]["owner"]["avatar"].string!
+                    flat.flatPrice = jsondata[i]["price"].string!
+                    //    flat.flatSubway = "Пока нема"
+                    //flat.flatMutualFriends = "социопат"
+                    flat.flat_id = jsondata[i]["id"].string!
+                    flat.imageOfFlat.append(jsondata[i]["photos"][0]["url"].string!)
+                    flat.numberOfRoomsInFlat = jsondata[i]["rooms"].string!
+                    self.flats.append(flat)
     
+                }
+            }
+            
+            OperationQueue.main.addOperation({()-> Void in
+    
+                self.listOfFlatsTableView.reloadData()
+            })
+    
+        }
     }
-    }
-    OperationQueue.main.addOperation({()-> Void in
-    
-    self.listOfFlatsTableView.reloadData()})
-    
-        }}
 
-    
-    
-    
 }
 
 

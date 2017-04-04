@@ -85,7 +85,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         //VK button
         let vkButton = UIButton()
         
-        if (per?.vk_id)! != "0" {
+        if (per?.vk_id)! != "" {
             vkButton.frame = CGRect(x: 15.0, y: changeButton.frame.maxY + 25.0, width: 34.0, height: 34.0)
             vkButton.setTitle("VK", for: .normal)
         } else {
@@ -106,7 +106,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         //FB button
         let fbButton = UIButton()
         
-        if (per?.fb_id)! != "0" {
+        if (per?.fb_id)! != "" {
             fbButton.frame = CGRect(x: vkButton.frame.maxX + 6, y: changeButton.frame.maxY + 25.0, width: 34.0, height: 34.0)
             fbButton.setTitle("FB", for: .normal)
         } else {

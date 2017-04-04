@@ -184,7 +184,6 @@ override func didReceiveMemoryWarning() {
                                 per.id = Int(jsondata["user"]["id"].string!)!
                                 UserDefaults.standard.set(per.id, forKey: "id_user")
                                 UserDefaults.standard.synchronize()
-                                print("USER_ID:\(jsondata["user"]["social_networks"][0]["id_user"].string)")
                             }
                             
                             let realm1 = try! Realm()

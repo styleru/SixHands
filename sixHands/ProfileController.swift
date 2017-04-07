@@ -57,7 +57,9 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         //profile photo
         let avatar = UIImageView()
         avatar.frame = CGRect(x: screen.maxX - 15.0 - screen.height * 0.09, y: screen.minY + 40.0, width: screen.height * 0.09, height: screen.height * 0.09)
-        avatar.sd_setImage(with: URL(string: (per?.avatar_url)!))
+        print(per?.avatar_url)
+        //avatar.sd_setImage(with: URL(string: (per?.avatar_url)!))
+        
         avatar.layer.masksToBounds = false
         avatar.layer.cornerRadius = avatar.frame.size.width/2
         avatar.clipsToBounds = true

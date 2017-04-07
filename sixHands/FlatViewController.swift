@@ -19,9 +19,12 @@ let screenSize: CGRect = UIScreen.main.bounds
     var id_underground_line = Int()
     var flat_id = String()
     let api = API()
-    var fullDesc = "AUE"
-    var shortDesc = "HUY"
+    var fullDesc = ""
+    var shortDesc = ""
+    let conv = [String:String]()
+    var dif = CGFloat()
     @IBOutlet weak var imagesScrollView: UIScrollView!
+    @IBOutlet weak var convView: UIView!
     @IBOutlet weak var backOutlet: UIButton!
     @IBOutlet weak var mutualFriendsOutlet: UIButton!
     @IBOutlet weak var avatar: UIImageView!
@@ -53,6 +56,7 @@ let screenSize: CGRect = UIScreen.main.bounds
     
     
     override func viewDidLoad() {
+        print(aboutFlat.font?.fontName)
         print(screenSize.width)
         print(screenSize.height)
         
@@ -60,7 +64,7 @@ let screenSize: CGRect = UIScreen.main.bounds
             let jsondata = js as! JSON
             if jsondata["description"] != nil{
             self.fullDesc = jsondata["description"].string!
-                if self.fullDesc.characters.count<170{
+                if self.fullDesc.characters.count<180{
                 self.showAllOutlet.isHidden = true
                 }
             }
@@ -76,9 +80,8 @@ let screenSize: CGRect = UIScreen.main.bounds
         if jsondata["floor"] != nil{self.stairs.text = jsondata["floor"].string! + "-этаж"}else {self.stairs.text = "-"}
         if jsondata["to_underground"] != nil {self.timeToSubway.text = jsondata["to_underground"].string! + " мин."} else {self.timeToSubway.text = "-"}
          print("description:\(self.fullDesc)")
-        self.shortDesc = try! String(self.fullDesc.characters.dropLast(self.fullDesc.characters.count-144))+"..."
-            self.aboutFlat.text = self.shortDesc
-            print("SUKA:\(self.shortDesc)")
+            self.aboutFlat.text = self.fullDesc
+            
             let seafoamBlue = UIColor(red: 85.0/255.0, green: 197.0/255.0, blue: 183.0/255.0, alpha: 1.0)
             if jsondata["owner"]["first_name"] != nil {
                 let firstText = "Хозяин "
@@ -98,7 +101,7 @@ let screenSize: CGRect = UIScreen.main.bounds
 
         self.mutualFriendsOutlet.setAttributedTitle(attributedText, for: .normal)}else{self.mutualFriendsOutlet.setTitle("Owner", for: .normal)}
         if jsondata["owner"]["avatar"] != nil {self.avatar.sd_setImage(with:  URL(string : jsondata["owner"]["avatar"].string!))}
-            
+           
             if  let amount = jsondata["photos"].array?.count{
             for i in 0..<amount{
                 
@@ -112,6 +115,56 @@ let screenSize: CGRect = UIScreen.main.bounds
                     self.imagesScrollView.addSubview(imageView)
                 }}
             }
+            
+            //УДОБСТВА
+            
+            if let optionsArr = jsondata["options"].array{
+                let options = jsondata["options"]
+                for i in 0..<optionsArr.count{
+                var image = UIImageView()
+                let label = UILabel()
+                let j = CGFloat(i)
+                image.contentMode = .scaleAspectFill
+                image.frame = CGRect(x:self.razdelitel3.frame.minX, y: self.screenSize.height*0.022*(1+4*j) , width: self.screenSize.width*0.08, height: self.screenSize.width*0.08)
+               
+                label.frame = CGRect(x: image.frame.maxX+self.screenSize.width*0.0533, y: image.frame.minY, width: self.screenSize.width/2, height: self.screenSize.width*0.08)
+                
+                label.textAlignment = .left
+                label.textColor = UIColor(red: 62/255, green: 50/255, blue: 80/255, alpha: 1.0)
+                label.font = UIFont(name: "SFUIText-Light", size: 16)
+                label.text = "PIZDddd"
+                //image.backgroundColor = UIColor.black
+                image.alpha = 1.0
+                    switch options[i]{
+                    case "23": image.image = #imageLiteral(resourceName: "Fan Head_6c6c6c_100")
+                        label.text = "Кондиционер"
+                    case "9": image.image = #imageLiteral(resourceName: "pawPrint")
+                    label.text = "Можно с животными"
+                    case "15": image.image = #imageLiteral(resourceName: "Wi-Fi_6c6c6c_100")
+                    label.text = "Интернет"
+                    case "18": image.image = #imageLiteral(resourceName: "TV_6c6c6c_100")
+                    label.text = "Телевизор"
+                    case "19": image.image = #imageLiteral(resourceName: "snow")
+                    label.text = "Холодильник"
+                    case "20": image.image = #imageLiteral(resourceName: "Dishwasher_6c6c6c_100")
+                    label.text = "Посудомоечная машина"
+                    case "21": image.image = #imageLiteral(resourceName: "Washing Machine_6c6c6c_100")
+                    label.text = "Стиральная машина"
+                    case "24": image.image = #imageLiteral(resourceName: "shape1")
+                    label.text = "Парковочное место"
+
+                    default : image.backgroundColor = UIColor.gray }
+                
+                self.convView.addSubview(image)
+                self.convView.addSubview(label)
+                self.scrollView.contentSize.height+=self.screenSize.height*0.022*4
+                self.convView.frame.size.height+=self.screenSize.height*0.022*4
+                }}
+            
+            
+            
+            
+            
             if let id_underground = jsondata["id_underground"].string{
                 self.api.underground(id: id_underground){(js:Any) in
                 let jsondata = js as! JSON
@@ -222,15 +275,11 @@ let screenSize: CGRect = UIScreen.main.bounds
             aboutFlat.frame = CGRect(x: about.frame.minX-5, y: about.frame.maxY+screenSize.height*0.017, width: screenSize.width*0.845333, height: screenSize.height*0.16)}else if screenSize.width == 414{
         aboutFlat.frame = CGRect(x: about.frame.minX-5, y: about.frame.maxY+screenSize.height*0.017, width: screenSize.width*0.845333, height: screenSize.height*0.165)
         }
-        razdelitel4.frame = CGRect(x: mutualFriendsOutlet.frame.minX, y: aboutFlat.frame.maxY + screenSize.height*0.02338 , width: screenSize.width*0.88, height: screenSize.height*0.002)
+        showAllOutlet.frame = CGRect(x: razdelitel3.frame.minX, y: aboutFlat.frame.maxY, width: screenSize.width*0.5, height: screenSize.height*0.02)
+        razdelitel4.frame = CGRect(x: mutualFriendsOutlet.frame.minX, y: showAllOutlet.frame.maxY + screenSize.height*0.02338 , width: screenSize.width*0.88, height: screenSize.height*0.002)
         conveniences.frame = CGRect(x: mutualFriendsOutlet.frame.minX, y: razdelitel4.frame.maxY+screenSize.height*0.02338, width: screenSize.width*0.277, height: screenSize.height*0.017991)
+         convView.frame = CGRect(x: 0, y: conveniences.frame.maxY, width: screenSize.width, height: screenSize.height*0.022*0)
         
-        if screenSize.width == 375{
-        showAllOutlet.frame = CGRect(x: screenSize.width*0.45, y: aboutFlat.frame.maxY-screenSize.height*0.0325, width: screenSize.width*0.5, height: screenSize.height*0.03)
-        }else if screenSize.width == 414{
-        showAllOutlet.frame = CGRect(x: screenSize.width*0.45, y: aboutFlat.frame.maxY-screenSize.height*0.02398, width: screenSize.width*0.5, height: screenSize.height*0.03)
-        
-        }
        
         super.viewDidLoad()
 
@@ -267,6 +316,40 @@ let screenSize: CGRect = UIScreen.main.bounds
     }
 
     @IBAction func showAllButton(_ sender: Any) {
+        print("kek")
+        if screenSize.width == 375{
+            dif = aboutFlat.contentSize.height-screenSize.height*0.16
+            
+        }else if screenSize.width == 414{
+            
+            dif = aboutFlat.contentSize.height-screenSize.height*0.165
+        }
+        if showAllOutlet.title(for: .normal) == "показать полностью"{
+            
+            aboutFlat.frame.size.height += dif
+        showAllOutlet.frame = CGRect(x: showAllOutlet.frame.minX, y: showAllOutlet.frame.minY+dif, width: showAllOutlet.frame.width, height: showAllOutlet.frame.height)
+        showAllOutlet.setTitle("скрыть", for: .normal)
+        scrollView.contentSize.height += dif
+        razdelitel4.frame = CGRect(x:razdelitel4.frame.minX , y: razdelitel4.frame.minY+dif, width: razdelitel4.frame.width, height: razdelitel4.frame.height)
+        conveniences.frame = CGRect(x: conveniences.frame.minX, y: conveniences.frame.minY+dif, width: conveniences.frame.width, height: conveniences.frame.height)
+        convView.frame = CGRect(x: convView.frame.minX, y: convView.frame.minY+dif, width: convView.frame.width, height: convView.frame.height)
+                //print(dif)
+                }
+                else {
+            
+            
+            print(dif)
+        //aboutFlat.frame.size.height-=dif
+            aboutFlat.frame = CGRect(x: aboutFlat.frame.minX, y: aboutFlat.frame.minY, width: aboutFlat.frame.width, height: aboutFlat.frame.height-dif)
+        showAllOutlet.frame = CGRect(x: showAllOutlet.frame.minX, y: showAllOutlet.frame.minY-dif, width: showAllOutlet.frame.width, height: showAllOutlet.frame.height)
+        showAllOutlet.setTitle("показать полностью", for: .normal)
+        scrollView.contentSize.height -= dif
+         razdelitel4.frame = CGRect(x:razdelitel4.frame.minX , y: razdelitel4.frame.minY-dif, width: razdelitel4.frame.width, height: razdelitel4.frame.height)
+        conveniences.frame = CGRect(x: conveniences.frame.minX, y: conveniences.frame.minY-dif, width: conveniences.frame.width, height: conveniences.frame.height)
+        convView.frame = CGRect(x: convView.frame.minX, y: convView.frame.minY-dif, width: convView.frame.width, height: convView.frame.height)
+        }
+       
+        
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

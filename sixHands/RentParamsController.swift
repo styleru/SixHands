@@ -23,8 +23,8 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UITableViewDe
         //view bounds
         let screen = self.view.frame
         
-        params = ["Холодильник", "Интернет", "Телевизор", "Парковка", "Кондиционер", "Стиральная машина", "Посудомоечная машина", "Мебель", "Животные", "Совместная аренда", "Кухонная мебель"]
-        paramsValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        params = ["Холодильник", "Интернет", "Телевизор", "Парковка", "Кондиционер", "Стиральная машина", "Посудомоечная машина", "Животные"]
+        paramsValues = [0, 0, 0, 0, 0, 0, 0, 0]
         
         //gray bar
         let grayBar = UIView()

@@ -10,10 +10,8 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-
 class FlatViewController: UIViewController {
 let screenSize: CGRect = UIScreen.main.bounds
-   let per = realm.object(ofType: person.self, forPrimaryKey: 0)
     var mas = [String]()
     var id_underground = Int()
     var id_underground_line = Int()

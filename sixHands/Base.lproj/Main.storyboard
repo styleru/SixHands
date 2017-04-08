@@ -570,7 +570,7 @@
                         <viewControllerLayoutGuide type="bottom" id="8Kf-He-hd7"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bz4-Ti-izc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Общие друзья" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0DL-5f-Fdo">
@@ -620,7 +620,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Jt-fR-XNd">
-                                <rect key="frame" x="27" y="20" width="9" height="16"/>
+                                <rect key="frame" x="22" y="15" width="17" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="18"/>
                             </button>
@@ -638,7 +638,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zt1-5M-5fP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="tvc-cq-5E0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-2890.4000000000001" y="2860.1199400299852"/>
+            <point key="canvasLocation" x="-2890.4000000000001" y="2859.6701649175416"/>
         </scene>
         <!--Rent Params Controller-->
         <scene sceneID="C3N-7D-C3d">
@@ -765,7 +765,7 @@
         <image name="stockSnap02FAEBOQ2G" width="960" height="1704"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KDP-i7-wSB"/>
+        <segue reference="ow1-io-7hw"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

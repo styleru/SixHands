@@ -9,7 +9,6 @@
 import UIKit
 
 class RentParamsController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
-    let per = realm.object(ofType: person.self, forPrimaryKey: 0)
     let roomsField = UITextField()
     let squareField = UITextField()
     let table = UITableView()

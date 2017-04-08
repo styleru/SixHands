@@ -10,7 +10,6 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-let per = realm.object(ofType: person.self, forPrimaryKey: 0)
 class API{
     
     let domain = "http://dev.6hands.styleru.net"
@@ -47,7 +46,7 @@ class API{
         let encoded = fullRequest.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
         let myUrl = URL(string: encoded!)
         
-        headers = ["Token" : per!.token]
+        //headers = ["Token" : per!.token]
         
         Alamofire.upload(multipartFormData: { (multipart) in
             

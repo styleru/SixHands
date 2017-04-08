@@ -12,10 +12,10 @@ import FBSDKLoginKit
 import CoreData
 import Alamofire
 import SwiftyJSON
-
+import RealmSwift
 
 class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    let per = realm.object(ofType: person.self, forPrimaryKey: 0)
+    let realm = try! Realm()
     var flats = [Flat]()
     let api = API()
     typealias JSONStandard = [String : AnyObject]
@@ -24,7 +24,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let per = realm.object(ofType: person.self, forPrimaryKey: 1)
         //parameters for request & request
         let params = "&parameters=%5B%7B%22key%22%3A%22id_user%22%2C%22value%22%3A%22\(UserDefaults.standard.value(forKey: "id_user")!))%22%2C%20%22criterion%22%3A%22single%22%7D%5D"
         
@@ -57,8 +57,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         //profile photo
         let avatar = UIImageView()
         avatar.frame = CGRect(x: screen.maxX - 15.0 - screen.height * 0.09, y: screen.minY + 40.0, width: screen.height * 0.09, height: screen.height * 0.09)
-        print(per?.avatar_url)
-        //avatar.sd_setImage(with: URL(string: (per?.avatar_url)!))
+        avatar.sd_setImage(with: URL(string: (per?.avatar_url)!))
         
         avatar.layer.masksToBounds = false
         avatar.layer.cornerRadius = avatar.frame.size.width/2

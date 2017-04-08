@@ -14,7 +14,6 @@ import FBSDKLoginKit
 import Alamofire
 
 class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
-    let per = realm.object(ofType: person.self, forPrimaryKey: 0)
     let screenSize: CGRect = UIScreen.main.bounds
     let api = API()
     var flats = [Flat]()

@@ -10,7 +10,8 @@ import Foundation
 import RealmSwift
 
 class person: Object {
-    dynamic var id = 0
+    dynamic var id = 1
+    dynamic var user_id = 0
     dynamic var last_name = ""
     dynamic var first_name = ""
     dynamic var vk_id = ""

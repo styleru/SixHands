@@ -11,6 +11,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import Alamofire
 import SwiftyJSON
+import RealmSwift
 
 public func FBLogin(){
     let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
@@ -73,12 +74,17 @@ func getFBUserData(token:String,withcompletionHandler:(_ success:Bool) ->())
                         per.phone = jsondata["user"]["phone"].string!
                         per.avatar_url = jsondata["user"]["avatar"].string!
                         per.fb_id = jsondata["user"]["social_networks"][0]["id_user"].string!
-                            per.id = Int(jsondata["user"]["id"].string!)!
-                            UserDefaults.standard.set(per.id, forKey: "id_user")
+                            per.user_id = Int(jsondata["user"]["id"].string!)!
+                            UserDefaults.standard.set(per.user_id, forKey: "id_user")
                             UserDefaults.standard.synchronize()
                             print("USER_ID:\(jsondata["user"]["social_networks"][0]["id_user"].string)")}
-                        try! realm.write {
-                            realm.add(per, update: true)
+                    DispatchQueue(label: "background").async {
+                        autoreleasepool {
+                            let realm = try! Realm()
+                            try! realm.write {
+                                realm.add(per, update: true)
+                            }
+                        }
                     }
                     }
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)

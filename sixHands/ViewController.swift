@@ -14,7 +14,6 @@ import RealmSwift
 
 @available(iOS 10.0, *)
 class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
-    let per = realm.object(ofType: person.self, forPrimaryKey: 0)
     let screenSize: CGRect = UIScreen.main.bounds
     let api = API()
     @IBOutlet weak var terms: UIButton!
@@ -30,7 +29,6 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(realm.configuration.fileURL)
         // Do any additional setup after loading the view, typically from a nib.
         VKSDKInstance = VKSdk.initialize(withAppId: "5446345")
         VKSDKInstance!.register(self)
@@ -181,14 +179,18 @@ override func didReceiveMemoryWarning() {
                                 per.phone = jsondata["user"]["phone"].string!
                                 per.avatar_url = jsondata["user"]["avatar"].string!
                                 per.vk_id = jsondata["user"]["social_networks"][0]["id_user"].string!
-                                per.id = Int(jsondata["user"]["id"].string!)!
-                                UserDefaults.standard.set(per.id, forKey: "id_user")
+                                per.user_id = Int(jsondata["user"]["id"].string!)!
+                                UserDefaults.standard.set(per.user_id, forKey: "id_user")
                                 UserDefaults.standard.synchronize()
                             }
                             
-                            let realm1 = try! Realm()
-                            try! realm1.write {
-                                realm1.add(per, update: true)
+                            DispatchQueue(label: "background").async {
+                                autoreleasepool {
+                                    let realm = try! Realm()
+                                    try! realm.write {
+                                        realm.add(per, update: true)
+                                    }
+                                }
                             }
 
 

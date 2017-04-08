@@ -15,6 +15,7 @@ class MutualFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     var flat_id = String()
     var friends = [JSON]()
     let api = API()
+    var segue = String()
     
     @IBOutlet weak var back: UIButton!
     @IBOutlet weak var mutualFriendsTableView: UITableView!
@@ -28,6 +29,7 @@ class MutualFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         
         mutualFriendsTableView.separatorStyle = .none
         mutualFriendsTableView.rowHeight = screenSize.height * 0.4
+        back.addTarget(self, action: #selector(MutualFriendsViewController.backAction), for: .touchUpInside)
         
         api.flatsSingle(id: flat_id){(js:Any) in
             let jsondata = js as! JSON
@@ -36,6 +38,14 @@ class MutualFriendsViewController: UIViewController, UITableViewDelegate, UITabl
                 print("friends: \(self.friends)")
                 self.mutualFriendsTableView.reloadData()
             }
+        }
+    }
+    
+    func backAction() {
+        if segue == "flat" {
+            performSegue(withIdentifier: "toFlat", sender: self)
+        } else {
+            performSegue(withIdentifier: "toList", sender: self)
         }
     }
 

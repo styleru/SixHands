@@ -290,6 +290,7 @@ let screenSize: CGRect = UIScreen.main.bounds
         super.didReceiveMemoryWarning()
         
     }
+    
     func getSubway(underground_id:Int, city_id:String){
         Alamofire.request("http://6hands.styleru.net/underground?id_city=\(city_id)").responseJSON { response in
             var jsondata = JSON(data:response.data!)
@@ -354,6 +355,17 @@ let screenSize: CGRect = UIScreen.main.bounds
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         aboutFlat.setContentOffset(CGPoint.zero, animated: false)
+    }
+    
+    @IBAction func fromMutual(segue: UIStoryboardSegue) {}
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "toMutual"{
+            let VC = segue.destination as! MutualFriendsViewController
+            VC.segue = "flat"
+            VC.flat_id = flat_id
+        }
     }
    
 }

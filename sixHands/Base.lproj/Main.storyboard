@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -365,6 +365,9 @@
                                                 <state key="normal" title="Хозяин Райан 5 общих друзей">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="Vrl-09-h3Y" kind="show" identifier="toMutual" id="ow1-io-7hw"/>
+                                                </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iwc-ts-j8H">
                                                 <rect key="frame" x="288" y="531" width="65" height="65"/>
@@ -620,9 +623,6 @@
                                 <rect key="frame" x="27" y="20" width="9" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="18"/>
-                                <connections>
-                                    <segue destination="tvc-cq-5E0" kind="unwind" unwindAction="fromMutualFriendsWithSegue:" id="mY5-ZI-Bru"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -631,6 +631,8 @@
                         <outlet property="back" destination="8Jt-fR-XNd" id="e32-MO-gkw"/>
                         <outlet property="mutualFriends" destination="0DL-5f-Fdo" id="TcR-Jo-iQw"/>
                         <outlet property="mutualFriendsTableView" destination="mtC-z3-3gh" id="6J5-d7-vII"/>
+                        <segue destination="tvc-cq-5E0" kind="unwind" identifier="toFlat" unwindAction="fromMutualWithSegue:" id="WTz-cz-Q4d"/>
+                        <segue destination="tvc-cq-5E0" kind="unwind" identifier="toList" unwindAction="fromMutualFriendsWithSegue:" id="GLZ-of-5ly"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zt1-5M-5fP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -762,5 +764,8 @@
         <image name="Stairs Up_000000_100" width="100" height="100"/>
         <image name="stockSnap02FAEBOQ2G" width="960" height="1704"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="KDP-i7-wSB"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

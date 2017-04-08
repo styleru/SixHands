@@ -201,6 +201,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         } else if segue.identifier == "mutual"{
             let VC1 = segue.destination as! MutualFriendsViewController
             VC1.flat_id = id
+            VC1.segue = "list"
         }
     }
     

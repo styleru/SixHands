@@ -197,6 +197,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
             let VC = segue.destination as! FlatViewController
             let indexPath = self.listOfFlatsTableView.indexPathForSelectedRow
             VC.flat_id = flats[(indexPath?.row)!].flat_id
+            VC.segue = "list"
         } else if segue.identifier == "mutual"{
             let VC1 = segue.destination as! MutualFriendsViewController
             VC1.flat_id = id

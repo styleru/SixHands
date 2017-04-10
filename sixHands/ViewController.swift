@@ -28,7 +28,6 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
-        motion(toView: image, magnitude: -10)
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         VKSDKInstance = VKSdk.initialize(withAppId: "5446345")
@@ -38,7 +37,10 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
         device = "iphone"
         phone = "+70000000"
         
-        image.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height)
+        image.frame = CGRect(x: -screenSize.width * 0.05, y: -screenSize.height * 0.05, width: screenSize.width * 1.1, height: screenSize.height * 1.1)
+        motion(toView: image, magnitude: 20)
+        motion(toView: fbOutlet, magnitude: -10)
+        motion(toView: vkOutlet, magnitude: -10)
         vkOutlet.frame = CGRect(x: 0, y:0, width: screenSize.width*0.8125, height: screenSize.height*0.0845)
         vkOutlet.center = CGPoint(x: screenSize.width/2, y: screenSize.height*0.797)
         fbOutlet.frame = CGRect(x: 0, y:0, width: screenSize.width*0.8125, height: screenSize.height*0.0845)
@@ -231,10 +233,10 @@ override func didReceiveMemoryWarning() {
     func vkSdkUserAuthorizationFailed() {
     }
     func motion(toView view:UIView,magnitude: Float){
-        let xMotion = UIInterpolatingMotionEffect(keyPath: "content.x", type: .tiltAlongHorizontalAxis)
+        let xMotion = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
         xMotion.minimumRelativeValue = -magnitude
         xMotion.maximumRelativeValue = magnitude
-        let yMotion = UIInterpolatingMotionEffect(keyPath: "content.y", type: .tiltAlongVerticalAxis)
+        let yMotion = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
         yMotion.minimumRelativeValue = -magnitude
         yMotion.maximumRelativeValue = magnitude
         let group = UIMotionEffectGroup()

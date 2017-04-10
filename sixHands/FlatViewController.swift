@@ -16,6 +16,7 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
     var id_underground = Int()
     var id_underground_line = Int()
     var flat_id = String()
+    var segue = String()
     let api = API()
     var fullDesc = ""
     var shortDesc = ""
@@ -65,6 +66,14 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
         print(aboutFlat.font?.fontName)
         print(screenSize.width)
         print(screenSize.height)
+        
+        backOutlet.addTarget(self, action: #selector(FlatViewController.backAction), for: .touchUpInside)
+        
+        if segue == "list" {
+            rentOutlet.setTitle("Снять квартиру", for: .normal)
+        } else {
+            rentOutlet.setTitle("Редактировать квартиру", for: .normal)
+        }
         
         api.flatsSingle(id: flat_id){(js:Any) in
             let jsondata = js as! JSON
@@ -326,9 +335,6 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
         super.didReceiveMemoryWarning()
         
     }
-    
-    
-    
     //Falling menu
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //print(scrollView.contentOffset.y
@@ -380,7 +386,13 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
         
     }
     
-    
+    func backAction() {
+        if segue == "profile" {
+            performSegue(withIdentifier: "unwindToProfile", sender: self)
+        } else {
+            performSegue(withIdentifier: "unwindToList", sender: self)
+        }
+    }
     
     func getSubway(underground_id:Int, city_id:String){
         Alamofire.request("http://6hands.styleru.net/underground?id_city=\(city_id)").responseJSON { response in

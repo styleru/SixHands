@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bxM-4z-c0h">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="No2-mG-RJa">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -104,6 +104,28 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="313.49325337331339"/>
+        </scene>
+        <!--Entry-->
+        <scene sceneID="Y4q-Ew-u8y">
+            <objects>
+                <viewController id="No2-mG-RJa" customClass="Entry" customModule="sixHands" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="s8U-el-fNm"/>
+                        <viewControllerLayoutGuide type="bottom" id="1OL-mD-4CD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ViR-ST-RKk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="showAuth" id="c25-n2-lkC"/>
+                        <segue destination="bxM-4z-c0h" kind="show" identifier="enter" id="ATY-tg-wpF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QYh-IK-qAo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137" y="-497"/>
         </scene>
         <!--Список-->
         <scene sceneID="AjW-0Q-ZoI">
@@ -477,9 +499,6 @@
                                 <rect key="frame" x="139" y="452" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Back_ffffff_100"/>
-                                <connections>
-                                    <segue destination="zDr-8L-m3u" kind="unwind" unwindAction="fromSingleFlatWithSegue:" id="yFN-3J-ZDt"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -527,6 +546,8 @@
                         <outlet property="timeImage" destination="4ya-0X-7iY" id="mTo-82-Jzx"/>
                         <outlet property="timeToSubway" destination="d1V-6Q-XFC" id="wKu-5p-fS1"/>
                         <outlet property="zatemnenie2" destination="zbI-ti-bWT" id="BD0-K9-UnH"/>
+                        <segue destination="zDr-8L-m3u" kind="unwind" identifier="unwindToProfile" unwindAction="fromSingleFlatToProfileWithSegue:" id="HSi-g4-jEc"/>
+                        <segue destination="zDr-8L-m3u" kind="unwind" identifier="unwindToList" unwindAction="fromSingleFlatWithSegue:" id="gvC-Uz-D5q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iVJ-pb-US6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -552,6 +573,8 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="QEQ-eJ-3Xo" kind="show" identifier="rent" id="w72-Bw-mhI"/>
+                        <segue destination="NKU-Jd-hfY" kind="show" identifier="showFlat" id="wRR-th-zQh"/>
+                        <segue destination="z1O-OS-Z82" kind="show" identifier="editFlat" id="iZ2-wk-Kgk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AjP-Ss-CM5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -580,6 +603,28 @@
                 <exit id="JjA-I2-mHM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1430" y="2826"/>
+        </scene>
+        <!--Edit Flat Controller-->
+        <scene sceneID="W3C-El-O0c">
+            <objects>
+                <viewController id="z1O-OS-Z82" customClass="EditFlatController" customModule="sixHands" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mKY-uz-on2"/>
+                        <viewControllerLayoutGuide type="bottom" id="J4o-yJ-TNC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Rew-zo-3uh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="ySX-fR-Qwh" kind="unwind" identifier="backToProfile" unwindAction="fromEditToProfileWithSegue:" id="qTF-oC-Vti"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KQl-FI-0zu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ySX-fR-Qwh" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2399" y="2826"/>
         </scene>
         <!--Mutual Friends View Controller-->
         <scene sceneID="LQ8-Dk-W6J">
@@ -786,6 +831,8 @@
         <image name="stockSnap02FAEBOQ2G" width="960" height="1704"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="ATY-tg-wpF"/>
+        <segue reference="wRR-th-zQh"/>
         <segue reference="ow1-io-7hw"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

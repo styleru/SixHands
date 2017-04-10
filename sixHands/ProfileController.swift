@@ -21,6 +21,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
     typealias JSONStandard = [String : AnyObject]
     let table = UITableView()
     let refreshControl = UIRefreshControl()
+    var id = "0"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -152,6 +153,13 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if let indexPath = self.table.indexPathForSelectedRow
+        {
+            self.table.deselectRow(at: indexPath, animated: true)
+        }
+    }
+    
     func refresh() {
         print("refresh...")
         flats = []
@@ -245,10 +253,42 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.new.frame = CGRect(x: cell.views.frame.maxX + 11.0, y: cell.subwayLabel.frame.maxY + screen.height * 0.009, width: screen.height * 0.123, height: screen.height * 0.026)
         cell.new.adjustsFontSizeToFitWidth = true
         
+        //edit button
+        let size = screen.width * 0.09
+        cell.edit.frame = CGRect(x: screen.width - 15.0 - size, y: cell.flat.frame.maxY + screen.height * 0.009, width: size, height: size)
+        cell.edit.setImage(#imageLiteral(resourceName: "Edit"), for: .normal)
+        cell.edit.tag = Int(flats[indexPath.row].flat_id)!
+        cell.edit.addTarget(self, action: #selector(ProfileController.edit(_:)), for: .touchUpInside)
+        
         cell.switchButton.isHidden = true
         
         
         return cell
+    }
+    
+    func edit(_ sender: UIButton) {
+        id = "\(sender.tag)"
+        performSegue(withIdentifier: "editFlat", sender: self)
+    }
+    
+    @IBAction func fromSingleFlatToProfile(segue: UIStoryboardSegue) {}
+    @IBAction func fromEditToProfile(segue: UIStoryboardSegue) {}
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showFlat", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showFlat" {
+            let VC = segue.destination as! FlatViewController
+            let indexPath = self.table.indexPathForSelectedRow
+            VC.flat_id = flats[(indexPath?.row)!].flat_id
+            VC.segue = "profile"
+        } else if segue.identifier == "editFlat" {
+            let VC1 = segue.destination as! EditFlatController
+            VC1.flat_id = id
+            VC1.segue = "profile"
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -278,6 +318,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
                     flat.numberOfRoomsInFlat = jsondata[i]["rooms"].string!
                     flat.views = "65"
                     flat.newView = "12"
+                    flat.flat_id = jsondata[i]["id"].string!
                     self.flats.append(flat)
                     
                 }

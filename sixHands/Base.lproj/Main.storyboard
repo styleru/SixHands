@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -268,6 +268,18 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7mp-uP-8fI">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="951"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAH-m7-bEw">
+                                        <rect key="frame" x="106" y="460" width="162" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                        <state key="normal" title="показать полностью">
+                                            <color key="titleColor" red="0.33333333333333331" green="0.77254901960784317" blue="0.71764705882352942" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showAllButton:" destination="NKU-Jd-hfY" eventType="touchUpInside" id="KhO-r1-pyV"/>
+                                        </connections>
+                                    </button>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hu2-pe-rF2">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="918"/>
                                         <subviews>
@@ -418,22 +430,14 @@
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAH-m7-bEw">
-                                                <rect key="frame" x="177" y="743" width="162" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                <state key="normal" title="показать полностью">
-                                                    <color key="titleColor" red="0.33333333333333331" green="0.77254901960784317" blue="0.71764705882352942" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="showAllButton:" destination="NKU-Jd-hfY" eventType="touchUpInside" id="KhO-r1-pyV"/>
-                                                </connections>
-                                            </button>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cE6-Vw-Lwl">
                                                 <rect key="frame" x="56" y="793" width="240" height="128"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zbI-ti-bWT">
+                                                <rect key="frame" x="67" y="395" width="240" height="128"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -455,6 +459,14 @@
                                 <color key="backgroundColor" red="0.33333333333333331" green="0.77254901960784317" blue="0.71764705882352942" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Снять квартиру"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BP0-nM-uMs">
+                                <rect key="frame" x="175" y="492" width="14" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="forma1"/>
+                                <connections>
+                                    <action selector="favouriteAction:" destination="NKU-Jd-hfY" eventType="touchUpInside" id="YXP-kU-cQq"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="akA-OU-BNS">
                                 <rect key="frame" x="139" y="452" width="35" height="35"/>
@@ -486,6 +498,7 @@
                         <outlet property="convView" destination="cE6-Vw-Lwl" id="3xS-vC-T4r"/>
                         <outlet property="conveniences" destination="yF9-qe-iSD" id="G9s-n8-OTP"/>
                         <outlet property="date" destination="uhV-Zb-akj" id="dcl-uE-uDH"/>
+                        <outlet property="favourite" destination="BP0-nM-uMs" id="XDk-yF-jqT"/>
                         <outlet property="imagesScrollView" destination="hEd-Ak-DYH" id="GRf-RG-daZ"/>
                         <outlet property="mutualFriendsOutlet" destination="bEZ-TM-VHl" id="UUU-y1-goG"/>
                         <outlet property="numberOfRooms" destination="PPk-M9-g0N" id="fnn-QC-JGx"/>
@@ -507,6 +520,7 @@
                         <outlet property="time" destination="hLS-LJ-uJy" id="kMC-Rq-HJb"/>
                         <outlet property="timeImage" destination="4ya-0X-7iY" id="mTo-82-Jzx"/>
                         <outlet property="timeToSubway" destination="d1V-6Q-XFC" id="wKu-5p-fS1"/>
+                        <outlet property="zatemnenie2" destination="zbI-ti-bWT" id="BD0-K9-UnH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iVJ-pb-US6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -762,6 +776,7 @@
         <image name="Map" width="24" height="24"/>
         <image name="Profile" width="24" height="24"/>
         <image name="Stairs Up_000000_100" width="100" height="100"/>
+        <image name="forma1" width="14" height="20"/>
         <image name="stockSnap02FAEBOQ2G" width="960" height="1704"/>
     </resources>
     <inferredMetricsTieBreakers>

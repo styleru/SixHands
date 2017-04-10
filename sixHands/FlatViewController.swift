@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class FlatViewController: UIViewController {
+class FlatViewController: UIViewController,UIScrollViewDelegate{
 let screenSize: CGRect = UIScreen.main.bounds
     var mas = [String]()
     var id_underground = Int()
@@ -19,10 +19,14 @@ let screenSize: CGRect = UIScreen.main.bounds
     let api = API()
     var fullDesc = ""
     var shortDesc = ""
+    var check = 1
     let conv = [String:String]()
     var dif = CGFloat()
     @IBOutlet weak var imagesScrollView: UIScrollView!
     @IBOutlet weak var convView: UIView!
+    
+    @IBOutlet weak var favourite: UIButton!
+    @IBOutlet weak var zatemnenie2: UIView!
     @IBOutlet weak var backOutlet: UIButton!
     @IBOutlet weak var mutualFriendsOutlet: UIButton!
     @IBOutlet weak var avatar: UIImageView!
@@ -54,6 +58,7 @@ let screenSize: CGRect = UIScreen.main.bounds
     
     
     override func viewDidLoad() {
+        scrollView.delegate = self
         print(aboutFlat.font?.fontName)
         print(screenSize.width)
         print(screenSize.height)
@@ -258,13 +263,15 @@ let screenSize: CGRect = UIScreen.main.bounds
         mutualFriendsOutlet.center = CGPoint(x: screenSize.width * 0.26666, y: razdelitel2.frame.maxY + screenSize.height * 0.0809)
         price.bounds = CGRect(x: 0, y: 0, width: screenSize.width/3 , height: screenSize.height * 0.06 )
         price.center = CGPoint(x: screenSize.width-price.bounds.width/2 , y:screenSize.height*0.29 + price.bounds.height/2)
-
+        
         avatar.layer.masksToBounds = false
         avatar.layer.cornerRadius = avatar.frame.size.width / 2
         avatar.clipsToBounds = true
         subwayColor.layer.masksToBounds = false
         subwayColor.layer.cornerRadius = subwayColor.frame.size.width / 2
         subwayColor.clipsToBounds = true
+        favourite.bounds = CGRect(x: 0, y: 0, width: 30 , height: 30 )
+        favourite.center = CGPoint(x: screenSize.width-40 , y: 40)
         
         razdelitel3.frame = CGRect(x: mutualFriendsOutlet.frame.minX, y: avatar.frame.midY+screenSize.height * 0.0809, width: screenSize.width*0.88, height: screenSize.height*0.002)
         
@@ -274,11 +281,21 @@ let screenSize: CGRect = UIScreen.main.bounds
         aboutFlat.frame = CGRect(x: about.frame.minX-5, y: about.frame.maxY+screenSize.height*0.017, width: screenSize.width*0.845333, height: screenSize.height*0.165)
         }
         showAllOutlet.frame = CGRect(x: razdelitel3.frame.minX, y: aboutFlat.frame.maxY, width: screenSize.width*0.5, height: screenSize.height*0.02)
+        
         razdelitel4.frame = CGRect(x: mutualFriendsOutlet.frame.minX, y: showAllOutlet.frame.maxY + screenSize.height*0.02338 , width: screenSize.width*0.88, height: screenSize.height*0.002)
         conveniences.frame = CGRect(x: mutualFriendsOutlet.frame.minX, y: razdelitel4.frame.maxY+screenSize.height*0.02338, width: screenSize.width*0.277, height: screenSize.height*0.017991)
          convView.frame = CGRect(x: 0, y: conveniences.frame.maxY, width: screenSize.width, height: screenSize.height*0.022*0)
+        scrollView.addSubview(showAllOutlet)
+        zatemnenie2.frame = CGRect(x: 0, y:0 , width: screenSize.width, height: screenSize.height*0.31784)
+        //GRADIENT
+        var gradient: CAGradientLayer = CAGradientLayer()
+        gradient.frame = CGRect(x: 0, y: 0, width: zatemnenie2.frame.width, height: zatemnenie2.frame.height)
         
-       
+        let color1 = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.4).cgColor
+        let color2 = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.0).cgColor
+        gradient.colors = [color1,color2]
+        gradient.locations = [0.0, 1.0]
+        zatemnenie2.layer.insertSublayer(gradient, at: 0)
         super.viewDidLoad()
 
         
@@ -289,6 +306,9 @@ let screenSize: CGRect = UIScreen.main.bounds
         
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //print(scrollView.contentOffset.y)
+    }
     func getSubway(underground_id:Int, city_id:String){
         Alamofire.request("http://6hands.styleru.net/underground?id_city=\(city_id)").responseJSON { response in
             var jsondata = JSON(data:response.data!)
@@ -323,10 +343,10 @@ let screenSize: CGRect = UIScreen.main.bounds
             
             dif = aboutFlat.contentSize.height-screenSize.height*0.165
         }
+        
         if showAllOutlet.title(for: .normal) == "показать полностью"{
-            
-            aboutFlat.frame.size.height += dif
-        showAllOutlet.frame = CGRect(x: showAllOutlet.frame.minX, y: showAllOutlet.frame.minY+dif, width: showAllOutlet.frame.width, height: showAllOutlet.frame.height)
+                aboutFlat.frame.size.height += dif
+       showAllOutlet.frame.origin.y += dif
         showAllOutlet.setTitle("скрыть", for: .normal)
         scrollView.contentSize.height += dif
         razdelitel4.frame = CGRect(x:razdelitel4.frame.minX , y: razdelitel4.frame.minY+dif, width: razdelitel4.frame.width, height: razdelitel4.frame.height)
@@ -338,18 +358,19 @@ let screenSize: CGRect = UIScreen.main.bounds
             
             
             print(dif)
-        //aboutFlat.frame.size.height-=dif
-            aboutFlat.frame = CGRect(x: aboutFlat.frame.minX, y: aboutFlat.frame.minY, width: aboutFlat.frame.width, height: aboutFlat.frame.height-dif)
-        showAllOutlet.frame = CGRect(x: showAllOutlet.frame.minX, y: showAllOutlet.frame.minY-dif, width: showAllOutlet.frame.width, height: showAllOutlet.frame.height)
+        aboutFlat.frame.size.height-=dif
+        showAllOutlet.frame.origin.y-=dif
         showAllOutlet.setTitle("показать полностью", for: .normal)
         scrollView.contentSize.height -= dif
-         razdelitel4.frame = CGRect(x:razdelitel4.frame.minX , y: razdelitel4.frame.minY-dif, width: razdelitel4.frame.width, height: razdelitel4.frame.height)
-        conveniences.frame = CGRect(x: conveniences.frame.minX, y: conveniences.frame.minY-dif, width: conveniences.frame.width, height: conveniences.frame.height)
-        convView.frame = CGRect(x: convView.frame.minX, y: convView.frame.minY-dif, width: convView.frame.width, height: convView.frame.height)
+        razdelitel4.frame.origin.y -= dif
+        conveniences.frame.origin.y -= dif
+        convView.frame.origin.y -= dif
         }
        
         
     }
+    
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         aboutFlat.setContentOffset(CGPoint.zero, animated: false)
@@ -366,4 +387,12 @@ let screenSize: CGRect = UIScreen.main.bounds
         }
     }
    
+    @IBAction func favouriteAction(_ sender: Any) {
+        if check>0{
+        favourite.setImage(#imageLiteral(resourceName: "forma12"), for: .normal)
+        }else{
+        favourite.setImage(#imageLiteral(resourceName: "forma1"), for: .normal)
+        }
+        check *= -1
+    }
 }

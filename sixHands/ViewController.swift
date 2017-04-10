@@ -28,6 +28,7 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
+        motion(toView: image, magnitude: -10)
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         VKSDKInstance = VKSdk.initialize(withAppId: "5446345")
@@ -229,6 +230,17 @@ override func didReceiveMemoryWarning() {
     
     func vkSdkUserAuthorizationFailed() {
     }
+    func motion(toView view:UIView,magnitude: Float){
+        let xMotion = UIInterpolatingMotionEffect(keyPath: "content.x", type: .tiltAlongHorizontalAxis)
+        xMotion.minimumRelativeValue = -magnitude
+        xMotion.maximumRelativeValue = magnitude
+        let yMotion = UIInterpolatingMotionEffect(keyPath: "content.y", type: .tiltAlongVerticalAxis)
+        yMotion.minimumRelativeValue = -magnitude
+        yMotion.maximumRelativeValue = magnitude
+        let group = UIMotionEffectGroup()
+        group.motionEffects = [xMotion,yMotion]
+        view.addMotionEffect(group)
+        }
     
 
 }

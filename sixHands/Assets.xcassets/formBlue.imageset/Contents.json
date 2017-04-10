@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "formBlue.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "formBlue-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "forma12@3x.png",
+      "filename" : "formBlue-2.png",
       "scale" : "3x"
     }
   ],

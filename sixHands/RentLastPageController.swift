@@ -187,10 +187,7 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
             "20" : "\(RentAddressController.flatToRent.posudomoyka)",
             "19" : "\(RentAddressController.flatToRent.fridge)",
             "18" : "\(RentAddressController.flatToRent.tv)",
-            "8" : "\(RentAddressController.flatToRent.furniture)",
             "9" : "\(RentAddressController.flatToRent.animals)",
-            "12" : "\(RentAddressController.flatToRent.mutualFriends)",
-            "14" : "\(RentAddressController.flatToRent.kitchenFurniture)",
             "15" : "\(RentAddressController.flatToRent.internet)"
         ]
         

@@ -29,6 +29,7 @@ class Entry: UIViewController {
             }
             print("entering...")
         }
+        
     }
 
     override func viewDidLoad() {

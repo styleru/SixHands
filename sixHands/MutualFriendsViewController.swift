@@ -26,6 +26,8 @@ class MutualFriendsViewController: UIViewController, UITableViewDelegate, UITabl
 
         print(flat_id)
         back.frame = CGRect(x: screenSize.width*0.072, y: screenSize.height*0.0475, width: screenSize.width*0.024, height: screenSize.height*0.02548)
+        mutualFriendsTableView.delegate = self
+        mutualFriendsTableView.dataSource = self
         mutualFriends.frame = CGRect(x: screenSize.width*0.072, y: screenSize.height*0.10794, width: screenSize.width*0.592, height: screenSize.height*0.05)
         
         mutualFriendsTableView.separatorStyle = .none

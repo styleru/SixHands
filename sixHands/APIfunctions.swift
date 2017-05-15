@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class API{
     
-    let domain = "http://dev.6hands.styleru.net"
+    let domain = "http://6hand.anti.school"
 
     var headers:HTTPHeaders = HTTPHeaders()
     

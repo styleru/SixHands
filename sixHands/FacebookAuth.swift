@@ -53,7 +53,7 @@ func getFBUserData(token:String,withcompletionHandler:(_ success:Bool) ->())
                 "token": token]
             print("kek: \(token)")
             
-            let url = "http://dev.6hands.styleru.net/user"
+            let url = "http://6hand.anti.school/user"
             //ПОЛУЧАЮ JSON С СЕРВАКА
             
             Alamofire.request(url, method: .post, parameters: params).responseJSON { response in

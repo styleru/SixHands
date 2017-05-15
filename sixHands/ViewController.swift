@@ -137,7 +137,7 @@ override func didReceiveMemoryWarning() {
                     self.avatar = user.photo_max
                     self.sn_id = result.token.userId
                     
-                    let listUrlString = "http://dev.6hands.styleru.net/user"
+                    let listUrlString = "http://6hand.anti.school/user"
                     let myUrl = URL(string: listUrlString)
                     var request = URLRequest(url:myUrl!);
                     request.httpMethod = "POST"

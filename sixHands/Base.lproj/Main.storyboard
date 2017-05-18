@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="No2-mG-RJa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bxM-4z-c0h">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -247,14 +247,6 @@
                                     <action selector="new:" destination="kfz-7V-ri2" eventType="touchUpInside" id="Ori-L6-M0f"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JgC-Wc-rqJ">
-                                <rect key="frame" x="334" y="31" width="25" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Horizontal Settings Mixer_000000_100"/>
-                                <connections>
-                                    <action selector="filter:" destination="kfz-7V-ri2" eventType="touchUpInside" id="eGb-gM-J7x"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -262,7 +254,6 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="favouritesOutlet" destination="4LO-xe-YIz" id="2Av-9h-WPl"/>
-                        <outlet property="filterOutlet" destination="JgC-Wc-rqJ" id="rb1-PF-HZq"/>
                         <outlet property="listOfFlats" destination="Xvw-tq-dDA" id="Xpv-Sq-YdP"/>
                         <outlet property="listOfFlatsTableView" destination="eKc-B7-2HR" id="Cme-Im-qxU"/>
                         <outlet property="newOutlet" destination="pno-6K-2Q9" id="Gje-E9-DfL"/>
@@ -635,7 +626,7 @@
                         <viewControllerLayoutGuide type="bottom" id="8Kf-He-hd7"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bz4-Ti-izc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Общие друзья" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0DL-5f-Fdo">
@@ -824,16 +815,15 @@
         <image name="Door Opened_000000_100" width="100" height="100"/>
         <image name="Expand_000000_100" width="100" height="100"/>
         <image name="Home" width="24" height="24"/>
-        <image name="Horizontal Settings Mixer_000000_100" width="50" height="50"/>
         <image name="Map" width="24" height="24"/>
         <image name="Profile" width="24" height="24"/>
         <image name="Stairs Up_000000_100" width="100" height="100"/>
         <image name="stockSnap02FAEBOQ2G" width="960" height="1704"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ATY-tg-wpF"/>
-        <segue reference="wRR-th-zQh"/>
-        <segue reference="ow1-io-7hw"/>
+        <segue reference="U6V-Gu-04z"/>
+        <segue reference="KDP-i7-wSB"/>
+        <segue reference="OOK-34-sFi"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

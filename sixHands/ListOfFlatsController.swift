@@ -23,7 +23,8 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     let amount = 10
     var id = String()
     
-    @IBOutlet weak var filterOutlet: UIButton!
+    var dot = UIImageView()
+    
     @IBOutlet weak var listOfFlats: UILabel!
     
     @IBOutlet weak var favouritesOutlet: UIButton!
@@ -34,8 +35,19 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         
-        update(offset:0,amount: amount)
-               
+        API.flatsFilter(offset: 0, amount: amount, parameters: "") { (i) in
+            self.flats += i
+            OperationQueue.main.addOperation({()-> Void in
+                
+                self.listOfFlatsTableView.reloadData()
+            })
+
+        }
+        
+
+        //update(offset:0,amount: amount)
+        //DOT BETWEEN SUBWAY
+        dot.backgroundColor = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1)
         
         //gray bar
         let grayBar = UIView()
@@ -54,8 +66,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         //CONSTRAINTS:
         favouritesOutlet.bounds = CGRect(x: 0, y: 0, width: screenSize.width * 0.3  , height: screenSize.height * 0.0299 )
         favouritesOutlet.center = CGPoint(x: screenSize.width * 0.836 , y: screenSize.height * 0.16041)
-        filterOutlet.bounds = CGRect(x:0, y:0 , width: screenSize.width * 0.0676, height: screenSize.width * 0.0676)
-        filterOutlet.center = CGPoint(x: screenSize.width * 0.9, y: screenSize.height * 0.093)
+        
         listOfFlatsTableView.rowHeight = screenSize.height * 0.4
         
         listOfFlats.bounds = CGRect(x:0, y:0 , width: screenSize.width * 0.8, height: screenSize.height * 0.096)
@@ -95,7 +106,14 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     func refresh() {
         print("refresh...")
         flats = []
-        update(offset:0 , amount: amount)
+        API.flatsFilter(offset: 0, amount: amount, parameters: "") { (i) in
+            self.flats += i
+            OperationQueue.main.addOperation({()-> Void in
+                
+                self.listOfFlatsTableView.reloadData()
+            })
+            
+        }
         offsetInc = amount
         self.listOfFlatsTableView.reloadData()
         self.refreshControl.endRefreshing()
@@ -104,7 +122,14 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         if indexPath.row == flats.count - 1 {
-            update(offset:offsetInc , amount: amount)
+            API.flatsFilter(offset: offsetInc, amount: amount, parameters: "") { (i) in
+                self.flats += i
+                OperationQueue.main.addOperation({()-> Void in
+                    
+                    self.listOfFlatsTableView.reloadData()
+                })
+                
+            }
             offsetInc += amount
         }
     }
@@ -133,8 +158,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         cell.subway.bounds = CGRect(x: 0, y: 0, width:screenSize.width * 0.3 , height: screenSize.height * 0.02698)
         cell.subway.center = CGPoint(x:cell.flatImage.frame.minX+cell.subway.frame.width/2 + 4, y: cell.flatImage.frame.maxY + cell.subway.frame.height )
         
-        /* cell.dot.bounds = CGRect(x: 0, y: 0,width: 4, height: 4)
-         cell.dot.center = CGPoint(x:cell.subway.frame.maxX+5, y: cell.flatImage.frame.maxY + cell.subway.frame.height )*/
+        
         
         cell.numberOfRooms.bounds = CGRect(x: 0, y: 0, width:screenSize.width * 0.3, height: screenSize.height * 0.02698)
         cell.numberOfRooms.center = CGPoint(x:cell.subway.frame.maxX+10+cell.numberOfRooms.frame.width/2, y:cell.flatImage.frame.maxY + cell.subway.frame.height )
@@ -207,27 +231,50 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBAction func new(_ sender: UIButton) {
         flats = []
+        API.flatsFilter(offset: 0, amount: amount, parameters: "") { (i) in
+            self.flats += i
+            OperationQueue.main.addOperation({()-> Void in
+                
+                self.listOfFlatsTableView.reloadData()
+            })
+            
+        }
         newOutlet.alpha = 1
         favouritesOutlet.alpha = 0.2
         popularOutlet.alpha = 0.2
-        update(offset:0 , amount: amount)
+        
     }
    
     @IBAction func popular(_ sender: UIButton) {
         flats = []
+        API.flatsFilter(offset: 0, amount: amount, parameters: "") { (i) in
+            self.flats += i
+            OperationQueue.main.addOperation({()-> Void in
+                
+                self.listOfFlatsTableView.reloadData()
+            })
+            
+        }
         newOutlet.alpha = 0.2
         favouritesOutlet.alpha = 0.2
         popularOutlet.alpha = 1
-        update(offset:0 , amount: amount)
+        
     }
     @IBAction func favourites(_ sender: UIButton) {
         
         newOutlet.alpha = 0.2
         flats = []
+        API.flatsFilter(offset: 0, amount: amount, parameters: "") { (i) in
+            self.flats += i
+            OperationQueue.main.addOperation({()-> Void in
+                
+                self.listOfFlatsTableView.reloadData()
+            })
+            
+        }
         favouritesOutlet.alpha = 1
         popularOutlet.alpha = 0.2
-        update(offset:0 , amount: amount)
-
+       
     }
     
     @IBAction func filter(_ sender: UIButton) {
@@ -236,33 +283,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     @IBAction func fromSingleFlat(segue: UIStoryboardSegue) {}
     @IBAction func fromMutualFriends(segue: UIStoryboardSegue) {}
     
-    func update(offset:Int,amount:Int){
-    
-        api.flatsFilter(offset: offset, amount: amount, parameters: ""){(js:Any) in
-            let jsondata = js as! JSON
-            let array = jsondata.array
-            if (array?.count) != nil {
-                for i in 0..<array!.count{
-                    let flat = Flat()
-                    flat.avatarImage = jsondata[i]["owner"]["avatar"].string!
-                    flat.flatPrice = jsondata[i]["price"].string!
-                    //    flat.flatSubway = "Пока нема"
-                    //flat.flatMutualFriends = "социопат"
-                    flat.flat_id = jsondata[i]["id"].string!
-                    flat.imageOfFlat.append(jsondata[i]["photos"][0]["url"].string!)
-                    flat.numberOfRoomsInFlat = jsondata[i]["rooms"].string!
-                    self.flats.append(flat)
-    
-                }
-            }
-            
-            OperationQueue.main.addOperation({()-> Void in
-    
-                self.listOfFlatsTableView.reloadData()
-            })
-    
-        }
-    }
+   
 
 }
 

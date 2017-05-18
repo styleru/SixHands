@@ -12,6 +12,7 @@ import FBSDKCoreKit
 import RealmSwift
 //let realm = try! Realm()
 //import YandexMobileMetrica
+let domain = "http://6hand.anti.school"
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?

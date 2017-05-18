@@ -1,34 +1,34 @@
 PODS:
   - Alamofire (4.4.0)
-  - libwebp (0.5.1):
-    - libwebp/core (= 0.5.1)
-    - libwebp/dec (= 0.5.1)
-    - libwebp/demux (= 0.5.1)
-    - libwebp/dsp (= 0.5.1)
-    - libwebp/enc (= 0.5.1)
-    - libwebp/mux (= 0.5.1)
-    - libwebp/utils (= 0.5.1)
-    - libwebp/webp (= 0.5.1)
-  - libwebp/core (0.5.1):
+  - libwebp (0.6.0):
+    - libwebp/core (= 0.6.0)
+    - libwebp/dec (= 0.6.0)
+    - libwebp/demux (= 0.6.0)
+    - libwebp/dsp (= 0.6.0)
+    - libwebp/enc (= 0.6.0)
+    - libwebp/mux (= 0.6.0)
+    - libwebp/utils (= 0.6.0)
+    - libwebp/webp (= 0.6.0)
+  - libwebp/core (0.6.0):
     - libwebp/webp
-  - libwebp/dec (0.5.1):
+  - libwebp/dec (0.6.0):
     - libwebp/core
-  - libwebp/demux (0.5.1):
+  - libwebp/demux (0.6.0):
     - libwebp/core
-  - libwebp/dsp (0.5.1):
+  - libwebp/dsp (0.6.0):
     - libwebp/core
-  - libwebp/enc (0.5.1):
+  - libwebp/enc (0.6.0):
     - libwebp/core
-  - libwebp/mux (0.5.1):
+  - libwebp/mux (0.6.0):
     - libwebp/core
-  - libwebp/utils (0.5.1):
+  - libwebp/utils (0.6.0):
     - libwebp/core
-  - libwebp/webp (0.5.1)
-  - Realm (2.5.1):
-    - Realm/Headers (= 2.5.1)
-  - Realm/Headers (2.5.1)
-  - RealmSwift (2.5.1):
-    - Realm (= 2.5.1)
+  - libwebp/webp (0.6.0)
+  - Realm (2.7.0):
+    - Realm/Headers (= 2.7.0)
+  - Realm/Headers (2.7.0)
+  - RealmSwift (2.7.0):
+    - Realm (= 2.7.0)
   - SDWebImage/Core (4.0.0)
   - SDWebImage/WebP (4.0.0):
     - libwebp
@@ -47,9 +47,9 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
-  libwebp: b9126f8982a95370cf4eaad9bb3fefd57f052c15
-  Realm: 32f86104d37c8521f864d4274050b38ba6190733
-  RealmSwift: f719e7511c902b8908593e8f143f59e47931bdb6
+  libwebp: 1d5a07c2eb97f9c31bd5f154bb82efc0ea67c6a2
+  Realm: 07e5d3a9e0e41d65fd5f9f05150ed6295d0f093b
+  RealmSwift: 6d06425d3900c86473c4f323bf6949b43fca22bc
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   VK-ios-sdk: 7fd48bc5aaa6b96c3197c1987eb6593f2ea67331
@@ -57,4 +57,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: f23d87135824d4568c901742ce6060474ae82e52
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.0.beta.3

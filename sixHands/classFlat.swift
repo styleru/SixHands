@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Alamofire
+import SwiftyJSON
 
 class Flat{
     
@@ -37,4 +39,13 @@ class Flat{
     var longitude = String()
     var latitude = String()
     
-    }
+}
+
+
+
+
+
+
+
+
+

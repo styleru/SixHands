@@ -62,6 +62,7 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
     
     
     override func viewDidLoad() {
+    print("FARTUK V MASLE:")
         scrollView.delegate = self
         print(aboutFlat.font?.fontName)
         print(screenSize.width)

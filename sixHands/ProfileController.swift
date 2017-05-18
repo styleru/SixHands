@@ -29,24 +29,15 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         //parameters for request & request
         let params = "&parameters=%5B%7B%22key%22%3A%22id_user%22%2C%22value%22%3A%22\(UserDefaults.standard.value(forKey: "id_user")!))%22%2C%20%22criterion%22%3A%22single%22%7D%5D"
         
-        get(sorting: "last", parameters: params, amount: 20)
+        //get(sorting: "last", parameters: params, amount: 20)
         
+
         //view bounds
         let screen = self.view.frame
         
         tabBarController?.tabBar.isHidden = false
 
-        /*
-        //right Button
-        let settingsButton = UIButton()
-        settingsButton.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-        settingsButton.setImage(UIImage(named: "Settings"), for: .normal)
-        settingsButton.imageView?.contentMode = .scaleAspectFill
-        settingsButton.addTarget(self, action: #selector(ProfileController.settingsButtonAction), for: .touchUpInside)
-        
-        let rightBarButton = UIBarButtonItem()
-        rightBarButton.customView = settingsButton
-        self.navigationItem.rightBarButtonItem = rightBarButton*/
+     
         
         //gray bar
         let grayBar = UIView()
@@ -164,7 +155,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         print("refresh...")
         flats = []
         let params = "&parameters=%5B%7B%22key%22%3A%22id_user%22%2C%22value%22%3A%22\(UserDefaults.standard.value(forKey: "id_user")!)%22%2C%20%22criterion%22%3A%22single%22%7D%5D"
-        get(sorting: "all", parameters: params, amount: 20)
+        //get(sorting: "all", parameters: params, amount: 20)
         self.table.reloadData()
         self.refreshControl.endRefreshing()
     }
@@ -296,53 +287,5 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         // Dispose of any resources that can be recreated.
     }
     
-    func get(sorting:String,parameters:String,amount:Int8) {
-        
-        api.flatsFilter(offset: 0, amount: Int(amount), parameters: parameters) { (js: Any) in
-            let jsondata = js as! JSON
-            let array = jsondata.array
-            print(jsondata)
-            
-            if (array?.count) != nil {
-                for i in 0..<array!.count{
-                    let flat = Flat()
-                    flat.flatPrice = jsondata[i]["price"].string!
-                    flat.flatSubway = "м. Текстильщики"
-                    
-                    let arrayOfPhotos = jsondata[i]["photos"].array
-                    if arrayOfPhotos?.count != nil {
-                        for j in 0..<arrayOfPhotos!.count {
-                            flat.imageOfFlat.append(jsondata[i]["photos"][j]["url"].string!)
-                        }
-                    }
-                    flat.numberOfRoomsInFlat = jsondata[i]["rooms"].string!
-                    flat.views = "65"
-                    flat.newView = "12"
-                    flat.flat_id = jsondata[i]["id"].string!
-                    self.flats.append(flat)
-                    
-                }
-                
-                OperationQueue.main.addOperation({()-> Void in
-                    
-                    self.table.reloadData()
-                    
-                })
-            }
-
-        }
-        
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+   
 }

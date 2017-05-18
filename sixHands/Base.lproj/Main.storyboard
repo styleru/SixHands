@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bxM-4z-c0h">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="No2-mG-RJa">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -563,7 +563,7 @@
                     <navigationItem key="navigationItem" id="iRg-7u-HQE"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <segue destination="QEQ-eJ-3Xo" kind="show" identifier="rent" id="w72-Bw-mhI"/>
+                        <segue destination="ZAK-j1-shd" kind="show" identifier="rent" id="w72-Bw-mhI"/>
                         <segue destination="NKU-Jd-hfY" kind="show" identifier="showFlat" id="wRR-th-zQh"/>
                         <segue destination="z1O-OS-Z82" kind="show" identifier="editFlat" id="iZ2-wk-Kgk"/>
                     </connections>
@@ -585,6 +585,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="cDO-Ks-Kz9"/>
                     <connections>
                         <segue destination="JjA-I2-mHM" kind="unwind" identifier="cancelRent" unwindAction="cancelRentWithSegue:" id="FdC-V9-g88"/>
                         <segue destination="kLX-A5-TRU" kind="show" identifier="continue" id="Sc9-2V-Zqf"/>
@@ -593,7 +594,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VKQ-tv-4n9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="JjA-I2-mHM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1430" y="2826"/>
+            <point key="canvasLocation" x="1430" y="3629"/>
         </scene>
         <!--Edit Flat Controller-->
         <scene sceneID="W3C-El-O0c">
@@ -615,7 +616,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KQl-FI-0zu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ySX-fR-Qwh" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2399" y="2826"/>
+            <point key="canvasLocation" x="3336.8000000000002" y="2825.9370314842581"/>
         </scene>
         <!--Mutual Friends View Controller-->
         <scene sceneID="LQ8-Dk-W6J">
@@ -717,7 +718,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cFd-bB-xzY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Dcf-KM-VFZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1430" y="3593"/>
+            <point key="canvasLocation" x="1430" y="4379"/>
         </scene>
         <!--Rent Last Page Controller-->
         <scene sceneID="095-De-Djj">
@@ -739,7 +740,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CeA-oK-pkx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="62a-57-d8s" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1430" y="4305"/>
+            <point key="canvasLocation" x="1430" y="5158"/>
         </scene>
         <!--Связь-->
         <scene sceneID="2HN-2l-uWG">
@@ -801,6 +802,24 @@
             </objects>
             <point key="canvasLocation" x="137" y="1130"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="UB5-i5-3MM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZAK-j1-shd" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GbM-gn-uyj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="QEQ-eJ-3Xo" kind="relationship" relationship="rootViewController" id="pKh-Vm-Sv1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JOk-mg-906" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1429.5999999999999" y="2825.9370314842581"/>
+        </scene>
     </scenes>
     <resources>
         <image name="001VkSocialLogotype" width="24" height="16"/>
@@ -821,9 +840,9 @@
         <image name="stockSnap02FAEBOQ2G" width="960" height="1704"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="U6V-Gu-04z"/>
-        <segue reference="KDP-i7-wSB"/>
+        <segue reference="ATY-tg-wpF"/>
         <segue reference="OOK-34-sFi"/>
+        <segue reference="KDP-i7-wSB"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

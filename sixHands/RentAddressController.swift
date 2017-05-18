@@ -10,8 +10,10 @@ import UIKit
 //import GooglePlaces
 import Alamofire
 import SwiftyJSON
+import CoreLocation
 
-class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
+    
     let addressField = UITextField()
     //var addresses = [CLLocationCoordinate2D]()
     var addressString = String()
@@ -21,68 +23,132 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
     var latitudes = [Float]()
     let table = UITableView()
     static var flatToRent = Flat()
+    let separator = UIView()
+    let locationManager = CLLocationManager()
+    
+    //view bounds
+    let screen = UIScreen.main.bounds
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        //view bounds
-        let screen = self.view.frame
+        UIApplication.shared.statusBarStyle = .default
         
-        //gray bar
-        let grayBar = UIView()
-        grayBar.frame = CGRect(x: 0.0, y: 0.0, width: screen.width, height: 20.0)
-        grayBar.backgroundColor = UIColor.black
-        grayBar.alpha = 0.37
-        self.view.addSubview(grayBar)
+        //navigationController setup
+        navigationItem.title = "Расположение"
+        
+        let cancel = UIButton()
+        cancel.setTitle("Cancel", for: .normal)
+        cancel.setTitleColor(UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1), for: .normal)
+        cancel.frame = CGRect(x: 0, y: 0, width: 65, height: 25)
+        cancel.addTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
+        
+        let leftBarButton = UIBarButtonItem()
+        leftBarButton.customView = cancel
+        self.navigationItem.leftBarButtonItem = leftBarButton
         
         //continue button
         let continueButton = UIButton()
         continueButton.frame = CGRect(x: 0.0, y: screen.maxY - 55.0, width: screen.width, height: 55.0)
         continueButton.addTarget(self, action: #selector(RentAddressController.continueButtonAction), for: .touchUpInside)
-        continueButton.backgroundColor = UIColor(red: 60/255, green: 70/255, blue: 77/255, alpha: 1)
+        continueButton.backgroundColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
         continueButton.setTitle("Далее", for: .normal)
         continueButton.setTitleColor(UIColor.white, for: .normal)
         continueButton.titleLabel?.font = UIFont.systemFont(ofSize: 20.0, weight: UIFontWeightMedium)
         self.view.addSubview(continueButton)
         
-        //cancel button
-        let cancelButton = UIButton()
-        cancelButton.frame = CGRect(x: screen.maxX - 15.0 - 90.0, y: 40.0, width: 100.0, height: 20.0)
-        cancelButton.addTarget(self, action: #selector(RentAddressController.cancelButtonAction), for: .touchUpInside)
-        cancelButton.backgroundColor = UIColor.clear
-        cancelButton.setTitle("Отменить", for: .normal)
-        cancelButton.setTitleColor(UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.7), for: .normal)
-        cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 17.0, weight: UIFontWeightRegular)
-        self.view.addSubview(cancelButton)
-        
-        addressField.frame = CGRect(x: screen.minX + 15.0, y: screen.height * 0.12, width: screen.width - 30.0, height: 36.0)
+        //address
+        addressField.frame = CGRect(x: screen.minX + 50.0, y: 74, width: screen.width - 100.0, height: 40.0)
         addressField.delegate = self
         addressField.placeholder = "Где вы сдаёте квартиру?"
-        addressField.textColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.7)
-        addressField.font = UIFont.systemFont(ofSize: 22.0, weight: UIFontWeightHeavy)
+        addressField.font = UIFont.systemFont(ofSize: 18.0, weight: UIFontWeightLight)
         addressField.adjustsFontSizeToFitWidth = true
         addressField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
         self.view.addSubview(addressField)
         
-        //separator
-        let separator = UIView()
-        separator.frame = CGRect(x: 15.0, y: addressField.frame.maxY + 15.0, width: screen.width - 30.0, height: 1.0)
-        separator.backgroundColor = UIColor(red: 215/255, green: 215/255, blue: 215/255, alpha: 1.0)
-        self.view.addSubview(separator)
+        let greyView = UIView()
+        greyView.frame = CGRect(x: 0.0, y: addressField.frame.minY - 10, width: screen.width, height: 60)
+        greyView.backgroundColor = UIColor(red: 244/255, green: 244/255, blue: 244/255, alpha: 1.0)
+        self.view.insertSubview(greyView, belowSubview: addressField)
+        
+        let border = UIView()
+        border.frame = CGRect(x: 5.0, y: addressField.frame.minY, width: screen.width - 10, height: 40)
+        border.backgroundColor = UIColor.clear
+        border.layer.cornerRadius = 5.0
+        border.clipsToBounds = true
+        border.layer.borderWidth = 2
+        border.layer.borderColor = UIColor(red: 220/255.0, green:220/255.0, blue:220/255.0, alpha: 1.0).cgColor
+        self.view.insertSubview(border, belowSubview: addressField)
+        
+        let searchIcon = UIImageView()
+        let searchIconSize = CGSize(width: 18, height: 18)
+        searchIcon.frame = CGRect(x: border.frame.minX + 15, y: addressField.frame.midY - searchIconSize.width/2, width: searchIconSize.width, height: searchIconSize.height)
+        searchIcon.image = #imageLiteral(resourceName: "searchIcon")
+        self.view.addSubview(searchIcon)
+        
+        let locationButton = UIButton()
+        let locationButtonSize = CGSize(width: 18, height: 18)
+        locationButton.frame = CGRect(x: border.frame.maxX - 15 - locationButtonSize.width/2, y: addressField.frame.midY - locationButtonSize.width/2, width: locationButtonSize.width, height: locationButtonSize.height)
+        locationButton.setImage(#imageLiteral(resourceName: "compass"), for: .normal)
+        locationButton.addTarget(self, action: #selector(getLocation), for: .touchUpInside)
+        view.addSubview(locationButton)
         
         //tableView for suggestions
-        table.frame = CGRect(x: 0.0, y: separator.frame.maxY, width: screen.width, height: screen.height - separator.frame.maxY - 55.0)
+        table.frame = CGRect(x: 0.0, y: greyView.frame.maxY, width: screen.width, height: screen.height - greyView.frame.maxY - 55.0)
         table.rowHeight = screen.height * 0.1
         table.delegate = self
         table.dataSource = self
         table.register(FlatViewCell.self, forCellReuseIdentifier: "cell")
         table.separatorInset.left = 15.0
         table.separatorInset.right = 15.0
+        table.tableFooterView = UIView()
         self.view.addSubview(table)
         
+        separator.frame = CGRect(x: 0.0, y: greyView.frame.maxY-1.5, width: screen.width, height: 1.5)
+        separator.backgroundColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0)
+        self.view.addSubview(separator)
         
+    }
+    
+    func getLocation() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {(placemarks, error)-> Void in
+            if (error != nil) {
+                print("Reverse geocoder failed with error" + (error?.localizedDescription)!)
+                return
+            }
+            
+            if placemarks?.count != 0 {
+                let pm = placemarks?[0]
+                self.displayLocationInfo(placemark: pm!)
+            } else {
+                print("Problem with the data received from geocoder")
+            }
+        })
+    }
+    
+    func displayLocationInfo(placemark: CLPlacemark) {
+        if placemark != nil {
+            //stop updating location to save battery life
+            locationManager.stopUpdatingLocation()
+            print(placemark.name!)
+            /*print(placemark.locality ? placemark.locality : "")
+            print(placemark.postalCode ? placemark.postalCode : "")
+            print(placemark.administrativeArea ? placemark.administrativeArea : "")
+            print(placemark.country ? placemark.country : "")*/
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error while updating location " + (error.localizedDescription))
     }
     
     func textFieldDidChange(_ textField: UITextField) {
@@ -153,6 +219,7 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
     
     func cancelButtonAction() {
         performSegue(withIdentifier: "cancelRent", sender: self)
+        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -160,6 +227,11 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (addressStrings.count != 0) {
+            self.separator.isHidden = true
+        } else {
+            self.separator.isHidden = false
+        }
         return addressStrings.count
     }
     
@@ -169,6 +241,27 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
         
         //view bounds
         let screen = self.view.frame
+        
+        
+        //for that ending separator(nailed it!)
+        for sublayer in cell.layer.sublayers! {
+            if sublayer.name == "separator" {
+                sublayer.removeFromSuperlayer()
+            }
+        }
+        
+        let bottomBorder = CALayer()
+        bottomBorder.frame = CGRect(x: 0, y: cell.frame.size.height - 1, width: cell.frame.size.width, height: 1)
+        bottomBorder.name = "separator"
+        cell.layer.addSublayer(bottomBorder)
+        
+        if(indexPath.row == addressStrings.count-1) {
+            bottomBorder.frame = CGRect(x: 0, y: cell.frame.size.height - 1.5, width: cell.frame.size.width, height: 1.5)
+            bottomBorder.backgroundColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0).cgColor
+        } else {
+            bottomBorder.frame = CGRect(x: 15, y: cell.frame.size.height - 1, width: cell.frame.size.width - 30, height: 1)
+            bottomBorder.backgroundColor = UIColor(red: 225/255, green: 225/255, blue: 225/255, alpha: 1.0).cgColor
+        }
         
         //address big label
         cell.subwayLabel.text = "\(addressStrings[indexPath.row])"

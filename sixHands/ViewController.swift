@@ -184,6 +184,7 @@ override func didReceiveMemoryWarning() {
                                 per.vk_id = jsondata["user"]["social_networks"][0]["id_user"].string!
                                 per.user_id = Int(jsondata["user"]["id"].string!)!
                                 UserDefaults.standard.set(per.user_id, forKey: "id_user")
+                                UserDefaults.standard.set(per.token, forKey: "Token")
                                 UserDefaults.standard.synchronize()
                             }
                             

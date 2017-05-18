@@ -8,26 +8,28 @@
 
 import UIKit
 import RealmSwift
+import Alamofire
 
 class Entry: UIViewController {
     let realm = try! Realm()
+    let api = API()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
         
         let per = realm.object(ofType: person.self, forPrimaryKey: 1)
-        if (per?.token == "") || (per?.token == nil) {
-            DispatchQueue.main.async() {
-                [unowned self] in
-                self.performSegue(withIdentifier: "showAuth", sender: self)
+        api.tokenCheck(token: (per?.token)!) { (statusCode) in
+            if (statusCode != 200) {
+                DispatchQueue.main.async() {
+                    [unowned self] in
+                    self.performSegue(withIdentifier: "showAuth", sender: self)
+                }
+            } else {
+                DispatchQueue.main.async() {
+                    [unowned self] in
+                    self.performSegue(withIdentifier: "enter", sender: self)
+                }
             }
-            print("no token")
-        } else {
-            DispatchQueue.main.async() {
-                [unowned self] in
-                self.performSegue(withIdentifier: "enter", sender: self)
-            }
-            print("entering...")
         }
         
     }

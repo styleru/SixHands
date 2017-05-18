@@ -22,6 +22,7 @@
 		5E9C8A722D7580992749666F /* Pods_sixHandsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36FDA856FD8EE1986F732C03 /* Pods_sixHandsUITests.framework */; };
 		7E2A8EE45F0BB582F5921732 /* Pods_sixHands.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6780D743E810AEE48781C19C /* Pods_sixHands.framework */; };
 		9D33CA5E1E4A6F1B000FFAA9 /* RentParamsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D33CA5D1E4A6F1B000FFAA9 /* RentParamsController.swift */; };
+		9D6B11C81ECB7C27006D38F7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D6B11C71ECB7C27006D38F7 /* CoreLocation.framework */; };
 		9D6F7FC01E9B77800012AFE8 /* EditFlatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6F7FBF1E9B77800012AFE8 /* EditFlatController.swift */; };
 		9D6FE0E71E42437C00133C3F /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6FE0E61E42437C00133C3F /* ProfileController.swift */; };
 		9D869E7D1E9B675F00C18EB7 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869E7C1E9B675F00C18EB7 /* Entry.swift */; };
@@ -78,6 +79,7 @@
 		8CEC0A982CA57FD3764CF30C /* Pods_sixHandsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sixHandsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		97141A11E80A7E41C9BE4B60 /* Pods-sixHandsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sixHandsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sixHandsTests/Pods-sixHandsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9D33CA5D1E4A6F1B000FFAA9 /* RentParamsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RentParamsController.swift; sourceTree = "<group>"; };
+		9D6B11C71ECB7C27006D38F7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		9D6F7FBF1E9B77800012AFE8 /* EditFlatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFlatController.swift; sourceTree = "<group>"; };
 		9D6FE0E61E42437C00133C3F /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		9D869E7C1E9B675F00C18EB7 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D6B11C81ECB7C27006D38F7 /* CoreLocation.framework in Frameworks */,
 				DAB274131E27B85D00A06E11 /* SwiftyJSON.framework in Frameworks */,
 				406F92011E2F53F800E2A9FF /* FBSDKCoreKit.framework in Frameworks */,
 				406F92021E2F53F800E2A9FF /* FBSDKLoginKit.framework in Frameworks */,
@@ -140,6 +143,7 @@
 		D8CA62CE80DF5009C0CB60E2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9D6B11C71ECB7C27006D38F7 /* CoreLocation.framework */,
 				40D6EFEE1E2F684D00363465 /* Bolts.framework */,
 				406F91FF1E2F53F800E2A9FF /* FBSDKCoreKit.framework */,
 				406F92001E2F53F800E2A9FF /* FBSDKLoginKit.framework */,
@@ -457,7 +461,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B379DF48C9DF859361F6E4BD /* [CP] Embed Pods Frameworks */ = {
@@ -502,7 +506,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		DD815C7A80DF7387AF815B51 /* [CP] Copy Pods Resources */ = {
@@ -532,7 +536,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -709,6 +713,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 63FDC736767934B0635C653E /* Pods-sixHands.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 4RWLL37A47;
@@ -734,6 +739,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B7AF76E87CD3942874EF5E1F /* Pods-sixHands.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 4RWLL37A47;

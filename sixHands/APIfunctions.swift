@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class API{
     
-       var headers:HTTPHeaders = HTTPHeaders()
+    var headers:HTTPHeaders = HTTPHeaders()
     
     
     func flatsSingle(id:String,completionHandler:@escaping (_ js:Any) ->()){
@@ -62,12 +62,27 @@ class API{
         }
     }
     
+    func tokenCheck(token:String,completionHandler:@escaping (_ js:Int) ->()){
+        let fullRequest = domain + "/token"
+        let token = UserDefaults.standard.value(forKey: "Token") as! String
+        if token != "" {
+            headers = ["Token" : UserDefaults.standard.value(forKey: "Token") as! String]
+        } else {
+            headers = ["Token" : ""]
+        }
+        Alamofire.request(fullRequest, headers: headers).responseJSON { response in
+            let jsondata = (response.response?.statusCode)!
+            completionHandler(jsondata)
+        }
+
+    }
+    
     func upload(photoData: [Data], parameters: [String : String], completionHandler:@escaping (_ js:Any) ->()){
         let fullRequest = domain + "/flats/single"
         let encoded = fullRequest.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
         let myUrl = URL(string: encoded!)
         
-        //headers = ["Token" : per!.token]
+        headers = ["Token" : UserDefaults.standard.value(forKey: "Token") as! String]
         
         Alamofire.upload(multipartFormData: { (multipart) in
             
@@ -90,6 +105,7 @@ class API{
                 print(error)
             case .success(let request, _, _):
                 request.response(completionHandler: { (response) in
+                    print("kek: \(response.response!)")
                     let json = JSON(data: response.data!)
                     completionHandler(json)
                 })

@@ -9,15 +9,18 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import RealmSwift
 
 class API{
     
     var headers:HTTPHeaders = HTTPHeaders()
     
     
-    func flatsSingle(id:String,completionHandler:@escaping (_ js:Any) ->()){
+    
+   func flatsSingle(id:String,completionHandler:@escaping (_ js:Any) ->()){
         let fullRequest = domain + "/flats/single?id_flat=" + id
-        
+   
+   
         Alamofire.request(fullRequest).responseJSON { response in
             let jsondata = JSON(data:response.data!)
             completionHandler(jsondata)
@@ -26,22 +29,24 @@ class API{
     
     //FLATS FILTER
     
-    class func flatsFilter(offset:Int,amount:Int, parameters: String, completionHandler: @escaping ([Flat])->Void){
+    func flatsFilter(offset:Int,amount:Int, parameters: String, completionHandler: @escaping ([Flat])->Void){
+        let realm = try! Realm()
+        let per = realm.object(ofType: person.self, forPrimaryKey: 1)
+        headers = ["Token":(per?.token)!]
         let fullRequest = domain + "/flats/filter?select=all&offset=\(offset)&amount=\(amount)\(parameters)"
         
-        
-        Alamofire.request(fullRequest).responseJSON { response in
+        Alamofire.request(fullRequest, headers : headers).responseJSON { response in
             var flats = [Flat]()
             let jsondata = JSON(data:response.data!)
             let array = jsondata.array
-            
             if (array?.count) != nil {
                 for i in 0..<array!.count{
                     let flat = Flat()
                     flat.avatarImage = jsondata[i]["owner"]["avatar"].string!
                     flat.flatPrice = jsondata[i]["price"].string!
                     flat.flatSubway = "Пока нема"
-                    flat.flatMutualFriends = "социопат"
+                    let number_of_friends = (jsondata[i]["mutual_friends"].array?.count)!
+                    flat.flatMutualFriends = "\(number_of_friends) общих друзей"
                     flat.flat_id = jsondata[i]["id"].string!
                     flat.imageOfFlat.append(jsondata[i]["photos"][0]["url"].string!)
                     flat.numberOfRoomsInFlat = jsondata[i]["rooms"].string!
@@ -64,9 +69,9 @@ class API{
     
     func tokenCheck(token:String,completionHandler:@escaping (_ js:Int) ->()){
         let fullRequest = domain + "/token"
-        let token = UserDefaults.standard.value(forKey: "Token") as! String
-        if token != "" {
-            headers = ["Token" : UserDefaults.standard.value(forKey: "Token") as! String]
+        
+        if token != ""{
+            headers = ["Token" : token]
         } else {
             headers = ["Token" : ""]
         }
@@ -98,7 +103,7 @@ class API{
                 i += 1
             }
             
-        }, to: myUrl!, method: .post, headers: headers, encodingCompletion: { result in
+        }, to: myUrl!, method: .post, headers:headers, encodingCompletion: { result in
             
             switch result {
             case .failure(let error):

@@ -24,7 +24,7 @@ public func FBLogin(){
                     
                 })
                 
-                //КИДАЮ ДАННЫЕ НА СЕРВАК
+               
                 
                 
                 fbLoginManager.logOut()

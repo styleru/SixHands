@@ -34,11 +34,10 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     override func viewDidLoad() {
-        
-        API.flatsFilter(offset: 0, amount: amount, parameters: "") { (i) in
+                
+        api.flatsFilter(offset: 0, amount: amount, parameters: "") { (i) in
             self.flats += i
             OperationQueue.main.addOperation({()-> Void in
-                
                 self.listOfFlatsTableView.reloadData()
             })
 
@@ -106,7 +105,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     func refresh() {
         print("refresh...")
         flats = []
-        API.flatsFilter(offset: 0, amount: amount, parameters: "") { (i) in
+        api.flatsFilter(offset: 0, amount: amount, parameters: "") { (i) in
             self.flats += i
             OperationQueue.main.addOperation({()-> Void in
                 
@@ -122,7 +121,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         if indexPath.row == flats.count - 1 {
-            API.flatsFilter(offset: offsetInc, amount: amount, parameters: "") { (i) in
+            api.flatsFilter(offset: offsetInc, amount: amount, parameters: "") { (i) in
                 self.flats += i
                 OperationQueue.main.addOperation({()-> Void in
                     
@@ -189,7 +188,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
         
         //END OF CONSTRAINTS
-        
+        cell.mutualFriends.setTitle(flats[indexPath.row].flatMutualFriends, for: .normal)
         cell.subway.text = "Арбатская"
         //cell.mutualFriends.text = "5 общих друзей"
         cell.numberOfRooms.text = "\(flats[indexPath.row].numberOfRoomsInFlat)-комн."
@@ -231,7 +230,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBAction func new(_ sender: UIButton) {
         flats = []
-        API.flatsFilter(offset: 0, amount: amount, parameters: "") { (i) in
+        api.flatsFilter(offset: 0, amount: amount, parameters: "") { (i) in
             self.flats += i
             OperationQueue.main.addOperation({()-> Void in
                 
@@ -247,7 +246,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
    
     @IBAction func popular(_ sender: UIButton) {
         flats = []
-        API.flatsFilter(offset: 0, amount: amount, parameters: "") { (i) in
+        api.flatsFilter(offset: 0, amount: amount, parameters: "") { (i) in
             self.flats += i
             OperationQueue.main.addOperation({()-> Void in
                 
@@ -264,7 +263,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
         newOutlet.alpha = 0.2
         flats = []
-        API.flatsFilter(offset: 0, amount: amount, parameters: "") { (i) in
+        api.flatsFilter(offset: 0, amount: amount, parameters: "") { (i) in
             self.flats += i
             OperationQueue.main.addOperation({()-> Void in
                 

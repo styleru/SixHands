@@ -18,7 +18,15 @@ class Entry: UIViewController {
         super.viewWillAppear(false)
         
         let per = realm.object(ofType: person.self, forPrimaryKey: 1)
-        api.tokenCheck(token: (per?.token)!) { (statusCode) in
+        guard var token = per?.token else{
+        return
+        }
+        
+        print("AUE:\(token.isEmpty)")
+        if token.isEmpty{
+        token = ""}
+        
+        api.tokenCheck(token: "") { (statusCode) in
             if (statusCode != 200) {
                 DispatchQueue.main.async() {
                     [unowned self] in

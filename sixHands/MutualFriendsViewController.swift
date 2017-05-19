@@ -24,7 +24,7 @@ class MutualFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print(flat_id)
+        
         back.frame = CGRect(x: screenSize.width*0.072, y: screenSize.height*0.0475, width: screenSize.width*0.024, height: screenSize.height*0.02548)
         mutualFriendsTableView.delegate = self
         mutualFriendsTableView.dataSource = self

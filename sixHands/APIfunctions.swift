@@ -19,9 +19,12 @@ class API{
     
    func flatsSingle(id:String,completionHandler:@escaping (_ js:Any) ->()){
         let fullRequest = domain + "/flats/single?id_flat=" + id
+    let realm = try! Realm()
+    let per = realm.object(ofType: person.self, forPrimaryKey: 1)
+    headers = ["Token":(per?.token)!]
+
    
-   
-        Alamofire.request(fullRequest).responseJSON { response in
+    Alamofire.request(fullRequest, headers:headers).responseJSON { response in
             let jsondata = JSON(data:response.data!)
             completionHandler(jsondata)
         }
@@ -66,6 +69,12 @@ class API{
             completionHandler(jsondata)
         }
     }
+    //UNDERGROUND
+    func metro(){
+    
+    }
+    
+    
     
     func tokenCheck(token:String,completionHandler:@escaping (_ js:Int) ->()){
         let fullRequest = domain + "/token"

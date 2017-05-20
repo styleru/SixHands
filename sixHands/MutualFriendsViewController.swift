@@ -29,14 +29,18 @@ class MutualFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         mutualFriendsTableView.delegate = self
         mutualFriendsTableView.dataSource = self
         mutualFriends.frame = CGRect(x: screenSize.width*0.072, y: screenSize.height*0.10794, width: screenSize.width*0.592, height: screenSize.height*0.05)
-        
+        mutualFriendsTableView.frame = CGRect(x: 0, y: mutualFriends.frame.maxY+12, width: screenSize.width, height: screenSize.height-mutualFriends.frame.maxY-12)
         mutualFriendsTableView.separatorStyle = .none
-        mutualFriendsTableView.rowHeight = screenSize.height * 0.4
+        mutualFriendsTableView.rowHeight = screenSize.width * 0.133+12
         back.addTarget(self, action: #selector(MutualFriendsViewController.backAction), for: .touchUpInside)
+        
+       
         
         api.flatsSingle(id: flat_id){(js:Any) in
             let jsondata = js as! JSON
+            
             if jsondata["mutual_friends"].array != nil {
+                print(jsondata["mutual_friends"].array)
                 self.friends = jsondata["mutual_friends"].array!
                 print("friends: \(self.friends)")
                 self.mutualFriendsTableView.reloadData()
@@ -71,6 +75,17 @@ class MutualFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mut", for: indexPath) as! MutualFriendsTableViewCell
+        
+        cell.avatar.frame = CGRect(x: mutualFriends.frame.minX, y: 6, width: screenSize.width*0.133, height: screenSize.width*0.133)
+        cell.avatar.layer.cornerRadius = cell.avatar.frame.width/2
+        cell.avatar.layer.masksToBounds = false
+        cell.avatar.clipsToBounds = true
+        cell.avatar.contentMode = .scaleAspectFill
+
+        cell.fullName.frame = CGRect(x: cell.avatar.frame.maxX+screenSize.width*0.042, y: cell.avatar.frame.midY-10, width: screenSize.width/2, height: 20)
+        
+        cell.sn.frame = CGRect(x: screenSize.width-screenSize.width*0.08-20, y:cell.fullName.frame.midY-10, width: 20, height: 20)
+        cell.sn.contentMode = .scaleAspectFill
         cell.fullName.text = friends[indexPath.row]["name"].string!
         cell.avatar.sd_setImage(with: URL(string: friends[indexPath.row]["photo"].string!))
         if friends[indexPath.row]["sn_type"].string! == "vk" {

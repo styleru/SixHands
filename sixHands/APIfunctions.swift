@@ -128,16 +128,29 @@ class API{
         
     }
     
-    class func Single(id:String)->JSON{
+     func Single(id:String, completionHandler: @escaping (Flat)->Void){
         let fullRequest = domain + "/flats/single?id_flat=" + id
-        var jsondata = JSON.null
+        let realm = try! Realm()
+        let per = realm.object(ofType: person.self, forPrimaryKey: 1)
+        headers = ["Token":(per?.token)!]
         
-        Alamofire.request(fullRequest).responseJSON { response in
-            jsondata = JSON(data:response.data!)
+        Alamofire.request(fullRequest, headers : headers).responseJSON { response in
+            var flat = Flat()
+            let jsondata = JSON(data:response.data!)
+            flat.avatarImage = jsondata["owner"]["avatar"].string!
+            flat.flatPrice = jsondata["price"].string!
+            flat.flatSubway = "Пока нема"
+            let number_of_friends = (jsondata["mutual_friends"].array?.count)!
+            flat.flatMutualFriends = "\(number_of_friends) общих друзей"
+            flat.flat_id = jsondata["id"].string!
+            
+            flat.imageOfFlat.append(jsondata["photos"][0]["url"].string!)
+            flat.numberOfRoomsInFlat = jsondata["rooms"].string!
+          
+
         }
-        
-        return jsondata
     }
+    
     
     
     func user(){

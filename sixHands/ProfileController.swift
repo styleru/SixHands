@@ -248,7 +248,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         //edit button
         let size = screen.width * 0.09
         cell.edit.frame = CGRect(x: screen.width - 15.0 - size, y: cell.flat.frame.maxY + screen.height * 0.009, width: size, height: size)
-        cell.edit.setImage(#imageLiteral(resourceName: "Edit"), for: .normal)
+        cell.edit.setImage(#imageLiteral(resourceName: "10"), for: .normal)
         cell.edit.tag = Int(flats[indexPath.row].flat_id)!
         cell.edit.addTarget(self, action: #selector(ProfileController.edit(_:)), for: .touchUpInside)
         

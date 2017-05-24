@@ -218,7 +218,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.priceLabel.frame = CGRect(x: screen.maxX - screen.height * 0.15 - 15.0, y: cell.flat.frame.minY + screen.height * 0.2, width: screen.height * 0.15, height: screen.height * 0.056)
         
         //subway
-        cell.subwayLabel.text = "\(flats[indexPath.row].flatSubway)"
+        //cell.subwayLabel.text = "\(flats[indexPath.row].flatSubway)"
         cell.subwayLabel.textColor = UIColor.black
         cell.subwayLabel.font = UIFont.systemFont(ofSize: 14.0)
         cell.subwayLabel.frame = CGRect(x: 15.0, y: cell.flat.frame.maxY + screen.height * 0.009, width: screen.height * 0.276, height: screen.height * 0.032)

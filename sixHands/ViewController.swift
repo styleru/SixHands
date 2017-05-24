@@ -29,6 +29,7 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
         VKSDKInstance = VKSdk.initialize(withAppId: "5446345")
         VKSDKInstance!.register(self)

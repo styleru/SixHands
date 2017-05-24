@@ -15,7 +15,7 @@ import RealmSwift
 
 public func FBLogin(){
     let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
-    fbLoginManager .logIn(withReadPermissions: ["public_profile","email"], handler: { (result, error) -> Void in
+    fbLoginManager .logIn(withReadPermissions: ["public_profile","email","user_friends","user_location"], handler: { (result, error) -> Void in
         if (error == nil){
             let fbloginresult : FBSDKLoginManagerLoginResult = result!
             if(fbloginresult.grantedPermissions != nil && fbloginresult.grantedPermissions.contains("email"))

@@ -22,7 +22,8 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     var offsetInc = 10
     let amount = 10
     var id = String()
-    
+    var station = String()
+    var station_color = UIColor()
     var dot = UIImageView()
     
     @IBOutlet weak var listOfFlats: UILabel!
@@ -35,15 +36,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
                 
-        api.flatsFilter(offset: 0, amount: amount, parameters: "") { (i) in
-            self.flats += i
-            OperationQueue.main.addOperation({()-> Void in
-                self.listOfFlatsTableView.reloadData()
-            })
-
-        }
-        
-
+      api.update_subway()
         //update(offset:0,amount: amount)
         //DOT BETWEEN SUBWAY
         dot.backgroundColor = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1)

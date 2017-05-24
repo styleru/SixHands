@@ -14,7 +14,8 @@ class Flat{
     
     var imageOfFlat = [String]()
     var avatarImage: String = ""
-    var flatSubway:String = ""
+    var idSubway:String = ""
+    var subway_color:String = ""
     var numberOfRoomsInFlat:String = ""
     var flatMutualFriends:String = ""
     var flatPrice:String = ""
@@ -35,10 +36,47 @@ class Flat{
     var animals = String()
     var longitude = String()
     var latitude = String()
+    var update_date = String()
+    var time = String()
+    var time_to_subway = String()
+    var floor = String()
+    var floors = String()
     
 }
 
+class station{
+    var id:String = ""
+    var name:String = ""
+    var id_underground_line:String = ""
+    //GET STATION
+   class func get_station(id:String, completionHandler: @escaping (_ Station:String,_ id:String)->Void){
+    
+    
+            let station = ""
+            let id = ""
+            completionHandler(station, id)
+    
+    }
 
+}
+
+class line{
+    var id:String = ""
+    var name:String = ""
+    var color:String = ""
+   
+    //GET LINE AND COLOR
+   class func get_color_of_station(id:String, completionHandler: @escaping (_ color:UIColor)->Void){
+        
+        
+            let color = "jj"
+            let full_color = UIColor(hexString:color+"ff")
+            completionHandler(full_color!)
+        
+    }
+
+    
+}
 
 
 

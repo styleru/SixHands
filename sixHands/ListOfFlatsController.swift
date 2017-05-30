@@ -50,11 +50,8 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         let per = realm.object(ofType: person.self, forPrimaryKey: 1)
         //let sub = realm.object(ofType: subway.self, forPrimaryKey: 2)
         //print("Subway:\(sub?.subway_lines)")
-      
         api.update_subway()
-        try! realm.write {
-            
-        }
+        
 
         
         

@@ -87,8 +87,7 @@ class API{
                     station.id = jsondata["stations"][i]["id"].string!
                     station.name = jsondata["stations"][i]["name"].string!
                     station.id_underground_line = jsondata["stations"][i]["id_underground_line"].string!
-                    if !subway.subwayStations.contains(station){
-                        subway.subwayStations.append(station)}
+                    subway.subwayStations.append(station)
                 }
                 let lines_array = jsondata["lines"].array?.count
                 for i in 0..<lines_array!{
@@ -96,14 +95,15 @@ class API{
                     line.id = jsondata["lines"][i]["id"].string!
                     line.name = jsondata["lines"][i]["name"].string!
                     line.color = jsondata["lines"][i]["color"].string!
-                    if !subway.subwayLines.contains(line){
                     subway.subwayLines.append(line)
-                    }
+                    
                 }
                 DispatchQueue(label: "background").async {
                     autoreleasepool {
                         let realm = try! Realm()
                         try! realm.write {
+                            realm.delete(realm.objects(Line))
+                            realm.delete(realm.objects(Station))
                             realm.add(subway, update: true)
                         }
                     }

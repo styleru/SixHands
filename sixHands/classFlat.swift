@@ -9,13 +9,12 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import RealmSwift
 
 class Flat{
     
     var imageOfFlat = [String]()
     var avatarImage: String = ""
-    var idSubway:String = ""
-    var subway_color:String = ""
     var numberOfRoomsInFlat:String = ""
     var flatMutualFriends:String = ""
     var flatPrice:String = ""
@@ -41,43 +40,41 @@ class Flat{
     var time_to_subway = String()
     var floor = String()
     var floors = String()
+    var subway = Subway()
     
 }
 
-class station{
+class Station: Object{
     var id:String = ""
     var name:String = ""
     var id_underground_line:String = ""
     //GET STATION
-   class func get_station(id:String, completionHandler: @escaping (_ Station:String,_ id:String)->Void){
-    
-    
-            let station = ""
-            let id = ""
-            completionHandler(station, id)
-    
+    class func get_station(id:String, completionHandler: @escaping (_ Station:String,_ id:String)->Void){
+        let station = ""
+        let id = ""
+        completionHandler(station, id)
+        
     }
-
+    
 }
 
-class line{
+class Line: Object
+{
     var id:String = ""
     var name:String = ""
     var color:String = ""
-   
-    //GET LINE AND COLOR
-   class func get_color_of_station(id:String, completionHandler: @escaping (_ color:UIColor)->Void){
-        
-        
-            let color = "jj"
-            let full_color = UIColor(hexString:color+"ff")
-            completionHandler(full_color!)
-        
-    }
-
-    
 }
 
+class Subway:Object{
+    dynamic var id = 2
+    let subwayLines = RealmSwift.List<Line>()
+    let subwayStations = RealmSwift.List<Station>()
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+    
+    
+}
 
 
 

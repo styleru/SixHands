@@ -20,8 +20,6 @@ class person: Object {
     dynamic var phone = ""
     dynamic var avatar_url = ""
     dynamic var token = ""
-    var subway_lines = [line]()
-    var subway_stations = [station]()
     override static func primaryKey() -> String? {
         return "id"
     }

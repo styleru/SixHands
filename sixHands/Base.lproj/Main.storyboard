@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="No2-mG-RJa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="No2-mG-RJa">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -155,12 +155,8 @@
                                                     <rect key="frame" x="0.0" y="123" width="343" height="2"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="6gh-A1-C63">
-                                                    <rect key="frame" x="-10" y="-6" width="363" height="198"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Метро" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cXa-7m-lIC">
-                                                    <rect key="frame" x="13" y="200" width="134" height="19"/>
+                                                    <rect key="frame" x="27" y="200" width="134" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -193,6 +189,18 @@
                                                         <color key="titleColor" red="0.39008748531341553" green="0.80578804016113281" blue="0.76642340421676636" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                 </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="6gh-A1-C63">
+                                                    <rect key="frame" x="-10" y="-6" width="363" height="198"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LyD-4W-iHl">
+                                                    <rect key="frame" x="7" y="203" width="12" height="12"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nfi-7A-jU3">
+                                                    <rect key="frame" x="116" y="203" width="12" height="12"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <accessibility key="accessibilityConfiguration" label="Текст-хуекст">
@@ -200,12 +208,14 @@
                                         </accessibility>
                                         <connections>
                                             <outlet property="avatar" destination="78b-AS-TrM" id="Aq1-o7-gvD"/>
+                                            <outlet property="dot" destination="Nfi-7A-jU3" id="YH0-tY-vyo"/>
                                             <outlet property="flatImage" destination="6gh-A1-C63" id="bai-MK-7fi"/>
                                             <outlet property="mutualFriends" destination="8H5-wH-Hkp" id="U2h-lw-blw"/>
                                             <outlet property="numberOfRooms" destination="Ofb-Vb-DKn" id="b7k-PY-Jln"/>
                                             <outlet property="price" destination="lAD-oV-HK9" id="kNc-6I-rjl"/>
                                             <outlet property="separator" destination="Kp1-G8-Xtb" id="DST-TR-4Gt"/>
                                             <outlet property="subway" destination="cXa-7m-lIC" id="naA-qP-Ju9"/>
+                                            <outlet property="subwayColor" destination="LyD-4W-iHl" id="RCA-Bu-ZXN"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

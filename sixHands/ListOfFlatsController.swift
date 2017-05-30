@@ -12,6 +12,7 @@ import CoreData
 import FBSDKCoreKit
 import FBSDKLoginKit
 import Alamofire
+import RealmSwift
 
 class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
     let screenSize: CGRect = UIScreen.main.bounds
@@ -24,8 +25,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     var id = String()
     var station = String()
     var station_color = UIColor()
-    var dot = UIImageView()
-    
+       
     @IBOutlet weak var listOfFlats: UILabel!
     
     @IBOutlet weak var favouritesOutlet: UIButton!
@@ -35,11 +35,28 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     override func viewDidLoad() {
+        api.flatsFilter(offset: 0, amount: amount, parameters: "[]") { (i) in
+            self.flats += i
+           
+            OperationQueue.main.addOperation({()-> Void in
                 
-      api.update_subway()
-        //update(offset:0,amount: amount)
-        //DOT BETWEEN SUBWAY
-        dot.backgroundColor = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1)
+                self.listOfFlatsTableView.reloadData()
+            })
+            
+        }
+        
+        let realm = try! Realm()
+        print("REALM FILE:\(Realm.Configuration().fileURL)")
+        let per = realm.object(ofType: person.self, forPrimaryKey: 1)
+        //let sub = realm.object(ofType: subway.self, forPrimaryKey: 2)
+        //print("Subway:\(sub?.subway_lines)")
+      
+        api.update_subway()
+        try! realm.write {
+            
+        }
+
+        
         
         //gray bar
         let grayBar = UIView()
@@ -98,7 +115,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     func refresh() {
         print("refresh...")
         flats = []
-        api.flatsFilter(offset: 0, amount: amount, parameters: "") { (i) in
+        api.flatsFilter(offset: 0, amount: amount, parameters: "[]") { (i) in
             self.flats += i
             OperationQueue.main.addOperation({()-> Void in
                 
@@ -114,7 +131,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         if indexPath.row == flats.count - 1 {
-            api.flatsFilter(offset: offsetInc, amount: amount, parameters: "") { (i) in
+            api.flatsFilter(offset: offsetInc, amount: amount, parameters: "[]") { (i) in
                 self.flats += i
                 OperationQueue.main.addOperation({()-> Void in
                     
@@ -223,7 +240,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBAction func new(_ sender: UIButton) {
         flats = []
-        api.flatsFilter(offset: 0, amount: amount, parameters: "") { (i) in
+        api.flatsFilter(offset: 0, amount: amount, parameters: "[]") { (i) in
             self.flats += i
             OperationQueue.main.addOperation({()-> Void in
                 
@@ -239,7 +256,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
    
     @IBAction func popular(_ sender: UIButton) {
         flats = []
-        api.flatsFilter(offset: 0, amount: amount, parameters: "") { (i) in
+        api.flatsFilter(offset: 0, amount: amount, parameters: "[]") { (i) in
             self.flats += i
             OperationQueue.main.addOperation({()-> Void in
                 
@@ -256,7 +273,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
         newOutlet.alpha = 0.2
         flats = []
-        api.flatsFilter(offset: 0, amount: amount, parameters: "") { (i) in
+        api.flatsFilter(offset: 0, amount: amount, parameters: "[]") { (i) in
             self.flats += i
             OperationQueue.main.addOperation({()-> Void in
                 

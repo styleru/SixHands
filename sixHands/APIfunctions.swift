@@ -17,14 +17,13 @@ class API{
     
     
     
-   func flatsSingle(id:String,completionHandler:@escaping (_ js:Any) ->()){
+    func flatsSingle(id:String,completionHandler:@escaping (_ js:Any) ->()){
         let fullRequest = domain + "/flats/single?id_flat=" + id
-    let realm = try! Realm()
-    let per = realm.object(ofType: person.self, forPrimaryKey: 1)
-    headers = ["Token":(per?.token)!]
-
-   
-    Alamofire.request(fullRequest, headers:headers).responseJSON { response in
+        let realm = try! Realm()
+        let per = realm.object(ofType: person.self, forPrimaryKey: 1)
+        headers = ["Token":(per?.token)!]
+        
+        Alamofire.request(fullRequest, headers:headers).responseJSON { response in
             let jsondata = JSON(data:response.data!)
             completionHandler(jsondata)
         }
@@ -36,23 +35,23 @@ class API{
         let realm = try! Realm()
         let per = realm.object(ofType: person.self, forPrimaryKey: 1)
         headers = ["Token":(per?.token)!]
-        let fullRequest = domain + "/flats/filter?select=all&offset=\(offset)&amount=\(amount)\(parameters)"
+        let fullRequest = domain + "/flats/filter?select=all&offset=\(offset)&amount=\(amount)&parameters=\(parameters)"
         
         Alamofire.request(fullRequest, headers : headers).responseJSON { response in
             var flats = [Flat]()
             let jsondata = JSON(data:response.data!)
-            let array = jsondata.array
+            let array = jsondata["flats"].array
             if (array?.count) != nil {
                 for i in 0..<array!.count{
                     let flat = Flat()
-                    flat.avatarImage = jsondata[i]["owner"]["avatar"].string!
-                    flat.flatPrice = jsondata[i]["price"].string!
-                    flat.idSubway = "Пока нема"
-                    let number_of_friends = (jsondata[i]["mutual_friends"].array?.count)!
+                    flat.avatarImage = jsondata["flats"][i]["owner"]["avatar"].string!
+                    flat.flatPrice = jsondata["flats"][i]["price"].string!
+                    //flat.idSubway = "Пока нема"
+                    let number_of_friends = (jsondata["flats"][i]["mutual_friends"].array?.count)!
                     flat.flatMutualFriends = "\(number_of_friends) общих друзей"
-                    flat.flat_id = jsondata[i]["id"].string!
-                    flat.imageOfFlat.append(jsondata[i]["photos"][0]["url"].string!)
-                    flat.numberOfRoomsInFlat = jsondata[i]["rooms"].string!
+                    flat.flat_id = jsondata["flats"][i]["id"].string!
+                    flat.imageOfFlat.append(jsondata["flats"][i]["photos"][0]["url"].string!)
+                    flat.numberOfRoomsInFlat = jsondata["flats"][i]["rooms"].string!
                     flats.append(flat)
                 }
             }
@@ -74,39 +73,51 @@ class API{
     
     //UNDERGROUND
     func update_subway(){
-        var stations = [station]()
-        var lines = [line]()
-        let realm = try! Realm()
-        let per = realm.object(ofType: person.self, forPrimaryKey: 1)
-        let fullRequest = domain + "/underground?id_city=1"
+        
+        var subway = Subway()
+        let fullRequest = domain + "/underground"
         Alamofire.request(fullRequest).responseJSON { response in
+            
             let jsondata = JSON(data:response.data!)
             if !jsondata.isEmpty{
-            let stations_array = jsondata["stations"].array?.count
+                
+                let stations_array = jsondata["stations"].array?.count
                 for i in 0..<stations_array!{
-                let Station = station()
-                    Station.id = jsondata["stations"][i]["id"].string!
-                    Station.name = jsondata["stations"][i]["name"].string!
-                    Station.id_underground_line = jsondata["stations"][i]["id_underground_line"].string!
-                    stations.append(Station)
+                    let station = Station()
+                    station.id = jsondata["stations"][i]["id"].string!
+                    station.name = jsondata["stations"][i]["name"].string!
+                    station.id_underground_line = jsondata["stations"][i]["id_underground_line"].string!
+                    if !subway.subwayStations.contains(station){
+                        subway.subwayStations.append(station)}
                 }
-            let lines_array = jsondata["lines"].array?.count
+                let lines_array = jsondata["lines"].array?.count
                 for i in 0..<lines_array!{
-                    let Line = line()
-                    Line.id = jsondata["lines"][i]["id"].string!
-                    Line.name = jsondata["lines"][i]["name"].string!
-                    Line.color = jsondata["lines"][i]["color"].string!
-                    lines.append(Line)
+                    let line = Line()
+                    line.id = jsondata["lines"][i]["id"].string!
+                    line.name = jsondata["lines"][i]["name"].string!
+                    line.color = jsondata["lines"][i]["color"].string!
+                    if !subway.subwayLines.contains(line){
+                    subway.subwayLines.append(line)
+                    }
+                }
+                DispatchQueue(label: "background").async {
+                    autoreleasepool {
+                        let realm = try! Realm()
+                        try! realm.write {
+                            realm.add(subway, update: true)
+                        }
+                    }
                 }
 
             }
-         //
-           
+            
+            
+            
         }
-
+        
     }
-       
-   
+    
+    
     
     
     //TOKEN CHECK
@@ -122,7 +133,7 @@ class API{
             let jsondata = (response.response?.statusCode)!
             completionHandler(jsondata)
         }
-
+        
     }
     
     func upload(photoData: [Data], parameters: [String : String], completionHandler:@escaping (_ js:Any) ->()){
@@ -162,24 +173,24 @@ class API{
         
     }
     
-     func Single(id:String, completionHandler: @escaping (Flat)->Void){
+    func Single(id:String, completionHandler: @escaping (Flat)->Void){
         let fullRequest = domain + "/flats/single?id_flat=" + id
         let realm = try! Realm()
         let per = realm.object(ofType: person.self, forPrimaryKey: 1)
         headers = ["Token":(per?.token)!]
-       
+        
         Alamofire.request(fullRequest, headers : headers).responseJSON { response in
             var flat = Flat()
             let jsondata = JSON(data:response.data!)
             flat.avatarImage = jsondata["owner"]["avatar"].string!
             flat.flatPrice = jsondata["price"].string!
-            flat.idSubway = "Пока нема"
+           // flat.idSubway = "Пока нема"
             let number_of_friends = (jsondata["mutual_friends"].array?.count)!
             flat.flatMutualFriends = "\(number_of_friends) общих друзей"
             flat.flat_id = jsondata["id"].string!
             let photoArray:Int = (jsondata["photos"].array?.count)!
             for i in 0..<photoArray{
-            flat.imageOfFlat.append(jsondata["photos"][i]["url"].string!)
+                flat.imageOfFlat.append(jsondata["photos"][i]["url"].string!)
             }
             flat.numberOfRoomsInFlat = jsondata["rooms"].string!
             flat.update_date = jsondata["update_date"].string!

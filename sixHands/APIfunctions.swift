@@ -167,30 +167,12 @@ class API{
         let realm = try! Realm()
         let per = realm.object(ofType: person.self, forPrimaryKey: 1)
         headers = ["Token":(per?.token)!]
-<<<<<<< HEAD
-<<<<<<< HEAD
-        let flat = Flat()
         Alamofire.request(fullRequest, headers : headers).responseJSON { response in
             
-            let jsondata = JSON(data:response.data!)
-            flat.avatarImage = jsondata["owner"]["avatar"].string!
-            flat.flatPrice = jsondata["price"].string!
-=======
-       
-        Alamofire.request(fullRequest, headers : headers).responseJSON { response in
-=======
-       
-        Alamofire.request(fullRequest, headers : headers).responseJSON { response in
->>>>>>> origin/master
             var flat = Flat()
             var jsondata = JSON(data:response.data!)
             flat.avatarImage = jsondata["owner"]["avatar"].string ?? ""
             flat.flatPrice = jsondata["price"].string ?? "-"
-
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
            // flat.idSubway = "Пока нема"
             let number_of_friends = jsondata["mutual_friends"].array?.count ?? 0
             flat.flatMutualFriends = "\(number_of_friends) общих друзей"
@@ -199,17 +181,6 @@ class API{
             for i in 0..<photoArray{
                 flat.imageOfFlat.append(jsondata["photos"][i]["url"].string!)
             }
-<<<<<<< HEAD
-<<<<<<< HEAD
-            flat.numberOfRoomsInFlat = jsondata["rooms"].string!
-            flat.update_date = jsondata["update_date"].string!
-            flat.time_to_subway = jsondata["to_underground"].string!
-            flat.square = jsondata["square"].string!
-            flat.floor = jsondata["floor"].string!
-            flat.floors = jsondata["floors"].string!
-=======
-=======
->>>>>>> origin/master
             flat.numberOfRoomsInFlat = jsondata["rooms"].string ?? "-"
             if let full = jsondata["update_date"].string{
             flat.time = full.substring(from:full.index(full.startIndex, offsetBy:11))
@@ -227,10 +198,6 @@ class API{
                 flat.options.append(jsondata["options"][i].string!)
             }
             print(flat.options)
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
             completionHandler(flat)
         }
         

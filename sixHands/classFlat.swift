@@ -63,7 +63,7 @@ class Flat{
     
 }
 
-/*class Station: Object{
+class Station: Object{
     var stationId:String = ""
     var name:String = ""
     var id_underground_line:String = ""
@@ -92,9 +92,3 @@ class Subway:Object{
     }
     
 }
-
-
-
-
-
-*/

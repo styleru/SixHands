@@ -34,33 +34,8 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
 
         // Do any additional setup after loading the view.
         
-        UIApplication.shared.statusBarStyle = .default
-        
-        //navigationController setup
-        navigationItem.title = "Расположение"
-        
-        let cancel = UIButton()
-        cancel.setTitle("Cancel", for: .normal)
-        cancel.setTitleColor(UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1), for: .normal)
-        cancel.frame = CGRect(x: 0, y: 0, width: 65, height: 25)
-        cancel.addTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
-        
-        let leftBarButton = UIBarButtonItem()
-        leftBarButton.customView = cancel
-        self.navigationItem.leftBarButtonItem = leftBarButton
-        
-        //continue button
-        let continueButton = UIButton()
-        continueButton.frame = CGRect(x: 0.0, y: screen.maxY - 55.0, width: screen.width, height: 55.0)
-        continueButton.addTarget(self, action: #selector(RentAddressController.continueButtonAction), for: .touchUpInside)
-        continueButton.backgroundColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
-        continueButton.setTitle("Далее", for: .normal)
-        continueButton.setTitleColor(UIColor.white, for: .normal)
-        continueButton.titleLabel?.font = UIFont.systemFont(ofSize: 20.0, weight: UIFontWeightMedium)
-        self.view.addSubview(continueButton)
-        
         //address
-        addressField.frame = CGRect(x: screen.minX + 50.0, y: 74, width: screen.width - 100.0, height: 40.0)
+        addressField.frame = CGRect(x: screen.minX + 50.0, y: 74 + 52, width: screen.width - 100.0, height: 40.0)
         addressField.delegate = self
         addressField.placeholder = "Где вы сдаёте квартиру?"
         addressField.font = UIFont.systemFont(ofSize: 18.0, weight: UIFontWeightLight)
@@ -71,6 +46,8 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
         let greyView = UIView()
         greyView.frame = CGRect(x: 0.0, y: addressField.frame.minY - 10, width: screen.width, height: 60)
         greyView.backgroundColor = UIColor(red: 244/255, green: 244/255, blue: 244/255, alpha: 1.0)
+        greyView.layer.borderWidth = 1
+        greyView.layer.borderColor = UIColor(red: 220/255.0, green:220/255.0, blue:220/255.0, alpha: 1.0).cgColor
         self.view.insertSubview(greyView, belowSubview: addressField)
         
         let border = UIView()
@@ -209,17 +186,6 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
             latitudes = []
             self.table.reloadData()
         }
-    }
-    
-    func continueButtonAction() {
-        print("continue...")
-        print("long: \(RentAddressController.flatToRent.longitude), lat: \(RentAddressController.flatToRent.latitude)")
-        performSegue(withIdentifier: "continue", sender: self)
-    }
-    
-    func cancelButtonAction() {
-        performSegue(withIdentifier: "cancelRent", sender: self)
-        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

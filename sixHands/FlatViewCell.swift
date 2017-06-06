@@ -27,9 +27,8 @@ class FlatViewCell: UITableViewCell {
     let priceLabel = UILabel()
     let subwayLabel = UILabel()
     let rooms = UILabel()
-    let views = UILabel()
-    let new = UILabel()
     let edit = UIButton()
+    let sep = UIImageView()
     
     let switchButton = UISwitch()
     
@@ -51,11 +50,10 @@ class FlatViewCell: UITableViewCell {
         
         self.backgroundColor = UIColor.clear
         contentView.addSubview(flat)
+        contentView.addSubview(sep)
         contentView.addSubview(priceLabel)
         contentView.addSubview(subwayLabel)
         contentView.addSubview(rooms)
-        contentView.addSubview(views)
-        contentView.addSubview(new)
         contentView.addSubview(switchButton)
         contentView.addSubview(edit)
         

@@ -22,12 +22,16 @@
 		5E9C8A722D7580992749666F /* Pods_sixHandsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36FDA856FD8EE1986F732C03 /* Pods_sixHandsUITests.framework */; };
 		7E2A8EE45F0BB582F5921732 /* Pods_sixHands.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6780D743E810AEE48781C19C /* Pods_sixHands.framework */; };
 		9D33CA5E1E4A6F1B000FFAA9 /* RentParamsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D33CA5D1E4A6F1B000FFAA9 /* RentParamsController.swift */; };
+		9D4DD7DF1EE54AFC00633DFE /* MasterContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4DD7DE1EE54AFC00633DFE /* MasterContainer.swift */; };
+		9D4DD7E11EE54DEE00633DFE /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4DD7E01EE54DEE00633DFE /* Empty.swift */; };
+		9D4DD7E31EE56D3C00633DFE /* RentCommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4DD7E21EE56D3C00633DFE /* RentCommentController.swift */; };
 		9D6B11C81ECB7C27006D38F7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D6B11C71ECB7C27006D38F7 /* CoreLocation.framework */; };
 		9D6F7FC01E9B77800012AFE8 /* EditFlatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6F7FBF1E9B77800012AFE8 /* EditFlatController.swift */; };
 		9D6FE0E71E42437C00133C3F /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6FE0E61E42437C00133C3F /* ProfileController.swift */; };
 		9D869E7D1E9B675F00C18EB7 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D869E7C1E9B675F00C18EB7 /* Entry.swift */; };
 		9D8D64481E47C03100019F22 /* RentAddressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8D64471E47C03100019F22 /* RentAddressController.swift */; };
 		9DC414C01E4B4D0B001A9385 /* RentLastPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC414BF1E4B4D0B001A9385 /* RentLastPageController.swift */; };
+		9DEB382C1EDF5C8800303561 /* NumbersContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEB382B1EDF5C8800303561 /* NumbersContainer.swift */; };
 		A35074894FDA36A12622C1DD /* Pods_sixHandsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CEC0A982CA57FD3764CF30C /* Pods_sixHandsTests.framework */; };
 		DAB274111E2676CC00A06E11 /* VK_ios_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB274101E2676CC00A06E11 /* VK_ios_sdk.framework */; };
 		DAB274131E27B85D00A06E11 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB274121E27B85D00A06E11 /* SwiftyJSON.framework */; };
@@ -79,12 +83,16 @@
 		8CEC0A982CA57FD3764CF30C /* Pods_sixHandsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sixHandsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		97141A11E80A7E41C9BE4B60 /* Pods-sixHandsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sixHandsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sixHandsTests/Pods-sixHandsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9D33CA5D1E4A6F1B000FFAA9 /* RentParamsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RentParamsController.swift; sourceTree = "<group>"; };
+		9D4DD7DE1EE54AFC00633DFE /* MasterContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterContainer.swift; sourceTree = "<group>"; };
+		9D4DD7E01EE54DEE00633DFE /* Empty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
+		9D4DD7E21EE56D3C00633DFE /* RentCommentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RentCommentController.swift; sourceTree = "<group>"; };
 		9D6B11C71ECB7C27006D38F7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		9D6F7FBF1E9B77800012AFE8 /* EditFlatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFlatController.swift; sourceTree = "<group>"; };
 		9D6FE0E61E42437C00133C3F /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		9D869E7C1E9B675F00C18EB7 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		9D8D64471E47C03100019F22 /* RentAddressController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RentAddressController.swift; sourceTree = "<group>"; };
 		9DC414BF1E4B4D0B001A9385 /* RentLastPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RentLastPageController.swift; sourceTree = "<group>"; };
+		9DEB382B1EDF5C8800303561 /* NumbersContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumbersContainer.swift; sourceTree = "<group>"; };
 		AAA86B416A6473A83F995839 /* Pods-sixHandsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sixHandsUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-sixHandsUITests/Pods-sixHandsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B7AF76E87CD3942874EF5E1F /* Pods-sixHands.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sixHands.release.xcconfig"; path = "Pods/Target Support Files/Pods-sixHands/Pods-sixHands.release.xcconfig"; sourceTree = "<group>"; };
 		DAB2740D1E2676B100A06E11 /* sixHands-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sixHands-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -222,8 +230,12 @@
 				408376921E4B4C3C001B8F16 /* FlatViewController.swift */,
 				9D6FE0E61E42437C00133C3F /* ProfileController.swift */,
 				9D6F7FBF1E9B77800012AFE8 /* EditFlatController.swift */,
+				9D4DD7E01EE54DEE00633DFE /* Empty.swift */,
+				9D4DD7DE1EE54AFC00633DFE /* MasterContainer.swift */,
+				9DEB382B1EDF5C8800303561 /* NumbersContainer.swift */,
 				9D8D64471E47C03100019F22 /* RentAddressController.swift */,
 				9D33CA5D1E4A6F1B000FFAA9 /* RentParamsController.swift */,
+				9D4DD7E21EE56D3C00633DFE /* RentCommentController.swift */,
 				9DC414BF1E4B4D0B001A9385 /* RentLastPageController.swift */,
 				406BC1991E7FC8BA000ECBE2 /* MutualFriendsViewController.swift */,
 			);
@@ -461,7 +473,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B379DF48C9DF859361F6E4BD /* [CP] Embed Pods Frameworks */ = {
@@ -506,7 +518,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		DD815C7A80DF7387AF815B51 /* [CP] Copy Pods Resources */ = {
@@ -536,7 +548,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -548,10 +560,14 @@
 			files = (
 				408A687C1E424A8900FEA8EF /* APIfunctions.swift in Sources */,
 				9D869E7D1E9B675F00C18EB7 /* Entry.swift in Sources */,
+				9D4DD7E31EE56D3C00633DFE /* RentCommentController.swift in Sources */,
 				405F99411E75E09C002EB303 /* person.swift in Sources */,
+				9DEB382C1EDF5C8800303561 /* NumbersContainer.swift in Sources */,
 				406BC19C1E7FCA06000ECBE2 /* MutualFriendsTableViewCell.swift in Sources */,
+				9D4DD7E11EE54DEE00633DFE /* Empty.swift in Sources */,
 				408376931E4B4C3C001B8F16 /* FlatViewController.swift in Sources */,
 				9D8D64481E47C03100019F22 /* RentAddressController.swift in Sources */,
+				9D4DD7DF1EE54AFC00633DFE /* MasterContainer.swift in Sources */,
 				9D6F7FC01E9B77800012AFE8 /* EditFlatController.swift in Sources */,
 				9D6FE0E71E42437C00133C3F /* ProfileController.swift in Sources */,
 				404E70E11E2EBF2800F94277 /* FacebookAuth.swift in Sources */,

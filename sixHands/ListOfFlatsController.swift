@@ -46,19 +46,16 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         }
         
         let realm = try! Realm()
-        print("REALM FILE:\(Realm.Configuration().fileURL)")
-        let per = realm.object(ofType: person.self, forPrimaryKey: 1)
+        //print("REALM FILE:\(Realm.Configuration().fileURL)")
+        //let per = realm.object(ofType: person.self, forPrimaryKey: 1)
+        let sub = realm.object(ofType: Subway.self, forPrimaryKey: 2)
         
-       // api.update_subway()
+        api.update_subway()
      
-        
-        
-
-        
-       // let delayTime = DispatchTime.now()+5
-       /* DispatchQueue.main.asyncAfter(deadline: delayTime) {
-            print(sub?.subwayLines[3].name)
-        }*/
+        let lineName = sub?.subwayLines[0]
+        print("lineName: \((lineName?["name"])!)")
+        print("lineColor: \((lineName?["color"])!)")
+        print("lineID: \((lineName?["lineId"])!)")
         
         //gray bar
         let grayBar = UIView()
@@ -157,23 +154,20 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
         //CONSTRAINTS
         cell.flatImage.bounds = CGRect(x: 0, y: 0.0, width: screenSize.width * 0.91466 , height: screenSize.height * 0.27436282 )
-         cell.flatImage.center = CGPoint(x: cell.bounds.width / 2, y: cell.flatImage.frame.height/2 + 20.0)
+        cell.flatImage.center = CGPoint(x: cell.bounds.width / 2, y: cell.flatImage.frame.height/2 + 20.0)
         
         cell.subway.center = CGPoint(x:cell.flatImage.frame.minX+cell.subway.frame.width/2 + 4, y: cell.flatImage.frame.maxY + cell.subway.frame.height )
         cell.mutualFriends.bounds = CGRect(x: 0, y: 0, width: screenSize.width * 0.3 , height: screenSize.height * 0.03)
-        cell.mutualFriends.center = CGPoint(x:cell.flatImage.frame.minX+cell.mutualFriends.frame.width/2 + 4, y: cell.subway.frame.maxY+15)
+        cell.mutualFriends.center = CGPoint(x:cell.flatImage.frame.minX+cell.mutualFriends.frame.width/2 + 4, y: cell.subway.frame.maxY+20)
         
         cell.price.bounds = CGRect(x: 0, y: 0, width:screenSize.width * 0.25066 , height: screenSize.height * 0.05997)
-        cell.price.center = CGPoint(x:cell.flatImage.frame.maxX-cell.price.frame.width/2, y:cell.flatImage.frame.height * 0.8)
+        cell.price.center = CGPoint(x:cell.flatImage.frame.maxX-cell.price.frame.width/2, y:cell.flatImage.frame.height * 0.95)
         
         cell.subway.bounds = CGRect(x: 0, y: 0, width:screenSize.width * 0.3 , height: screenSize.height * 0.02698)
-        cell.subway.center = CGPoint(x:cell.flatImage.frame.minX+cell.subway.frame.width/2 + 4, y: cell.flatImage.frame.maxY + cell.subway.frame.height )
-        
-        
+        cell.subway.center = CGPoint(x:cell.flatImage.frame.minX+cell.subway.frame.width/2 + 4, y: cell.flatImage.frame.maxY + cell.subway.frame.height + 5.0)
         
         cell.numberOfRooms.bounds = CGRect(x: 0, y: 0, width:screenSize.width * 0.3, height: screenSize.height * 0.02698)
-        cell.numberOfRooms.center = CGPoint(x:cell.subway.frame.maxX+10+cell.numberOfRooms.frame.width/2, y:cell.flatImage.frame.maxY + cell.subway.frame.height )
-        
+        cell.numberOfRooms.center = CGPoint(x:cell.subway.frame.maxX+10+cell.numberOfRooms.frame.width/2, y:cell.flatImage.frame.maxY + cell.subway.frame.height + 5.0)
         
         //cell.dot.layer.cornerRadius = cell.dot.frame.size.width / 2
         cell.avatar.bounds = CGRect(x: 0, y: 0, width:screenSize.width * 0.11733 , height: screenSize.width * 0.11733)

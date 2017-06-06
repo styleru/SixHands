@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sixHands/FlatViewController.swift"
-            timestampString = "518373073.643546"
+            timestampString = "518468587.775084"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "269"
-            endingLineNumber = "269"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
             landmarkName = "scrollViewDidScroll(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -121,30 +121,61 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "sixHands/APIfunctions.swift"
-            timestampString = "518440883.055775"
+            filePath = "sixHands/classFlat.swift"
+            timestampString = "518454459.387691"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
-            landmarkName = "flatSingle(id:completionHandler:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sixHands/FlatViewController.swift"
-            timestampString = "518373073.643546"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "buttonOwner"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "sixHands.Flat.numberOfRoomsInFlat.getter : Swift.String"
+                  moduleName = "sixHands"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kovalchuk/Desktop/sixHands/sixHands/classFlat.swift"
+                  timestampString = "518454460.735791"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "41">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "sixHands.Flat.numberOfRoomsInFlat.setter : Swift.String"
+                  moduleName = "sixHands"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kovalchuk/Desktop/sixHands/sixHands/classFlat.swift"
+                  timestampString = "518454460.742205"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "85">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "sixHands.Flat.init () -&gt; sixHands.Flat"
+                  moduleName = "sixHands"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kovalchuk/Desktop/sixHands/sixHands/classFlat.swift"
+                  timestampString = "518454460.746043"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "81">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

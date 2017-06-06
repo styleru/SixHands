@@ -31,35 +31,8 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
         //view bounds
         let screen = self.view.frame
         
-        //gray bar
-        let grayBar = UIView()
-        grayBar.frame = CGRect(x: 0.0, y: 0.0, width: screen.width, height: 20.0)
-        grayBar.backgroundColor = UIColor.black
-        grayBar.alpha = 0.37
-        self.view.addSubview(grayBar)
-        
-        //continue button
-        let continueButton = UIButton()
-        continueButton.frame = CGRect(x: 0.0, y: screen.maxY - 55.0, width: screen.width, height: 55.0)
-        continueButton.addTarget(self, action: #selector(RentLastPageController.continueButtonAction), for: .touchUpInside)
-        continueButton.backgroundColor = UIColor(red: 60/255, green: 70/255, blue: 77/255, alpha: 1)
-        continueButton.setTitle("Опубликовать", for: .normal)
-        continueButton.setTitleColor(UIColor.white, for: .normal)
-        continueButton.titleLabel?.font = UIFont.systemFont(ofSize: 20.0, weight: UIFontWeightMedium)
-        self.view.addSubview(continueButton)
-        
-        //cancel button
-        let cancelButton = UIButton()
-        cancelButton.frame = CGRect(x: screen.maxX - 15.0 - 90.0, y: 40.0, width: 100.0, height: 20.0)
-        cancelButton.addTarget(self, action: #selector(RentLastPageController.cancelButtonAction), for: .touchUpInside)
-        cancelButton.backgroundColor = UIColor.clear
-        cancelButton.setTitle("Отменить", for: .normal)
-        cancelButton.setTitleColor(UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.7), for: .normal)
-        cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 17.0, weight: UIFontWeightRegular)
-        self.view.addSubview(cancelButton)
-        
         //main scroll
-        mainScrollView.frame = CGRect(x: 0.0, y: screen.height * 0.12, width: screen.width, height: screen.height - 55.0 - screen.height * 0.12)
+        mainScrollView.frame = CGRect(x: 0.0, y: screen.height * 0.12 + 52, width: screen.width, height: screen.height - 55.0 - screen.height * 0.12)
         mainScrollView.contentSize.height = mainScrollView.frame.height
         mainScrollView.contentSize.width = screen.width
         mainScrollView.showsVerticalScrollIndicator = false

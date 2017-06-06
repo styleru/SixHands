@@ -61,15 +61,9 @@ class API{
     
     
     //UNDERGROUND
-  /*  func update_subway(){
+    func update_subway(){
         let fullRequest = domain + "/underground"
-        let realm = try! Realm()
-        let realm1 = try! Realm()
-        let st = realm.object(ofType: Station.self, forPrimaryKey: 10)
-        /*try! realm.write {
-            realm.delete(realm.objects(Line))
-            realm.delete(realm.objects(Station))
-        }*/
+        let subway = Subway()
 
         Alamofire.request(fullRequest).responseJSON { response in
             
@@ -79,17 +73,10 @@ class API{
                 let stations_array = jsondata["stations"].array?.count
                 for i in 0..<stations_array!{
                     let station = Station()
-                    st?.stationId = jsondata["stations"][i]["id"].string!
-                    st?.name = jsondata["stations"][i]["name"].string!
-                    st?.id_underground_line = jsondata["stations"][i]["id_underground_line"].string!
-                    DispatchQueue(label: "background22").async {
-                        autoreleasepool {
-                            let realm = try! Realm()
-                            try! realm.write {
-                            realm.add(st!, update: true)
-                            }
-                        }
-                    }
+                    station.stationId = jsondata["stations"][i]["id"].string!
+                    station.name = jsondata["stations"][i]["name"].string!
+                    station.id_underground_line = jsondata["stations"][i]["id_underground_line"].string!
+                    subway.subwayStations.append(station)
                     
                 }
                 let lines_array = jsondata["lines"].array?.count
@@ -98,18 +85,19 @@ class API{
                     line.lineId = jsondata["lines"][i]["id"].string!
                     line.name = jsondata["lines"][i]["name"].string!
                     line.color = jsondata["lines"][i]["color"].string!
+                    subway.subwayLines.append(line)
                  
                 }
-              /*  DispatchQueue(label: "background2").async {
+                DispatchQueue(label: "background2").async {
                     autoreleasepool {
                         let realm = try! Realm()
                         try! realm.write {
-                            realm.delete(realm.objects(Line))
-                            realm.delete(realm.objects(Station))
+                            //realm.delete(realm.objects(Line))
+                            //realm.delete(realm.objects(Station))
                             realm.add(subway, update: true)
                         }
                     }
-                }*/
+                }
 
             }
             
@@ -119,7 +107,6 @@ class API{
         
     }
     
-    */
     
     
     //TOKEN CHECK
@@ -180,32 +167,64 @@ class API{
         let realm = try! Realm()
         let per = realm.object(ofType: person.self, forPrimaryKey: 1)
         headers = ["Token":(per?.token)!]
-        var flat = Flat()
+<<<<<<< HEAD
+        let flat = Flat()
         Alamofire.request(fullRequest, headers : headers).responseJSON { response in
+            
             let jsondata = JSON(data:response.data!)
             flat.avatarImage = jsondata["owner"]["avatar"].string!
             flat.flatPrice = jsondata["price"].string!
+=======
+       
+        Alamofire.request(fullRequest, headers : headers).responseJSON { response in
+            var flat = Flat()
+            var jsondata = JSON(data:response.data!)
+            flat.avatarImage = jsondata["owner"]["avatar"].string ?? ""
+            flat.flatPrice = jsondata["price"].string ?? "-"
+
+>>>>>>> origin/master
            // flat.idSubway = "Пока нема"
-            let number_of_friends = (jsondata["mutual_friends"].array?.count)!
+            let number_of_friends = jsondata["mutual_friends"].array?.count ?? 0
             flat.flatMutualFriends = "\(number_of_friends) общих друзей"
-            flat.flat_id = jsondata["id"].string!
+            flat.flat_id = jsondata["id"].string ?? "0"
             let photoArray:Int = (jsondata["photos"].array?.count)!
             for i in 0..<photoArray{
                 flat.imageOfFlat.append(jsondata["photos"][i]["url"].string!)
             }
+<<<<<<< HEAD
             flat.numberOfRoomsInFlat = jsondata["rooms"].string!
             flat.update_date = jsondata["update_date"].string!
             flat.time_to_subway = jsondata["to_underground"].string!
             flat.square = jsondata["square"].string!
             flat.floor = jsondata["floor"].string!
             flat.floors = jsondata["floors"].string!
+=======
+            flat.numberOfRoomsInFlat = jsondata["rooms"].string ?? "-"
+            if let full = jsondata["update_date"].string{
+            flat.time = full.substring(from:full.index(full.startIndex, offsetBy:11))
+            flat.update_date = full.substring(to: full.index(full.startIndex, offsetBy:10))
+            }
+            flat.time_to_subway = jsondata["to_underground"].string ?? "-"
+            flat.square = jsondata["square"].string ?? "-"
+            flat.floor = jsondata["floor"].string ?? "-"
+            flat.floors = jsondata["floors"].string ?? "-"
+            flat.ownerName = jsondata["owner"]["first_name"].string ?? "Неопределен"
+            flat.address = jsondata["address"].string ?? "Адрес не указан"
+            flat.comments = jsondata["description"].string ?? "Описание не указано"
+            let optionsCount = jsondata["options"].array?.count ?? 0
+            for i in 0..<optionsCount{
+                flat.options.append(jsondata["options"][i].string!)
+            }
+            print(flat.options)
+>>>>>>> origin/master
+            completionHandler(flat)
         }
-        completionHandler(flat)
+        
     }
     
     
     
-    func user(){
+    func options(){
     }
     
 }

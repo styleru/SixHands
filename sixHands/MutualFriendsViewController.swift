@@ -35,12 +35,12 @@ class MutualFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         back.addTarget(self, action: #selector(MutualFriendsViewController.backAction), for: .touchUpInside)
         
        
-        
+       
        /* api.flatsSingle(id: flat_id){(js:Any) in
             let jsondata = js as! JSON
-            
+            print(jsondata)
             if jsondata["mutual_friends"].array != nil {
-                print(jsondata["mutual_friends"].array)
+                print(jsondata["mutual_friends"].array!)
                 self.friends = jsondata["mutual_friends"].array!
                 self.mutualFriendsTableView.reloadData()
             }

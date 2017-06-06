@@ -26,11 +26,16 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         let per = realm.object(ofType: person.self, forPrimaryKey: 1)
-        print(per?.token)
+        //print(per?.token)
         //parameters for request & request
         let params = "&parameters=%5B%7B%22key%22%3A%22id_user%22%2C%22value%22%3A%22\(UserDefaults.standard.value(forKey: "id_user")!))%22%2C%20%22criterion%22%3A%22single%22%7D%5D"
         
-        //get(sorting: "last", parameters: params, amount: 20)
+        api.flatsFilter(offset: 0, amount: 20, parameters: params) { (flat) in
+            self.flats += flat
+            OperationQueue.main.addOperation({()-> Void in
+                self.table.reloadData()
+            })
+        }
         
 
         //view bounds
@@ -129,12 +134,13 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         //tableView
         table.frame = CGRect(x: 0.0, y: vkButton.frame.maxY + 15.0, width: screen.width, height: screen.height - 167.0 - 124.0)
-        table.rowHeight = screen.height * 0.375
+        table.rowHeight = screen.height * 0.4
         table.delegate = self
         table.dataSource = self
         table.register(FlatViewCell.self, forCellReuseIdentifier: "cell")
         table.separatorInset.left = 15.0
         table.separatorInset.right = 15.0
+        table.separatorStyle = .none
         self.view.addSubview(table)
         
         //pull
@@ -156,8 +162,13 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         print("refresh...")
         flats = []
         let params = "&parameters=%5B%7B%22key%22%3A%22id_user%22%2C%22value%22%3A%22\(UserDefaults.standard.value(forKey: "id_user")!)%22%2C%20%22criterion%22%3A%22single%22%7D%5D"
-        //get(sorting: "all", parameters: params, amount: 20)
-        self.table.reloadData()
+        api.flatsFilter(offset: 0, amount: 20, parameters: params) { (flat) in
+            self.flats += flat
+            OperationQueue.main.addOperation({()-> Void in
+                self.table.reloadData()
+            })
+        }
+        //self.table.reloadData()
         self.refreshControl.endRefreshing()
     }
     
@@ -205,9 +216,11 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         let screen = self.view.frame
         
         //image
+        cell.flat.frame = CGRect(x: 15.0, y: 10.0, width: screen.width - 30.0, height: screen.height * 0.3)
+        cell.flat.center = CGPoint(x: cell.bounds.width / 2, y: cell.flat.frame.height/2 + 20.0)
+        cell.flat.contentMode = .scaleAspectFill
+        cell.flat.clipsToBounds = true
         cell.flat.sd_setImage(with: URL(string : flats[indexPath.row].imageOfFlat[0]))
-        cell.flat.frame = CGRect(x: 15.0, y: 10.0, width: screen.width - 30.0, height: tableView.rowHeight * 0.7)
-        cell.flat.contentMode = .scaleToFill
         
         //price
         cell.priceLabel.text = "\(flats[indexPath.row].flatPrice) Р"
@@ -215,44 +228,46 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.priceLabel.textAlignment = .center
         cell.priceLabel.font = UIFont(name: "Lato-Medium", size: 16.0)
         cell.priceLabel.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.36)
-        cell.priceLabel.frame = CGRect(x: screen.maxX - screen.height * 0.15 - 15.0, y: cell.flat.frame.minY + screen.height * 0.2, width: screen.height * 0.15, height: screen.height * 0.056)
+        cell.priceLabel.frame = CGRect(x: screen.maxX - screen.height * 0.15 - 15.0, y: cell.flat.frame.height * 0.87, width: screen.height * 0.15, height: screen.height * 0.056)
         
         //subway
-        //cell.subwayLabel.text = "\(flats[indexPath.row].flatSubway)"
-        cell.subwayLabel.textColor = UIColor.black
-        cell.subwayLabel.font = UIFont.systemFont(ofSize: 14.0)
-        cell.subwayLabel.frame = CGRect(x: 15.0, y: cell.flat.frame.maxY + screen.height * 0.009, width: screen.height * 0.276, height: screen.height * 0.032)
+        cell.subwayLabel.text = "Арбатская"//"\(flats[indexPath.row].flatSubway)"
+        cell.subwayLabel.alpha = 0.7
+        cell.subwayLabel.font = UIFont.systemFont(ofSize: 16.0, weight: UIFontWeightLight)
+        cell.subwayLabel.bounds = CGRect(x: 0, y: 0, width:screen.width * 0.3 , height: screen.height * 0.02698)
+        cell.subwayLabel.center = CGPoint(x:cell.flat.frame.minX+cell.subwayLabel.frame.width/2 + 4, y: cell.flat.frame.maxY + cell.subwayLabel.frame.height + 5.0)
         cell.subwayLabel.adjustsFontSizeToFitWidth = true
         
         //rooms
         cell.rooms.text = "\(flats[indexPath.row].numberOfRoomsInFlat)-комн."
-        cell.rooms.textColor = UIColor.black
-        cell.rooms.font = UIFont.systemFont(ofSize: 14.0)
-        cell.rooms.frame = CGRect(x: cell.subwayLabel.frame.maxX + 17.0, y: cell.flat.frame.maxY + screen.height * 0.009, width: screen.height * 0.143, height: screen.height * 0.032)
+        cell.rooms.alpha = 0.7
+        cell.rooms.font = UIFont.systemFont(ofSize: 16.0, weight: UIFontWeightLight)
+        cell.rooms.bounds = CGRect(x: 0, y: 0, width:screen.width * 0.3, height: screen.height * 0.02698)
+        cell.rooms.center = CGPoint(x:cell.subwayLabel.frame.maxX+10+cell.rooms.frame.width/2, y:cell.flat.frame.maxY + cell.subwayLabel.frame.height + 5.0)
         cell.rooms.adjustsFontSizeToFitWidth = true
         
-        //views
-        cell.views.text = "Просмотров: \(flats[indexPath.row].views)"
-        cell.views.textColor = UIColor.black
-        cell.views.font = UIFont.systemFont(ofSize: 12.0, weight: UIFontWeightLight)
-        cell.views.frame = CGRect(x: 15.0, y: cell.subwayLabel.frame.maxY + screen.height * 0.009, width: screen.height * 0.176, height: screen.height * 0.026)
-        cell.views.adjustsFontSizeToFitWidth = true
-        
-        //new views
-        cell.new.text = "Новых: \(flats[indexPath.row].newView)"
-        cell.new.textColor = UIColor(red: 72/255, green: 218/255, blue: 200/255, alpha: 1)
-        cell.new.font = UIFont.systemFont(ofSize: 12.0, weight: UIFontWeightLight)
-        cell.new.frame = CGRect(x: cell.views.frame.maxX + 11.0, y: cell.subwayLabel.frame.maxY + screen.height * 0.009, width: screen.height * 0.123, height: screen.height * 0.026)
-        cell.new.adjustsFontSizeToFitWidth = true
-        
         //edit button
-        let size = screen.width * 0.09
-        cell.edit.frame = CGRect(x: screen.width - 15.0 - size, y: cell.flat.frame.maxY + screen.height * 0.009, width: size, height: size)
+        let size = screen.width * 0.11733
+        cell.edit.frame = CGRect(x: 0, y: 0, width: size, height: size)
+        cell.edit.center = CGPoint(x:cell.flat.frame.maxX-cell.edit.frame.width/2 - 8,y:cell.bounds.height-(cell.bounds.height-cell.flat.frame.maxY)/2)
         cell.edit.setImage(#imageLiteral(resourceName: "10"), for: .normal)
         cell.edit.tag = Int(flats[indexPath.row].flat_id)!
         cell.edit.addTarget(self, action: #selector(ProfileController.edit(_:)), for: .touchUpInside)
         
         cell.switchButton.isHidden = true
+        
+        cell.sep.bounds = CGRect(x: 0, y: 0, width: screen.width-30, height: 1)
+        cell.sep.center = CGPoint(x:cell.bounds.width / 2, y: 2)
+        
+        if indexPath.row != 0{
+            if #available(iOS 10.0, *) {
+                cell.sep.backgroundColor = UIColor(displayP3Red: 215/255, green: 215/255, blue: 215/255, alpha: 1.0)
+            } else {
+                // Fallback on earlier versions
+            }
+        } else {
+            cell.sep.backgroundColor = UIColor.clear
+        }
         
         
         return cell

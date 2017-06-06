@@ -24,7 +24,7 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
     var check1 = false
     var check2 = false
     let conv = [String:String]()
-    var flat = Flat()
+    
     var dif = CGFloat()
     @IBOutlet weak var imagesScrollView: UIScrollView!
     @IBOutlet weak var convView: UIView!
@@ -64,8 +64,37 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
     
     override func viewDidLoad() {
        
-        api.flatSingle(id: flat_id) { (i) in
-            self.flat = i
+        api.flatSingle(id: flat_id) { (flat) in
+            for i in 0..<flat.imageOfFlat.count{
+                
+                let imageView = UIImageView()
+                
+                imageView.sd_setImage(with: URL(string : flat.imageOfFlat[i]))
+                let x = self.view.frame.width * CGFloat(i)
+                imageView.frame = CGRect(x: x, y: 0, width: self.screenSize.width, height: self.imagesScrollView.bounds.height)
+                self.imagesScrollView.contentSize.width = self.screenSize.width * CGFloat(i + 1)
+                imageView.clipsToBounds = true
+                self.imagesScrollView.addSubview(imageView)
+            }
+            self.price.text = flat.flatPrice + " ₽"
+            self.timeToSubway.text = flat.time_to_subway + " мин."
+            self.time.text = flat.time
+            self.date.text = flat.update_date
+            self.stairs.text = flat.floor + " этаж"
+            self.square.text = flat.square + " м.кв."
+            self.numberOfRooms.text = flat.numberOfRoomsInFlat + " ком."
+            self.avatar.sd_setImage(with: URL(string :flat.avatarImage))
+            self.mutualFriendsOutlet.setAttributedTitle(flat.buttonOwner(flat.ownerName, flat.flatMutualFriends), for: .normal)
+            self.adress.text = flat.address
+            self.aboutFlat.text = flat.comments
+            if self.checkText(textView: self.aboutFlat){
+            self.aboutFlat.sizeToFit()
+            self.razdelitel4.frame = CGRect(x: self.aboutFlat.frame.minX, y: self.aboutFlat.frame.maxY, width: self.screenSize.width*0.88, height: self.screenSize.height*0.002)
+            self.showAllOutlet.isHidden = true
+            self.conveniences.frame = CGRect(x: self.mutualFriendsOutlet.frame.minX, y: self.razdelitel4.frame.maxY+self.screenSize.height*0.02338, width: self.screenSize.width*0.277, height: self.screenSize.height*0.017991)
+            self.convView.frame = CGRect(x: 0, y: self.conveniences.frame.maxY, width: self.screenSize.width, height: self.screenSize.height*0.022*0)
+            
+            }
         }
         
     
@@ -81,58 +110,7 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
         } else {
             rentOutlet.setTitle("Редактировать квартиру", for: .normal)
         }
-        
-  
-            
-        
-            
-            
-            let seafoamBlue = UIColor(red: 85.0/255.0, green: 197.0/255.0, blue: 183.0/255.0, alpha: 1.0)
-            
-                
-                
-               /* let firstText = "Хозяин "
-                let name = jsondata["owner"]["first_name"].string! + "\n5 "
-                let secondText = "общих друзей ❯"
-                let attrText1 = NSMutableAttributedString(string: firstText)
-                attrText1.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: NSMakeRange(0,attrText1.length))
-                
-                let attrText2 = NSMutableAttributedString(string: name)
-                attrText2.addAttribute(NSForegroundColorAttributeName, value: seafoamBlue, range: NSMakeRange(0,attrText2.length))
-                let attrText3 = NSMutableAttributedString(string: secondText)
-                attrText3.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: NSMakeRange(0,attrText3.length))
-                let attributedText = NSMutableAttributedString()
-                attributedText.append(attrText1)
-                attributedText.append(attrText2)
-                attributedText.append(attrText3)*/
-                
-            
-        
-            
-           /* if  let amount = jsondata["photos"].array?.count{
-                for i in 0..<amount{
-                    
-                    let imageView = UIImageView()
-                    if jsondata["photos"][i]["url"] != nil{
-                        imageView.sd_setImage(with: URL(string : jsondata["photos"][i]["url"].string!))
-                        let x = self.view.frame.width * CGFloat(i)
-                        imageView.frame = CGRect(x: x, y: 0, width: self.screenSize.width, height: self.imagesScrollView.bounds.height)
-                        self.imagesScrollView.contentSize.width = self.screenSize.width * CGFloat(i + 1)
-                        imageView.clipsToBounds = true
-                        self.imagesScrollView.addSubview(imageView)
-                    }}
-            }*/
-            
-            //УДОБСТВА
-            
-            
-            
-            
-        
-        
-        
-        
-        
+ 
         //Font of adress
         switch (screenSize.width){
         case 320 : adress.font = UIFont.systemFont(ofSize: 20)
@@ -232,6 +210,8 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
         
         scrollView.addSubview(showAllOutlet)
         zatemnenie2.frame = CGRect(x: 0, y:0 , width: screenSize.width, height: screenSize.height*0.31784)
+        
+        
         //GRADIENT
         var gradient: CAGradientLayer = CAGradientLayer()
         gradient.frame = CGRect(x: 0, y: 0, width: zatemnenie2.frame.width, height: zatemnenie2.frame.height)
@@ -241,15 +221,22 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
         gradient.colors = [color1,color2]
         gradient.locations = [0.0, 1.0]
         zatemnenie2.layer.insertSublayer(gradient, at: 0)
+        
+        
+        
+        
+        
+        
+        
+        
         super.viewDidLoad()
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
+    
     //Falling menu
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //print(scrollView.contentOffset.y
@@ -309,30 +296,7 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
         }
     }
     
-    func getSubway(underground_id:Int, city_id:String){
-        Alamofire.request("http://6hands.styleru.net/underground?id_city=\(city_id)").responseJSON { response in
-            var jsondata = JSON(data:response.data!)
-            print(jsondata["stations"][underground_id-1])
-            self.subway.text = jsondata["stations"][underground_id-1]["name"].string!
-            self.id_underground_line = Int(jsondata["stations"][underground_id-1]["id_underground_line"].string!)!
-            let color = (jsondata["lines"].array?.count)!
-            
-            for i in 0..<color{
-                if jsondata["lines"][i]["id"].string! == "\(self.id_underground_line)"{
-                    let col = jsondata["lines"][i]["color"].string!
-                    switch col{
-                    case "Синий": self.subwayColor.backgroundColor = UIColor.blue
-                    case "Красный": self.subwayColor.backgroundColor = UIColor.red
-                    case "Зеленый": self.subwayColor.backgroundColor = UIColor.green
-                    case "Желтая": self.subwayColor.backgroundColor = UIColor.yellow
-                    case "Серый": self.subwayColor.backgroundColor = UIColor.gray
-                    default : self.subwayColor.backgroundColor = UIColor.black
-                    }
-                }
-                
-            }
-        }
-    }
+
     
     @IBAction func showAllButton(_ sender: Any) {
         print("kek")
@@ -398,5 +362,10 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
             else {favourite.setImage(#imageLiteral(resourceName: "Bookmark Ribbon_18bca9_100"), for: .normal)}
         }
         check *= -1
+    }
+    
+    // ДЛЯ КНОПКИ ПОКАЗАТЬ ПОЛНОСТЬЮ
+    func checkText(textView:UITextView)->Bool{
+        return textView.numberOfLines()<5
     }
 }

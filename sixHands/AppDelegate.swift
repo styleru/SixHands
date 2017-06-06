@@ -5,6 +5,16 @@
 //  Created by Владимир Марков on 11.01.17.
 //  Copyright © 2017 Владимир Марков. All rights reserved.
 //
+extension UITextView{
+    
+    func numberOfLines() -> Int{
+        if let fontUnwrapped = self.font{
+            return Int(self.contentSize.height / fontUnwrapped.lineHeight)
+        }
+        return 0
+    }
+    
+}
 
 import UIKit
 import CoreData

@@ -180,32 +180,46 @@ class API{
         let realm = try! Realm()
         let per = realm.object(ofType: person.self, forPrimaryKey: 1)
         headers = ["Token":(per?.token)!]
-        var flat = Flat()
+       
         Alamofire.request(fullRequest, headers : headers).responseJSON { response in
-            let jsondata = JSON(data:response.data!)
-            flat.avatarImage = jsondata["owner"]["avatar"].string!
-            flat.flatPrice = jsondata["price"].string!
+            var flat = Flat()
+            var jsondata = JSON(data:response.data!)
+            flat.avatarImage = jsondata["owner"]["avatar"].string ?? ""
+            flat.flatPrice = jsondata["price"].string ?? "-"
+
            // flat.idSubway = "Пока нема"
-            let number_of_friends = (jsondata["mutual_friends"].array?.count)!
+            let number_of_friends = jsondata["mutual_friends"].array?.count ?? 0
             flat.flatMutualFriends = "\(number_of_friends) общих друзей"
-            flat.flat_id = jsondata["id"].string!
+            flat.flat_id = jsondata["id"].string ?? "0"
             let photoArray:Int = (jsondata["photos"].array?.count)!
             for i in 0..<photoArray{
                 flat.imageOfFlat.append(jsondata["photos"][i]["url"].string!)
             }
-            flat.numberOfRoomsInFlat = jsondata["rooms"].string!
-            flat.update_date = jsondata["update_date"].string!
-            flat.time_to_subway = jsondata["to_underground"].string!
-            flat.square = jsondata["square"].string!
-            flat.floor = jsondata["floor"].string!
-            flat.floors = jsondata["floors"].string!
+            flat.numberOfRoomsInFlat = jsondata["rooms"].string ?? "-"
+            if let full = jsondata["update_date"].string{
+            flat.time = full.substring(from:full.index(full.startIndex, offsetBy:11))
+            flat.update_date = full.substring(to: full.index(full.startIndex, offsetBy:10))
+            }
+            flat.time_to_subway = jsondata["to_underground"].string ?? "-"
+            flat.square = jsondata["square"].string ?? "-"
+            flat.floor = jsondata["floor"].string ?? "-"
+            flat.floors = jsondata["floors"].string ?? "-"
+            flat.ownerName = jsondata["owner"]["first_name"].string ?? "Неопределен"
+            flat.address = jsondata["address"].string ?? "Адрес не указан"
+            flat.comments = jsondata["description"].string ?? "Описание не указано"
+            let optionsCount = jsondata["options"].array?.count ?? 0
+            for i in 0..<optionsCount{
+                flat.options.append(jsondata["options"][i].string!)
+            }
+            print(flat.options)
+            completionHandler(flat)
         }
-        completionHandler(flat)
+        
     }
     
     
     
-    func user(){
+    func options(){
     }
     
 }

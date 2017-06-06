@@ -48,7 +48,7 @@ class EditFlatController: UIViewController {
         scrollView.showsHorizontalScrollIndicator = false
         self.view.addSubview(scrollView)
         
-        api.flatsSingle(id: "350"){(js:Any) in
+      /*  api.flatsSingle(id: "350"){(js:Any) in
             let jsondata = js as! JSON
             let imageSize = CGSize(width: scrollViewSize.width * 0.6, height: scrollViewSize.height * 0.8)
             scrollView.contentSize.width = 55.0 + CGFloat(jsondata["photos"].array!.count) * (imageSize.width + 15.0)
@@ -68,7 +68,7 @@ class EditFlatController: UIViewController {
                 scrollView.addSubview(deleteButton)
             }
             
-        }
+        }*/
     }
     
     func backAction() {

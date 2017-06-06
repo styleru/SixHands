@@ -36,16 +36,15 @@ class MutualFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         
        
         
-        api.flatsSingle(id: flat_id){(js:Any) in
+       /* api.flatsSingle(id: flat_id){(js:Any) in
             let jsondata = js as! JSON
             
             if jsondata["mutual_friends"].array != nil {
                 print(jsondata["mutual_friends"].array)
                 self.friends = jsondata["mutual_friends"].array!
-                print("friends: \(self.friends)")
                 self.mutualFriendsTableView.reloadData()
             }
-        }
+        }*/
     }
     
     func backAction() {

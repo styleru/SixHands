@@ -17,18 +17,7 @@ class API{
     
     
     
-    func flatsSingle(id:String,completionHandler:@escaping (_ js:Any) ->()){
-        let fullRequest = domain + "/flats/single?id_flat=" + id
-        let realm = try! Realm()
-        let per = realm.object(ofType: person.self, forPrimaryKey: 1)
-        headers = ["Token":(per?.token)!]
-        
-        Alamofire.request(fullRequest, headers:headers).responseJSON { response in
-            let jsondata = JSON(data:response.data!)
-            completionHandler(jsondata)
-        }
-    }
-    
+       
     //FLATS FILTER
     
     func flatsFilter(offset:Int,amount:Int, parameters: String, completionHandler: @escaping ([Flat])->Void){
@@ -72,10 +61,16 @@ class API{
     
     
     //UNDERGROUND
-    func update_subway(){
-        
-        var subway = Subway()
+  /*  func update_subway(){
         let fullRequest = domain + "/underground"
+        let realm = try! Realm()
+        let realm1 = try! Realm()
+        let st = realm.object(ofType: Station.self, forPrimaryKey: 10)
+        /*try! realm.write {
+            realm.delete(realm.objects(Line))
+            realm.delete(realm.objects(Station))
+        }*/
+
         Alamofire.request(fullRequest).responseJSON { response in
             
             let jsondata = JSON(data:response.data!)
@@ -84,21 +79,28 @@ class API{
                 let stations_array = jsondata["stations"].array?.count
                 for i in 0..<stations_array!{
                     let station = Station()
-                    station.id = jsondata["stations"][i]["id"].string!
-                    station.name = jsondata["stations"][i]["name"].string!
-                    station.id_underground_line = jsondata["stations"][i]["id_underground_line"].string!
-                    subway.subwayStations.append(station)
+                    st?.stationId = jsondata["stations"][i]["id"].string!
+                    st?.name = jsondata["stations"][i]["name"].string!
+                    st?.id_underground_line = jsondata["stations"][i]["id_underground_line"].string!
+                    DispatchQueue(label: "background22").async {
+                        autoreleasepool {
+                            let realm = try! Realm()
+                            try! realm.write {
+                            realm.add(st!, update: true)
+                            }
+                        }
+                    }
+                    
                 }
                 let lines_array = jsondata["lines"].array?.count
                 for i in 0..<lines_array!{
                     let line = Line()
-                    line.id = jsondata["lines"][i]["id"].string!
+                    line.lineId = jsondata["lines"][i]["id"].string!
                     line.name = jsondata["lines"][i]["name"].string!
                     line.color = jsondata["lines"][i]["color"].string!
-                    subway.subwayLines.append(line)
-                    
+                 
                 }
-                DispatchQueue(label: "background").async {
+              /*  DispatchQueue(label: "background2").async {
                     autoreleasepool {
                         let realm = try! Realm()
                         try! realm.write {
@@ -107,7 +109,7 @@ class API{
                             realm.add(subway, update: true)
                         }
                     }
-                }
+                }*/
 
             }
             
@@ -117,7 +119,7 @@ class API{
         
     }
     
-    
+    */
     
     
     //TOKEN CHECK
@@ -173,14 +175,13 @@ class API{
         
     }
     
-    func Single(id:String, completionHandler: @escaping (Flat)->Void){
+    func flatSingle(id:String, completionHandler: @escaping (Flat)->Void){
         let fullRequest = domain + "/flats/single?id_flat=" + id
         let realm = try! Realm()
         let per = realm.object(ofType: person.self, forPrimaryKey: 1)
         headers = ["Token":(per?.token)!]
-        
+        var flat = Flat()
         Alamofire.request(fullRequest, headers : headers).responseJSON { response in
-            var flat = Flat()
             let jsondata = JSON(data:response.data!)
             flat.avatarImage = jsondata["owner"]["avatar"].string!
             flat.flatPrice = jsondata["price"].string!
@@ -199,6 +200,7 @@ class API{
             flat.floor = jsondata["floor"].string!
             flat.floors = jsondata["floors"].string!
         }
+        completionHandler(flat)
     }
     
     

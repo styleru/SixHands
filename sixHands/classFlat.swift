@@ -40,39 +40,45 @@ class Flat{
     var time_to_subway = String()
     var floor = String()
     var floors = String()
-    var subway = Subway()
+    var subwayId = String()
     
 }
 
 class Station: Object{
-    var id:String = ""
+    dynamic var id = 10
+    var stationId:String = ""
     var name:String = ""
     var id_underground_line:String = ""
-    //GET STATION
-    class func get_station(id:String, completionHandler: @escaping (_ Station:String,_ id:String)->Void){
-        let station = ""
-        let id = ""
-        completionHandler(station, id)
-        
+    override static func primaryKey() -> String? {
+        return "id"
     }
-    
 }
 
 class Line: Object
 {
-    var id:String = ""
+    dynamic var id = 11
+    var lineId:String = ""
     var name:String = ""
     var color:String = ""
+    override static func primaryKey() -> String? {
+        return "id"
+    }
 }
 
 class Subway:Object{
     dynamic var id = 2
-    let subwayLines = RealmSwift.List<Line>()
-    let subwayStations = RealmSwift.List<Station>()
+    let subwayLines = List<Line>()
+    let subwayStations = List<Station>()
     override static func primaryKey() -> String? {
         return "id"
     }
-    
+    class func getStation(id:String)->(station:String,color:UIColor){
+       var sub = try! Realm().objects(Subway)
+       
+        print()
+        
+        return ("",UIColor.black)
+    }
     
 }
 

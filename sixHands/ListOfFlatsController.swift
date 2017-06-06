@@ -48,12 +48,17 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         let realm = try! Realm()
         print("REALM FILE:\(Realm.Configuration().fileURL)")
         let per = realm.object(ofType: person.self, forPrimaryKey: 1)
-        //let sub = realm.object(ofType: subway.self, forPrimaryKey: 2)
-        //print("Subway:\(sub?.subway_lines)")
-        api.update_subway()
+        
+       // api.update_subway()
+     
+        
         
 
         
+       // let delayTime = DispatchTime.now()+5
+       /* DispatchQueue.main.asyncAfter(deadline: delayTime) {
+            print(sub?.subwayLines[3].name)
+        }*/
         
         //gray bar
         let grayBar = UIView()

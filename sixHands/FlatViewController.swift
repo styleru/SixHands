@@ -24,6 +24,7 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
     var check1 = false
     var check2 = false
     let conv = [String:String]()
+    var flat = Flat()
     var dif = CGFloat()
     @IBOutlet weak var imagesScrollView: UIScrollView!
     @IBOutlet weak var convView: UIView!
@@ -62,7 +63,12 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
     
     
     override func viewDidLoad() {
-    print("FARTUK V MASLE:")
+       
+        api.flatSingle(id: flat_id) { (i) in
+            self.flat = i
+        }
+        
+    
         scrollView.delegate = self
         print(aboutFlat.font?.fontName)
         print(screenSize.width)
@@ -76,37 +82,16 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
             rentOutlet.setTitle("Редактировать квартиру", for: .normal)
         }
         
-        api.flatsSingle(id: flat_id){(js:Any) in
-            let jsondata = js as! JSON
-            if jsondata["description"] != nil{
-                self.fullDesc = jsondata["description"].string!
-                self.aboutFlat.text = self.fullDesc
-                if self.fullDesc.characters.count<180{
-                    self.showAllOutlet.isHidden = true
-                    self.aboutFlat.sizeToFit()
-                    self.razdelitel4.frame.origin.y = self.aboutFlat.frame.maxY+self.screenSize.height*0.02338
-                    self.conveniences.frame.origin.y = self.razdelitel4.frame.maxY + self.screenSize.height*0.02338
-                    self.convView.frame.origin.y = self.conveniences.frame.maxY
-                }
-                
-            }
+  
             
-            let time = jsondata["create_date"].string!
-            if time != nil{
-                self.date.text = try? String(time.characters.dropLast(9))
-                self.time.text = try? String(time.characters.dropFirst(11))}
-            if jsondata["price"] != nil { self.price.text = jsondata["price"].string!+" ₽"} else {self.price.text = "-"}
-            if jsondata["address"] != nil{  self.adress.text = jsondata["address"].string!}else {self.adress.text = " "}
-            if jsondata["square"] != nil{self.square.text = jsondata["square"].string! + " м.кв."}else{self.square.text = "-"}
-            if jsondata["rooms"] != nil{self.numberOfRooms.text = jsondata["rooms"].string! + " ком."}else{self.numberOfRooms.text = "-"}
-            if jsondata["floor"] != nil{self.stairs.text = jsondata["floor"].string! + "-этаж"}else {self.stairs.text = "-"}
-            if jsondata["to_underground"] != nil {self.timeToSubway.text = jsondata["to_underground"].string! + " мин."} else {self.timeToSubway.text = "-"}
-            print("description:\(self.fullDesc)")
+        
             
             
             let seafoamBlue = UIColor(red: 85.0/255.0, green: 197.0/255.0, blue: 183.0/255.0, alpha: 1.0)
-            if jsondata["owner"]["first_name"] != nil {
-                let firstText = "Хозяин "
+            
+                
+                
+               /* let firstText = "Хозяин "
                 let name = jsondata["owner"]["first_name"].string! + "\n5 "
                 let secondText = "общих друзей ❯"
                 let attrText1 = NSMutableAttributedString(string: firstText)
@@ -119,12 +104,12 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
                 let attributedText = NSMutableAttributedString()
                 attributedText.append(attrText1)
                 attributedText.append(attrText2)
-                attributedText.append(attrText3)
+                attributedText.append(attrText3)*/
                 
-                self.mutualFriendsOutlet.setAttributedTitle(attributedText, for: .normal)}else{self.mutualFriendsOutlet.setTitle("Owner", for: .normal)}
-            if jsondata["owner"]["avatar"] != nil {self.avatar.sd_setImage(with:  URL(string : jsondata["owner"]["avatar"].string!))}
             
-            if  let amount = jsondata["photos"].array?.count{
+        
+            
+           /* if  let amount = jsondata["photos"].array?.count{
                 for i in 0..<amount{
                     
                     let imageView = UIImageView()
@@ -136,85 +121,14 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
                         imageView.clipsToBounds = true
                         self.imagesScrollView.addSubview(imageView)
                     }}
-            }
+            }*/
             
             //УДОБСТВА
             
-            if let optionsArr = jsondata["options"].array{
-               
-                let options = jsondata["options"]
-                for i in 0..<optionsArr.count{
-                    var image = UIImageView()
-                    let label = UILabel()
-                    let j = CGFloat(i)
-                    image.contentMode = .scaleAspectFill
-                    image.frame = CGRect(x:self.razdelitel3.frame.minX, y: self.screenSize.height*0.022*(1+4*j) , width: self.screenSize.width*0.08, height: self.screenSize.width*0.08)
-                    
-                    label.frame = CGRect(x: image.frame.maxX+self.screenSize.width*0.0533, y: image.frame.minY, width: self.screenSize.width/2, height: self.screenSize.width*0.08)
-                    
-                    label.textAlignment = .left
-                    label.textColor = UIColor(red: 62/255, green: 50/255, blue: 80/255, alpha: 1.0)
-                    label.font = UIFont(name: "SFUIText-Light", size: 16)
-                    label.text = "PIZDddd"
-                    //image.backgroundColor = UIColor.black
-                    image.alpha = 1.0
-                    switch options[i]{
-                    case "23": image.image = #imageLiteral(resourceName: "Fan Head_6c6c6c_100")
-                    label.text = "Кондиционер"
-                    case "9": image.image = #imageLiteral(resourceName: "pawPrint")
-                    label.text = "Можно с животными"
-                    case "15": image.image = #imageLiteral(resourceName: "Wi-Fi_6c6c6c_100")
-                    label.text = "Интернет"
-                    case "18": image.image = #imageLiteral(resourceName: "TV_6c6c6c_100")
-                    label.text = "Телевизор"
-                    case "19": image.image = #imageLiteral(resourceName: "snow")
-                    label.text = "Холодильник"
-                    case "20": image.image = #imageLiteral(resourceName: "Dishwasher_6c6c6c_100")
-                    label.text = "Посудомоечная машина"
-                    case "21": image.image = #imageLiteral(resourceName: "Washing Machine_6c6c6c_100")
-                    label.text = "Стиральная машина"
-                    case "24": image.image = #imageLiteral(resourceName: "shape1")
-                    label.text = "Парковочное место"
-                        
-                    default : image.backgroundColor = UIColor.gray }
-                    
-                    self.convView.addSubview(image)
-                    self.convView.addSubview(label)
-                    self.scrollView.contentSize.height+=self.screenSize.height*0.022*4
-                    self.convView.frame.size.height+=self.screenSize.height*0.022*4
-                   
-                }
-           
-          self.scrollView.contentSize.height -= 80            }
             
             
             
-            
-            
-            if let id_underground = jsondata["id_underground"].string{
-                self.api.underground(id: id_underground){(js:Any) in
-                    let jsondata = js as! JSON
-                    self.subway.text = jsondata["stations"][Int(id_underground)!-1]["name"].string!
-                    self.id_underground_line = Int(jsondata["stations"][Int(id_underground)!-1]["id_underground_line"].string!)!
-                    let color = (jsondata["lines"].array?.count)!
-                    
-                    for i in 0..<color{
-                        if jsondata["lines"][i]["id"].string! == "\(self.id_underground_line)"{
-                            let col = jsondata["lines"][i]["color"].string!
-                            switch col{
-                            case "Синий": self.subwayColor.backgroundColor = UIColor.blue
-                            case "Красный": self.subwayColor.backgroundColor = UIColor.red
-                            case "Зеленый": self.subwayColor.backgroundColor = UIColor.green
-                            case "Желтая": self.subwayColor.backgroundColor = UIColor.yellow
-                            case "Серый": self.subwayColor.backgroundColor = UIColor.gray
-                            default : self.subwayColor.backgroundColor = UIColor.black
-                            }
-                        }
-                    }}
-            }
-            
-            
-        }
+        
         
         
         

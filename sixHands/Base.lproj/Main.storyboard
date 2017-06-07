@@ -708,14 +708,14 @@
                         <viewControllerLayoutGuide type="bottom" id="kh1-eq-nLi"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wYz-7N-43b">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="496"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kM-eP-Vpb">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="496"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5f6-Sb-LMN">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="496"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Основная информация" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C78-1s-1OP">
                                                 <rect key="frame" x="16" y="0.0" width="190" height="15"/>
@@ -972,6 +972,7 @@
                                             <constraint firstItem="3C3-h8-5QE" firstAttribute="leading" secondItem="5f6-Sb-LMN" secondAttribute="leading" constant="16" id="QFG-5k-WZY"/>
                                             <constraint firstItem="KQj-DC-UpE" firstAttribute="top" secondItem="Ryd-f6-3Bk" secondAttribute="bottom" constant="20" id="SNZ-Nw-Aps"/>
                                             <constraint firstItem="G2V-gU-dYb" firstAttribute="top" secondItem="eWb-cx-G5w" secondAttribute="bottom" constant="45" id="TSe-wB-FSM"/>
+                                            <constraint firstAttribute="height" constant="1000" id="TYJ-yX-PYt"/>
                                             <constraint firstItem="2oc-cW-pZE" firstAttribute="top" secondItem="cKP-kh-ht6" secondAttribute="bottom" id="VJP-rf-5YG"/>
                                             <constraint firstItem="eWb-cx-G5w" firstAttribute="top" secondItem="QZV-E5-4Az" secondAttribute="bottom" constant="15" id="Wj2-E4-NiS"/>
                                             <constraint firstItem="WW6-LK-Yll" firstAttribute="top" secondItem="G2V-gU-dYb" secondAttribute="bottom" constant="45" id="Wtr-RC-wNZ"/>
@@ -1009,27 +1010,24 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="5f6-Sb-LMN" firstAttribute="centerY" secondItem="5kM-eP-Vpb" secondAttribute="centerY" id="Diq-Xc-hAL"/>
-                                    <constraint firstItem="5f6-Sb-LMN" firstAttribute="centerX" secondItem="5kM-eP-Vpb" secondAttribute="centerX" id="Fyo-7A-eW6"/>
-                                    <constraint firstAttribute="trailing" secondItem="5f6-Sb-LMN" secondAttribute="trailing" id="Im9-qG-mW1"/>
-                                    <constraint firstItem="5f6-Sb-LMN" firstAttribute="leading" secondItem="5kM-eP-Vpb" secondAttribute="leading" id="jzV-qz-9Bd"/>
-                                    <constraint firstAttribute="bottom" secondItem="5f6-Sb-LMN" secondAttribute="bottom" id="khb-4L-OzB"/>
-                                    <constraint firstItem="5f6-Sb-LMN" firstAttribute="top" secondItem="5kM-eP-Vpb" secondAttribute="top" id="xR3-T8-MEE"/>
+                                    <constraint firstAttribute="bottom" secondItem="5f6-Sb-LMN" secondAttribute="bottom" id="3EZ-M0-epk"/>
+                                    <constraint firstItem="5f6-Sb-LMN" firstAttribute="top" secondItem="5kM-eP-Vpb" secondAttribute="top" id="PX9-Lr-ipo"/>
+                                    <constraint firstAttribute="trailing" secondItem="5f6-Sb-LMN" secondAttribute="trailing" id="YLf-vy-6DJ"/>
+                                    <constraint firstItem="5f6-Sb-LMN" firstAttribute="leading" secondItem="5kM-eP-Vpb" secondAttribute="leading" id="stA-Wd-0Mg"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="5f6-Sb-LMN" firstAttribute="width" secondItem="wYz-7N-43b" secondAttribute="width" id="7Nk-2i-PvF"/>
+                            <constraint firstItem="5f6-Sb-LMN" firstAttribute="width" secondItem="wYz-7N-43b" secondAttribute="width" id="0Wh-1n-GKE"/>
                             <constraint firstItem="5kM-eP-Vpb" firstAttribute="top" secondItem="ab6-xr-Eof" secondAttribute="bottom" id="8Un-Lk-WC4"/>
                             <constraint firstItem="5kM-eP-Vpb" firstAttribute="leading" secondItem="wYz-7N-43b" secondAttribute="leading" id="9Xj-Kt-RtP"/>
                             <constraint firstAttribute="trailing" secondItem="5kM-eP-Vpb" secondAttribute="trailing" id="DGq-Hh-Z6E"/>
                             <constraint firstItem="kh1-eq-nLi" firstAttribute="top" secondItem="5kM-eP-Vpb" secondAttribute="bottom" id="DpV-py-4Pm"/>
-                            <constraint firstItem="5f6-Sb-LMN" firstAttribute="height" secondItem="wYz-7N-43b" secondAttribute="height" priority="250" id="hmX-Yg-Spu"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="496"/>
+                    <size key="freeformSize" width="375" height="1000"/>
                     <connections>
                         <outlet property="content" destination="5f6-Sb-LMN" id="f4B-Jp-usY"/>
                         <outlet property="scroll" destination="5kM-eP-Vpb" id="daf-BN-abE"/>
@@ -1249,8 +1247,8 @@
         <image name="uncheckedMark3" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OOK-34-sFi"/>
         <segue reference="ATY-tg-wpF"/>
+        <segue reference="OOK-34-sFi"/>
         <segue reference="ow1-io-7hw"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -12,6 +12,7 @@ import SwiftyJSON
 import RealmSwift
 
 class Flat{
+    
     var buttonOwner : (_ fullName:String,_ number:String)->(NSMutableAttributedString) = {fullName,number in
         let seafoamBlue = UIColor(red: 85.0/255.0, green: 197.0/255.0, blue: 183.0/255.0, alpha: 1.0)
         let firstText = "Хозяин "

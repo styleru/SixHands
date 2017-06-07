@@ -86,15 +86,13 @@ class API{
                     line.name = jsondata["lines"][i]["name"].string!
                     line.color = jsondata["lines"][i]["color"].string!
                     subway.subwayLines.append(line)
-                 
                 }
                 DispatchQueue(label: "background2").async {
                     autoreleasepool {
                         let realm = try! Realm()
                         try! realm.write {
-                            //realm.delete(realm.objects(Line))
-                            //realm.delete(realm.objects(Station))
-                            realm.add(subway, update: true)
+                            print(subway)
+                        realm.add(subway, update: true)
                         }
                     }
                 }

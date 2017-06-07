@@ -46,16 +46,16 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         }
         
         let realm = try! Realm()
-        //print("REALM FILE:\(Realm.Configuration().fileURL)")
+        print("REALM FILE:\(Realm.Configuration().fileURL)")
         //let per = realm.object(ofType: person.self, forPrimaryKey: 1)
         let sub = realm.object(ofType: Subway.self, forPrimaryKey: 2)
         
-        api.update_subway()
-     
+        //api.update_subway()
+        /*
         let lineName = sub?.subwayLines[0]
         print("lineName: \((lineName?["name"])!)")
         print("lineColor: \((lineName?["color"])!)")
-        print("lineID: \((lineName?["lineId"])!)")
+        print("lineID: \((lineName?["lineId"])!)")*/
         
         //gray bar
         let grayBar = UIView()

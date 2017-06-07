@@ -27,6 +27,7 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
     
     var dif = CGFloat()
     @IBOutlet weak var imagesScrollView: UIScrollView!
+    @IBOutlet var viewInScroll: UIView!
     @IBOutlet weak var convView: UIView!
     
     @IBOutlet weak var favourite: UIButton!
@@ -76,6 +77,7 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
                 imageView.clipsToBounds = true
                 self.imagesScrollView.addSubview(imageView)
             }
+            
             self.price.text = flat.flatPrice + " ₽"
             self.timeToSubway.text = flat.time_to_subway + " мин."
             self.time.text = flat.time
@@ -87,21 +89,47 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
             self.mutualFriendsOutlet.setAttributedTitle(flat.buttonOwner(flat.ownerName, flat.flatMutualFriends), for: .normal)
             self.adress.text = flat.address
             self.aboutFlat.text = flat.comments
+            
             if self.checkText(textView: self.aboutFlat){
             self.aboutFlat.sizeToFit()
-            self.razdelitel4.frame = CGRect(x: self.aboutFlat.frame.minX, y: self.aboutFlat.frame.maxY, width: self.screenSize.width*0.88, height: self.screenSize.height*0.002)
             self.showAllOutlet.isHidden = true
+            self.razdelitel4.frame = CGRect(x: self.aboutFlat.frame.minX, y: self.aboutFlat.frame.maxY, width: self.screenSize.width*0.88, height: self.screenSize.height*0.002)
+            }else{
+                self.razdelitel4.frame = CGRect(x: self.aboutFlat.frame.minX, y: self.showAllOutlet.frame.maxY + self.screenSize.height*0.02338, width: self.screenSize.width*0.88, height: self.screenSize.height*0.002)}
+            
             self.conveniences.frame = CGRect(x: self.mutualFriendsOutlet.frame.minX, y: self.razdelitel4.frame.maxY+self.screenSize.height*0.02338, width: self.screenSize.width*0.277, height: self.screenSize.height*0.017991)
-            self.convView.frame = CGRect(x: 0, y: self.conveniences.frame.maxY, width: self.screenSize.width, height: self.screenSize.height*0.022*0)
+            self.convView.frame = CGRect(x: 0, y: self.conveniences.frame.maxY, width: self.screenSize.width, height: 0)
+            
+            self.api.options(options: flat.options, completionHandler: { (opt) in
+                
+               var count:CGFloat = 15
+                for option in opt {
+                    let image = UIImageView()
+                    let label = UILabel()
+                    image.frame = CGRect(x: self.conveniences.frame.minX, y:count, width: 30, height: 30)
+                    label.frame = CGRect(x: image.frame.maxX+20, y: image.frame.midY-9, width: self.screenSize.width/1.5, height: 18)
+                    
+                    count += 45
+                    label.textAlignment = .left
+                    label.textColor = UIColor(red: 62/255, green: 50/255, blue: 80/255, alpha: 1)
+                    label.font = UIFont(name: ".SFUIText-Light", size: 16)
+                    label.text = option.name
+                    image.contentMode = .scaleAspectFill
+                    image.sd_setImage(with: URL(string : option.icon))
+                    self.convView.frame.size.height = count
+                    self.convView.addSubview(label)
+                    self.convView.addSubview(image)
+                   
+                }
+                 self.scrollView.contentSize.height = self.convView.frame.maxY+40
+            })
+           
             
             }
-        }
+        
         
     
         scrollView.delegate = self
-        print(aboutFlat.font?.fontName)
-        print(screenSize.width)
-        print(screenSize.height)
         
         backOutlet.addTarget(self, action: #selector(FlatViewController.backAction), for: .touchUpInside)
         

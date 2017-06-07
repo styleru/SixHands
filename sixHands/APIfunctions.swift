@@ -48,7 +48,17 @@ class API{
             
         }
     }
-    
+    //MUTUAL FRIENDS
+    func murualFriends(id:String, completionHandler: @escaping (_ js:JSON)->()){
+        let realm = try! Realm()
+        let per = realm.object(ofType: person.self, forPrimaryKey: 1)
+        headers = ["Token":(per?.token)!]
+        let fullRequest = domain + "/flats/single?id_flat=" + id
+        Alamofire.request(fullRequest, headers : headers).responseJSON { response in
+            var jsondata = JSON(data:response.data!)
+            completionHandler(jsondata)
+        }
+    }
     
     func underground(id:String,completionHandler:@escaping (_ js:Any) ->()){
         let fullRequest = domain + "/underground?id_city=\(id)"
@@ -195,7 +205,7 @@ class API{
             for i in 0..<optionsCount{
                 flat.options.append(jsondata["options"][i].string!)
             }
-            print(flat.options)
+            
             completionHandler(flat)
         }
         
@@ -203,7 +213,24 @@ class API{
     
     
     
-    func options(){
+    func options(options:[String], completionHandler: @escaping ([(name:String,icon:String)])->Void){
+        let fullRequest = domain + "/options"
+        var returnArray = [(name:String,icon:String)]()
+        Alamofire.request(fullRequest).responseJSON { response in
+            let jsondata = JSON(data:response.data!)
+            for option in options{
+                for i in jsondata.array!{
+                    if i["id"].string == option{
+                        let ret = (name: i["name"].string,icon:i["icon"].string)
+                    returnArray.append(ret as! (name: String, icon: String))
+                    break
+                    }
+                }
+            }
+            completionHandler(returnArray)
+        
+        }
+        
     }
     
 }

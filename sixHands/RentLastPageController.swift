@@ -13,16 +13,14 @@ import CoreLocation
 
 class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     let api = API()
-    let priceField = UITextField()
-    let commentsField = UITextView()
-    let separator = UIView()
-    let separator3 = UIView()
-    let photoLabel = UILabel()
-    let addButton = UIButton()
     var photos = [UIImage]()
     let imagePicker = UIImagePickerController()
-    let scrollView = UIScrollView()
-    let mainScrollView = UIScrollView()
+    @IBOutlet weak var justLabel: UILabel!
+    @IBOutlet weak var content: UIView!
+    @IBOutlet weak var scroll: UIScrollView!
+    let border = UIView()
+    let addPhoto = UIButton()
+    let avatar = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,123 +29,27 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
         //view bounds
         let screen = self.view.frame
         
-        //main scroll
-        mainScrollView.frame = CGRect(x: 0.0, y: screen.height * 0.12 + 52, width: screen.width, height: screen.height - 55.0 - screen.height * 0.12)
-        mainScrollView.contentSize.height = mainScrollView.frame.height
-        mainScrollView.contentSize.width = screen.width
-        mainScrollView.showsVerticalScrollIndicator = false
-        self.view.addSubview(mainScrollView)
+        let yourViewSize = CGSize(width: 100, height: 100)
+        border.frame = CGRect(x: screen.width/2 - yourViewSize.width/2, y: justLabel.frame.maxY + 15.0, width: yourViewSize.width, height: yourViewSize.height)
+        border.backgroundColor = UIColor.clear
+        border.layer.cornerRadius = 4.0
+        border.clipsToBounds = true
+        border.layer.borderWidth = 2
+        border.layer.borderColor = UIColor(red: 220/255.0, green:220/255.0, blue:220/255.0, alpha: 1.0).cgColor
+        self.scroll.addSubview(border)
         
-        //price text field
-        priceField.frame = CGRect(x: screen.minX + 15.0, y: 0.0, width: screen.width - 30.0, height: 36.0)
-        priceField.delegate = self
-        priceField.placeholder = "Введите цену"
-        priceField.textColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.8)
-        priceField.font = UIFont.systemFont(ofSize: 24.0, weight: UIFontWeightHeavy)
-        priceField.adjustsFontSizeToFitWidth = true
-        mainScrollView.addSubview(priceField)
+        let avatarSize = CGSize(width: 50, height: 40)
+        avatar.frame = CGRect(x: 25, y: 30, width: avatarSize.width, height: avatarSize.height)
+        avatar.image = UIImage(named: "72")
+        border.addSubview(avatar)
         
-        //separator
-        let separator2 = UIView()
-        separator2.frame = CGRect(x: 15.0, y: priceField.frame.maxY + 15.0, width: screen.width - 30.0, height: 1.0)
-        separator2.backgroundColor = UIColor(red: 215/255, green: 215/255, blue: 215/255, alpha: 1.0)
-        mainScrollView.addSubview(separator2)
+        let yourButtonSize = CGSize(width: 96, height: 96)
+        addPhoto.frame = CGRect(x: 2, y: 2, width: yourButtonSize.width, height: yourButtonSize.height)
+        addPhoto.backgroundColor = UIColor.clear
+        addPhoto.addTarget(self, action: #selector(addButtonAction), for: .touchUpInside)
+        border.addSubview(addPhoto)
         
-        //comments textview
-        commentsField.frame = CGRect(x: screen.minX + 10.0, y: separator2.frame.maxY + 30.0, width: screen.width - 30.0, height: 36.0)
-        commentsField.delegate = self
-        commentsField.text = "Комментарии"
-        commentsField.textColor = UIColor.gray
-        commentsField.font = UIFont.systemFont(ofSize: 18.0, weight: UIFontWeightSemibold)
-        mainScrollView.addSubview(commentsField)
         
-        //separator
-        separator.frame = CGRect(x: 15.0, y: commentsField.frame.maxY + 15.0, width: screen.width - 30.0, height: 1.0)
-        separator.backgroundColor = UIColor(red: 215/255, green: 215/255, blue: 215/255, alpha: 1.0)
-        mainScrollView.addSubview(separator)
-        
-        //label photo
-        photoLabel.frame = CGRect(x: screen.minX + 15.0, y: separator.frame.maxY + 30.0, width: 192.0, height: 72.0)
-        photoLabel.text = "Фотографии квартиры"
-        photoLabel.numberOfLines = 2
-        photoLabel.textColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.8)
-        photoLabel.font = UIFont.systemFont(ofSize: 24.0, weight: UIFontWeightHeavy)
-        mainScrollView.addSubview(photoLabel)
-        
-        //separator
-        separator3.frame = CGRect(x: 15.0, y: photoLabel.frame.maxY + 15.0, width: screen.width - 30.0, height: 1.0)
-        separator3.backgroundColor = UIColor(red: 215/255, green: 215/255, blue: 215/255, alpha: 1.0)
-        mainScrollView.addSubview(separator3)
-        
-        //add button
-        var size: CGFloat = 35.0
-        addButton.frame = CGRect(x: screen.width - 25.0 - size, y: photoLabel.frame.midY - size/2, width: size, height: size)
-        addButton.addTarget(self, action: #selector(RentLastPageController.addButtonAction), for: .touchUpInside)
-        addButton.setImage(#imageLiteral(resourceName: "Add"), for: .normal)
-        mainScrollView.addSubview(addButton)
-        
-        //recognize tap
-        let tap = UITapGestureRecognizer(target: self, action: #selector(RentLastPageController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
-        
-        //scroll view
-        size = screen.width/2 - 30
-        scrollView.frame = CGRect(x: 0.0, y: separator3.frame.maxY + 30.0, width: screen.width, height: size)
-        scrollView.contentSize.height = scrollView.frame.height
-        scrollView.contentSize.width = screen.width/2 * CGFloat(photos.count)
-        scrollView.showsHorizontalScrollIndicator = false
-        mainScrollView.addSubview(scrollView)
-        
-    }
-    
-    //dismiss keyboard
-    func dismissKeyboard() {
-        view.endEditing(true)
-    }
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == "Комментарии" {
-            textView.text = ""
-            textView.textColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.8)
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text == "" {
-            textView.text = "Комментарии"
-            textView.textColor = UIColor.gray
-        }
-    }
-    
-    func textViewDidChange(_ textView: UITextView) {
-        if commentsField.contentSize.height < 180 {
-            var textFrame = commentsField.frame
-            textFrame.size.height = commentsField.contentSize.height
-            let dif = textFrame.size.height - commentsField.frame.height
-            separator.frame.origin.y += dif
-            photoLabel.frame.origin.y += dif
-            separator3.frame.origin.y += dif
-            addButton.frame.origin.y += dif
-            scrollView.frame.origin.y += dif
-            mainScrollView.contentSize.height += dif
-            commentsField.frame = textFrame
-            commentsField.setContentOffset(CGPoint(x: 0.0, y: commentsField.contentSize.height - commentsField.frame.height), animated: false)
-            
-        }
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.placeholder = ""
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        return textField.resignFirstResponder()
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField.text == "" {
-            textField.placeholder = "Введите цену"
-        }
     }
     
     func continueButtonAction() {
@@ -193,10 +95,10 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
             "building" : building,
             "longitude" : "\(RentAddressController.flatToRent.longitude)",
             "latitude" : "\(RentAddressController.flatToRent.latitude)",
-            "price" : "\(priceField.text!)",
+            //"price" : "\(priceField.text!)",
             "square" : "\(RentAddressController.flatToRent.square)",
             "rooms" : "\(RentAddressController.flatToRent.numberOfRoomsInFlat)",
-            "description" : "\(commentsField.text!)",
+            //"description" : "\(commentsField.text!)",
             "options" : params
         ]
         
@@ -238,32 +140,30 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         
-        let cameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.default)
+        let cameraAction = UIAlertAction(title: "Камера", style: UIAlertActionStyle.default)
         {
             (result : UIAlertAction) -> Void in
             self.snap()
         }
         alertController.addAction(cameraAction)
         
-        let libraryAction = UIAlertAction(title: "Photo Library", style: UIAlertActionStyle.default)
+        let libraryAction = UIAlertAction(title: "Медиатека", style: UIAlertActionStyle.default)
         {
             (result : UIAlertAction) -> Void in
             self.choose()
         }
         alertController.addAction(libraryAction)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel)
+        let cancelAction = UIAlertAction(title: "Отмена", style: UIAlertActionStyle.cancel)
         {
             (result : UIAlertAction) -> Void in
         }
         alertController.addAction(cancelAction)
         
-        self.present(alertController, animated: true, completion: nil)
+        if photos.count < 20 {
+            self.present(alertController, animated: true, completion: nil)
+        }
         
-    }
-    
-    func cancelButtonAction() {
-        performSegue(withIdentifier: "cancelRent", sender: self)
     }
     
     func snap() {
@@ -289,20 +189,61 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         photos.insert(image, at: 0)
+        justLabel.text = "\(photos.count) фотографий"
+        if photos.count == 20 {
+            self.border.backgroundColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 1)
+            self.avatar.image = UIImage(named:"7")
+            justLabel.text = "\(photos.count) фотографий (максимум)"
+        }
+        justLabel.sizeToFit()
+        justLabel.frame.origin.x = self.view.frame.width/2 - justLabel.frame.width/2
         
         let imageView = UIImageView()
-        imageView.frame = CGRect(x: 15.0, y: 0, width: self.scrollView.frame.height, height: self.scrollView.frame.height)
-        if photos.count != 1 {
-            for subview in scrollView.subviews {
-                subview.frame.origin.x += self.view.frame.width/2
+        let delete = UIButton()
+        imageView.frame = CGRect(x: 0.0, y: 0, width: 100, height: 100)
+        delete.frame = CGRect(x: 0.0, y: 0, width: 25, height: 25)
+        if photos.count == 1 {
+            border.frame.origin.x = self.view.frame.width/2 - border.frame.width - 6
+            imageView.frame.origin = CGPoint(x: self.view.frame.width/2 + 6, y: border.frame.minY)
+        } else if photos.count == 2 {
+            border.frame.origin.x = self.view.frame.width/2 - border.frame.width * 1.5 - 12
+            for subview in scroll.subviews {
+                if subview.tag == 1 {
+                    subview.frame.origin.x -= 56
+                }
+            }
+            imageView.frame.origin = CGPoint(x: self.view.frame.width/2 + 12 + 50, y: border.frame.minY)
+        } else {
+            let q = photos.count
+            if q % 3 == 0 {
+                let x = self.view.frame.width/2 - border.frame.width * 1.5 - 12
+                let y = border.frame.maxY + 10 + CGFloat((q/3 - 1) * 110)
+                imageView.frame.origin = CGPoint(x: x, y: y)
+                if q > 6 {
+                    self.scroll.contentSize.height += 110
+                }
+            } else if (q - 1) % 3 == 0 {
+                let x = self.view.frame.width/2 - 50
+                let y = border.frame.maxY + 10 + CGFloat(((q - 1)/3 - 1) * 110)
+                imageView.frame.origin = CGPoint(x: x, y: y)
+            } else if (q - 2) % 3 == 0 {
+                let x = self.view.frame.width/2 + 12 + 50
+                let y = border.frame.maxY + 10 + CGFloat(((q - 2)/3 - 1) * 110)
+                imageView.frame.origin = CGPoint(x: x, y: y)
             }
         }
-        scrollView.contentSize.width += self.view.frame.width/2
+        
+        delete.frame.origin = CGPoint(x: imageView.frame.maxX - 17, y: imageView.frame.minY - 7)
         imageView.image = image
+        delete.setImage(UIImage(named: "82"), for: .normal)
+        delete.addTarget(self, action: #selector(deletePhoto), for: .touchUpInside)
         imageView.contentMode = .scaleToFill
         imageView.clipsToBounds = true
         imageView.layer.masksToBounds = false
-        scrollView.addSubview(imageView)
+        imageView.tag = photos.count
+        delete.tag = photos.count
+        self.scroll.addSubview(imageView)
+        self.scroll.addSubview(delete)
         
         self.dismiss(animated: true, completion: nil)
     }
@@ -311,24 +252,69 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             photos.insert(pickedImage, at: 0)
+            justLabel.text = "\(photos.count) фотографий"
+            if photos.count == 20 {
+                self.border.backgroundColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 1)
+                self.avatar.image = UIImage(named:"7")
+                justLabel.text = "\(photos.count) фотографий (максимум)"
+            }
+            justLabel.sizeToFit()
+            justLabel.frame.origin.x = self.view.frame.width/2 - justLabel.frame.width/2
             
             let imageView = UIImageView()
-            imageView.frame = CGRect(x: 15.0, y: 0, width: self.scrollView.frame.height, height: self.scrollView.frame.height)
-            if photos.count != 1 {
-                for subview in scrollView.subviews {
-                    subview.frame.origin.x += self.view.frame.width/2
+            let delete = UIButton()
+            imageView.frame = CGRect(x: 0.0, y: 0, width: 100, height: 100)
+            delete.frame = CGRect(x: 0.0, y: 0, width: 25, height: 25)
+            if photos.count == 1 {
+                border.frame.origin.x = self.view.frame.width/2 - border.frame.width - 6
+                imageView.frame.origin = CGPoint(x: self.view.frame.width/2 + 6, y: border.frame.minY)
+            } else if photos.count == 2 {
+                border.frame.origin.x = self.view.frame.width/2 - border.frame.width * 1.5 - 12
+                for subview in scroll.subviews {
+                    if subview.tag == 1 {
+                        subview.frame.origin.x -= 56
+                    }
+                }
+                imageView.frame.origin = CGPoint(x: self.view.frame.width/2 + 12 + 50, y: border.frame.minY)
+            } else {
+                let q = photos.count
+                if q % 3 == 0 {
+                    let x = self.view.frame.width/2 - border.frame.width * 1.5 - 12
+                    let y = border.frame.maxY + 10 + CGFloat((q/3 - 1) * 110)
+                    imageView.frame.origin = CGPoint(x: x, y: y)
+                    if q > 6 {
+                        self.scroll.contentSize.height += 110
+                    }
+                } else if (q - 1) % 3 == 0 {
+                    let x = self.view.frame.width/2 - 50
+                    let y = border.frame.maxY + 10 + CGFloat(((q - 1)/3 - 1) * 110)
+                    imageView.frame.origin = CGPoint(x: x, y: y)
+                } else if (q - 2) % 3 == 0 {
+                    let x = self.view.frame.width/2 + 12 + 50
+                    let y = border.frame.maxY + 10 + CGFloat(((q - 2)/3 - 1) * 110)
+                    imageView.frame.origin = CGPoint(x: x, y: y)
                 }
             }
-            scrollView.contentSize.width += self.view.frame.width/2
+            
+            delete.frame.origin = CGPoint(x: imageView.frame.maxX - 17, y: imageView.frame.minY - 7)
             imageView.image = pickedImage
+            delete.setImage(UIImage(named: "82"), for: .normal)
+            delete.addTarget(self, action: #selector(deletePhoto), for: .touchUpInside)
             imageView.contentMode = .scaleToFill
             imageView.clipsToBounds = true
             imageView.layer.masksToBounds = false
-            scrollView.addSubview(imageView)
+            imageView.tag = photos.count
+            delete.tag = photos.count
+            self.scroll.addSubview(imageView)
+            self.scroll.addSubview(delete)
             
         }
         
         dismiss(animated: true, completion: nil)
+        
+    }
+    
+    func deletePhoto() {
         
     }
     

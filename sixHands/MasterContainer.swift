@@ -14,6 +14,7 @@ class MasterContainer: UIViewController {
     @IBOutlet weak var progress: UIProgressView!
     var i = Int()
     let cancel = UIButton()
+    let nextButton = UIButton()
     let continueButton = UIButton()
     let first = UILabel()
     let second = UILabel()
@@ -65,14 +66,27 @@ class MasterContainer: UIViewController {
         continueButton.titleLabel?.font = UIFont.systemFont(ofSize: 20.0, weight: UIFontWeightMedium)
         self.view.addSubview(continueButton)
         
-        cancel.setTitle("Cancel", for: .normal)
+        cancel.setTitle("Отменить", for: .normal)
         cancel.setTitleColor(UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1), for: .normal)
-        cancel.frame = CGRect(x: 0, y: 0, width: 65, height: 25)
+        cancel.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        cancel.contentHorizontalAlignment = .left
+        cancel.frame = CGRect(x: 0, y: 0, width: 90, height: 25)
         cancel.addTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
         
         let leftBarButton = UIBarButtonItem()
         leftBarButton.customView = cancel
         self.navigationItem.leftBarButtonItem = leftBarButton
+        
+        nextButton.setTitle("Далее", for: .normal)
+        nextButton.setTitleColor(UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1), for: .normal)
+        nextButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        nextButton.contentHorizontalAlignment = .right
+        nextButton.frame = CGRect(x: 0, y: 0, width: 120, height: 25)
+        nextButton.addTarget(self, action: #selector(continueButtonAction), for: .touchUpInside)
+        
+        let rightBarButton = UIBarButtonItem()
+        rightBarButton.customView = nextButton
+        self.navigationItem.rightBarButtonItem = rightBarButton
     }
 
     override func didReceiveMemoryWarning() {
@@ -103,14 +117,15 @@ class MasterContainer: UIViewController {
             case 4:
                 fourth.textColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
                 continueButton.setTitle("Опубликовать", for: .normal)
+                nextButton.setTitle("Опубликовать", for: .normal)
             default:
                 print("waaaat?!")
             }
-            cancel.setTitle("Back", for: .normal)
+            cancel.setTitle("Назад", for: .normal)
             cancel.removeTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
             cancel.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
         } else {
-            
+            i -= 1
         }
     }
     
@@ -121,12 +136,13 @@ class MasterContainer: UIViewController {
     
     func backButtonAction() {
         continueButton.setTitle("Далее", for: .normal)
+        nextButton.setTitle("Далее", for: .normal)
         i -= 1
         containerView?.segueIdentifierReceived(button: i)
         progress.setProgress(progress.progress - 0.25, animated: true)
         navigationItem.title = "Шаг \(i) из 4"
         if i == 1 {
-            cancel.setTitle("Cancel", for: .normal)
+            cancel.setTitle("Отменить", for: .normal)
             cancel.removeTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
             cancel.addTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
         }

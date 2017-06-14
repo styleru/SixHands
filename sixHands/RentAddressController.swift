@@ -35,7 +35,7 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
         // Do any additional setup after loading the view.
         
         //address
-        addressField.frame = CGRect(x: screen.minX + 50.0, y: 74 + 52, width: screen.width - 100.0, height: 40.0)
+        addressField.frame = CGRect(x: screen.minX + 50.0, y: 10, width: screen.width - 100.0, height: 40.0)
         addressField.delegate = self
         addressField.placeholder = "Где вы сдаёте квартиру?"
         addressField.font = UIFont.systemFont(ofSize: 18.0, weight: UIFontWeightLight)
@@ -73,7 +73,7 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
         view.addSubview(locationButton)
         
         //tableView for suggestions
-        table.frame = CGRect(x: 0.0, y: greyView.frame.maxY, width: screen.width, height: screen.height - greyView.frame.maxY - 55.0)
+        table.frame = CGRect(x: 0.0, y: greyView.frame.maxY, width: screen.width, height: screen.height - greyView.frame.maxY - 55.0 - 116.0)
         table.rowHeight = screen.height * 0.1
         table.delegate = self
         table.dataSource = self

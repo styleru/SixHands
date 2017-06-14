@@ -52,7 +52,6 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         let per = realm.object(ofType: person.self, forPrimaryKey: 1)
         print(per?.token)
         
-        
         //gray bar
         let grayBar = UIView()
         grayBar.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: 20.0)

@@ -20,6 +20,7 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
     @IBOutlet weak var label3: UILabel!
     @IBOutlet weak var label2: UILabel!
     @IBOutlet weak var label1: UILabel!
+    @IBOutlet var okOutlet: UIButton!
     @IBOutlet weak var fbOutlet: UIButton!
     @IBOutlet weak var vkOutlet: UIButton!
     @IBOutlet weak var image: UIImageView!
@@ -29,6 +30,7 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         // Do any additional setup after loading the view, typically from a nib.
         VKSDKInstance = VKSdk.initialize(withAppId: "5446345")
@@ -42,10 +44,11 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
         motion(toView: image, magnitude: 20)
         motion(toView: fbOutlet, magnitude: -10)
         motion(toView: vkOutlet, magnitude: -10)
-        vkOutlet.frame = CGRect(x: 0, y:0, width: screenSize.width*0.8125, height: screenSize.height*0.0845)
-        vkOutlet.center = CGPoint(x: screenSize.width/2, y: screenSize.height*0.797)
-        fbOutlet.frame = CGRect(x: 0, y:0, width: screenSize.width*0.8125, height: screenSize.height*0.0845)
-        fbOutlet.center = CGPoint(x: screenSize.width/2, y: screenSize.height*0.6813)
+        okOutlet.frame = CGRect(x: screenSize.width*0.08, y: screenSize.height*0.55, width: screenSize.width*0.8125, height: screenSize.height*0.0845)
+        fbOutlet.frame = CGRect(x: okOutlet.frame.minX, y: okOutlet.frame.maxY+20, width: okOutlet.frame.width, height: okOutlet.frame.height)
+        vkOutlet.frame = CGRect(x: okOutlet.frame.minX, y: fbOutlet.frame.maxY+20, width: okOutlet.frame.width, height: okOutlet.frame.height)
+
+        okOutlet.layer.cornerRadius = okOutlet.frame.height/2
         fbOutlet.layer.cornerRadius = fbOutlet.frame.height/2
         vkOutlet.layer.cornerRadius = vkOutlet.frame.height/2
         switch (screenSize.width){
@@ -200,10 +203,15 @@ override func didReceiveMemoryWarning() {
 
 
                         }
-                        
+                        let delayTime = DispatchTime.now() + 1
+                        DispatchQueue.main.asyncAfter(deadline: delayTime) {
                         DispatchQueue.main.async { [unowned self] in
-                        self.performSegue(withIdentifier: "login", sender: self)
-                        }
+                        //self.performSegue(withIdentifier: "login", sender: self)
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let afterLoginTB = storyboard.instantiateViewController(withIdentifier: "afterLogin") as! UITabBarController
+                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                            appDelegate.window?.rootViewController = afterLoginTB
+                            }}
                     }
                     task.resume()
                     

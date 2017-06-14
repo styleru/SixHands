@@ -40,7 +40,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.23137254901960785" green="0.3529411764705882" blue="0.59215686274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="     Войти через Facebook" image="002FacebookLogo"/>
+                                <state key="normal" title="      Войти через Facebook" image="002FacebookLogo"/>
                                 <connections>
                                     <action selector="fbLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CQS-F3-Rz3"/>
                                 </connections>
@@ -87,6 +87,13 @@
                                     </attributedString>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sE7-vD-hO1">
+                                <rect key="frame" x="57" y="384" width="260" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.88627450980392153" green="0.49411764705882355" blue="0.20784313725490194" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="                   Войти через ОК" image="ok"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -96,6 +103,7 @@
                         <outlet property="label1" destination="lqy-Vm-CKW" id="eHn-GY-7yE"/>
                         <outlet property="label2" destination="gl6-8L-O0n" id="wL7-xc-Ec9"/>
                         <outlet property="label3" destination="EtG-AA-woM" id="bKU-rt-weP"/>
+                        <outlet property="okOutlet" destination="sE7-vD-hO1" id="X3B-Wz-RKV"/>
                         <outlet property="terms" destination="ibe-Fz-hFP" id="Xrh-2m-usp"/>
                         <outlet property="vkOutlet" destination="gTe-vZ-jGk" id="trV-DB-y9P"/>
                         <segue destination="bxM-4z-c0h" kind="show" identifier="login" id="U6V-Gu-04z"/>
@@ -198,8 +206,9 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nfi-7A-jU3">
-                                                    <rect key="frame" x="116" y="203" width="12" height="12"/>
+                                                    <rect key="frame" x="116" y="203" width="2" height="2"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.39215686274509803" green="0.39215686274509803" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -631,7 +640,7 @@
                         <viewControllerLayoutGuide type="bottom" id="8Kf-He-hd7"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bz4-Ti-izc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Общие друзья" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0DL-5f-Fdo">
@@ -1243,13 +1252,14 @@
         <image name="Profile" width="24" height="24"/>
         <image name="Stairs Up_000000_100" width="100" height="100"/>
         <image name="checkedMark2" width="22" height="22"/>
+        <image name="ok" width="15" height="24"/>
         <image name="stockSnap02FAEBOQ2G" width="960" height="1704"/>
         <image name="uncheckedMark3" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ATY-tg-wpF"/>
+        <segue reference="KDP-i7-wSB"/>
         <segue reference="OOK-34-sFi"/>
-        <segue reference="ow1-io-7hw"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

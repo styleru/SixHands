@@ -51,7 +51,7 @@ func getFBUserData(token:String,withcompletionHandler:(_ success:Bool) ->())
                 "sn_type":"fb",
                 "sn_id":fbDetails["id"]! as! String,
                 "token": token]
-            print("kek: \(token)")
+       
             
             let url = "http://6hand.anti.school/user"
             //ПОЛУЧАЮ JSON С СЕРВАКА
@@ -77,9 +77,10 @@ func getFBUserData(token:String,withcompletionHandler:(_ success:Bool) ->())
                             per.user_id = Int(jsondata["user"]["id"].string!)!
                             UserDefaults.standard.set(per.user_id, forKey: "id_user")
                             UserDefaults.standard.synchronize()
-                            print("USER_ID:\(jsondata["user"]["social_networks"][0]["id_user"].string)")}
+                           }
                     DispatchQueue(label: "background").async {
                         autoreleasepool {
+                            print(per)
                             let realm = try! Realm()
                             try! realm.write {
                                 realm.add(per, update: true)
@@ -87,10 +88,12 @@ func getFBUserData(token:String,withcompletionHandler:(_ success:Bool) ->())
                         }
                     }
                     }
+                let delayTime = DispatchTime.now() + 1
+                DispatchQueue.main.asyncAfter(deadline: delayTime) {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let afterLoginTB = storyboard.instantiateViewController(withIdentifier: "afterLogin") as! UITabBarController
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.window?.rootViewController = afterLoginTB
+                    appDelegate.window?.rootViewController = afterLoginTB}
             }
             
             

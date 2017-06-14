@@ -24,6 +24,9 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
     var check1 = false
     var check2 = false
     let conv = [String:String]()
+    let label1ForMutualFriends = UILabel()
+    let label2ForMutualFriends = UILabel()
+
     
     var dif = CGFloat()
     @IBOutlet weak var imagesScrollView: UIScrollView!
@@ -64,7 +67,6 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
     
     
     override func viewDidLoad() {
-       
         api.flatSingle(id: flat_id) { (flat) in
             for i in 0..<flat.imageOfFlat.count{
                 
@@ -86,7 +88,28 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
             self.square.text = flat.square + " м.кв."
             self.numberOfRooms.text = flat.numberOfRoomsInFlat + " ком."
             self.avatar.sd_setImage(with: URL(string :flat.avatarImage))
-            self.mutualFriendsOutlet.setAttributedTitle(flat.buttonOwner(flat.ownerName, flat.flatMutualFriends), for: .normal)
+            self.subway.text = Subway.getStation(id: flat.subwayId).station
+            self.subwayColor.backgroundColor = Subway.getStation(id: flat.subwayId).color
+            //BUTTON FOR MUTUAL FRIENDS
+            self.label1ForMutualFriends.attributedText = flat.buttonOwner(flat.ownerName)
+            self.mutualFriendsOutlet.frame = CGRect(x: self.screenSize.width*0.061333, y: self.avatar.frame.midY - self.avatar.frame.height/2, width: self.screenSize.width/1.5, height: self.avatar.frame.height)
+            self.label1ForMutualFriends.frame = CGRect(x: 0, y: 5, width: self.screenSize.width/2, height: 18)
+            self.label2ForMutualFriends.text = "\(flat.flatMutualFriends) общих друзей ❯"
+            self.label2ForMutualFriends.frame = CGRect(x:  self.label1ForMutualFriends.frame.minX, y:  self.label1ForMutualFriends.frame.maxY+10, width: self.screenSize.width*0.405, height: 28)
+            self.label2ForMutualFriends.backgroundColor = UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1)
+            self.label2ForMutualFriends.font = UIFont(name: ".SFUIText-Light", size: 16)
+            self.label1ForMutualFriends.font = UIFont(name: ".SFUIText-Light", size: 18)
+            self.label2ForMutualFriends.layer.masksToBounds = false
+            self.label2ForMutualFriends.clipsToBounds = true
+            self.label2ForMutualFriends.textAlignment = .center
+            self.label2ForMutualFriends.sizeToFit()
+            self.label2ForMutualFriends.frame.size.width += 20
+            self.label2ForMutualFriends.frame.size.height += 6
+            self.label2ForMutualFriends.layer.cornerRadius = self.label2ForMutualFriends.frame.height/2
+            self.mutualFriendsOutlet.addSubview(self.label2ForMutualFriends)
+            self.mutualFriendsOutlet.addSubview(self.label1ForMutualFriends)
+            //END OF BUTTON
+            
             self.adress.text = flat.address
             self.aboutFlat.text = flat.comments
             
@@ -97,7 +120,7 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
             }else{
                 self.razdelitel4.frame = CGRect(x: self.aboutFlat.frame.minX, y: self.showAllOutlet.frame.maxY + self.screenSize.height*0.02338, width: self.screenSize.width*0.88, height: self.screenSize.height*0.002)}
             
-            self.conveniences.frame = CGRect(x: self.mutualFriendsOutlet.frame.minX, y: self.razdelitel4.frame.maxY+self.screenSize.height*0.02338, width: self.screenSize.width*0.277, height: self.screenSize.height*0.017991)
+            self.conveniences.frame = CGRect(x: self.showAllOutlet.frame.minX, y: self.razdelitel4.frame.maxY+self.screenSize.height*0.02338, width: self.screenSize.width*0.277, height: self.screenSize.height*0.017991)
             self.convView.frame = CGRect(x: 0, y: self.conveniences.frame.maxY, width: self.screenSize.width, height: 0)
             
             self.api.options(options: flat.options, completionHandler: { (opt) in
@@ -121,7 +144,7 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
                     self.convView.addSubview(image)
                    
                 }
-                 self.scrollView.contentSize.height = self.convView.frame.maxY+40
+                 self.scrollView.contentSize.height = self.convView.frame.maxY+60
             })
            
             
@@ -166,7 +189,7 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
         time.center = CGPoint(x: screenSize.width * 0.82666, y: screenSize.height * 0.47601199)
         date.bounds = CGRect(x: 0, y: 0, width: screenSize.width * 0.3, height: screenSize.height * 0.0254 )
         date.center = CGPoint(x: time.frame.maxX - date.frame.width/2, y: screenSize.height * 0.44302849)
-        subwayColor.bounds = CGRect(x: 0, y: 0, width: screenSize.width * 0.032, height: screenSize.width * 0.032 )
+        subwayColor.bounds = CGRect(x: 0, y: 0, width: 12, height:12)
         subwayColor.center = CGPoint(x:adress.frame.minX + subwayColor.frame.width/2, y: screenSize.height * 0.5457)
         subway.bounds = CGRect(x: 0, y: 0, width: screenSize.width * 0.5, height: screenSize.height * 0.03 )
         subway.center = CGPoint(x: subwayColor.frame.maxX + subway.frame.width/2 + 5, y: screenSize.height * 0.5457)
@@ -218,22 +241,22 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
         avatar.layer.cornerRadius = avatar.frame.size.width / 2
         avatar.clipsToBounds = true
         subwayColor.layer.masksToBounds = false
-        subwayColor.layer.cornerRadius = subwayColor.frame.size.width / 2
+        subwayColor.layer.cornerRadius = 6
         subwayColor.clipsToBounds = true
         favourite.bounds = CGRect(x: 0, y: 0, width: 30 , height: 30 )
         favourite.center = CGPoint(x: screenSize.width-screenSize.width*0.1 , y: screenSize.width*0.1)
         
-        razdelitel3.frame = CGRect(x: mutualFriendsOutlet.frame.minX, y: avatar.frame.midY+screenSize.height * 0.0809, width: screenSize.width*0.88, height: screenSize.height*0.002)
+        razdelitel3.frame = CGRect(x: razdelitel2.frame.minX, y: avatar.frame.midY+screenSize.height * 0.0809, width: screenSize.width*0.88, height: screenSize.height*0.002)
         
-        about.frame = CGRect(x: mutualFriendsOutlet.frame.minX, y: razdelitel3.frame.maxY+screenSize.height*0.02338, width: screenSize.width*0.277, height: screenSize.height*0.017991)
+        about.frame = CGRect(x: razdelitel2.frame.minX, y: razdelitel3.frame.maxY+screenSize.height*0.02338, width: screenSize.width*0.277, height: screenSize.height*0.017991)
         if screenSize.width == 375{
             aboutFlat.frame = CGRect(x: about.frame.minX-5, y: about.frame.maxY+screenSize.height*0.017, width: screenSize.width*0.845333, height: screenSize.height*0.16)}else if screenSize.width == 414{
             aboutFlat.frame = CGRect(x: about.frame.minX-5, y: about.frame.maxY+screenSize.height*0.017, width: screenSize.width*0.845333, height: screenSize.height*0.165)
         }
         showAllOutlet.frame = CGRect(x: razdelitel3.frame.minX, y: aboutFlat.frame.maxY, width: screenSize.width*0.5, height: screenSize.height*0.02)
         
-        razdelitel4.frame = CGRect(x: mutualFriendsOutlet.frame.minX, y: showAllOutlet.frame.maxY + screenSize.height*0.02338 , width: screenSize.width*0.88, height: screenSize.height*0.002)
-        conveniences.frame = CGRect(x: mutualFriendsOutlet.frame.minX, y: razdelitel4.frame.maxY+screenSize.height*0.02338, width: screenSize.width*0.277, height: screenSize.height*0.017991)
+        razdelitel4.frame = CGRect(x: showAllOutlet.frame.minX, y: showAllOutlet.frame.maxY + screenSize.height*0.02338 , width: screenSize.width*0.88, height: screenSize.height*0.002)
+        conveniences.frame = CGRect(x: showAllOutlet.frame.minX, y: razdelitel4.frame.maxY+screenSize.height*0.02338, width: screenSize.width*0.277, height: screenSize.height*0.017991)
         convView.frame = CGRect(x: 0, y: conveniences.frame.maxY, width: screenSize.width, height: screenSize.height*0.022*0)
         
         scrollView.addSubview(showAllOutlet)

@@ -35,27 +35,23 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     override func viewDidLoad() {
-        api.flatsFilter(offset: 0, amount: amount, parameters: "[]") { (i) in
-            self.flats += i
-           
-            OperationQueue.main.addOperation({()-> Void in
+        
+        self.api.flatsFilter(offset: 0, amount: self.amount, parameters: "[]") { (i) in
+                self.flats += i
                 
-                self.listOfFlatsTableView.reloadData()
-            })
-            
-        }
+                OperationQueue.main.addOperation({()-> Void in
+                    
+                    self.listOfFlatsTableView.reloadData()
+                })
+                
+            }
+        
+       
         
         let realm = try! Realm()
-        print("REALM FILE:\(Realm.Configuration().fileURL)")
-        //let per = realm.object(ofType: person.self, forPrimaryKey: 1)
-        let sub = realm.object(ofType: Subway.self, forPrimaryKey: 2)
+        let per = realm.object(ofType: person.self, forPrimaryKey: 1)
+        print(per?.token)
         
-        //api.update_subway()
-        /*
-        let lineName = sub?.subwayLines[0]
-        print("lineName: \((lineName?["name"])!)")
-        print("lineColor: \((lineName?["color"])!)")
-        print("lineID: \((lineName?["lineId"])!)")*/
         
         //gray bar
         let grayBar = UIView()
@@ -165,11 +161,12 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
         cell.subway.bounds = CGRect(x: 0, y: 0, width:screenSize.width * 0.3 , height: screenSize.height * 0.02698)
         cell.subway.center = CGPoint(x:cell.flatImage.frame.minX+cell.subway.frame.width/2 + 4, y: cell.flatImage.frame.maxY + cell.subway.frame.height + 5.0)
-        
+        //
         cell.numberOfRooms.bounds = CGRect(x: 0, y: 0, width:screenSize.width * 0.3, height: screenSize.height * 0.02698)
         cell.numberOfRooms.center = CGPoint(x:cell.subway.frame.maxX+10+cell.numberOfRooms.frame.width/2, y:cell.flatImage.frame.maxY + cell.subway.frame.height + 5.0)
-        
-        //cell.dot.layer.cornerRadius = cell.dot.frame.size.width / 2
+        //
+        cell.dot.layer.cornerRadius = cell.dot.frame.size.width / 2
+        //
         cell.avatar.bounds = CGRect(x: 0, y: 0, width:screenSize.width * 0.11733 , height: screenSize.width * 0.11733)
         cell.avatar.center = CGPoint(x:cell.flatImage.frame.maxX-cell.avatar.frame.width/2 - 8,y:cell.bounds.height-(cell.bounds.height-cell.flatImage.frame.maxY)/2)
         cell.avatar.layer.masksToBounds = false
@@ -183,11 +180,9 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         cell.separator.center = CGPoint(x:cell.bounds.width / 2, y: 2)
         
         if indexPath.row != 0{
-            if #available(iOS 10.0, *) {
-                cell.separator.backgroundColor = UIColor(displayP3Red: 215/255, green: 215/255, blue: 215/255, alpha: 1.0)
-            } else {
-                // Fallback on earlier versions
-            }
+            
+        cell.separator.backgroundColor = UIColor(red: 215/255, green: 215/255, blue: 215/255, alpha: 1.0)
+           
         } else {
             cell.separator.backgroundColor = UIColor.clear
         }
@@ -195,9 +190,12 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
         //END OF CONSTRAINTS
         cell.mutualFriends.setTitle(flats[indexPath.row].flatMutualFriends, for: .normal)
-        cell.subway.text = "Арбатская"
-        //cell.mutualFriends.text = "5 общих друзей"
+        cell.subway.text = Subway.getStation(id:flats[indexPath.row].subwayId ).station
         cell.numberOfRooms.text = "\(flats[indexPath.row].numberOfRoomsInFlat)-комн."
+        //FOR DOT
+        cell.subway.sizeToFit()
+        cell.dot.center = CGPoint(x: cell.subway.frame.maxX+10, y: cell.subway.frame.midY)
+        cell.numberOfRooms.frame = CGRect(x: cell.dot.frame.maxX+9, y: cell.numberOfRooms.frame.minY, width: screenSize.width * 0.3, height: screenSize.height * 0.02698)
         cell.price.text = "\(flats[indexPath.row].flatPrice) ₽"
         cell.avatar.sd_setImage(with: URL(string : flats[indexPath.row].avatarImage))
         cell.mutualFriends.tag = Int(flats[indexPath.row].flat_id)!

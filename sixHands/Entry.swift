@@ -16,7 +16,8 @@ class Entry: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
-        
+        print("REALM FILE:\(Realm.Configuration().fileURL)")
+        api.update_subway()
         let per = realm.object(ofType: person.self, forPrimaryKey: 1)
         var token = String()
         if let i = per?.token{

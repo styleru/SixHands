@@ -13,22 +13,20 @@ import RealmSwift
 
 class Flat{
     
-    var buttonOwner : (_ fullName:String,_ number:String)->(NSMutableAttributedString) = {fullName,number in
+    var buttonOwner : (_ fullName:String)->(NSMutableAttributedString) = {fullName in
         let seafoamBlue = UIColor(red: 85.0/255.0, green: 197.0/255.0, blue: 183.0/255.0, alpha: 1.0)
         let firstText = "Хозяин "
-        let name = fullName + "\n\(number) "
-        let secondText = "общих друзей ❯"
+        let name = fullName
+        
         let attrText1 = NSMutableAttributedString(string: firstText)
         attrText1.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: NSMakeRange(0,attrText1.length))
         
         let attrText2 = NSMutableAttributedString(string: name)
         attrText2.addAttribute(NSForegroundColorAttributeName, value: seafoamBlue, range: NSMakeRange(0,attrText2.length))
-        let attrText3 = NSMutableAttributedString(string: secondText)
-        attrText3.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: NSMakeRange(0,attrText3.length))
+       
         let attributedText = NSMutableAttributedString()
         attributedText.append(attrText1)
         attributedText.append(attrText2)
-        attributedText.append(attrText3)
         return attributedText
     }
     var ownerName = String()
@@ -85,11 +83,16 @@ class Subway:Object{
         return "id"
     }
     class func getStation(id:String)->(station:String,color:UIColor){
-       var sub = try! Realm().objects(Subway.self)
-       
-        print()
+        let realm = try! Realm()
+        let sub = realm.object(ofType: Subway.self, forPrimaryKey: 2)
+        let station = sub?.subwayStations[Int(id)!-1]
+        let name = station?["name"]
+        let idLine:String = station?["id_underground_line"] as! String
+        let line = sub?.subwayLines[Int(idLine)!-1]
+        let colorString = line?["color"] as! String
+        let color = UIColor.init(hexString: colorString+"ff")
         
-        return ("",UIColor.black)
+        return (name as! String,color!)
     }
     
 }

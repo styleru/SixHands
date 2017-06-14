@@ -35,7 +35,7 @@ class API{
                     let flat = Flat()
                     flat.avatarImage = jsondata["flats"][i]["owner"]["avatar"].string!
                     flat.flatPrice = jsondata["flats"][i]["price"].string!
-                    //flat.idSubway = "Пока нема"
+                    flat.subwayId = jsondata["flats"][i]["id_underground"].string!
                     let number_of_friends = (jsondata["flats"][i]["mutual_friends"].array?.count)!
                     flat.flatMutualFriends = "\(number_of_friends) общих друзей"
                     flat.flat_id = jsondata["flats"][i]["id"].string!
@@ -101,7 +101,6 @@ class API{
                     autoreleasepool {
                         let realm = try! Realm()
                         try! realm.write {
-                            print(subway)
                         realm.add(subway, update: true)
                         }
                     }
@@ -181,9 +180,9 @@ class API{
             var jsondata = JSON(data:response.data!)
             flat.avatarImage = jsondata["owner"]["avatar"].string ?? ""
             flat.flatPrice = jsondata["price"].string ?? "-"
-           // flat.idSubway = "Пока нема"
+            flat.subwayId = jsondata["id_underground"].string ?? "не указано"
             let number_of_friends = jsondata["mutual_friends"].array?.count ?? 0
-            flat.flatMutualFriends = "\(number_of_friends) общих друзей"
+            flat.flatMutualFriends = "\(number_of_friends)"
             flat.flat_id = jsondata["id"].string ?? "0"
             let photoArray:Int = (jsondata["photos"].array?.count)!
             for i in 0..<photoArray{

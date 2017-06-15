@@ -215,8 +215,11 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         //view bounds
         let screen = self.view.frame
         
+        cell.frame.size.width = screen.width
+        cell.frame.size.height = screen.height * 0.4
+        
         //image
-        cell.flat.frame = CGRect(x: 15.0, y: 10.0, width: screen.width - 30.0, height: screen.height * 0.3)
+        cell.flat.frame = CGRect(x: 0, y: 0.0, width: screen.width * 0.91466 , height: screen.height * 0.27436282 )
         cell.flat.center = CGPoint(x: cell.bounds.width / 2, y: cell.flat.frame.height/2 + 20.0)
         cell.flat.contentMode = .scaleAspectFill
         cell.flat.clipsToBounds = true
@@ -237,13 +240,19 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.subwayLabel.bounds = CGRect(x: 0, y: 0, width:screen.width * 0.3 , height: screen.height * 0.02698)
         cell.subwayLabel.center = CGPoint(x:cell.flat.frame.minX+cell.subwayLabel.frame.width/2 + 4, y: cell.flat.frame.maxY + cell.subwayLabel.frame.height + 5.0)
         cell.subwayLabel.adjustsFontSizeToFitWidth = true
+        cell.subwayLabel.sizeToFit()
+        
+        //dot
+        cell.dotImg.backgroundColor = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1)
+        cell.dotImg.frame = CGRect(x: cell.subwayLabel.frame.maxX+10, y: cell.subwayLabel.frame.midY - 1, width: 2, height: 2)
+        cell.dotImg.layer.cornerRadius = cell.dotImg.frame.size.width / 2
         
         //rooms
         cell.rooms.text = "\(flats[indexPath.row].numberOfRoomsInFlat)-комн."
         cell.rooms.alpha = 0.7
         cell.rooms.font = UIFont.systemFont(ofSize: 16.0, weight: UIFontWeightLight)
         cell.rooms.bounds = CGRect(x: 0, y: 0, width:screen.width * 0.3, height: screen.height * 0.02698)
-        cell.rooms.center = CGPoint(x:cell.subwayLabel.frame.maxX+10+cell.rooms.frame.width/2, y:cell.flat.frame.maxY + cell.subwayLabel.frame.height + 5.0)
+        cell.rooms.center = CGPoint(x:cell.dotImg.frame.maxX+10+cell.rooms.frame.width/2, y:cell.flat.frame.maxY + cell.subwayLabel.frame.height + 5.0)
         cell.rooms.adjustsFontSizeToFitWidth = true
         
         //edit button

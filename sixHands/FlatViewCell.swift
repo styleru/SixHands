@@ -29,6 +29,7 @@ class FlatViewCell: UITableViewCell {
     let rooms = UILabel()
     let edit = UIButton()
     let sep = UIImageView()
+    let dotImg = UIImageView()
     
     let switchButton = UISwitch()
     
@@ -56,6 +57,7 @@ class FlatViewCell: UITableViewCell {
         contentView.addSubview(rooms)
         contentView.addSubview(switchButton)
         contentView.addSubview(edit)
+        contentView.addSubview(dotImg)
         
     }
     

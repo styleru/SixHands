@@ -874,16 +874,6 @@
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="26c-mi-Zub">
-                                                <rect key="frame" x="279" y="222" width="80" height="25"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="80" id="mHp-bS-Pvp"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
-                                                <state key="normal" title="Выбрать">
-                                                    <color key="titleColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KQj-DC-UpE">
                                                 <rect key="frame" x="337" y="334" width="22" height="22"/>
                                                 <constraints>
@@ -1033,6 +1023,13 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Выберите" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eG4-t6-hfW">
+                                                <rect key="frame" x="0.0" y="212" width="359" height="45"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -1059,10 +1056,7 @@
                                             <constraint firstItem="0RJ-VL-dMg" firstAttribute="leading" secondItem="5f6-Sb-LMN" secondAttribute="leading" constant="16" id="CKG-8Z-2Vr"/>
                                             <constraint firstAttribute="trailing" secondItem="G2V-gU-dYb" secondAttribute="trailing" constant="16" id="CNq-LH-eFr"/>
                                             <constraint firstItem="dDF-34-wf8" firstAttribute="leading" secondItem="5f6-Sb-LMN" secondAttribute="leading" constant="16" id="Dfd-Nc-aLc"/>
-                                            <constraint firstItem="26c-mi-Zub" firstAttribute="top" secondItem="3C3-h8-5QE" secondAttribute="bottom" constant="10" id="EcA-U3-dtd"/>
-                                            <constraint firstItem="srx-Ew-Z6i" firstAttribute="top" secondItem="26c-mi-Zub" secondAttribute="bottom" constant="10" id="EsN-jb-629"/>
                                             <constraint firstAttribute="trailing" secondItem="fB9-36-fs7" secondAttribute="trailing" constant="16" id="G11-70-lKQ"/>
-                                            <constraint firstAttribute="trailing" secondItem="26c-mi-Zub" secondAttribute="trailing" constant="16" id="H5O-Pf-bS3"/>
                                             <constraint firstItem="pmT-6S-TnM" firstAttribute="leading" secondItem="5f6-Sb-LMN" secondAttribute="leading" constant="16" id="I66-4l-lDE"/>
                                             <constraint firstItem="G2V-gU-dYb" firstAttribute="top" secondItem="fB9-36-fs7" secondAttribute="bottom" id="JI1-UH-0GO"/>
                                             <constraint firstItem="2OZ-hs-XFc" firstAttribute="leading" secondItem="5f6-Sb-LMN" secondAttribute="leading" constant="16" id="JPk-Wp-JSI"/>
@@ -1150,7 +1144,12 @@
                     <size key="freeformSize" width="375" height="700"/>
                     <connections>
                         <outlet property="content" destination="5f6-Sb-LMN" id="f4B-Jp-usY"/>
+                        <outlet property="floorField" destination="fB9-36-fs7" id="iVc-1y-KFw"/>
+                        <outlet property="floorsField" destination="C9O-u5-Q81" id="Y7u-4C-ToZ"/>
+                        <outlet property="priceField" destination="2oc-cW-pZE" id="n5N-Sn-Ett"/>
+                        <outlet property="roomsField" destination="eG4-t6-hfW" id="jvq-eG-cIq"/>
                         <outlet property="scroll" destination="5kM-eP-Vpb" id="daf-BN-abE"/>
+                        <outlet property="squareField" destination="usj-BF-NYJ" id="JM8-YO-4IM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cFd-bB-xzY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1515,8 +1514,8 @@
         <image name="Profile" width="24" height="24"/>
         <image name="Stairs Up_000000_100" width="100" height="100"/>
         <image name="checkedMark2" width="22" height="22"/>
-        <image name="ok" width="15" height="24"/>
         <image name="fan" width="25" height="37"/>
+        <image name="ok" width="15" height="24"/>
         <image name="pawPrint" width="29" height="25"/>
         <image name="shape1" width="26" height="26"/>
         <image name="snow" width="29" height="25"/>

@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sixHands/FlatViewCell.swift"
-            timestampString = "519247934.659026"
+            timestampString = "519257903.116247"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "12"
@@ -88,11 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sixHands/RentLastPageController.swift"
-            timestampString = "519168496.100575"
+            timestampString = "519257903.116364"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "choose()"
             landmarkType = "7">
          </BreakpointContent>
@@ -104,11 +104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sixHands/RentLastPageController.swift"
-            timestampString = "519168496.100652"
+            timestampString = "519257903.116463"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "choose()"
             landmarkType = "7">
          </BreakpointContent>
@@ -126,22 +126,6 @@
             startingLineNumber = "163"
             endingLineNumber = "163"
             landmarkName = "textFieldDidChange(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sixHands/RentLastPageController.swift"
-            timestampString = "519168496.10107"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "continueButtonAction()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

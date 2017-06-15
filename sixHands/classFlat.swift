@@ -59,6 +59,7 @@ class Flat{
     var floor = String()
     var floors = String()
     var subwayId = String()
+    var photos = [Data]()
     
 }
 

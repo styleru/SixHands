@@ -234,12 +234,12 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.priceLabel.frame = CGRect(x: screen.maxX - screen.height * 0.15 - 15.0, y: cell.flat.frame.height * 0.87, width: screen.height * 0.15, height: screen.height * 0.056)
         
         //subway
-        cell.subwayLabel.text = "Арбатская"//"\(flats[indexPath.row].flatSubway)"
+        cell.subwayLabel.text = Subway.getStation(id:flats[indexPath.row].subwayId ).station
         cell.subwayLabel.alpha = 0.7
         cell.subwayLabel.font = UIFont.systemFont(ofSize: 16.0, weight: UIFontWeightLight)
         cell.subwayLabel.bounds = CGRect(x: 0, y: 0, width:screen.width * 0.3 , height: screen.height * 0.02698)
         cell.subwayLabel.center = CGPoint(x:cell.flat.frame.minX+cell.subwayLabel.frame.width/2 + 4, y: cell.flat.frame.maxY + cell.subwayLabel.frame.height + 5.0)
-        cell.subwayLabel.adjustsFontSizeToFitWidth = true
+        //cell.subwayLabel.adjustsFontSizeToFitWidth = true
         cell.subwayLabel.sizeToFit()
         
         //dot
@@ -252,13 +252,13 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.rooms.alpha = 0.7
         cell.rooms.font = UIFont.systemFont(ofSize: 16.0, weight: UIFontWeightLight)
         cell.rooms.bounds = CGRect(x: 0, y: 0, width:screen.width * 0.3, height: screen.height * 0.02698)
-        cell.rooms.center = CGPoint(x:cell.dotImg.frame.maxX+10+cell.rooms.frame.width/2, y:cell.flat.frame.maxY + cell.subwayLabel.frame.height + 5.0)
-        cell.rooms.adjustsFontSizeToFitWidth = true
+        cell.rooms.center = CGPoint(x:cell.dotImg.frame.maxX+10+cell.rooms.frame.width/2, y:cell.flat.frame.maxY + cell.subwayLabel.frame.height + 3.0)
+        //cell.rooms.adjustsFontSizeToFitWidth = true
         
         //edit button
         let size = screen.width * 0.11733
         cell.edit.frame = CGRect(x: 0, y: 0, width: size, height: size)
-        cell.edit.center = CGPoint(x:cell.flat.frame.maxX-cell.edit.frame.width/2 - 8,y:cell.bounds.height-(cell.bounds.height-cell.flat.frame.maxY)/2)
+        cell.edit.center = CGPoint(x:cell.flat.frame.maxX-cell.edit.frame.width/2 - 4,y:cell.bounds.height-(cell.bounds.height-cell.flat.frame.maxY)/2)
         cell.edit.setImage(#imageLiteral(resourceName: "10"), for: .normal)
         cell.edit.tag = Int(flats[indexPath.row].flat_id)!
         cell.edit.addTarget(self, action: #selector(ProfileController.edit(_:)), for: .touchUpInside)

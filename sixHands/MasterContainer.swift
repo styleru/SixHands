@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class MasterContainer: UIViewController {
     
@@ -20,6 +21,7 @@ class MasterContainer: UIViewController {
     let second = UILabel()
     let third = UILabel()
     let fourth = UILabel()
+    let api = API()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,12 +114,11 @@ class MasterContainer: UIViewController {
                 RentAddressController.flatToRent.internet = "\(RentParamsController.paramsValues[1])"
                 RentAddressController.flatToRent.tv = "\(RentParamsController.paramsValues[2])"
                 RentAddressController.flatToRent.parking = "\(RentParamsController.paramsValues[3])"
-                //RentAddressController.flatToRent.numberOfRoomsInFlat = roomsField.text!
-                //RentAddressController.flatToRent.square = squareField.text!
             case 4:
                 fourth.textColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
                 continueButton.setTitle("Опубликовать", for: .normal)
                 nextButton.setTitle("Опубликовать", for: .normal)
+                
             default:
                 print("waaaat?!")
             }
@@ -126,7 +127,82 @@ class MasterContainer: UIViewController {
             cancel.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
         } else {
             i -= 1
+            
+            print("goPublic...")
+            
+            let param = [
+                "24" : "\(RentAddressController.flatToRent.parking)",
+                "23" : "\(RentAddressController.flatToRent.conditioning)",
+                "19" : "\(RentAddressController.flatToRent.fridge)",
+                "9" : "\(RentAddressController.flatToRent.animals)",
+                "15" : "\(RentAddressController.flatToRent.internet)"
+            ]
+            
+            var params = "["
+            for (id, value) in param {
+                if value == "1" {
+                    params += id + ","
+                }
+            }
+            params = String(params.characters.dropLast(1))
+            params += "]"
+            
+            //separate building and street
+            let full = RentAddressController.flatToRent.address
+            var building = ""
+            var street = ""
+            if let rangeOfComma = full.range(of: ",", options: .backwards) {
+                building = String(full.characters.suffix(from: rangeOfComma.upperBound))
+                building = String(building.characters.dropFirst())
+            }
+            if let rangeOfComma = full.range(of: ",") {
+                street = String(full.characters.prefix(upTo: rangeOfComma.upperBound))
+                street = String(street.characters.dropLast())
+            }
+            
+            let parameters = [
+                "id_city" : "1",
+                "id_underground" : "1",
+                "street" : street,
+                "building" : building,
+                "longitude" : "\(RentAddressController.flatToRent.longitude)",
+                "latitude" : "\(RentAddressController.flatToRent.latitude)",
+                "price" : "\(RentAddressController.flatToRent.flatPrice)",
+                "square" : "\(RentAddressController.flatToRent.square)",
+                "rooms" : "\(RentAddressController.flatToRent.numberOfRoomsInFlat)",
+                "floor" : "\(RentAddressController.flatToRent.floor)",
+                "floors" : "\(RentAddressController.flatToRent.floors)",
+                "description" : "\(RentAddressController.flatToRent.comments)",
+                "options" : params
+            ]
+            
+            upload(photoData: RentAddressController.flatToRent.photos, parameters: parameters)
         }
+    }
+    
+    func upload(photoData: [Data], parameters: [String : String]) {
+        
+        api.upload(photoData: photoData, parameters: parameters) { (js: Any) in
+            let jsondata = js as! JSON
+            print("data: \(jsondata)")
+            if (jsondata != JSON.null) {
+                print("finally!")
+                self.performSegue(withIdentifier: "cancelRent", sender: self)
+            } else {
+                print("Something's wrong")
+                
+                //temporary alert
+                let alertController = UIAlertController(title: "Something's wrong", message: "hmmm... 500 Internal Server Error", preferredStyle: UIAlertControllerStyle.alert)
+                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel)
+                {
+                    (result : UIAlertAction) -> Void in
+                }
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
+                
+            }
+        }
+        
     }
     
     func cancelButtonAction() {

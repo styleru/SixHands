@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="No2-mG-RJa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="No2-mG-RJa">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -137,7 +136,7 @@
             </objects>
             <point key="canvasLocation" x="137" y="-497"/>
         </scene>
-        <!--Список-->
+        <!--Снять-->
         <scene sceneID="AjW-0Q-ZoI">
             <objects>
                 <viewController id="kfz-7V-ri2" customClass="ListOfFlatsController" customModule="sixHands" customModuleProvider="target" sceneMemberID="viewController">
@@ -146,7 +145,7 @@
                         <viewControllerLayoutGuide type="bottom" id="deP-en-NzB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QrD-6y-QHd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="249" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eKc-B7-2HR">
@@ -271,7 +270,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Список" image="Home" id="Hl6-qV-VCj"/>
+                    <tabBarItem key="tabBarItem" title="Снять" image="list" id="Hl6-qV-VCj"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="favouritesOutlet" destination="4LO-xe-YIz" id="2Av-9h-WPl"/>
@@ -575,7 +574,7 @@
                         <viewControllerLayoutGuide type="bottom" id="yg7-vm-fXR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="unH-rV-y1d">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -601,7 +600,7 @@
                         <viewControllerLayoutGuide type="bottom" id="jGN-4j-mI8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pc1-kk-T63">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="496"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -723,7 +722,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kM-eP-Vpb">
-                                <rect key="frame" x="0.0" y="20" width="375" height="680"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="700"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5f6-Sb-LMN">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="700"/>
@@ -874,16 +873,6 @@
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="26c-mi-Zub">
-                                                <rect key="frame" x="279" y="222" width="80" height="25"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="80" id="mHp-bS-Pvp"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
-                                                <state key="normal" title="Выбрать">
-                                                    <color key="titleColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KQj-DC-UpE">
                                                 <rect key="frame" x="337" y="334" width="22" height="22"/>
                                                 <constraints>
@@ -1033,6 +1022,13 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Выберите" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eG4-t6-hfW">
+                                                <rect key="frame" x="0.0" y="212" width="359" height="45"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -1059,10 +1055,7 @@
                                             <constraint firstItem="0RJ-VL-dMg" firstAttribute="leading" secondItem="5f6-Sb-LMN" secondAttribute="leading" constant="16" id="CKG-8Z-2Vr"/>
                                             <constraint firstAttribute="trailing" secondItem="G2V-gU-dYb" secondAttribute="trailing" constant="16" id="CNq-LH-eFr"/>
                                             <constraint firstItem="dDF-34-wf8" firstAttribute="leading" secondItem="5f6-Sb-LMN" secondAttribute="leading" constant="16" id="Dfd-Nc-aLc"/>
-                                            <constraint firstItem="26c-mi-Zub" firstAttribute="top" secondItem="3C3-h8-5QE" secondAttribute="bottom" constant="10" id="EcA-U3-dtd"/>
-                                            <constraint firstItem="srx-Ew-Z6i" firstAttribute="top" secondItem="26c-mi-Zub" secondAttribute="bottom" constant="10" id="EsN-jb-629"/>
                                             <constraint firstAttribute="trailing" secondItem="fB9-36-fs7" secondAttribute="trailing" constant="16" id="G11-70-lKQ"/>
-                                            <constraint firstAttribute="trailing" secondItem="26c-mi-Zub" secondAttribute="trailing" constant="16" id="H5O-Pf-bS3"/>
                                             <constraint firstItem="pmT-6S-TnM" firstAttribute="leading" secondItem="5f6-Sb-LMN" secondAttribute="leading" constant="16" id="I66-4l-lDE"/>
                                             <constraint firstItem="G2V-gU-dYb" firstAttribute="top" secondItem="fB9-36-fs7" secondAttribute="bottom" id="JI1-UH-0GO"/>
                                             <constraint firstItem="2OZ-hs-XFc" firstAttribute="leading" secondItem="5f6-Sb-LMN" secondAttribute="leading" constant="16" id="JPk-Wp-JSI"/>
@@ -1150,7 +1143,12 @@
                     <size key="freeformSize" width="375" height="700"/>
                     <connections>
                         <outlet property="content" destination="5f6-Sb-LMN" id="f4B-Jp-usY"/>
+                        <outlet property="floorField" destination="fB9-36-fs7" id="iVc-1y-KFw"/>
+                        <outlet property="floorsField" destination="C9O-u5-Q81" id="Y7u-4C-ToZ"/>
+                        <outlet property="priceField" destination="2oc-cW-pZE" id="n5N-Sn-Ett"/>
+                        <outlet property="roomsField" destination="eG4-t6-hfW" id="jvq-eG-cIq"/>
                         <outlet property="scroll" destination="5kM-eP-Vpb" id="daf-BN-abE"/>
+                        <outlet property="squareField" destination="usj-BF-NYJ" id="JM8-YO-4IM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cFd-bB-xzY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1166,11 +1164,11 @@
                         <viewControllerLayoutGuide type="bottom" id="mqv-Pr-R9y"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="oCM-K3-f2s">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="496"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0e-U0-14i">
-                                <rect key="frame" x="0.0" y="20" width="375" height="476"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZIx-NZ-ZnP">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
@@ -1294,11 +1292,11 @@
                         <viewControllerLayoutGuide type="bottom" id="pRL-Ly-zLH"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0v0-2s-cdd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="496"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Расскажите о квартире" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAD-XY-xeD">
-                                <rect key="frame" x="16" y="20" width="190" height="15"/>
+                                <rect key="frame" x="16" y="0.0" width="190" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="NbO-LH-BYT"/>
                                     <constraint firstAttribute="width" constant="190" id="lh3-6J-uxH"/>
@@ -1308,7 +1306,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SND-JN-FEf">
-                                <rect key="frame" x="16" y="47" width="343" height="1"/>
+                                <rect key="frame" x="16" y="27" width="343" height="1"/>
                                 <color key="backgroundColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="KHU-hS-6r5"/>
@@ -1316,7 +1314,7 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" text="Здесь можно писать всё, что вы считаете нужным сказать о квартире. Уложитесь в 500 символов." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ppL-9K-tYv">
-                                <rect key="frame" x="16" y="60" width="343" height="250"/>
+                                <rect key="frame" x="16" y="40" width="343" height="250"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="GiQ-Wy-DoU"/>
@@ -1346,7 +1344,7 @@
             </objects>
             <point key="canvasLocation" x="3248.8000000000002" y="4482.9085457271367"/>
         </scene>
-        <!--Связь-->
+        <!--закладки-->
         <scene sceneID="2HN-2l-uWG">
             <objects>
                 <viewController id="w5c-CK-dor" sceneMemberID="viewController">
@@ -1359,13 +1357,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Связь" image="Chat" id="KpG-95-jkd"/>
+                    <tabBarItem key="tabBarItem" title="закладки" image="bookmarkWhite" id="KpG-95-jkd"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jkm-0p-LbR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="580" y="2006"/>
         </scene>
-        <!--Карта-->
+        <!--Сдать-->
         <scene sceneID="CuA-Ib-Q0R">
             <objects>
                 <viewController id="zpI-hk-eiu" sceneMemberID="viewController">
@@ -1378,7 +1376,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Карта" image="Map" id="Exm-Ln-df3"/>
+                    <tabBarItem key="tabBarItem" title="Сдать" image="placeAdvert" id="Exm-Ln-df3"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sdx-KD-XB3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1396,8 +1394,8 @@
                         <color key="barTintColor" red="0.23529411764705882" green="0.27450980392156865" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="kfz-7V-ri2" kind="relationship" relationship="viewControllers" id="UNO-kG-68M"/>
                         <segue destination="zpI-hk-eiu" kind="relationship" relationship="viewControllers" id="sWe-J3-ZiC"/>
+                        <segue destination="kfz-7V-ri2" kind="relationship" relationship="viewControllers" id="UNO-kG-68M"/>
                         <segue destination="w5c-CK-dor" kind="relationship" relationship="viewControllers" id="8Rv-NF-baK"/>
                         <segue destination="esv-Wj-ofM" kind="relationship" relationship="viewControllers" id="dtV-Lu-bCc"/>
                     </connections>
@@ -1506,18 +1504,20 @@
         <image name="2" width="2560" height="1920"/>
         <image name="Back_ffffff_100" width="96" height="96"/>
         <image name="Bookmark Ribbon_ffffff_100" width="48" height="48"/>
-        <image name="Chat" width="25" height="25"/>
         <image name="Clock_000000_32" width="32" height="32"/>
         <image name="Door Opened_000000_100" width="100" height="100"/>
         <image name="Expand_000000_100" width="100" height="100"/>
-        <image name="Home" width="24" height="24"/>
-        <image name="Map" width="24" height="24"/>
         <image name="Profile" width="24" height="24"/>
         <image name="Stairs Up_000000_100" width="100" height="100"/>
+        <image name="bookmarkWhite" width="17" height="19"/>
         <image name="checkedMark2" width="22" height="22"/>
-        <image name="ok" width="15" height="24"/>
         <image name="fan" width="25" height="37"/>
+
+        <image name="list" width="23" height="18"/>
+        
+        <image name="ok" width="15" height="24"/>
         <image name="pawPrint" width="29" height="25"/>
+        <image name="placeAdvert" width="28" height="21"/>
         <image name="shape1" width="26" height="26"/>
         <image name="snow" width="29" height="25"/>
         <image name="stockSnap02FAEBOQ2G" width="960" height="1704"/>

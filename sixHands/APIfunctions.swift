@@ -72,6 +72,7 @@ class API{
     
     //UNDERGROUND
     func update_subway(){
+     
         let fullRequest = domain + "/underground"
         let subway = Subway()
 
@@ -79,7 +80,6 @@ class API{
             
             let jsondata = JSON(data:response.data!)
             if !jsondata.isEmpty{
-                
                 let stations_array = jsondata["stations"].array?.count
                 for i in 0..<stations_array!{
                     let station = Station()
@@ -87,7 +87,6 @@ class API{
                     station.name = jsondata["stations"][i]["name"].string!
                     station.id_underground_line = jsondata["stations"][i]["id_underground_line"].string!
                     subway.subwayStations.append(station)
-                    
                 }
                 let lines_array = jsondata["lines"].array?.count
                 for i in 0..<lines_array!{
@@ -101,6 +100,10 @@ class API{
                     autoreleasepool {
                         let realm = try! Realm()
                         try! realm.write {
+                        let line = try! Realm().objects(Line)
+                        let station = try! Realm().objects(Station)
+                        realm.delete(line)
+                        realm.delete(station)
                         realm.add(subway, update: true)
                         }
                     }
@@ -193,6 +196,7 @@ class API{
             flat.time = full.substring(from:full.index(full.startIndex, offsetBy:11))
             flat.update_date = full.substring(to: full.index(full.startIndex, offsetBy:10))
             }
+            flat.isFavourite = jsondata["is_favourite"].string ?? "0"
             flat.time_to_subway = jsondata["to_underground"].string ?? "-"
             flat.square = jsondata["square"].string ?? "-"
             flat.floor = jsondata["floor"].string ?? "-"
@@ -211,7 +215,7 @@ class API{
     }
     
     
-    
+    //OPTIONS
     func options(options:[String], completionHandler: @escaping ([(name:String,icon:String)])->Void){
         let fullRequest = domain + "/options"
         var returnArray = [(name:String,icon:String)]()
@@ -231,5 +235,18 @@ class API{
         }
         
     }
+    /////////////////////
+    func favourite(id:String){
+        let realm = try! Realm()
+        let per = realm.object(ofType: person.self, forPrimaryKey: 1)
+        headers = ["Token":(per?.token)!,"Content-Type":"application/x-www-form-urlencoded"]
+        print(headers)
+        let fullRequest = domain + "/flats/favourite"
+        Alamofire.request(fullRequest, method: .put, parameters: ["id_flat":id],headers : headers).responseJSON { response in
+        let jsondata = response.response?.statusCode
+            print("STATUS CODE:\(jsondata)")
+        }
+    }
+    
     
 }

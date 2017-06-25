@@ -20,13 +20,11 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
     let api = API()
     var fullDesc = ""
     var shortDesc = ""
-    var check = 1
-    var check1 = false
-    var check2 = false
+    var isAlreadyScrolled = false
     let conv = [String:String]()
     let label1ForMutualFriends = UILabel()
     let label2ForMutualFriends = UILabel()
-
+    
     
     var dif = CGFloat()
     @IBOutlet weak var imagesScrollView: UIScrollView!
@@ -67,6 +65,8 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
     
     
     override func viewDidLoad() {
+        favourite.setImage(#imageLiteral(resourceName: "whiteForm"), for: .selected)
+        favourite.setImage(#imageLiteral(resourceName: "Bookmark Ribbon_ffffff_100"), for: .normal)
         api.flatSingle(id: flat_id) { (flat) in
             for i in 0..<flat.imageOfFlat.count{
                 
@@ -79,7 +79,9 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
                 imageView.clipsToBounds = true
                 self.imagesScrollView.addSubview(imageView)
             }
-            
+            if flat.isFavourite == "1"{
+            self.favourite.isSelected = true
+            }
             self.price.text = flat.flatPrice + " ₽"
             self.timeToSubway.text = flat.time_to_subway + " мин."
             self.time.text = flat.time
@@ -114,9 +116,9 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
             self.aboutFlat.text = flat.comments
             
             if self.checkText(textView: self.aboutFlat){
-            self.aboutFlat.sizeToFit()
-            self.showAllOutlet.isHidden = true
-            self.razdelitel4.frame = CGRect(x: self.aboutFlat.frame.minX, y: self.aboutFlat.frame.maxY, width: self.screenSize.width*0.88, height: self.screenSize.height*0.002)
+                self.aboutFlat.sizeToFit()
+                self.showAllOutlet.isHidden = true
+                self.razdelitel4.frame = CGRect(x: self.aboutFlat.frame.minX, y: self.aboutFlat.frame.maxY, width: self.screenSize.width*0.88, height: self.screenSize.height*0.002)
             }else{
                 self.razdelitel4.frame = CGRect(x: self.aboutFlat.frame.minX, y: self.showAllOutlet.frame.maxY + self.screenSize.height*0.02338, width: self.screenSize.width*0.88, height: self.screenSize.height*0.002)}
             
@@ -125,7 +127,7 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
             
             self.api.options(options: flat.options, completionHandler: { (opt) in
                 
-               var count:CGFloat = 15
+                var count:CGFloat = 15
                 for option in opt {
                     let image = UIImageView()
                     let label = UILabel()
@@ -142,16 +144,16 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
                     self.convView.frame.size.height = count
                     self.convView.addSubview(label)
                     self.convView.addSubview(image)
-                   
+                    
                 }
-                 self.scrollView.contentSize.height = self.convView.frame.maxY+60
+                self.scrollView.contentSize.height = self.convView.frame.maxY+60
             })
-           
             
-            }
+            
+        }
         
         
-    
+        
         scrollView.delegate = self
         
         backOutlet.addTarget(self, action: #selector(FlatViewController.backAction), for: .touchUpInside)
@@ -161,7 +163,7 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
         } else {
             rentOutlet.setTitle("Редактировать квартиру", for: .normal)
         }
- 
+        
         //Font of adress
         switch (screenSize.width){
         case 320 : adress.font = UIFont.systemFont(ofSize: 20)
@@ -292,48 +294,25 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //print(scrollView.contentOffset.y
         
-        if scrollView.contentOffset.y > screenSize.height*0.329 && check1 == false{
-            check2 = true
-            check1=true
-            print("HUY")
+        if scrollView.contentOffset.y > screenSize.height*0.3 && isAlreadyScrolled == false{
+            isAlreadyScrolled = true
+            
             UIView.animate(withDuration: 1, delay: 0.0, options: [], animations: {
                 self.navController.frame.origin.y += self.screenSize.height*0.09
+                self.favourite.setImage(#imageLiteral(resourceName: "Bookmark Ribbon_18bca9_100"), for: .normal)
+                self.favourite.setImage(#imageLiteral(resourceName: "formBlue"), for: .selected)
             }, completion: nil)
             backOutlet.setImage(#imageLiteral(resourceName: "18"), for: .normal)
-            
-            if check>0{
-                UIView.animate(withDuration: 1, delay: 0.0, options: [], animations: {
-                    self.favourite.setImage(#imageLiteral(resourceName: "Bookmark Ribbon_18bca9_100"), for: .normal)
-                }, completion: nil)
-                
-            }else{
-                UIView.animate(withDuration: 1, delay: 0.0, options: [], animations: {
-                    self.favourite.setImage(#imageLiteral(resourceName: "formBlue"), for: .normal)
-                }, completion: nil)
-                
-            }
-            
-            
-            
         }
-        if scrollView.contentOffset.y < screenSize.height*0.329{
-            check2 = false
-            check1 = false
+        
+        if scrollView.contentOffset.y < screenSize.height*0.3{
+            isAlreadyScrolled = false
             UIView.animate(withDuration: 1, delay: 0.0, options: [], animations: {
                 self.navController.frame.origin.y = -self.screenSize.height*0.09
+                self.favourite.setImage(#imageLiteral(resourceName: "Bookmark Ribbon_ffffff_100"), for: .normal)
+                self.favourite.setImage(#imageLiteral(resourceName: "whiteForm"), for: .selected)
             }, completion: nil)
             backOutlet.setImage(#imageLiteral(resourceName: "Back_ffffff_100"), for: .normal)
-            if check>0{
-                UIView.animate(withDuration: 1, delay: 0.0, options: [], animations: {
-                    self.favourite.setImage(#imageLiteral(resourceName: "Bookmark Ribbon_ffffff_100"), for: .normal)
-                }, completion: nil)
-                
-            }else{
-                UIView.animate(withDuration: 1, delay: 0.0, options: [], animations: {
-                    self.favourite.setImage(#imageLiteral(resourceName: "whiteForm"), for: .normal)
-                }, completion: nil)
-                
-            }
             
         }
         
@@ -347,7 +326,7 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
         }
     }
     
-
+    
     
     @IBAction func showAllButton(_ sender: Any) {
         print("kek")
@@ -402,17 +381,14 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
         }
     }
     
-    @IBAction func favouriteAction(_ sender: Any) {
-        if check>0{
-            if check2 == false{
-                favourite.setImage(#imageLiteral(resourceName: "whiteForm"), for: .normal)}
-            else {favourite.setImage(#imageLiteral(resourceName: "formBlue"), for: .normal)}
+    @IBAction func favouriteAction(_ sender: UIButton!) {
+         api.favourite(id: flat_id)
+        sender.isSelected = !sender.isSelected
+        if !isAlreadyScrolled{
+            favourite.setImage(#imageLiteral(resourceName: "whiteForm"), for: .selected)
         }else{
-            if check2 == false{
-                favourite.setImage(#imageLiteral(resourceName: "Bookmark Ribbon_ffffff_100"), for: .normal)}
-            else {favourite.setImage(#imageLiteral(resourceName: "Bookmark Ribbon_18bca9_100"), for: .normal)}
+            favourite.setImage(#imageLiteral(resourceName: "formBlue"), for: .selected)
         }
-        check *= -1
     }
     
     // ДЛЯ КНОПКИ ПОКАЗАТЬ ПОЛНОСТЬЮ

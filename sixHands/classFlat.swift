@@ -29,6 +29,7 @@ class Flat{
         attributedText.append(attrText2)
         return attributedText
     }
+    var isFavourite = String()
     var ownerName = String()
     var imageOfFlat = [String]()
     var avatarImage: String = ""
@@ -59,6 +60,7 @@ class Flat{
     var floor = String()
     var floors = String()
     var subwayId = String()
+    var photos = [Data]()
     
 }
 

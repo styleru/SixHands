@@ -52,90 +52,6 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
         
     }
     
-    func continueButtonAction() {
-        print("goPublic...")
-        
-        let param = [
-            "24" : "\(RentAddressController.flatToRent.parking)",
-            "23" : "\(RentAddressController.flatToRent.conditioning)",
-            "21" : "\(RentAddressController.flatToRent.stiralka)",
-            "20" : "\(RentAddressController.flatToRent.posudomoyka)",
-            "19" : "\(RentAddressController.flatToRent.fridge)",
-            "18" : "\(RentAddressController.flatToRent.tv)",
-            "9" : "\(RentAddressController.flatToRent.animals)",
-            "15" : "\(RentAddressController.flatToRent.internet)"
-        ]
-        
-        var params = "["
-        for (id, value) in param {
-            if value == "1" {
-                params += id + ","
-            }
-        }
-        params = String(params.characters.dropLast(1))
-        params += "]"
-        
-        //separate building and street
-        let full = RentAddressController.flatToRent.address
-        var building = ""
-        var street = ""
-        if let rangeOfComma = full.range(of: ",", options: .backwards) {
-            building = String(full.characters.suffix(from: rangeOfComma.upperBound))
-            building = String(building.characters.dropFirst())
-        }
-        if let rangeOfComma = full.range(of: ",") {
-            street = String(full.characters.prefix(upTo: rangeOfComma.upperBound))
-            street = String(street.characters.dropLast())
-        }
-        
-        let parameters = [
-            "id_city" : "1",
-            "id_underground" : "1",
-            "street" : street,
-            "building" : building,
-            "longitude" : "\(RentAddressController.flatToRent.longitude)",
-            "latitude" : "\(RentAddressController.flatToRent.latitude)",
-            //"price" : "\(priceField.text!)",
-            "square" : "\(RentAddressController.flatToRent.square)",
-            "rooms" : "\(RentAddressController.flatToRent.numberOfRoomsInFlat)",
-            //"description" : "\(commentsField.text!)",
-            "options" : params
-        ]
-        
-        var photoDatas = [Data]()
-        for photo in photos {
-            photoDatas.append(UIImageJPEGRepresentation(photo,1)!)
-        }
-        
-        upload(photoData: photoDatas, parameters: parameters)
-        
-    }
-    
-    func upload(photoData: [Data], parameters: [String : String]) {
-        
-        api.upload(photoData: photoData, parameters: parameters) { (js: Any) in
-            let jsondata = js as! JSON
-            print("data: \(jsondata)")
-            if (jsondata != JSON.null) {
-                print("finally!")
-                self.performSegue(withIdentifier: "cancelRent", sender: self)
-            } else {
-                print("Something's wrong")
-                
-                //temporary alert
-                let alertController = UIAlertController(title: "Something's wrong", message: "hmmm... 500 Internal Server Error", preferredStyle: UIAlertControllerStyle.alert)
-                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel)
-                {
-                    (result : UIAlertAction) -> Void in
-                }
-                alertController.addAction(cancelAction)
-                self.present(alertController, animated: true, completion: nil)
-                
-            }
-        }
-        
-    }
-    
     func addButtonAction() {
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
@@ -189,6 +105,7 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         photos.insert(image, at: 0)
+        RentAddressController.flatToRent.photos.append(UIImageJPEGRepresentation(image,1)!)
         justLabel.text = "\(photos.count) фотографий"
         if photos.count == 20 {
             self.border.backgroundColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 1)
@@ -252,6 +169,7 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             photos.insert(pickedImage, at: 0)
+            RentAddressController.flatToRent.photos.append(UIImageJPEGRepresentation(pickedImage,1)!)
             justLabel.text = "\(photos.count) фотографий"
             if photos.count == 20 {
                 self.border.backgroundColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 1)

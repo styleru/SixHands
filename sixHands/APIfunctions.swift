@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyJSON
 import RealmSwift
 
+
 class API{
     
     var headers:HTTPHeaders = HTTPHeaders()
@@ -247,6 +248,7 @@ class API{
             print("STATUS CODE:\(jsondata)")
         }
     }
+//CHECKING INTERNET CONNECTION
     
     
 }

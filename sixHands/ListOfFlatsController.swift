@@ -13,6 +13,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import Alamofire
 import RealmSwift
+import SystemConfiguration
 
 class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
     let screenSize: CGRect = UIScreen.main.bounds
@@ -25,7 +26,8 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     var id = String()
     var station = String()
     var station_color = UIColor()
-       
+    let internetLabel = UILabel()
+    
     @IBOutlet weak var listOfFlats: UILabel!
     
     @IBOutlet weak var favouritesOutlet: UIButton!
@@ -46,7 +48,6 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
                 
             }
         
-       
         
         let realm = try! Realm()
         let per = realm.object(ofType: person.self, forPrimaryKey: 1)
@@ -91,7 +92,8 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         refreshControl.tintColor = UIColor.gray
         refreshControl.addTarget(self, action: #selector(ListOfFlatsController.refresh), for: UIControlEvents.valueChanged)
         self.listOfFlatsTableView?.addSubview(refreshControl)
-     
+        
+        checkInternet()
         super.viewDidLoad()
     }
     
@@ -107,6 +109,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func refresh() {
+       checkInternet()
         print("refresh...")
         flats = []
         api.flatsFilter(offset: 0, amount: amount, parameters: "[]") { (i) in
@@ -123,7 +126,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
+        checkInternet()
         if indexPath.row == flats.count - 1 {
             api.flatsFilter(offset: offsetInc, amount: amount, parameters: "[]") { (i) in
                 self.flats += i
@@ -232,6 +235,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @IBAction func new(_ sender: UIButton) {
+        checkInternet()
         flats = []
         api.flatsFilter(offset: 0, amount: amount, parameters: "[]") { (i) in
             self.flats += i
@@ -248,6 +252,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     }
    
     @IBAction func popular(_ sender: UIButton) {
+       checkInternet()
         flats = []
         api.flatsFilter(offset: 0, amount: amount, parameters: "[]") { (i) in
             self.flats += i
@@ -285,7 +290,24 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     @IBAction func fromSingleFlat(segue: UIStoryboardSegue) {}
     @IBAction func fromMutualFriends(segue: UIStoryboardSegue) {}
     
-   
+    func checkInternet(){
+        if !ConnectionCheck.isConnectedToNetwork() {
+            let image = UIImageView()
+            image.image = #imageLiteral(resourceName: "attentionSignOutline")
+            image.frame = CGRect(x: 10, y: 10, width: 16, height: 16)
+            internetLabel.frame = CGRect(x: 0, y: listOfFlatsTableView.frame.minY, width: self.screenSize.width, height: 35)
+            internetLabel.backgroundColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 0.9)
+            internetLabel.text = "Отсутствует подключение к интернету"
+            internetLabel.font = UIFont(name: ".SFUIText-Med", size: 16)
+            internetLabel.textColor = UIColor.white
+            internetLabel.textAlignment = .center
+           internetLabel.addSubview(image)
+           view.addSubview(internetLabel)
+        }
+        else{
+            internetLabel.removeFromSuperview()
+        }
+    }
 
 }
 

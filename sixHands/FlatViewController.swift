@@ -125,10 +125,11 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
             self.conveniences.frame = CGRect(x: self.showAllOutlet.frame.minX, y: self.razdelitel4.frame.maxY+self.screenSize.height*0.02338, width: self.screenSize.width*0.277, height: self.screenSize.height*0.017991)
             self.convView.frame = CGRect(x: 0, y: self.conveniences.frame.maxY, width: self.screenSize.width, height: 0)
             
-            self.api.options(options: flat.options, completionHandler: { (opt) in
+            
                 
-                var count:CGFloat = 15
-                for option in opt {
+            var count:CGFloat = 15
+            for i in flat.options{
+                    let option = Options.getOption(optionId: i)
                     let image = UIImageView()
                     let label = UILabel()
                     image.frame = CGRect(x: self.conveniences.frame.minX, y:count, width: 30, height: 30)
@@ -140,18 +141,16 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
                     label.font = UIFont(name: ".SFUIText-Light", size: 16)
                     label.text = option.name
                     image.contentMode = .scaleAspectFill
-                    image.sd_setImage(with: URL(string : option.icon))
+                    image.image = option.icon
                     self.convView.frame.size.height = count
                     self.convView.addSubview(label)
                     self.convView.addSubview(image)
-                    
-                }
-                self.scrollView.contentSize.height = self.convView.frame.maxY+60
-            })
+            }
             
+                self.scrollView.contentSize.height = self.convView.frame.maxY+60
             
         }
-        
+ 
         
         
         scrollView.delegate = self

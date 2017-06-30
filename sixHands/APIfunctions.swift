@@ -217,7 +217,7 @@ class API{
     
     
     //OPTIONS
-    func options(options:[String], completionHandler: @escaping ([(name:String,icon:String)])->Void){
+    /* func options(options:[String], completionHandler: @escaping ([(name:String,icon:String)])->Void){
         let fullRequest = domain + "/options"
         var returnArray = [(name:String,icon:String)]()
         Alamofire.request(fullRequest).responseJSON { response in
@@ -235,7 +235,38 @@ class API{
         
         }
         
+    }*/
+    func updateOptions(){
+        let fullRequest = domain + "/options"
+        Alamofire.request(fullRequest).responseJSON { response in
+            let options = Options()
+            let jsondata = JSON(data:response.data!)
+            print("OPTIONS:\(jsondata)")
+            for i in jsondata.array!{
+              let option = Option()
+                option.id = i["id"].string
+                option.name = i["name"].string
+                let url = URL(string:i["icon"].string! )
+                let data = try? Data(contentsOf: url!)
+                let image = UIImage(data: data!)
+                let imageFull = UIImagePNGRepresentation(image!) as NSData?
+                option.image = imageFull
+                options.options.append(option)
+            }
+            DispatchQueue(label: "background3").async {
+                autoreleasepool {
+                    let realm = try! Realm()
+                    try! realm.write {
+                        let option = try! Realm().objects(Option)
+                        realm.delete(option)
+                        realm.add(options, update: true)
+                    }
+                }
+                
+            }
+        }
     }
+    
     /////////////////////
     func favourite(id:String){
         let realm = try! Realm()
@@ -248,7 +279,5 @@ class API{
             print("STATUS CODE:\(jsondata)")
         }
     }
-//CHECKING INTERNET CONNECTION
-    
     
 }

@@ -98,3 +98,23 @@ class Subway:Object{
     }
     
 }
+class Option:Object{
+    var id:String?
+    var image:NSData?
+    var name:String?
+}
+class Options:Object{
+dynamic var id = 3
+let options = List<Option>()
+    
+    class func getOption(optionId:String)->(name:String?,icon:UIImage?){
+        let realm = try! Realm()
+        let option = realm.objects(Option.self).filter("id=='\(optionId)'").first
+        let image = UIImage(data: option?["image"] as! Data)
+        let name = option?["name"]
+        return (name as! String,image)
+    }
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+}

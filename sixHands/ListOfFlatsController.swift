@@ -37,7 +37,9 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     override func viewDidLoad() {
+        let realm = try! Realm()
         
+        api.updateOptions()
         self.api.flatsFilter(offset: 0, amount: self.amount, parameters: "[]") { (i) in
                 self.flats += i
                 
@@ -49,7 +51,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
             }
         
         
-        let realm = try! Realm()
+    
         let per = realm.object(ofType: person.self, forPrimaryKey: 1)
         print(per?.token)
         

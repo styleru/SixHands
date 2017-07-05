@@ -16,6 +16,7 @@ class person: Object {
     dynamic var first_name = ""
     dynamic var vk_id = ""
     dynamic var fb_id = ""
+    dynamic var ok_id = ""
     dynamic var email = ""
     dynamic var phone = ""
     dynamic var avatar_url = ""

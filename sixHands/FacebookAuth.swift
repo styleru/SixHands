@@ -40,7 +40,6 @@ func getFBUserData(token:String,withcompletionHandler:(_ success:Bool) ->())
     request?.start(completionHandler: { (connection, result, error) -> Void in
         if(error == nil)
         {
-            print("result \(result)")
             let fbDetails = result as! NSDictionary
             let params:Parameters = ["first_name": fbDetails["first_name"]! as! String,
                                      "last_name":fbDetails["last_name"]! as! String ,
@@ -60,7 +59,7 @@ func getFBUserData(token:String,withcompletionHandler:(_ success:Bool) ->())
                 
                 //ЗАНОС В CORE DATA
                 
-                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                if let data = response.data {
                     var jsondata = JSON(data: data)
                     let per = person()
                     per.token = jsondata["token"].string!

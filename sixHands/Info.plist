@@ -26,7 +26,17 @@
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
+			<string>Viewer</string>
+			<key>CFBundleURLName</key>
+			<string>ru.ok</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>ok1251241984</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>CFBundleURLName</key>
 			<string>vk5446345</string>
 			<key>CFBundleURLSchemes</key>
@@ -54,6 +64,8 @@
 		<string>fbapi</string>
 		<string>fbshareextension</string>
 		<string>fb-messenger-api</string>
+		<string>ok1251241984</string>
+		<string>okauth</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -82,5 +94,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>item0</key>
+	<string>okauth</string>
+	<key>item1</key>
+	<string>ok1251241984</string>
 </dict>
 </plist>

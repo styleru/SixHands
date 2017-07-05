@@ -20,8 +20,9 @@ import UIKit
 import CoreData
 import FBSDKCoreKit
 import RealmSwift
-//let realm = try! Realm()
-//import YandexMobileMetrica
+
+
+
 let domain = "http://6hand.anti.school"
 extension UIColor {
     public convenience init?(hexString: String) {
@@ -57,21 +58,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
+        let settings = OKSDKInitSettings()
+        settings.appKey = "CBABHFJLEBABABABA"
+        settings.appId = "1251241984"
+        settings.controllerHandler = {
+            return self.window?.rootViewController?.presentedViewController
+        }
+        OKSDK.initWith(settings)
         UIApplication.shared.statusBarStyle = .lightContent
         UITabBar.appearance().tintColor = UIColor(red: 89/255, green: 215/255, blue: 199/255, alpha: 1)
         UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 14.0, weight: UIFontWeightLight)], for: .normal)
-        //YMMYandexMetrica.activate(withApiKey: "ed7c92ed-40a2-4c16-90d8-d323bd78017d")
         
-    return    FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-    
+        
+    return true
+        //FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         VKSdk.processOpen(url, fromApplication: sourceApplication)
+        OKSDK.open(url)
+        return true
+            //FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
         
-        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
 
     

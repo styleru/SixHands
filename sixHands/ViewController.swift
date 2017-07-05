@@ -10,6 +10,7 @@ import UIKit
 import SwiftyJSON
 import CoreData
 import RealmSwift
+import Alamofire
 
 
 @available(iOS 10.0, *)
@@ -89,6 +90,77 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
     }
     
     
+    @IBAction func okLogin(_ sender: Any) {
+        OKSDK.authorize(withPermissions: ["LONG_ACCESS_TOKEN","PHOTO_CONTENT","VALUABLE_ACCESS","GET_EMAIL"], success: { (result) in
+            let Data = result as! NSArray
+            let token = Data[0]
+            print(result)
+            print(token)
+            OKSDK.invokeMethod("users.getCurrentUser", arguments: [:] , success: { (data) in
+                let Data = data as! NSDictionary
+                print(data)
+                let name = Data["first_name"]
+                let age = Data["age"]
+                
+                
+                let params:Parameters = ["first_name": Data["first_name"] as! String,
+                                         "last_name":Data["last_name"]! as! String ,
+                                         "email":Data["email"]! as! String ,
+                                         "avatar": Data["pic_3"] as! String ,
+                                         "phone": "000",
+                                         "device":"iPhone",
+                                         "sn_type":"ok",
+                                         "sn_id":Data["uid"]! as! String,
+                                         "token": token]
+                
+                
+                let url = "http://6hand.anti.school/user"
+                Alamofire.request(url, method: .post, parameters: params).responseJSON { response in
+                    
+                    //ЗАНОС В CORE DATA
+                    
+                    if let data = response.data {
+                        var jsondata = JSON(data: data)
+                        let per = person()
+                        per.token = jsondata["token"].string!
+                        
+                        
+                        if jsondata != nil{
+                            print(jsondata)
+                            per.first_name = jsondata["user"]["first_name"].string ?? ""
+                            per.last_name = jsondata["user"]["last_name"].string ?? ""
+                            per.email = jsondata["user"]["email"].string ?? ""
+                            per.phone = jsondata["user"]["phone"].string ?? ""
+                            per.avatar_url = jsondata["user"]["avatar"].string ?? ""
+                            per.ok_id = jsondata["user"]["social_networks"][0]["id_user"].string ?? ""
+                            per.user_id = Int(jsondata["user"]["id"].string!)!
+                            UserDefaults.standard.set(per.user_id, forKey: "id_user")
+                            UserDefaults.standard.synchronize()
+                        }
+                        DispatchQueue(label: "background").async {
+                            autoreleasepool {
+                                print(per)
+                                let realm = try! Realm()
+                                try! realm.write {
+                                    realm.add(per, update: true)
+                                }
+                            }
+                        }
+                    }
+                    let delayTime = DispatchTime.now() + 1
+                    DispatchQueue.main.asyncAfter(deadline: delayTime) {
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let afterLoginTB = storyboard.instantiateViewController(withIdentifier: "afterLogin") as! UITabBarController
+                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                        appDelegate.window?.rootViewController = afterLoginTB}
+                }
+            }, error: { (error) in
+                print("ERROR:\(error)")
+            })
+        }) { (error) in
+            print("error:\(error)")
+        }
+    }
     
     @IBAction func fbLogin(_ sender: UIButton) {
         FBLogin()

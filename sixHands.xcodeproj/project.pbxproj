@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		400274BC1E321D46000B94DF /* FlatViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400274BB1E321D46000B94DF /* FlatViewCell.swift */; };
+		401F5EED1F06A3E1007BD559 /* OKSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 401F5EE81F06A3E1007BD559 /* OKSDK.m */; };
 		404A1B561F0001CE00AA5C22 /* ConnectionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404A1B551F0001CE00AA5C22 /* ConnectionCheck.swift */; };
 		404E70E11E2EBF2800F94277 /* FacebookAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404E70E01E2EBF2800F94277 /* FacebookAuth.swift */; };
 		405F99411E75E09C002EB303 /* person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F99401E75E09C002EB303 /* person.swift */; };
@@ -68,6 +69,8 @@
 		36A6F9B5BD6D2615B0FFA05B /* Pods-sixHandsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sixHandsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-sixHandsTests/Pods-sixHandsTests.release.xcconfig"; sourceTree = "<group>"; };
 		36FDA856FD8EE1986F732C03 /* Pods_sixHandsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sixHandsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		400274BB1E321D46000B94DF /* FlatViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatViewCell.swift; sourceTree = "<group>"; };
+		401F5EE71F06A3E1007BD559 /* OKSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKSDK.h; sourceTree = "<group>"; };
+		401F5EE81F06A3E1007BD559 /* OKSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKSDK.m; sourceTree = "<group>"; };
 		404A1B551F0001CE00AA5C22 /* ConnectionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionCheck.swift; sourceTree = "<group>"; };
 		404E70E01E2EBF2800F94277 /* FacebookAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookAuth.swift; sourceTree = "<group>"; };
 		405F99401E75E09C002EB303 /* person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = person.swift; sourceTree = "<group>"; };
@@ -201,6 +204,8 @@
 				F7529B631E266BA700F47FE9 /* LaunchScreen.storyboard */,
 				F7529B661E266BA700F47FE9 /* Info.plist */,
 				DAB2740D1E2676B100A06E11 /* sixHands-Bridging-Header.h */,
+				401F5EE71F06A3E1007BD559 /* OKSDK.h */,
+				401F5EE81F06A3E1007BD559 /* OKSDK.m */,
 			);
 			path = sixHands;
 			sourceTree = "<group>";
@@ -567,6 +572,7 @@
 				405F99411E75E09C002EB303 /* person.swift in Sources */,
 				9DEB382C1EDF5C8800303561 /* NumbersContainer.swift in Sources */,
 				406BC19C1E7FCA06000ECBE2 /* MutualFriendsTableViewCell.swift in Sources */,
+				401F5EED1F06A3E1007BD559 /* OKSDK.m in Sources */,
 				9D4DD7E11EE54DEE00633DFE /* Empty.swift in Sources */,
 				408376931E4B4C3C001B8F16 /* FlatViewController.swift in Sources */,
 				9D8D64481E47C03100019F22 /* RentAddressController.swift in Sources */,

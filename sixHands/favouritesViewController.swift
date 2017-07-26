@@ -1,56 +1,27 @@
 //
-//  ListOfFlatsController.swift
+//  favouritesViewController.swift
 //  sixHands
 //
-//  Created by Владимир Марков on 16.01.17.
+//  Created by Илья on 09.07.17.
 //  Copyright © 2017 Владимир Марков. All rights reserved.
 //
 
 import UIKit
-import SwiftyJSON
-import CoreData
-import FBSDKCoreKit
-import FBSDKLoginKit
-import Alamofire
-import RealmSwift
-import SystemConfiguration
 
-class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
+class favouritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    var flats = [Flat]()
     let screenSize: CGRect = UIScreen.main.bounds
     let api = API()
-    var flats = [Flat]()
-    typealias JSONStandard = [String : AnyObject]
     let refreshControl = UIRefreshControl()
     var offsetInc = 10
     let amount = 10
     var id = String()
-    var station = String()
-    var station_color = UIColor()
     let internetLabel = UILabel()
-    
-    @IBOutlet weak var listOfFlats: UILabel!
-    
-    @IBOutlet weak var listOfFlatsTableView: UITableView!
-    
-    
+    @IBOutlet var favouritesLabel: UILabel!
+    @IBOutlet var listOfFlatsTableView: UITableView!
     override func viewDidLoad() {
-        let realm = try! Realm()
-        
-       
-        self.api.flatsFilter(offset: 0, amount: self.amount,select:"all", parameters: "[]") { (i) in
-                self.flats += i
-                
-                OperationQueue.main.addOperation({()-> Void in
-                    
-                    self.listOfFlatsTableView.reloadData()
-                })
-                
-            }
-        
-        
-    
-        let per = realm.object(ofType: person.self, forPrimaryKey: 1)
-        print(per?.token)
+        super.viewDidLoad()
+      
         
         //gray bar
         let grayBar = UIView()
@@ -71,8 +42,8 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
         listOfFlatsTableView.rowHeight = screenSize.height * 0.4
         
-        listOfFlats.bounds = CGRect(x:0, y:0 , width: screenSize.width * 0.8, height: 30)
-        listOfFlats.center = CGPoint(x: listOfFlats.bounds.width/2 + screenSize.width/2 - screenSize.width * 0.91466 / 2, y: (screenSize.height * 0.16 - 49)/2 + UIApplication.shared.statusBarFrame.height)
+        favouritesLabel.bounds = CGRect(x:0, y:0 , width: screenSize.width * 0.8, height: 30)
+        favouritesLabel.center = CGPoint(x: favouritesLabel.bounds.width/2 + screenSize.width/2 - screenSize.width * 0.91466 / 2, y: (screenSize.height * 0.16 - 49)/2 + UIApplication.shared.statusBarFrame.height)
         
         
         
@@ -86,27 +57,19 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         refreshControl.tintColor = UIColor.gray
         refreshControl.addTarget(self, action: #selector(ListOfFlatsController.refresh), for: UIControlEvents.valueChanged)
         self.listOfFlatsTableView?.addSubview(refreshControl)
-        
         checkInternet()
-        super.viewDidLoad()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        if let indexPath = self.listOfFlatsTableView.indexPathForSelectedRow
-        {
-            self.listOfFlatsTableView.deselectRow(at: indexPath, animated: true)
-        }
-    }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+       
     }
     
     func refresh() {
-       checkInternet()
+        checkInternet()
         print("refresh...")
         flats = []
-        api.flatsFilter(offset: 0, amount: amount,select: "all", parameters: "[]") { (i) in
+        api.flatsFilter(offset: 0, amount: amount,select: "favourites", parameters: "[]") { (i) in
             self.flats += i
             OperationQueue.main.addOperation({()-> Void in
                 
@@ -118,29 +81,57 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         self.listOfFlatsTableView.reloadData()
         self.refreshControl.endRefreshing()
     }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        checkInternet()
-        if indexPath.row == flats.count - 1 {
-            api.flatsFilter(offset: offsetInc, amount: amount,select: "all", parameters: "[]") { (i) in
-                self.flats += i
-                OperationQueue.main.addOperation({()-> Void in
-                    
-                    self.listOfFlatsTableView.reloadData()
-                })
-                
-            }
-            offsetInc += amount
-        }
+    func mutual(_ sender: UIButton) {
+        id = "\(sender.tag)"
+        performSegue(withIdentifier: "mutual2", sender: self)
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // cell selected code here
-        performSegue(withIdentifier:"singleFlat", sender: self)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "favouriteFlat"{
+            let VC = segue.destination as! FlatViewController
+            let indexPath = self.listOfFlatsTableView.indexPathForSelectedRow
+            VC.flat_id = flats[(indexPath?.row)!].flat_id
+            VC.segue = "favourite"
+        } else if segue.identifier == "mutual2"{
+            let VC1 = segue.destination as! MutualFriendsViewController
+            VC1.flat_id = id
+            VC1.segue = "favourite"
+        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        flats = []
+        api.flatsFilter(offset: 0, amount: amount,select: "favourites", parameters: "[]") { (i) in
+            self.flats += i
+            OperationQueue.main.addOperation({()-> Void in
+                
+                self.listOfFlatsTableView.reloadData()
+            })
+            
+        }}
+    func checkInternet(){
+        if !ConnectionCheck.isConnectedToNetwork() {
+            let image = UIImageView()
+            image.image = #imageLiteral(resourceName: "attentionSignOutline")
+            image.frame = CGRect(x: 10, y: 10, width: 16, height: 16)
+            internetLabel.frame = CGRect(x: 0, y: listOfFlatsTableView.frame.minY, width: self.screenSize.width, height: 35)
+            internetLabel.backgroundColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 0.9)
+            internetLabel.text = "Отсутствует подключение к интернету"
+            internetLabel.font = UIFont(name: ".SFUIText-Med", size: 16)
+            internetLabel.textColor = UIColor.white
+            internetLabel.textAlignment = .center
+            internetLabel.addSubview(image)
+            view.addSubview(internetLabel)
+        }
+        else{
+            internetLabel.removeFromSuperview()
+        }
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return flats.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "FlatViewCell", for: indexPath) as! FlatViewCell
         
         
@@ -151,6 +142,7 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         cell.subway.center = CGPoint(x:cell.flatImage.frame.minX+cell.subway.frame.width/2 + 4, y: cell.flatImage.frame.maxY + cell.subway.frame.height )
         cell.mutualFriends.bounds = CGRect(x: 0, y: 0, width: screenSize.width * 0.3 , height: screenSize.height * 0.03)
         cell.mutualFriends.center = CGPoint(x:cell.flatImage.frame.minX+cell.mutualFriends.frame.width/2 + 4, y: cell.subway.frame.maxY+20)
+       
         
         cell.price.bounds = CGRect(x: 0, y: 0, width:screenSize.width * 0.25066 , height: screenSize.height * 0.05997)
         cell.price.center = CGPoint(x:cell.flatImage.frame.maxX-cell.price.frame.width/2, y:cell.flatImage.frame.height * 0.95)
@@ -177,8 +169,8 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
         if indexPath.row != 0{
             
-        cell.separator.backgroundColor = UIColor(red: 215/255, green: 215/255, blue: 215/255, alpha: 1.0)
-           
+            cell.separator.backgroundColor = UIColor(red: 215/255, green: 215/255, blue: 215/255, alpha: 1.0)
+            
         } else {
             cell.separator.backgroundColor = UIColor.clear
         }
@@ -204,59 +196,10 @@ class ListOfFlatsController: UIViewController, UITableViewDelegate, UITableViewD
         
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return flats.count
-    }
-    
-    func mutual(_ sender: UIButton) {
-        id = "\(sender.tag)"
-        performSegue(withIdentifier: "mutual", sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "singleFlat"{
-            let VC = segue.destination as! FlatViewController
-            let indexPath = self.listOfFlatsTableView.indexPathForSelectedRow
-            VC.flat_id = flats[(indexPath?.row)!].flat_id
-            VC.segue = "list"
-        } else if segue.identifier == "mutual"{
-            let VC1 = segue.destination as! MutualFriendsViewController
-            VC1.flat_id = id
-            VC1.segue = "list"
-        }
-    }
-    
-    
    
+    @IBAction func fromSingleFlatToFavourites(segue: UIStoryboardSegue) {}
     
-    
-    
-    @IBAction func fromSingleFlat(segue: UIStoryboardSegue) {}
-    @IBAction func fromMutualFriends(segue: UIStoryboardSegue) {}
-    
-    func checkInternet(){
-        if !ConnectionCheck.isConnectedToNetwork() {
-            let image = UIImageView()
-            image.image = #imageLiteral(resourceName: "attentionSignOutline")
-            image.frame = CGRect(x: 10, y: 10, width: 16, height: 16)
-            internetLabel.frame = CGRect(x: 0, y: listOfFlatsTableView.frame.minY, width: self.screenSize.width, height: 35)
-            internetLabel.backgroundColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 0.9)
-            internetLabel.text = "Отсутствует подключение к интернету"
-            internetLabel.font = UIFont(name: ".SFUIText-Med", size: 16)
-            internetLabel.textColor = UIColor.white
-            internetLabel.textAlignment = .center
-           internetLabel.addSubview(image)
-           view.addSubview(internetLabel)
-        }
-        else{
-            internetLabel.removeFromSuperview()
-        }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier:"favouriteFlat", sender: self)
     }
-
 }
-
-
-
-

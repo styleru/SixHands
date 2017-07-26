@@ -65,6 +65,7 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
     
     
     override func viewDidLoad() {
+        print(segue)
         favourite.setImage(#imageLiteral(resourceName: "whiteForm"), for: .selected)
         favourite.setImage(#imageLiteral(resourceName: "Bookmark Ribbon_ffffff_100"), for: .normal)
         api.flatSingle(id: flat_id) { (flat) in
@@ -320,10 +321,12 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
     func backAction() {
         if segue == "profile" {
             performSegue(withIdentifier: "unwindToProfile", sender: self)
-        } else {
+        } else if segue == "favourite"{
+            performSegue(withIdentifier: "unwindToFavourites", sender: self)
+        }else {
             performSegue(withIdentifier: "unwindToList", sender: self)
         }
-    }
+    } 
     
     
     

@@ -32,7 +32,29 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let fbImage = UIImageView()
+        let vkImage = UIImageView()
+        let okImage = UIImageView()
         
+        let fbLabel = UILabel()
+        let vkLabel = UILabel()
+        let okLabel = UILabel()
+        
+        fbLabel.text = "Войти через Facebook"
+        vkLabel.text = "Войти через Vkontakte"
+        okLabel.text = "Войти через OK"
+        
+        fbLabel.textAlignment = .left
+        vkLabel.textAlignment = .left
+        okLabel.textAlignment = .left
+        
+        fbLabel.font = UIFont(name: fbLabel.font.fontName, size: 17)
+        vkLabel.font = UIFont(name: vkLabel.font.fontName, size: 17)
+        okLabel.font = UIFont(name: okLabel.font.fontName, size: 17)
+        
+        fbLabel.textColor = UIColor.white
+        vkLabel.textColor = UIColor.white
+        okLabel.textColor = UIColor.white
         // Do any additional setup after loading the view, typically from a nib.
         VKSDKInstance = VKSdk.initialize(withAppId: "5446345")
         VKSDKInstance!.register(self)
@@ -67,6 +89,31 @@ class ViewController: UIViewController, VKSdkDelegate,VKSdkUIDelegate {
         label2.text = "Сервис безопасной\nсдачи и аренды жилой\nнедвижимости"
         label3.frame = CGRect(x: fbOutlet.frame.minX+5, y: screenSize.height*0.91, width: screenSize.width*0.78125, height: 15)
         terms.frame = CGRect(x: fbOutlet.frame.minX+5, y: label3.frame.maxY, width: screenSize.width*0.70625, height: 15)
+        
+        
+        fbImage.frame = CGRect(x: 25, y: fbOutlet.frame.height/2-12 , width: 24, height: 24)
+        vkImage.frame = CGRect(x: 25, y: vkOutlet.frame.height/2-12, width: 24, height: 24)
+        okImage.frame = CGRect(x: 25, y: okOutlet.frame.height/2-12, width: 24, height: 24)
+        
+        fbLabel.frame = CGRect(x: fbImage.frame.maxX + 24, y: fbOutlet.frame.height/2 - 9, width: 190, height: 18)
+        vkLabel.frame = CGRect(x: vkImage.frame.maxX + 24, y: vkOutlet.frame.height/2 - 9, width: 190, height: 18)
+        okLabel.frame = CGRect(x: okImage.frame.maxX + 24, y: okOutlet.frame.height/2 - 9, width: 190, height: 18)
+        
+        fbImage.image = #imageLiteral(resourceName: "002FacebookLogo")
+        vkImage.image = #imageLiteral(resourceName: "001VkSocialLogotype")
+        okImage.image = #imageLiteral(resourceName: "ok")
+        
+        fbImage.contentMode = .scaleAspectFit
+        vkImage.contentMode = .scaleAspectFit
+        okImage.contentMode = .scaleAspectFit
+        
+        fbOutlet.addSubview(fbImage)
+        vkOutlet.addSubview(vkImage)
+        okOutlet.addSubview(okImage)
+        
+        fbOutlet.addSubview(fbLabel)
+        vkOutlet.addSubview(vkLabel)
+        okOutlet.addSubview(okLabel)
     }
     
 

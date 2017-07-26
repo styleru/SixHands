@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="No2-mG-RJa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13168.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="No2-mG-RJa">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13147.4"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,7 +32,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.31372549019607843" green="0.44705882352941173" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="    Войти через Vkontakte" image="001VkSocialLogotype"/>
                                 <connections>
                                     <action selector="vkLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y8G-Vc-MBm"/>
                                 </connections>
@@ -42,7 +41,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.23137254901960785" green="0.3529411764705882" blue="0.59215686274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="      Войти через Facebook" image="002FacebookLogo"/>
                                 <connections>
                                     <action selector="fbLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CQS-F3-Rz3"/>
                                 </connections>
@@ -94,7 +92,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.88627450980392153" green="0.49411764705882355" blue="0.20784313725490194" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="                   Войти через ОК" image="ok"/>
                                 <connections>
                                     <action selector="okLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0d1-IG-Dzk"/>
                                 </connections>
@@ -153,7 +150,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="249" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eKc-B7-2HR">
-                                <rect key="frame" x="16" y="141" width="343" height="477"/>
+                                <rect key="frame" x="16" y="74" width="343" height="544"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -234,16 +231,6 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XdJ-tV-D8c">
-                                <rect key="frame" x="122" y="74" width="111" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Популярное">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="popular:" destination="kfz-7V-ri2" eventType="touchUpInside" id="E0p-Nq-Iaq"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Список квартир" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xvw-tq-dDA">
                                 <rect key="frame" x="20" y="20" width="238" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -251,37 +238,17 @@
                                 <color key="textColor" red="0.035294117647058823" green="0.035294117647058823" blue="0.035294117647058823" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4LO-xe-YIz">
-                                <rect key="frame" x="268" y="74" width="91" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Избранное">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="favourites:" destination="kfz-7V-ri2" eventType="touchUpInside" id="0OX-P4-b4O"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pno-6K-2Q9">
-                                <rect key="frame" x="16" y="74" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Новое">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="new:" destination="kfz-7V-ri2" eventType="touchUpInside" id="Ori-L6-M0f"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Снять" image="list" id="Hl6-qV-VCj"/>
+                    <tabBarItem key="tabBarItem" title="Снять" image="list" id="Hl6-qV-VCj">
+                        <inset key="imageInsets" minX="0.0" minY="-6" maxX="0.0" maxY="0.0"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="favouritesOutlet" destination="4LO-xe-YIz" id="2Av-9h-WPl"/>
                         <outlet property="listOfFlats" destination="Xvw-tq-dDA" id="Xpv-Sq-YdP"/>
                         <outlet property="listOfFlatsTableView" destination="eKc-B7-2HR" id="Cme-Im-qxU"/>
-                        <outlet property="newOutlet" destination="pno-6K-2Q9" id="Gje-E9-DfL"/>
-                        <outlet property="popularOutlet" destination="XdJ-tV-D8c" id="4MD-bh-TRe"/>
                         <segue destination="NKU-Jd-hfY" kind="show" identifier="singleFlat" id="OOK-34-sFi"/>
                         <segue destination="Vrl-09-h3Y" kind="show" identifier="mutual" id="KDP-i7-wSB"/>
                     </connections>
@@ -562,6 +529,7 @@
                         <outlet property="zatemnenie2" destination="zbI-ti-bWT" id="BD0-K9-UnH"/>
                         <segue destination="zDr-8L-m3u" kind="unwind" identifier="unwindToProfile" unwindAction="fromSingleFlatToProfileWithSegue:" id="HSi-g4-jEc"/>
                         <segue destination="zDr-8L-m3u" kind="unwind" identifier="unwindToList" unwindAction="fromSingleFlatWithSegue:" id="gvC-Uz-D5q"/>
+                        <segue destination="zDr-8L-m3u" kind="unwind" identifier="unwindToFavourites" unwindAction="fromSingleFlatToFavouritesWithSegue:" id="eic-mA-EXT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iVJ-pb-US6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -582,7 +550,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Профиль" image="Profile" id="SW5-iT-ZWd"/>
+                    <tabBarItem key="tabBarItem" title="Профиль" image="avatar" id="SW5-iT-ZWd">
+                        <inset key="imageInsets" minX="0.0" minY="-6" maxX="0.0" maxY="0.0"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" id="iRg-7u-HQE"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -706,6 +677,7 @@
                         <outlet property="mutualFriendsTableView" destination="mtC-z3-3gh" id="6J5-d7-vII"/>
                         <segue destination="tvc-cq-5E0" kind="unwind" identifier="toFlat" unwindAction="fromMutualWithSegue:" id="WTz-cz-Q4d"/>
                         <segue destination="tvc-cq-5E0" kind="unwind" identifier="toList" unwindAction="fromMutualFriendsWithSegue:" id="GLZ-of-5ly"/>
+                        <segue destination="tvc-cq-5E0" kind="unwind" identifier="toFavourite" unwindAction="fromSingleFlatToFavouritesWithSegue:" id="Gf7-2Z-KP6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zt1-5M-5fP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1348,10 +1320,10 @@
             </objects>
             <point key="canvasLocation" x="3248.8000000000002" y="4482.9085457271367"/>
         </scene>
-        <!--закладки-->
+        <!--Закладки-->
         <scene sceneID="2HN-2l-uWG">
             <objects>
-                <viewController id="w5c-CK-dor" sceneMemberID="viewController">
+                <viewController id="w5c-CK-dor" customClass="favouritesViewController" customModule="sixHands" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nQs-Na-kQo"/>
                         <viewControllerLayoutGuide type="bottom" id="J5h-mg-aGq"/>
@@ -1359,9 +1331,109 @@
                     <view key="view" contentMode="scaleToFill" id="FQL-yq-ntT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="249" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rJW-ng-zHF">
+                                <rect key="frame" x="16" y="74" width="343" height="544"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FlatViewCell" rowHeight="249" id="xAv-1F-Wfu" customClass="FlatViewCell" customModule="sixHands" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="249"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xAv-1F-Wfu" id="nzb-yS-6f9">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="249"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TVy-g4-o4l">
+                                                    <rect key="frame" x="0.0" y="123" width="343" height="2"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Метро" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UVH-rw-zAD">
+                                                    <rect key="frame" x="27" y="200" width="134" height="19"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="n-комн" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lPT-VX-8MY">
+                                                    <rect key="frame" x="164" y="199" width="118" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="tBU-GF-Dxm">
+                                                    <rect key="frame" x="290" y="195" width="45" height="45"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vYT-b0-Fy2">
+                                                    <rect key="frame" x="8" y="222" width="93" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                                    <state key="normal" title="Общие друзья">
+                                                        <color key="titleColor" red="0.39008748529999998" green="0.80578804020000006" blue="0.76642340419999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="fai-ag-nOF">
+                                                    <rect key="frame" x="-10" y="-6" width="363" height="198"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WVp-eX-UFe">
+                                                    <rect key="frame" x="7" y="203" width="12" height="12"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U2W-Ol-1iz">
+                                                    <rect key="frame" x="116" y="203" width="2" height="2"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10 000 Р" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8iE-uc-Y7S">
+                                                    <rect key="frame" x="264" y="129" width="81" height="37"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.35999999999999999" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" label="Текст-хуекст">
+                                            <bool key="isElement" value="NO"/>
+                                        </accessibility>
+                                        <connections>
+                                            <outlet property="avatar" destination="tBU-GF-Dxm" id="B8x-qi-NfK"/>
+                                            <outlet property="dot" destination="U2W-Ol-1iz" id="Pko-Ci-BSo"/>
+                                            <outlet property="flatImage" destination="fai-ag-nOF" id="NYX-oZ-BHH"/>
+                                            <outlet property="mutualFriends" destination="vYT-b0-Fy2" id="U6G-5C-vWT"/>
+                                            <outlet property="numberOfRooms" destination="lPT-VX-8MY" id="Tce-kx-J97"/>
+                                            <outlet property="price" destination="8iE-uc-Y7S" id="hjZ-SH-Tpk"/>
+                                            <outlet property="separator" destination="TVy-g4-o4l" id="c7V-iA-HJE"/>
+                                            <outlet property="subway" destination="UVH-rw-zAD" id="CIY-b9-V4v"/>
+                                            <outlet property="subwayColor" destination="WVp-eX-UFe" id="Auj-JK-FmN"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Закладки" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYr-NX-hPk">
+                                <rect key="frame" x="16" y="20" width="238" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="28"/>
+                                <color key="textColor" red="0.035294117649999998" green="0.035294117649999998" blue="0.035294117649999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="закладки" image="bookmarkWhite" id="KpG-95-jkd"/>
+                    <tabBarItem key="tabBarItem" title="Закладки" image="bookmarkWhite" id="KpG-95-jkd">
+                        <inset key="imageInsets" minX="0.0" minY="-6" maxX="0.0" maxY="0.0"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
+                    </tabBarItem>
+                    <connections>
+                        <outlet property="favouritesLabel" destination="BYr-NX-hPk" id="0zA-mh-cSg"/>
+                        <outlet property="listOfFlatsTableView" destination="rJW-ng-zHF" id="3VA-Xd-9IE"/>
+                        <segue destination="NKU-Jd-hfY" kind="show" identifier="favouriteFlat" id="skR-Ee-kxn"/>
+                        <segue destination="Vrl-09-h3Y" kind="show" identifier="mutual2" id="P60-pm-Z4K"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jkm-0p-LbR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1380,7 +1452,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Сдать" image="placeAdvert" id="Exm-Ln-df3"/>
+                    <tabBarItem key="tabBarItem" title="Сдать" image="placeAdvert" id="Exm-Ln-df3">
+                        <inset key="imageInsets" minX="0.0" minY="-6" maxX="0.0" maxY="0.0"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sdx-KD-XB3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1393,9 +1468,15 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="Evk-bz-0Yv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.34901960784313724" green="0.84313725490196079" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.23529411764705882" green="0.27450980392156865" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="unselectedItemTintColor">
+                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="zpI-hk-eiu" kind="relationship" relationship="viewControllers" id="sWe-J3-ZiC"/>
@@ -1501,8 +1582,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="001VkSocialLogotype" width="24" height="16"/>
-        <image name="002FacebookLogo" width="14" height="24"/>
         <image name="1" width="600" height="400"/>
         <image name="18" width="11" height="19"/>
         <image name="2" width="2560" height="1920"/>
@@ -1511,13 +1590,12 @@
         <image name="Clock_000000_32" width="32" height="32"/>
         <image name="Door Opened_000000_100" width="100" height="100"/>
         <image name="Expand_000000_100" width="100" height="100"/>
-        <image name="Profile" width="24" height="24"/>
         <image name="Stairs Up_000000_100" width="100" height="100"/>
+        <image name="avatar" width="19" height="21"/>
         <image name="bookmarkWhite" width="17" height="19"/>
         <image name="checkedMark2" width="22" height="22"/>
         <image name="fan" width="25" height="37"/>
         <image name="list" width="23" height="18"/>
-        <image name="ok" width="15" height="24"/>
         <image name="pawPrint" width="29" height="25"/>
         <image name="placeAdvert" width="28" height="21"/>
         <image name="shape1" width="26" height="26"/>
@@ -1527,9 +1605,9 @@
         <image name="wifi" width="29" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="U6V-Gu-04z"/>
-        <segue reference="KDP-i7-wSB"/>
-        <segue reference="OOK-34-sFi"/>
+        <segue reference="ATY-tg-wpF"/>
+        <segue reference="skR-Ee-kxn"/>
+        <segue reference="ow1-io-7hw"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

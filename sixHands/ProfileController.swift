@@ -30,7 +30,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         //parameters for request & request
         let params = "&parameters=%5B%7B%22key%22%3A%22id_user%22%2C%22value%22%3A%22\(UserDefaults.standard.value(forKey: "id_user")!))%22%2C%20%22criterion%22%3A%22single%22%7D%5D"
         
-        api.flatsFilter(offset: 0, amount: 20, parameters: params) { (flat) in
+        api.flatsFilter(offset: 0, amount: 20,select: "all", parameters: params) { (flat) in
             self.flats += flat
             OperationQueue.main.addOperation({()-> Void in
                 self.table.reloadData()
@@ -162,7 +162,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         print("refresh...")
         flats = []
         let params = "&parameters=%5B%7B%22key%22%3A%22id_user%22%2C%22value%22%3A%22\(UserDefaults.standard.value(forKey: "id_user")!)%22%2C%20%22criterion%22%3A%22single%22%7D%5D"
-        api.flatsFilter(offset: 0, amount: 20, parameters: params) { (flat) in
+        api.flatsFilter(offset: 0, amount: 20,select: "all", parameters: params) { (flat) in
             self.flats += flat
             OperationQueue.main.addOperation({()-> Void in
                 self.table.reloadData()

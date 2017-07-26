@@ -11,6 +11,7 @@
 		401F5EED1F06A3E1007BD559 /* OKSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 401F5EE81F06A3E1007BD559 /* OKSDK.m */; };
 		404A1B561F0001CE00AA5C22 /* ConnectionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404A1B551F0001CE00AA5C22 /* ConnectionCheck.swift */; };
 		404E70E11E2EBF2800F94277 /* FacebookAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404E70E01E2EBF2800F94277 /* FacebookAuth.swift */; };
+		404F01F91F12567100833A7E /* favouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F01F81F12567100833A7E /* favouritesViewController.swift */; };
 		405F99411E75E09C002EB303 /* person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F99401E75E09C002EB303 /* person.swift */; };
 		406BC19A1E7FC8BA000ECBE2 /* MutualFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406BC1991E7FC8BA000ECBE2 /* MutualFriendsViewController.swift */; };
 		406BC19C1E7FCA06000ECBE2 /* MutualFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406BC19B1E7FCA06000ECBE2 /* MutualFriendsTableViewCell.swift */; };
@@ -73,6 +74,7 @@
 		401F5EE81F06A3E1007BD559 /* OKSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKSDK.m; sourceTree = "<group>"; };
 		404A1B551F0001CE00AA5C22 /* ConnectionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionCheck.swift; sourceTree = "<group>"; };
 		404E70E01E2EBF2800F94277 /* FacebookAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookAuth.swift; sourceTree = "<group>"; };
+		404F01F81F12567100833A7E /* favouritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favouritesViewController.swift; sourceTree = "<group>"; };
 		405F99401E75E09C002EB303 /* person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = person.swift; sourceTree = "<group>"; };
 		406BC1991E7FC8BA000ECBE2 /* MutualFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutualFriendsViewController.swift; sourceTree = "<group>"; };
 		406BC19B1E7FCA06000ECBE2 /* MutualFriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutualFriendsTableViewCell.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				9D869E7C1E9B675F00C18EB7 /* Entry.swift */,
 				F7529B5C1E266BA700F47FE9 /* ViewController.swift */,
 				F7BAACAE1E2C8FE7009BE9AD /* ListOfFlatsController.swift */,
+				404F01F81F12567100833A7E /* favouritesViewController.swift */,
 				408376921E4B4C3C001B8F16 /* FlatViewController.swift */,
 				9D6FE0E61E42437C00133C3F /* ProfileController.swift */,
 				9D6F7FBF1E9B77800012AFE8 /* EditFlatController.swift */,
@@ -576,6 +579,7 @@
 				9D4DD7E11EE54DEE00633DFE /* Empty.swift in Sources */,
 				408376931E4B4C3C001B8F16 /* FlatViewController.swift in Sources */,
 				9D8D64481E47C03100019F22 /* RentAddressController.swift in Sources */,
+				404F01F91F12567100833A7E /* favouritesViewController.swift in Sources */,
 				9D4DD7DF1EE54AFC00633DFE /* MasterContainer.swift in Sources */,
 				9D6F7FC01E9B77800012AFE8 /* EditFlatController.swift in Sources */,
 				9D6FE0E71E42437C00133C3F /* ProfileController.swift in Sources */,

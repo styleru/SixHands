@@ -21,11 +21,11 @@ class API{
        
     //FLATS FILTER
     
-    func flatsFilter(offset:Int,amount:Int, parameters: String, completionHandler: @escaping ([Flat])->Void){
+    func flatsFilter(offset:Int,amount:Int, select:String , parameters: String, completionHandler: @escaping ([Flat])->Void){
         let realm = try! Realm()
         let per = realm.object(ofType: person.self, forPrimaryKey: 1)
         headers = ["Token":(per?.token)!]
-        let fullRequest = domain + "/flats/filter?select=all&offset=\(offset)&amount=\(amount)&parameters=\(parameters)"
+        let fullRequest = domain + "/flats/filter?select=\(select)&offset=\(offset)&amount=\(amount)&parameters=\(parameters)"
         
         Alamofire.request(fullRequest, headers : headers).responseJSON { response in
             var flats = [Flat]()
@@ -121,7 +121,7 @@ class API{
     
     
     //TOKEN CHECK
-    func tokenCheck(token:String,completionHandler:@escaping (_ js:Int) ->()){
+    func tokenCheck(token:String,completionHandler:@escaping (_ js:Int?) ->()){
         let fullRequest = domain + "/token"
         
         if token != ""{
@@ -130,7 +130,7 @@ class API{
             headers = ["Token" : ""]
         }
         Alamofire.request(fullRequest, headers: headers).responseJSON { response in
-            let jsondata = (response.response?.statusCode)!
+            let jsondata = (response.response?.statusCode)
             completionHandler(jsondata)
         }
         

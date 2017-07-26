@@ -57,6 +57,8 @@ class MutualFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     func backAction() {
         if segue == "flat" {
             performSegue(withIdentifier: "toFlat", sender: self)
+        } else if segue == "favourite"{
+            performSegue(withIdentifier: "toFavourite", sender: self)
         } else {
             performSegue(withIdentifier: "toList", sender: self)
         }

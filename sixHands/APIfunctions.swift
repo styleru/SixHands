@@ -137,11 +137,14 @@ class API{
     }
     
     func upload(photoData: [Data], parameters: [String : String], completionHandler:@escaping (_ js:Any) ->()){
+        let realm = try! Realm()
+        let per = realm.object(ofType: person.self, forPrimaryKey: 1)
         let fullRequest = domain + "/flats/single"
         let encoded = fullRequest.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
         let myUrl = URL(string: encoded!)
         
-        headers = ["Token" : UserDefaults.standard.value(forKey: "Token") as! String]
+        //headers = ["Token" : UserDefaults.standard.value(forKey: "Token") as! String]
+        headers = ["Token":(per?.token)!]
         
         Alamofire.upload(multipartFormData: { (multipart) in
             
@@ -205,6 +208,7 @@ class API{
             flat.ownerName = jsondata["owner"]["first_name"].string ?? "Неопределен"
             flat.address = jsondata["address"].string ?? "Адрес не указан"
             flat.comments = jsondata["description"].string ?? "Описание не указано"
+            flat.owner_id = jsondata["owner"]["id"].string ?? "Неопределен"
             let optionsCount = jsondata["options"].array?.count ?? 0
             for i in 0..<optionsCount{
                 flat.options.append(jsondata["options"][i].string!)

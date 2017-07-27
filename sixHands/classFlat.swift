@@ -61,6 +61,7 @@ class Flat{
     var floors = String()
     var subwayId = String()
     var photos = [Data]()
+    var owner_id = String()
     
 }
 
@@ -114,6 +115,13 @@ let options = List<Option>()
         let name = option?["name"]
         return (name as! String,image)
     }
+
+    class func getAll() -> (Options) {
+        let realm = try! Realm()
+        let options = realm.objects(Options.self).first
+        return (options)!
+    }
+    
     override static func primaryKey() -> String? {
         return "id"
     }

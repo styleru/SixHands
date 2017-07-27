@@ -13,6 +13,7 @@ import SwiftyJSON
 class FlatViewController: UIViewController,UIScrollViewDelegate{
     let screenSize: CGRect = UIScreen.main.bounds
     var mas = [String]()
+    var owner = String()
     var id_underground = Int()
     var id_underground_line = Int()
     var flat_id = String()
@@ -82,6 +83,13 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
             }
             if flat.isFavourite == "1"{
             self.favourite.isSelected = true
+            }
+            
+            self.owner = flat.owner_id
+            if Int(self.owner) != UserDefaults.standard.value(forKey: "id_user") as? Int {
+                self.rentOutlet.setTitle("Снять квартиру", for: .normal)
+            } else {
+                self.rentOutlet.setTitle("Редактировать квартиру", for: .normal)
             }
             self.price.text = flat.flatPrice + " ₽"
             self.timeToSubway.text = flat.time_to_subway + " мин."
@@ -157,13 +165,6 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
         scrollView.delegate = self
         
         backOutlet.addTarget(self, action: #selector(FlatViewController.backAction), for: .touchUpInside)
-        
-        if segue == "list" {
-            rentOutlet.setTitle("Снять квартиру", for: .normal)
-        } else {
-            rentOutlet.setTitle("Редактировать квартиру", for: .normal)
-        }
-        
         //Font of adress
         switch (screenSize.width){
         case 320 : adress.font = UIFont.systemFont(ofSize: 20)
@@ -171,9 +172,6 @@ class FlatViewController: UIViewController,UIScrollViewDelegate{
         case 414: adress.font = UIFont.systemFont(ofSize: 32)
         default : adress.font = UIFont.systemFont(ofSize: 25)
         }
-        
-        
-        
         
         //CONSTRAINTS
         imagesScrollView.bounds = CGRect(x: 0, y: 0, width: screenSize.width , height: screenSize.height * 0.38 )

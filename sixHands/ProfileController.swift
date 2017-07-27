@@ -218,7 +218,7 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.frame.size.height = screen.height * 0.4
         
         //image
-        cell.flat.frame = CGRect(x: 0, y: 0.0, width: screen.width * 0.91466 , height: screen.height * 0.27436282 )
+        cell.flat.frame = CGRect(x: 0, y: 0.0, width: screen.width - 30 , height: screen.height * 0.3)
         cell.flat.center = CGPoint(x: cell.bounds.width / 2, y: cell.flat.frame.height/2 + 20.0)
         cell.flat.contentMode = .scaleAspectFill
         cell.flat.clipsToBounds = true
@@ -255,9 +255,9 @@ class ProfileController: UIViewController, UITableViewDelegate, UITableViewDataS
         //cell.rooms.adjustsFontSizeToFitWidth = true
         
         //edit button
-        let size = screen.width * 0.11733
+        let size = screen.width * 0.12
         cell.edit.frame = CGRect(x: 0, y: 0, width: size, height: size)
-        cell.edit.center = CGPoint(x:cell.flat.frame.maxX-cell.edit.frame.width/2 - 4,y:cell.bounds.height-(cell.bounds.height-cell.flat.frame.maxY)/2)
+        cell.edit.center = CGPoint(x: cell.flat.frame.maxX-cell.edit.frame.width/2,y: cell.flat.frame.maxY + cell.subwayLabel.frame.height + 10.0)
         cell.edit.setImage(#imageLiteral(resourceName: "10"), for: .normal)
         cell.edit.tag = Int(flats[indexPath.row].flat_id)!
         cell.edit.addTarget(self, action: #selector(ProfileController.edit(_:)), for: .touchUpInside)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RentParamsController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class RentParamsController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource {
     
     static var paramsValues = [Int]()
     let rooms = ["1 комната", "2 комнаты", "3 комнаты", "4 комнаты", "более 4"]
@@ -17,6 +17,7 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UIPickerViewD
     let subView = UIView()
     let doneButton = UIButton()
     let separator = UIView()
+    var options = Options()
 
     @IBOutlet weak var scroll: UIScrollView!
     @IBOutlet weak var content: UIView!
@@ -25,6 +26,7 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UIPickerViewD
     @IBOutlet weak var squareField: UITextField!
     @IBOutlet weak var floorsField: UITextField!
     @IBOutlet weak var floorField: UITextField!
+    @IBOutlet weak var optionsTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +34,11 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UIPickerViewD
         // Do any additional setup after loading the view.
         
         let screen = self.view.frame
-        RentParamsController.paramsValues = [0, 0, 0, 0, 0]
-        
+        options = Options.getAll()
+        for _ in 0...options.options.count - 1 {
+            RentParamsController.paramsValues.append(0)
+        }
+        self.optionsTable.reloadData()
         scroll.contentSize.height = 1000
         
         picker.delegate = self
@@ -86,11 +91,11 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UIPickerViewD
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         roomsField.text = rooms[row]
-        RentAddressController.flatToRent.numberOfRoomsInFlat = roomsField.text!
+        RentAddressController.flatToRent.numberOfRoomsInFlat = String(row + 1)
         //self.view.endEditing(false)
     }
     
-    @IBAction func first(_ sender: UIButton) {
+    func first(_ sender: UIButton) {
         if sender.isSelected == false {
             sender.isSelected = true
             RentParamsController.paramsValues[sender.tag] = 1
@@ -131,9 +136,24 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UIPickerViewD
             }
         } else if textField == floorField {
             RentAddressController.flatToRent.floor = floorField.text ?? "-"
-        } else if textField == floorField {
+        } else if textField == floorsField {
             RentAddressController.flatToRent.floors = floorsField.text ?? "-"
         }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return options.options.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! optionCell
+        
+        cell.img.image = UIImage(data: options.options[indexPath.row]["image"] as! Data)
+        cell.lbl.text = (options.options[indexPath.row]["name"] as! String)
+        cell.btn.addTarget(self, action: #selector(first(_:)), for: .touchUpInside)
+        cell.btn.tag = indexPath.row
+        self.optionsTable.sizeToFit()
+        return cell
     }
 
     override func didReceiveMemoryWarning() {

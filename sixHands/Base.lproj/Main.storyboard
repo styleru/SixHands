@@ -605,7 +605,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KQl-FI-0zu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ySX-fR-Qwh" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3336.8000000000002" y="2825.9370314842581"/>
+            <point key="canvasLocation" x="2912.8000000000002" y="2825.9370314842581"/>
         </scene>
         <!--Mutual Friends View Controller-->
         <scene sceneID="LQ8-Dk-W6J">
@@ -1494,7 +1494,6 @@
         <image name="bookmarkWhite" width="17" height="19"/>
         <image name="checkedMark2" width="22" height="22"/>
         <image name="list" width="23" height="18"/>
-        <image name="pawPrint" width="29" height="25"/>
         <image name="placeAdvert" width="28" height="21"/>
         <image name="stockSnap02FAEBOQ2G" width="960" height="1704"/>
         <image name="uncheckedMark3" width="22" height="22"/>

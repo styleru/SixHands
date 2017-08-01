@@ -71,6 +71,10 @@ class favouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         flats = []
         api.flatsFilter(offset: 0, amount: amount,select: "favourites", parameters: "[]") { (i) in
             self.flats += i
+            self.listOfFlatsTableView.isUserInteractionEnabled = true
+            if self.flats.isEmpty {
+                self.noFavourites()
+            }
             OperationQueue.main.addOperation({()-> Void in
                 
                 self.listOfFlatsTableView.reloadData()
@@ -99,16 +103,26 @@ class favouritesViewController: UIViewController, UITableViewDelegate, UITableVi
             VC1.segue = "favourite"
         }
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        view.viewWithTag(1)?.removeFromSuperview()
+        view.viewWithTag(2)?.removeFromSuperview()
+    }
     override func viewWillAppear(_ animated: Bool) {
+      
         flats = []
         api.flatsFilter(offset: 0, amount: amount,select: "favourites", parameters: "[]") { (i) in
             self.flats += i
+            self.listOfFlatsTableView.isUserInteractionEnabled = true
+            if self.flats.isEmpty {
+                self.noFavourites()
+            }
             OperationQueue.main.addOperation({()-> Void in
                 
                 self.listOfFlatsTableView.reloadData()
             })
             
         }}
+    
     func checkInternet(){
         if !ConnectionCheck.isConnectedToNetwork() {
             let image = UIImageView()
@@ -201,5 +215,37 @@ class favouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier:"favouriteFlat", sender: self)
+    }
+    func noFavourites(){
+         listOfFlatsTableView.isUserInteractionEnabled = false
+        let description = UITextView()
+        description.frame = CGRect(x: favouritesLabel.frame.minX - 4, y: favouritesLabel.frame.maxY + 30, width: screenSize.width*0.9, height: 45)
+        description.font = UIFont(name: ".SFUIText-Light", size: 14)
+        description.textColor = UIColor(red: 119/255, green: 119/255, blue: 119/255, alpha: 1.0)
+        description.textAlignment = .left
+        description.text = "Добавляйте понравившиеся квартиры в\nзакладки, чтобы потом легко к ним вернуться."
+        description.tag = 1
+        let image = UIImageView()
+        let backView = UIView()
+        backView.frame = CGRect(x: screenSize.width/2, y: screenSize.height/2, width: 138, height: 18)
+        backView.center = CGPoint(x: screenSize.width/2, y: screenSize.height/2)
+        
+        image.image = #imageLiteral(resourceName: "forma13")
+        image.contentMode = .scaleAspectFill
+        image.frame = CGRect(x: 0, y: 0, width: 14, height: 18)
+        
+        let noLabel = UILabel()
+        noLabel.frame = CGRect(x: image.frame.maxX + 11, y: 0, width: 113, height: 18)
+        noLabel.font = UIFont(name: ".SFUIText-Bold", size: 16)
+        noLabel.textColor = UIColor(red: 76/255, green: 76/255, blue: 76/255, alpha: 1.0)
+        noLabel.textAlignment = .left
+        noLabel.text = "Нет закладок"
+        
+        backView.addSubview(noLabel)
+        backView.addSubview(image)
+        backView.tag = 2
+        
+        view.addSubview(backView)
+        view.addSubview(description)
     }
 }

@@ -30,7 +30,7 @@ class EditFlatController: UIViewController {
         self.view.addSubview(grayBar)
         
         let backButton = UIButton()
-        backButton.frame = CGRect(x: 35, y: 30, width: 25, height: 25)
+        backButton.frame = CGRect(x: 28, y: 30, width: 25, height: 25)
         backButton.setImage(#imageLiteral(resourceName: "Back"), for: .normal)
         backButton.addTarget(self, action: #selector(EditFlatController.backAction), for: .touchUpInside)
         view.addSubview(backButton)
@@ -48,27 +48,7 @@ class EditFlatController: UIViewController {
         scrollView.showsHorizontalScrollIndicator = false
         self.view.addSubview(scrollView)
         
-      /*  api.flatsSingle(id: "350"){(js:Any) in
-            let jsondata = js as! JSON
-            let imageSize = CGSize(width: scrollViewSize.width * 0.6, height: scrollViewSize.height * 0.8)
-            scrollView.contentSize.width = 55.0 + CGFloat(jsondata["photos"].array!.count) * (imageSize.width + 15.0)
-            for i in 0..<jsondata["photos"].array!.count {
-                let image = UIImageView()
-                let dx = 35.0 + CGFloat(i) * (imageSize.width + 15.0)
-                image.frame = CGRect(x: dx, y: 20.0, width: imageSize.width, height: imageSize.height)
-                image.sd_setImage(with: URL(string: jsondata["photos"][i]["url"].string!))
-                scrollView.addSubview(image)
-                //self.photos.append(image.image!)
-                
-                let deleteButton = UIButton()
-                let deleteButtonSize = CGSize(width: image.frame.width * 0.1, height: image.frame.width * 0.1)
-                deleteButton.frame = CGRect(x: image.frame.maxX - deleteButtonSize.width / 2, y: image.frame.minY - deleteButtonSize.height / 2, width: deleteButtonSize.width, height: deleteButtonSize.height)
-                deleteButton.setImage(#imageLiteral(resourceName: "delete"), for: .normal)
-                //yourButton.addTarget(self, action: #selector(), for: .touchUpInside)
-                scrollView.addSubview(deleteButton)
-            }
-            
-        }*/
+      
     }
     
     func backAction() {

@@ -24,13 +24,13 @@ PODS:
   - libwebp/utils (0.6.0):
     - libwebp/core
   - libwebp/webp (0.6.0)
-  - Realm (2.8.3):
-    - Realm/Headers (= 2.8.3)
-  - Realm/Headers (2.8.3)
-  - RealmSwift (2.8.3):
-    - Realm (= 2.8.3)
-  - SDWebImage/Core (4.0.0)
-  - SDWebImage/WebP (4.0.0):
+  - Realm (2.9.0):
+    - Realm/Headers (= 2.9.0)
+  - Realm/Headers (2.9.0)
+  - RealmSwift (2.9.0):
+    - Realm (= 2.9.0)
+  - SDWebImage/Core (4.1.0)
+  - SDWebImage/WebP (4.1.0):
     - libwebp
     - SDWebImage/Core
   - SwiftyJSON (3.1.4)
@@ -48,9 +48,9 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   libwebp: 1d5a07c2eb97f9c31bd5f154bb82efc0ea67c6a2
-  Realm: 3601ef091c8c499a31101d8563b991e75546cdce
-  RealmSwift: 8183818515471b01a99abdd2970f8e4fd52b6f4a
-  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  Realm: f14ab1673502559cb16592ddb8f383c474c13e05
+  RealmSwift: 16ad2c187042c4934f49750375582fe508627dcb
+  SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   VK-ios-sdk: 7fd48bc5aaa6b96c3197c1987eb6593f2ea67331
   YandexMobileMetrica: c8e9050cd23b10dee4358bdf0a5142583a63995c

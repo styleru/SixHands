@@ -99,6 +99,9 @@ class MasterContainer: UIViewController {
     func continueButtonAction() {
         print("continue...")
         print("long: \(RentAddressController.flatToRent.longitude), lat: \(RentAddressController.flatToRent.latitude)")
+        if i == 2 {
+            
+        }
         i += 1
         if i < 5 {
             navigationItem.title = "Шаг \(i) из 4"
@@ -109,11 +112,6 @@ class MasterContainer: UIViewController {
                 second.textColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
             case 3:
                 third.textColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
-                RentAddressController.flatToRent.conditioning = "\(RentParamsController.paramsValues[4])"
-                RentAddressController.flatToRent.fridge = "\(RentParamsController.paramsValues[0])"
-                RentAddressController.flatToRent.internet = "\(RentParamsController.paramsValues[1])"
-                RentAddressController.flatToRent.tv = "\(RentParamsController.paramsValues[2])"
-                RentAddressController.flatToRent.parking = "\(RentParamsController.paramsValues[3])"
             case 4:
                 fourth.textColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
                 continueButton.setTitle("Опубликовать", for: .normal)
@@ -130,19 +128,9 @@ class MasterContainer: UIViewController {
             
             print("goPublic...")
             
-            let param = [
-                "24" : "\(RentAddressController.flatToRent.parking)",
-                "23" : "\(RentAddressController.flatToRent.conditioning)",
-                "19" : "\(RentAddressController.flatToRent.fridge)",
-                "9" : "\(RentAddressController.flatToRent.animals)",
-                "15" : "\(RentAddressController.flatToRent.internet)"
-            ]
-            
             var params = "["
-            for (id, value) in param {
-                if value == "1" {
-                    params += id + ","
-                }
+            for id in RentAddressController.flatToRent.options {
+                params += id + ","
             }
             params = String(params.characters.dropLast(1))
             params += "]"

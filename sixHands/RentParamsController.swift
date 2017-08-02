@@ -8,17 +8,18 @@
 
 import UIKit
 
-class RentParamsController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource {
+class RentParamsController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIScrollViewDelegate {
     
-    static var paramsValues = [Int]()
-    let rooms = ["1 комната", "2 комнаты", "3 комнаты", "4 комнаты", "более 4"]
+    let rooms = ["Студия", "1 комната", "2 комнаты", "3 комнаты", "4 комнаты", "более 4"]
     let picker = UIPickerView()
     let viewForField = UIView()
     let subView = UIView()
     let doneButton = UIButton()
     let separator = UIView()
     var options = Options()
+    var isLayout = false
 
+    @IBOutlet weak var bottomSeparator: UIView!
     @IBOutlet weak var scroll: UIScrollView!
     @IBOutlet weak var content: UIView!
     @IBOutlet weak var priceField: UITextField!
@@ -26,7 +27,22 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UIPickerViewD
     @IBOutlet weak var squareField: UITextField!
     @IBOutlet weak var floorsField: UITextField!
     @IBOutlet weak var floorField: UITextField!
-    @IBOutlet weak var optionsTable: UITableView!
+    
+    let rubleSymbol = UILabel()
+    let meterSymbol = UILabel()
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if (!isLayout) {
+            options = Options.getAll()
+            for _ in 1...options.options.count - 4 {
+                DispatchQueue.main.async {
+                    self.scroll.contentSize.height += 40
+                }
+            }
+            isLayout = true
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,12 +50,38 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UIPickerViewD
         // Do any additional setup after loading the view.
         
         let screen = self.view.frame
+        roomsField.tintColor = UIColor.clear
+        scroll.delegate = self
         options = Options.getAll()
-        for _ in 0...options.options.count - 1 {
-            RentParamsController.paramsValues.append(0)
+        var i = 0
+        for option in options.options {
+            
+            let avatar = UIImageView()
+            let avatarSize = CGSize(width: 25, height: 25)
+            avatar.frame = CGRect(x: screen.minX + 16.0, y: self.bottomSeparator.frame.maxY + 15 + CGFloat(40 * i), width: avatarSize.width, height: avatarSize.height)
+            avatar.image = UIImage(data: option["image"] as! Data)
+            avatar.contentMode = .scaleAspectFill
+            self.scroll.addSubview(avatar)
+            
+            let yourLabel = UILabel()
+            let yourLabelSize = CGSize(width: 190, height: 17)
+            yourLabel.frame = CGRect(x: avatar.frame.maxX + 20, y: 0, width: yourLabelSize.width, height: yourLabelSize.height)
+            yourLabel.center.y = avatar.frame.midY
+            yourLabel.text = (option["name"] as! String)
+            yourLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightLight)
+            self.scroll.addSubview(yourLabel)
+            
+            let yourButton = UIButton()
+            let yourButtonSize = CGSize(width: 25, height: 25)
+            yourButton.frame = CGRect(x: screen.width - 16 - 25, y: avatar.frame.minY, width: yourButtonSize.width, height: yourButtonSize.height)
+            yourButton.setImage(UIImage(named:"uncheckedMark3"), for: .normal)
+            yourButton.setImage(UIImage(named:"checkedMark2"), for: .selected)
+            yourButton.addTarget(self, action: #selector(first(_:)), for: .touchUpInside)
+            yourButton.tag = Int(option["id"] as! String)!
+            self.scroll.addSubview(yourButton)
+            
+            i += 1
         }
-        self.optionsTable.reloadData()
-        scroll.contentSize.height = 1000
         
         picker.delegate = self
         picker.dataSource = self
@@ -71,12 +113,28 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UIPickerViewD
         floorField.delegate = self
         floorsField.delegate = self
         squareField.delegate = self
+        
+        rubleSymbol.text = " Р"
+        rubleSymbol.sizeToFit()
+        rubleSymbol.font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightLight)
+        priceField.rightView = rubleSymbol
+        priceField.rightViewMode = UITextFieldViewMode.always
+        
+        meterSymbol.text = " м²"
+        meterSymbol.sizeToFit()
+        meterSymbol.font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightLight)
+        squareField.rightView = meterSymbol
+        squareField.rightViewMode = UITextFieldViewMode.always
+        
+        rubleSymbol.textColor = UIColor.lightGray
+        meterSymbol.textColor = UIColor.lightGray
     }
     
     func doneButtonAction() {
+        roomsField.text = rooms[picker.selectedRow(inComponent: 0)]
         self.view.endEditing(false)
     }
-    
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -91,24 +149,35 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UIPickerViewD
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         roomsField.text = rooms[row]
-        RentAddressController.flatToRent.numberOfRoomsInFlat = String(row + 1)
+        RentAddressController.flatToRent.numberOfRoomsInFlat = String(row)
         //self.view.endEditing(false)
     }
     
     func first(_ sender: UIButton) {
         if sender.isSelected == false {
             sender.isSelected = true
-            RentParamsController.paramsValues[sender.tag] = 1
+            RentAddressController.flatToRent.options.append(String(sender.tag))
         } else {
             sender.isSelected = false
-            RentParamsController.paramsValues[sender.tag] = 0
+            for i in 0...RentAddressController.flatToRent.options.count - 1 {
+                if RentAddressController.flatToRent.options[i] == String(sender.tag) {
+                    RentAddressController.flatToRent.options.remove(at: i)
+                    break
+                }
+            }
         }
+        print(RentAddressController.flatToRent.options)
     }
     
     
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.text = ""
+        //textField.text = ""
+        if textField == priceField {
+            rubleSymbol.textColor = UIColor.black
+        } else if textField == squareField {
+            meterSymbol.textColor = UIColor.black
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -124,36 +193,23 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UIPickerViewD
             }
         }*/
         
-        if textField == priceField {
-            if !((textField.text?.hasSuffix(" Р"))!) && textField.text != "" {
-                RentAddressController.flatToRent.flatPrice = priceField.text!
-                textField.text = textField.text! + " Р"
-            }
-        } else if textField == squareField {
-            if !((textField.text?.hasSuffix(" м²"))!) && textField.text != "" {
-                RentAddressController.flatToRent.square = squareField.text!
-                textField.text = textField.text! + " м²"
-            }
-        } else if textField == floorField {
+        if textField == floorField {
             RentAddressController.flatToRent.floor = floorField.text ?? "-"
         } else if textField == floorsField {
             RentAddressController.flatToRent.floors = floorsField.text ?? "-"
+        } else if textField == priceField {
+            if textField.text == "" {
+                rubleSymbol.textColor = UIColor.lightGray
+            } else {
+                RentAddressController.flatToRent.flatPrice = priceField.text ?? "-"
+            }
+        } else if textField == squareField {
+            if textField.text == "" {
+                meterSymbol.textColor = UIColor.lightGray
+            } else {
+                RentAddressController.flatToRent.square = squareField.text ?? "-"
+            }
         }
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return options.options.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! optionCell
-        
-        cell.img.image = UIImage(data: options.options[indexPath.row]["image"] as! Data)
-        cell.lbl.text = (options.options[indexPath.row]["name"] as! String)
-        cell.btn.addTarget(self, action: #selector(first(_:)), for: .touchUpInside)
-        cell.btn.tag = indexPath.row
-        self.optionsTable.sizeToFit()
-        return cell
     }
 
     override func didReceiveMemoryWarning() {

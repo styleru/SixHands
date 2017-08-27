@@ -1035,7 +1035,7 @@
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" smartInsertDeleteType="no"/>
                                                 <variation key="default">
                                                     <mask key="constraints">
                                                         <exclude reference="7XA-g6-MrC"/>
@@ -1082,19 +1082,19 @@
                                                 <rect key="frame" x="136" y="78.5" width="223" height="49.5"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Введите" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C9O-u5-Q81">
                                                 <rect key="frame" x="136" y="129" width="223" height="49.5"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="usj-BF-NYJ">
                                                 <rect key="frame" x="136" y="179.5" width="223" height="49.5"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Выберите" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eG4-t6-hfW">
                                                 <rect key="frame" x="166" y="230" width="193" height="49.5"/>
@@ -1195,11 +1195,16 @@
                         <outlet property="bottomSeparator" destination="Ryd-f6-3Bk" id="2pM-eq-wTe"/>
                         <outlet property="content" destination="5f6-Sb-LMN" id="f4B-Jp-usY"/>
                         <outlet property="floorField" destination="fB9-36-fs7" id="iVc-1y-KFw"/>
+                        <outlet property="floorLabel" destination="6hT-3a-0vm" id="B8k-DU-oag"/>
                         <outlet property="floorsField" destination="C9O-u5-Q81" id="Y7u-4C-ToZ"/>
+                        <outlet property="floorsLabel" destination="dDF-34-wf8" id="qrl-OJ-oUn"/>
                         <outlet property="priceField" destination="2oc-cW-pZE" id="n5N-Sn-Ett"/>
+                        <outlet property="priceLabel" destination="QZV-E5-4Az" id="azb-Nx-kFx"/>
                         <outlet property="roomsField" destination="eG4-t6-hfW" id="jvq-eG-cIq"/>
+                        <outlet property="roomsLabel" destination="0RJ-VL-dMg" id="i6R-4v-ov7"/>
                         <outlet property="scroll" destination="5kM-eP-Vpb" id="daf-BN-abE"/>
                         <outlet property="squareField" destination="usj-BF-NYJ" id="JM8-YO-4IM"/>
+                        <outlet property="squareLabel" destination="o5e-zW-aqN" id="zxQ-WV-2is"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cFd-bB-xzY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1234,13 +1239,13 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Добавьте от 1 до 20 фотографий. Арендаторам важно понимать, как выглядит помещение." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="R21-2K-H2g">
-                                                <rect key="frame" x="16" y="40" width="343" height="65"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Добавьте от 1 до 20 фотографий. Арендаторам важно понимать, как выглядит помещение." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="R21-2K-H2g">
+                                                <rect key="frame" x="16" y="40" width="343" height="75"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="65" id="9Sb-9L-zth"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="95" id="c6A-mh-HpN"/>
-                                                    <constraint firstAttribute="height" constant="65" id="wf4-LZ-dJR"/>
+                                                    <constraint firstAttribute="height" constant="75" id="wf4-LZ-dJR"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
@@ -1253,7 +1258,7 @@
                                                 </variation>
                                             </textView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l3O-5c-H0i">
-                                                <rect key="frame" x="16" y="125" width="343" height="1"/>
+                                                <rect key="frame" x="16" y="135" width="343" height="1"/>
                                                 <color key="backgroundColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="BFB-Oi-DrS"/>
@@ -1264,7 +1269,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 фотографий" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ra-Pn-ha5">
-                                                <rect key="frame" x="118" y="141" width="139" height="19.5"/>
+                                                <rect key="frame" x="118" y="151" width="139" height="19.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="139" id="HBq-b1-hLE"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="19.5" id="M5R-m7-5gz"/>
@@ -1285,16 +1290,44 @@
                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="1" id="PRo-Vw-znD"/>
                                                 </constraints>
                                             </view>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DJp-8L-Iaj">
+                                                <rect key="frame" x="0.0" y="185.5" width="375" height="324.5"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6dl-rL-7ha">
+                                                    <size key="itemSize" width="50" height="50"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="cv3-Zd-bf1">
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </view>
+                                                    </collectionViewCell>
+                                                </cells>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="qrc-vR-2Iu" id="Hyi-jI-BSb"/>
+                                                    <outlet property="delegate" destination="qrc-vR-2Iu" id="cgh-os-vSQ"/>
+                                                </connections>
+                                            </collectionView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="DJp-8L-Iaj" firstAttribute="leading" secondItem="ZIx-NZ-ZnP" secondAttribute="leading" id="6SO-A0-80Q"/>
+                                            <constraint firstAttribute="bottom" secondItem="DJp-8L-Iaj" secondAttribute="bottom" id="K5K-bo-keB"/>
                                             <constraint firstAttribute="trailing" secondItem="R21-2K-H2g" secondAttribute="trailing" constant="16" id="MRY-Wp-JIH"/>
+                                            <constraint firstAttribute="trailing" secondItem="DJp-8L-Iaj" secondAttribute="trailing" id="NA9-LB-JcY"/>
                                             <constraint firstItem="4fm-ta-bDb" firstAttribute="top" secondItem="ZIx-NZ-ZnP" secondAttribute="top" id="SfK-LF-j3I"/>
                                             <constraint firstItem="l3O-5c-H0i" firstAttribute="leading" secondItem="ZIx-NZ-ZnP" secondAttribute="leading" constant="16" id="YNI-MD-iOo"/>
                                             <constraint firstAttribute="height" constant="510" id="cpg-Ft-8Re"/>
                                             <constraint firstItem="4fm-ta-bDb" firstAttribute="leading" secondItem="ZIx-NZ-ZnP" secondAttribute="leading" constant="16" id="diz-XJ-A8h"/>
                                             <constraint firstItem="l3O-5c-H0i" firstAttribute="top" secondItem="R21-2K-H2g" secondAttribute="bottom" constant="20" id="eAf-IK-ctr"/>
                                             <constraint firstItem="VqB-Qi-L4B" firstAttribute="top" secondItem="4fm-ta-bDb" secondAttribute="bottom" constant="12" id="gbz-Jg-nfj"/>
+                                            <constraint firstItem="DJp-8L-Iaj" firstAttribute="top" secondItem="2Ra-Pn-ha5" secondAttribute="bottom" constant="15" id="hDi-IN-qwI"/>
                                             <constraint firstItem="R21-2K-H2g" firstAttribute="top" secondItem="VqB-Qi-L4B" secondAttribute="bottom" constant="12" id="mRr-0u-mgV"/>
                                             <constraint firstItem="VqB-Qi-L4B" firstAttribute="leading" secondItem="ZIx-NZ-ZnP" secondAttribute="leading" constant="16" id="qSL-uB-esv"/>
                                             <constraint firstItem="2Ra-Pn-ha5" firstAttribute="top" secondItem="l3O-5c-H0i" secondAttribute="bottom" constant="15" id="svY-9g-EbD"/>
@@ -1323,6 +1356,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="collection" destination="DJp-8L-Iaj" id="9rT-D5-SfM"/>
                         <outlet property="content" destination="ZIx-NZ-ZnP" id="zZI-KI-Amm"/>
                         <outlet property="justLabel" destination="2Ra-Pn-ha5" id="v99-aL-KNH"/>
                         <outlet property="scroll" destination="G0e-U0-14i" id="Mw0-0J-EYC"/>
@@ -1674,7 +1708,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ATY-tg-wpF"/>
-        <segue reference="skR-Ee-kxn"/>
+        <segue reference="wRR-th-zQh"/>
         <segue reference="ow1-io-7hw"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

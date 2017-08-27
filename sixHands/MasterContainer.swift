@@ -22,10 +22,13 @@ class MasterContainer: UIViewController {
     let third = UILabel()
     let fourth = UILabel()
     let api = API()
+    
+    static var staticSelf: MasterContainer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        MasterContainer.staticSelf = self
         // Do any additional setup after loading the view.
         i = 1
         
@@ -62,7 +65,7 @@ class MasterContainer: UIViewController {
         //continue button
         continueButton.frame = CGRect(x: 0.0, y: screen.maxY - 55.0, width: screen.width, height: 55.0)
         continueButton.addTarget(self, action: #selector(MasterContainer.continueButtonAction), for: .touchUpInside)
-        continueButton.backgroundColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
+        continueButton.backgroundColor = UIColor(red: 176/255, green: 176/255, blue: 176/255, alpha: 1)
         continueButton.setTitle("Далее", for: .normal)
         continueButton.setTitleColor(UIColor.white, for: .normal)
         continueButton.titleLabel?.font = UIFont.systemFont(ofSize: 20.0, weight: UIFontWeightMedium)
@@ -97,74 +100,151 @@ class MasterContainer: UIViewController {
     }
     
     func continueButtonAction() {
+        
+        var isCompleted = true
         print("continue...")
         print("long: \(RentAddressController.flatToRent.longitude), lat: \(RentAddressController.flatToRent.latitude)")
+        
         if i == 2 {
-            
-        }
-        i += 1
-        if i < 5 {
-            navigationItem.title = "Шаг \(i) из 4"
-            containerView?.segueIdentifierReceived(button: i)
-            progress.setProgress(progress.progress + 0.25, animated: true)
-            switch i {
-            case 2:
-                second.textColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
-            case 3:
-                third.textColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
-            case 4:
-                fourth.textColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
-                continueButton.setTitle("Опубликовать", for: .normal)
-                nextButton.setTitle("Опубликовать", for: .normal)
+            if let controller = RentParamsController.staticSelf {
+                if RentAddressController.flatToRent.square == "" || RentAddressController.flatToRent.square == "-" {
+                    isCompleted = false
+                    controller.squareLabel.textColor = UIColor(red: 221/255, green: 86/255, blue: 86/255, alpha: 1)
+                } else {
+                    controller.squareLabel.textColor = UIColor.darkText
+                }
+                if RentAddressController.flatToRent.flatPrice == "" || RentAddressController.flatToRent.flatPrice == "-" {
+                    isCompleted = false
+                    controller.priceLabel.textColor = UIColor(red: 221/255, green: 86/255, blue: 86/255, alpha: 1)
+                } else {
+                    controller.priceLabel.textColor = UIColor.darkText
+                }
+                if RentAddressController.flatToRent.floor == "" || RentAddressController.flatToRent.floor == "-" {
+                    isCompleted = false
+                    controller.floorLabel.textColor = UIColor(red: 221/255, green: 86/255, blue: 86/255, alpha: 1)
+                } else {
+                    controller.floorLabel.textColor = UIColor.darkText
+                }
+                if RentAddressController.flatToRent.floors == "" || RentAddressController.flatToRent.floors == "-" {
+                    isCompleted = false
+                        controller.floorsLabel.textColor = UIColor(red: 221/255, green: 86/255, blue: 86/255, alpha: 1)
+                } else {
+                    controller.floorsLabel.textColor = UIColor.darkText
+                }
+                if RentAddressController.flatToRent.numberOfRoomsInFlat == "" || RentAddressController.flatToRent.numberOfRoomsInFlat == "-" {
+                    isCompleted = false
+                    controller.roomsLabel.textColor = UIColor(red: 221/255, green: 86/255, blue: 86/255, alpha: 1)
+                } else {
+                    controller.roomsLabel.textColor = UIColor.darkText
+                }
                 
-            default:
-                print("waaaat?!")
+                if !isCompleted {
+                    let alertController = UIAlertController(title: nil, message: "Заполните все поля", preferredStyle: UIAlertControllerStyle.alert)
+                    let cancelAction = UIAlertAction(title: "Ок", style: UIAlertActionStyle.cancel)
+                    {
+                        (result : UIAlertAction) -> Void in
+                    }
+                    alertController.addAction(cancelAction)
+                    controller.present(alertController, animated: true, completion: nil)
+                }
             }
-            cancel.setTitle("Назад", for: .normal)
-            cancel.removeTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
-            cancel.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
-        } else {
-            i -= 1
-            
-            print("goPublic...")
-            
-            var params = "["
-            for id in RentAddressController.flatToRent.options {
-                params += id + ","
+        } else if i == 4 {
+            if let controller = RentLastPageController.staticSelf {
+                if RentAddressController.flatToRent.photos.count == 0 {
+                    isCompleted = false
+                    let alertController = UIAlertController(title: nil, message: "Добавьте хотя бы одно фото квартиры", preferredStyle: UIAlertControllerStyle.alert)
+                    let cancelAction = UIAlertAction(title: "Ок", style: UIAlertActionStyle.cancel)
+                    {
+                        (result : UIAlertAction) -> Void in
+                    }
+                    alertController.addAction(cancelAction)
+                    controller.present(alertController, animated: true, completion: nil)
+                }
             }
-            params = String(params.characters.dropLast(1))
-            params += "]"
-            
-            //separate building and street
-            let full = RentAddressController.flatToRent.address
-            var building = ""
-            var street = ""
-            if let rangeOfComma = full.range(of: ",", options: .backwards) {
-                building = String(full.characters.suffix(from: rangeOfComma.upperBound))
-                building = String(building.characters.dropFirst())
+        } else if i == 1 {
+            if let controller = RentAddressController.staticSelf {
+                if RentAddressController.flatToRent.address == "" {
+                    isCompleted = false
+                    let alertController = UIAlertController(title: nil, message: "Добавьте адрес", preferredStyle: UIAlertControllerStyle.alert)
+                    let cancelAction = UIAlertAction(title: "Ок", style: UIAlertActionStyle.cancel)
+                    {
+                        (result : UIAlertAction) -> Void in
+                    }
+                    alertController.addAction(cancelAction)
+                    controller.present(alertController, animated: true, completion: nil)
+                }
             }
-            if let rangeOfComma = full.range(of: ",") {
-                street = String(full.characters.prefix(upTo: rangeOfComma.upperBound))
-                street = String(street.characters.dropLast())
+        }
+        
+        if (isCompleted) {
+            i += 1
+            if i < 5 {
+                if i != 3 {
+                    continueButton.backgroundColor = UIColor(red: 176/255, green: 176/255, blue: 176/255, alpha: 1)
+                }
+                navigationItem.title = "Шаг \(i) из 4"
+                containerView?.segueIdentifierReceived(button: i)
+                progress.setProgress(progress.progress + 0.25, animated: true)
+                switch i {
+                case 2:
+                    second.textColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
+                case 3:
+                    third.textColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
+                case 4:
+                    fourth.textColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
+                    continueButton.setTitle("Опубликовать", for: .normal)
+                    nextButton.setTitle("Опубликовать", for: .normal)
+                    
+                default:
+                    print("waaaat?!")
+                }
+                cancel.setTitle("Назад", for: .normal)
+                cancel.removeTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
+                cancel.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
+            } else {
+                i -= 1
+                
+                print("goPublic...")
+                var params = "["
+                if RentAddressController.flatToRent.options.count != 0 {
+                    for id in RentAddressController.flatToRent.options {
+                        params += id + ","
+                    }
+                    params = String(params.characters.dropLast(1))
+                }
+                params += "]"
+                
+                //separate building and street
+                let full = RentAddressController.flatToRent.address
+                var building = ""
+                var street = ""
+                if let rangeOfComma = full.range(of: ",", options: .backwards) {
+                    building = String(full.characters.suffix(from: rangeOfComma.upperBound))
+                    building = String(building.characters.dropFirst())
+                }
+                if let rangeOfComma = full.range(of: ",") {
+                    street = String(full.characters.prefix(upTo: rangeOfComma.upperBound))
+                    street = String(street.characters.dropLast())
+                }
+                
+                let parameters = [
+                    "id_city" : "1",
+                    "id_underground" : "4",
+                    "street" : street,
+                    "building" : building,
+                    "longitude" : "\(RentAddressController.flatToRent.longitude)",
+                    "latitude" : "\(RentAddressController.flatToRent.latitude)",
+                    "price" : "\(RentAddressController.flatToRent.flatPrice)",
+                    "square" : "\(RentAddressController.flatToRent.square)",
+                    "rooms" : "\(RentAddressController.flatToRent.numberOfRoomsInFlat)",
+                    "floor" : "\(RentAddressController.flatToRent.floor)",
+                    "floors" : "\(RentAddressController.flatToRent.floors)",
+                    "description" : "\(RentAddressController.flatToRent.comments)",
+                    "options" : params
+                ]
+                
+                upload(photoData: RentAddressController.flatToRent.photos, parameters: parameters)
             }
-            
-            let parameters = [
-                "id_city" : "1",
-                "id_underground" : "4",
-                "street" : street,
-                "building" : building,
-                "longitude" : "\(RentAddressController.flatToRent.longitude)",
-                "latitude" : "\(RentAddressController.flatToRent.latitude)",
-                "price" : "\(RentAddressController.flatToRent.flatPrice)",
-                "square" : "\(RentAddressController.flatToRent.square)",
-                "rooms" : "\(RentAddressController.flatToRent.numberOfRoomsInFlat)",
-                "floor" : "\(RentAddressController.flatToRent.floor)",
-                "floors" : "\(RentAddressController.flatToRent.floors)",
-                "description" : "\(RentAddressController.flatToRent.comments)",
-                "options" : params
-            ]
-            
-            upload(photoData: RentAddressController.flatToRent.photos, parameters: parameters)
         }
     }
     

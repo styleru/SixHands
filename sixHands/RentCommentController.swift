@@ -41,9 +41,17 @@ class RentCommentController: UIViewController, UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text != ""  {
+            if let controller = MasterContainer.staticSelf {
+                controller.continueButton.backgroundColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
+            }
+        }
         if textView.text == "" {
             textView.text = "Здесь можно писать всё, что вы считаете нужным сказать о квартире. Уложитесь в 500 символов."
             textView.textColor = UIColor(red: 119/255, green: 119/255, blue: 119/255, alpha: 1)
+            if let controller = MasterContainer.staticSelf {
+                controller.continueButton.backgroundColor = UIColor(red: 176/255, green: 176/255, blue: 176/255, alpha: 1)
+            }
         }
     }
     

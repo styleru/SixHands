@@ -11,75 +11,105 @@ import SwiftyJSON
 import Alamofire
 import CoreLocation
 
-class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     let api = API()
     var photos = [UIImage]()
     let imagePicker = UIImagePickerController()
     @IBOutlet weak var justLabel: UILabel!
     @IBOutlet weak var content: UIView!
     @IBOutlet weak var scroll: UIScrollView!
-    let border = UIView()
-    let addPhoto = UIButton()
-    let avatar = UIImageView()
+    @IBOutlet weak var collection: UICollectionView!
+    var photoSize = CGFloat()
+    
+    static var staticSelf: RentLastPageController?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        RentLastPageController.staticSelf = self
         //view bounds
-        let screen = self.view.frame
+        photoSize = (100 / 375) * self.view.frame.width
         
-        let yourViewSize = CGSize(width: 100, height: 100)
-        border.frame = CGRect(x: screen.width/2 - yourViewSize.width/2, y: justLabel.frame.maxY + 15.0, width: yourViewSize.width, height: yourViewSize.height)
-        border.backgroundColor = UIColor.clear
-        border.layer.cornerRadius = 4.0
-        border.clipsToBounds = true
-        border.layer.borderWidth = 2
-        border.layer.borderColor = UIColor(red: 220/255.0, green:220/255.0, blue:220/255.0, alpha: 1.0).cgColor
-        self.scroll.addSubview(border)
+        photos.append(UIImage(named: "addicon")!)
         
-        let avatarSize = CGSize(width: 50, height: 40)
-        avatar.frame = CGRect(x: 25, y: 30, width: avatarSize.width, height: avatarSize.height)
-        avatar.image = UIImage(named: "72")
-        border.addSubview(avatar)
-        
-        let yourButtonSize = CGSize(width: 96, height: 96)
-        addPhoto.frame = CGRect(x: 2, y: 2, width: yourButtonSize.width, height: yourButtonSize.height)
-        addPhoto.backgroundColor = UIColor.clear
-        addPhoto.addTarget(self, action: #selector(addButtonAction), for: .touchUpInside)
-        border.addSubview(addPhoto)
-        
+        let flow = collection.collectionViewLayout as! UICollectionViewFlowLayout
+        flow.minimumLineSpacing = 4
+        flow.minimumInteritemSpacing = 4
+        flow.itemSize = CGSize(width: photoSize, height: photoSize)
+        flow.sectionInset = UIEdgeInsets(top: 0, left: (self.view.frame.width - photoSize - 5)/2, bottom: 0, right: 0)
         
     }
     
-    func addButtonAction() {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photos.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        cell.frame.size = CGSize(width: photoSize, height: photoSize)
+        let imageview = UIImageView(frame: CGRect(x: 0, y: 5, width: photoSize - 5, height: photoSize - 5))
+        imageview.image = photos[indexPath.item]
+        imageview.tag = 100
+        cell.contentView.addSubview(imageview)
         
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-        
-        let cameraAction = UIAlertAction(title: "Камера", style: UIAlertActionStyle.default)
-        {
-            (result : UIAlertAction) -> Void in
-            self.snap()
+        if indexPath.row != 0 {
+            let yourView = UIButton()
+            let yourViewSize = CGSize(width: 25, height: 25)
+            yourView.frame = CGRect(x: photoSize - 25, y: 0, width: yourViewSize.width, height: yourViewSize.height)
+            yourView.setImage(UIImage(named: "82"), for: .normal)
+            yourView.addTarget(self, action: #selector(RentLastPageController.deletePhoto(_:)), for: .touchUpInside)
+            yourView.tag = indexPath.item
+            cell.contentView.addSubview(yourView)
+        } else {
+            for subview in cell.contentView.subviews {
+                if subview.tag != 100 {
+                    subview.removeFromSuperview()
+                } else {
+                    let img = subview as! UIImageView
+                    if img.image != photos[0] {
+                        subview.removeFromSuperview()
+                    }
+                }
+            }
         }
-        alertController.addAction(cameraAction)
         
-        let libraryAction = UIAlertAction(title: "Медиатека", style: UIAlertActionStyle.default)
-        {
-            (result : UIAlertAction) -> Void in
-            self.choose()
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.item == 0 {
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+            
+            let cameraAction = UIAlertAction(title: "Камера", style: UIAlertActionStyle.default)
+            {
+                (result : UIAlertAction) -> Void in
+                self.snap()
+            }
+            alertController.addAction(cameraAction)
+            
+            let libraryAction = UIAlertAction(title: "Медиатека", style: UIAlertActionStyle.default)
+            {
+                (result : UIAlertAction) -> Void in
+                self.choose()
+            }
+            alertController.addAction(libraryAction)
+            
+            let cancelAction = UIAlertAction(title: "Отмена", style: UIAlertActionStyle.cancel)
+            {
+                (result : UIAlertAction) -> Void in
+            }
+            alertController.addAction(cancelAction)
+            
+            if photos.count < 21 {
+                self.present(alertController, animated: true, completion: nil)
+            }
         }
-        alertController.addAction(libraryAction)
-        
-        let cancelAction = UIAlertAction(title: "Отмена", style: UIAlertActionStyle.cancel)
-        {
-            (result : UIAlertAction) -> Void in
-        }
-        alertController.addAction(cancelAction)
-        
-        if photos.count < 20 {
-            self.present(alertController, animated: true, completion: nil)
-        }
-        
     }
     
     func snap() {
@@ -104,63 +134,35 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
-        photos.insert(image, at: 0)
+        photos.insert(image, at: 1)
         RentAddressController.flatToRent.photos.append(UIImageJPEGRepresentation(image,1)!)
-        justLabel.text = "\(photos.count) фотографий"
-        if photos.count == 20 {
-            self.border.backgroundColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 1)
-            self.avatar.image = UIImage(named:"7")
-            justLabel.text = "\(photos.count) фотографий (максимум)"
+        justLabel.text = "\(photos.count - 1) фотографий"
+        if photos.count == 21 {
+            justLabel.text = "\(photos.count - 1) фотографий (максимум)"
+            photos[0] = UIImage(named: "7")!
+        }
+        let flow = collection.collectionViewLayout as! UICollectionViewFlowLayout
+        if photos.count == 1 {
+            flow.sectionInset = UIEdgeInsets(top: 0, left: (self.view.frame.width - photoSize - 5)/2, bottom: 0, right: 0)
+        } else if photos.count == 2 {
+            flow.sectionInset = UIEdgeInsets(top: 0, left: 60, bottom: 0, right: 55)
+        } else {
+            flow.sectionInset = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 20)
         }
         justLabel.sizeToFit()
         justLabel.frame.origin.x = self.view.frame.width/2 - justLabel.frame.width/2
         
-        let imageView = UIImageView()
-        let delete = UIButton()
-        imageView.frame = CGRect(x: 0.0, y: 0, width: 100, height: 100)
-        delete.frame = CGRect(x: 0.0, y: 0, width: 25, height: 25)
-        if photos.count == 1 {
-            border.frame.origin.x = self.view.frame.width/2 - border.frame.width - 6
-            imageView.frame.origin = CGPoint(x: self.view.frame.width/2 + 6, y: border.frame.minY)
-        } else if photos.count == 2 {
-            border.frame.origin.x = self.view.frame.width/2 - border.frame.width * 1.5 - 12
-            for subview in scroll.subviews {
-                if subview.tag == 1 {
-                    subview.frame.origin.x -= 56
-                }
-            }
-            imageView.frame.origin = CGPoint(x: self.view.frame.width/2 + 12 + 50, y: border.frame.minY)
-        } else {
-            let q = photos.count
-            if q % 3 == 0 {
-                let x = self.view.frame.width/2 - border.frame.width * 1.5 - 12
-                let y = border.frame.maxY + 10 + CGFloat((q/3 - 1) * 110)
-                imageView.frame.origin = CGPoint(x: x, y: y)
-                if q > 6 {
-                    self.scroll.contentSize.height += 110
-                }
-            } else if (q - 1) % 3 == 0 {
-                let x = self.view.frame.width/2 - 50
-                let y = border.frame.maxY + 10 + CGFloat(((q - 1)/3 - 1) * 110)
-                imageView.frame.origin = CGPoint(x: x, y: y)
-            } else if (q - 2) % 3 == 0 {
-                let x = self.view.frame.width/2 + 12 + 50
-                let y = border.frame.maxY + 10 + CGFloat(((q - 2)/3 - 1) * 110)
-                imageView.frame.origin = CGPoint(x: x, y: y)
+        collection.reloadData()
+        if (photos.count - 1) % 3 == 0 && photos.count > 9  {
+            DispatchQueue.main.async {
+                self.scroll.contentSize.height += 109
+                self.collection.frame.size.height += 109
             }
         }
         
-        delete.frame.origin = CGPoint(x: imageView.frame.maxX - 17, y: imageView.frame.minY - 7)
-        imageView.image = image
-        delete.setImage(UIImage(named: "82"), for: .normal)
-        delete.addTarget(self, action: #selector(deletePhoto), for: .touchUpInside)
-        imageView.contentMode = .scaleToFill
-        imageView.clipsToBounds = true
-        imageView.layer.masksToBounds = false
-        imageView.tag = photos.count
-        delete.tag = photos.count
-        self.scroll.addSubview(imageView)
-        self.scroll.addSubview(delete)
+        if let controller = MasterContainer.staticSelf {
+            controller.continueButton.backgroundColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
+        }
         
         self.dismiss(animated: true, completion: nil)
     }
@@ -168,63 +170,35 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            photos.insert(pickedImage, at: 0)
+            photos.insert(pickedImage, at: 1)
             RentAddressController.flatToRent.photos.append(UIImageJPEGRepresentation(pickedImage,1)!)
-            justLabel.text = "\(photos.count) фотографий"
-            if photos.count == 20 {
-                self.border.backgroundColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 1)
-                self.avatar.image = UIImage(named:"7")
-                justLabel.text = "\(photos.count) фотографий (максимум)"
+            justLabel.text = "\(photos.count - 1) фотографий"
+            if photos.count == 21 {
+                justLabel.text = "\(photos.count - 1) фотографий (максимум)"
+                photos[0] = UIImage(named: "7")!
+            }
+            let flow = collection.collectionViewLayout as! UICollectionViewFlowLayout
+            if photos.count == 1 {
+                flow.sectionInset = UIEdgeInsets(top: 0, left: (self.view.frame.width - 100)/2, bottom: 0, right: 0)
+            } else if photos.count == 2 {
+                flow.sectionInset = UIEdgeInsets(top: 0, left: 60, bottom: 0, right: 55)
+            } else {
+                flow.sectionInset = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 20)
             }
             justLabel.sizeToFit()
             justLabel.frame.origin.x = self.view.frame.width/2 - justLabel.frame.width/2
             
-            let imageView = UIImageView()
-            let delete = UIButton()
-            imageView.frame = CGRect(x: 0.0, y: 0, width: 100, height: 100)
-            delete.frame = CGRect(x: 0.0, y: 0, width: 25, height: 25)
-            if photos.count == 1 {
-                border.frame.origin.x = self.view.frame.width/2 - border.frame.width - 6
-                imageView.frame.origin = CGPoint(x: self.view.frame.width/2 + 6, y: border.frame.minY)
-            } else if photos.count == 2 {
-                border.frame.origin.x = self.view.frame.width/2 - border.frame.width * 1.5 - 12
-                for subview in scroll.subviews {
-                    if subview.tag == 1 {
-                        subview.frame.origin.x -= 56
-                    }
-                }
-                imageView.frame.origin = CGPoint(x: self.view.frame.width/2 + 12 + 50, y: border.frame.minY)
-            } else {
-                let q = photos.count
-                if q % 3 == 0 {
-                    let x = self.view.frame.width/2 - border.frame.width * 1.5 - 12
-                    let y = border.frame.maxY + 10 + CGFloat((q/3 - 1) * 110)
-                    imageView.frame.origin = CGPoint(x: x, y: y)
-                    if q > 6 {
-                        self.scroll.contentSize.height += 110
-                    }
-                } else if (q - 1) % 3 == 0 {
-                    let x = self.view.frame.width/2 - 50
-                    let y = border.frame.maxY + 10 + CGFloat(((q - 1)/3 - 1) * 110)
-                    imageView.frame.origin = CGPoint(x: x, y: y)
-                } else if (q - 2) % 3 == 0 {
-                    let x = self.view.frame.width/2 + 12 + 50
-                    let y = border.frame.maxY + 10 + CGFloat(((q - 2)/3 - 1) * 110)
-                    imageView.frame.origin = CGPoint(x: x, y: y)
+            collection.reloadData()
+            if (photos.count - 1) % 3 == 0 && photos.count > 9  {
+                DispatchQueue.main.async {
+                    self.scroll.contentSize.height += 109
+                    self.collection.frame.size.height += 109
                 }
             }
             
-            delete.frame.origin = CGPoint(x: imageView.frame.maxX - 17, y: imageView.frame.minY - 7)
-            imageView.image = pickedImage
-            delete.setImage(UIImage(named: "82"), for: .normal)
-            delete.addTarget(self, action: #selector(deletePhoto), for: .touchUpInside)
-            imageView.contentMode = .scaleToFill
-            imageView.clipsToBounds = true
-            imageView.layer.masksToBounds = false
-            imageView.tag = photos.count
-            delete.tag = photos.count
-            self.scroll.addSubview(imageView)
-            self.scroll.addSubview(delete)
+            if let controller = MasterContainer.staticSelf {
+                controller.continueButton.backgroundColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
+            }
             
         }
         
@@ -232,8 +206,23 @@ class RentLastPageController: UIViewController, UITextFieldDelegate, UITextViewD
         
     }
     
-    func deletePhoto() {
-        
+    func deletePhoto(_ sender: UIButton) {
+        photos.remove(at: sender.tag)
+        collection.reloadData()
+        if (photos.count) % 3 == 0 && photos.count > 8  {
+            DispatchQueue.main.async {
+                self.scroll.contentSize.height -= 109
+                self.collection.frame.size.height -= 109
+            }
+        }
+        let flow = collection.collectionViewLayout as! UICollectionViewFlowLayout
+        if photos.count == 1 {
+            flow.sectionInset = UIEdgeInsets(top: 0, left: (self.view.frame.width - 100)/2, bottom: 0, right: 0)
+        } else if photos.count == 2 {
+            flow.sectionInset = UIEdgeInsets(top: 0, left: 60, bottom: 0, right: 55)
+        } else {
+            flow.sectionInset = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 20)
+        }
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

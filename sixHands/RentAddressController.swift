@@ -29,10 +29,13 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
     //view bounds
     let screen = UIScreen.main.bounds
     
+    static var staticSelf: RentAddressController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+        RentAddressController.staticSelf = self
         
         //address
         addressField.frame = CGRect(x: screen.minX + 50.0, y: 10, width: screen.width - 100.0, height: 40.0)
@@ -264,6 +267,9 @@ class RentAddressController: UIViewController, UITextFieldDelegate, UITableViewD
         latitudes = []
         self.table.reloadData()
         cell.setSelected(false, animated: false)
+        if let controller = MasterContainer.staticSelf {
+            controller.continueButton.backgroundColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -11,6 +11,13 @@ import UIKit
 class RentParamsController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIScrollViewDelegate {
     
     let rooms = ["Студия", "1 комната", "2 комнаты", "3 комнаты", "4 комнаты", "более 4"]
+    
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var floorLabel: UILabel!
+    @IBOutlet weak var floorsLabel: UILabel!
+    @IBOutlet weak var squareLabel: UILabel!
+    @IBOutlet weak var roomsLabel: UILabel!
+    
     let picker = UIPickerView()
     let viewForField = UIView()
     let subView = UIView()
@@ -31,6 +38,8 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UIPickerViewD
     let rubleSymbol = UILabel()
     let meterSymbol = UILabel()
     
+    static var staticSelf: RentParamsController?
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if (!isLayout) {
@@ -44,10 +53,24 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UIPickerViewD
         }
     }
     
+    func didTapView(){
+        self.view.endEditing(true)
+        if priceField.text != "" && floorField.text != "" && floorsField.text != "" && squareField.text != "" && roomsField.text != "" {
+            if let controller = MasterContainer.staticSelf {
+                controller.continueButton.backgroundColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        RentParamsController.staticSelf = self
+        
+        let tapRecognizer = UITapGestureRecognizer()
+        tapRecognizer.addTarget(self, action: #selector(RentParamsController.didTapView))
+        self.view.addGestureRecognizer(tapRecognizer)
         
         let screen = self.view.frame
         roomsField.tintColor = UIColor.clear
@@ -132,7 +155,13 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UIPickerViewD
     
     func doneButtonAction() {
         roomsField.text = rooms[picker.selectedRow(inComponent: 0)]
+        RentAddressController.flatToRent.numberOfRoomsInFlat = String(picker.selectedRow(inComponent: 0))
         self.view.endEditing(false)
+        if priceField.text != "" && floorField.text != "" && floorsField.text != "" && squareField.text != "" && roomsField.text != "" {
+            if let controller = MasterContainer.staticSelf {
+                controller.continueButton.backgroundColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
+            }
+        }
     }
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -150,6 +179,11 @@ class RentParamsController: UIViewController, UITextFieldDelegate, UIPickerViewD
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         roomsField.text = rooms[row]
         RentAddressController.flatToRent.numberOfRoomsInFlat = String(row)
+        if priceField.text != "" && floorField.text != "" && floorsField.text != "" && squareField.text != "" && roomsField.text != "" {
+            if let controller = MasterContainer.staticSelf {
+                controller.continueButton.backgroundColor = UIColor(red: 85/255, green: 197/255, blue: 183/255, alpha: 1)
+            }
+        }
         //self.view.endEditing(false)
     }
     
